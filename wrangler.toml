@@ -1,0 +1,8 @@
+name = "rag-sandbox-guide"
+compatibility_date = "2024-01-01"
+
+[site]
+bucket = "./"
+
+[[rules]]
+include = ["*.html", "*.js", "*.css", "*.py", "*.md", "LICENSE"]

@@ -8,9 +8,10 @@
 
 ## 🚀 Быстрый старт
 
-### Онлайн демо (если развернуто):
-- [RAG Песочница - Pure Python](https://your-domain.com/rag_pure_python.html)
-- [Руководство по векторным БД](https://your-domain.com/vector_databases_guide.html)
+### ✨ Онлайн демо (Cloudflare Pages):
+- 🌐 **Главная страница**: [https://rag-sandbox-guide.pages.dev](https://rag-sandbox-guide.pages.dev)
+- 🐍 **RAG Песочница - Pure Python**: [https://rag-sandbox-guide.pages.dev/rag_pure_python.html](https://rag-sandbox-guide.pages.dev/rag_pure_python.html)
+- 📚 **Руководство по векторным БД**: [https://rag-sandbox-guide.pages.dev/vector_databases_guide.html](https://rag-sandbox-guide.pages.dev/vector_databases_guide.html)
 
 ### Локальный запуск:
 ```bash
@@ -151,7 +152,22 @@ MIT License - свободное использование для образо�
 
 Создано для образовательных целей в рамках изучения RAG и векторных баз данных.
 
+## 🚀 Развертывание
+
+### Cloudflare Pages
+Проект развернут на Cloudflare Pages:
+- **Production URL**: https://rag-sandbox-guide.pages.dev
+- **Preview URL**: https://7f85f65d.rag-sandbox-guide.pages.dev
+- **Автоматический деплой**: При push в main ветку GitHub
+
+### Локальное развертывание
+```bash
+npm install -g wrangler
+wrangler pages deploy dist --project-name your-project-name
+```
+
 ---
 
 **Последнее обновление**: Декабрь 2024
 **Статус**: ✅ Активно поддерживается
+**Развернуто на**: Cloudflare Pages
