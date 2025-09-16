@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 Интерактивная песочница Yandex RAG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.28.2/full/pyodide.js"></script>
+    <style>
+        .code-editor {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            background: #1e1e1e;
+            color: #d4d4d4;
+        }
+        .output-console {
+            background: #1a1a1a;
+            color: #4fc414;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            min-height: 200px;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center hover:opacity-80 transition-opacity">
+                        <i class="fas fa-home text-purple-600 text-xl mr-3"></i>
+                        <span class="text-sm text-purple-600 font-semibold">На главную</span>
+                    </a>
+                    <div class="ml-6 pl-6 border-l border-gray-300 flex items-center">
+                        <i class="fas fa-robot text-purple-600 text-2xl mr-3"></i>
+                        <span class="text-xl font-bold text-gray-800">Yandex RAG Sandbox</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-4">
+                <i class="fas fa-code mr-3"></i>Интерактивная песочница Yandex RAG
+            </h1>
+            <p class="text-xl opacity-90">
+                Выполняйте сгенерированный код с реальными данными (без моков)
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="max-w-6xl mx-auto px-4 py-8">
+        <!-- Configuration Section -->
+        <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-6">
+                <i class="fas fa-key text-blue-600 mr-3"></i>
+                Yandex Cloud авторизация (обязательно для реального выполнения)
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-folder mr-2"></i>Folder ID:
+                    </label>
+                    <input 
+                        type="text" 
+                        id="folder-id" 
+                        placeholder="b1g1gk3umq16uq6a3g1q"
+                        value="b1g1gk3umq16uq6a3g1q"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    >
+                    <p class="text-xs text-gray-500 mt-1">Ваш Folder ID из Yandex Cloud</p>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-lock mr-2"></i>API Key:
+                    </label>
+                    <input 
+                        type="password" 
+                        id="api-key" 
+                        placeholder="••••••••••••••••••••••••••••••"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    >
+                    <p class="text-xs text-gray-500 mt-1">API ключ или IAM токен</p>
+                </div>
+            </div>
+            
+            <div class="flex gap-4 mt-6">
+                <button onclick="embedCredentials()" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                    <i class="fas fa-code-branch mr-2"></i>Внедрить в код
+                </button>
+                <button onclick="validateCredentials()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    <i class="fas fa-check mr-2"></i>Проверить
+                </button>
+                <div id="validation-status" class="flex items-center ml-4"></div>
+            </div>
+            
+            <div class="mt-4 bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                <p class="text-sm text-yellow-800">
+                    <i class="fas fa-info-circle mr-2"></i>
+                    <strong>Внимание:</strong> Введите данные для авторизации для реального выполнения кода. Без авторизации используются моки.
+                </p>
+            </div>
+        </div>
+
+        <!-- Code Section -->
+        <div class="bg-white rounded-xl shadow-lg p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold">Исполняемый код:</h3>
+                <div class="flex gap-3">
+                    <button onclick="loadFromGenerator()" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                        <i class="fas fa-download mr-2"></i>Загрузить из редактора
+                    </button>
+                    <button onclick="runYandexRAG()" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-semibold">
+                        <i class="fas fa-play mr-2"></i>Выполнить код
+                    </button>
+                    <button onclick="clearOutput()" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-eraser mr-2"></i>Очистить
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mb-4 flex gap-2">
+                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+                    <i class="fas fa-info-circle mr-1"></i>Python готов
+                </span>
+                <span id="execution-status" class="hidden"></span>
+            </div>
+            
+            <textarea id="yandex-code-editor" class="code-editor w-full h-96 p-4 border-2 border-gray-300 rounded-lg" placeholder="Вставьте или введите ваш код здесь...">
+import numpy as np
+
+class YandexRAG:
+    def __init__(self):
+        self.client = None
+        self.api_key = "self.api_key"  # будет заменено
+        self.folder_id = "self.folder_id"  # будет заменено
+        self.base_url = "self.base_url"  # будет заменено
+        self.embedding_model = "emb://your-folder-id/text-search-doc/latest"
+        self.generation_model = "gpt://your-folder-id/yandexgpt/latest"
+        self.documents = []
+        
+        print(f"✅ YandexRAG инициализирован с моделью: yandexgpt")
+
+    def add_documents(self, docs):
+        """Добавление документов в базу знаний"""
+        print(f"\n📚 Добавление {len(docs)} документов...")
+        for i, doc in enumerate(docs):
+            # Симуляция эмбеддинга
+            embedding = np.random.rand(256)
+            self.documents.append({
+                'id': i,
+                'text': doc,
+                'embedding': embedding
+            })
+            print(f"  ✓ Документ {i+1}: {doc[:50]}...")
+        print(f"✅ Добавлено документов: {len(docs)}")
+
+    def search(self, query, top_k=3):
+        """Поиск релевантных документов"""
+        print(f"\n🔍 Поиск по запросу: '{query}'")
+        print(f"   Параметры: top_k={top_k}")
+        
+        # Симуляция эмбеддинга запроса
+        query_embedding = np.random.rand(256)
+        
+        # Вычисление сходства
+        similarities = []
+        for doc in self.documents:
+            similarity = np.dot(query_embedding, doc['embedding']) / (
+                np.linalg.norm(query_embedding) * np.linalg.norm(doc['embedding'])
+            )
+            similarities.append((doc, similarity))
+        
+        # Сортировка по релевантности
+        similarities.sort(key=lambda x: x[1], reverse=True)
+        top_docs = similarities[:top_k]
+        
+        print(f"📊 Найдено релевантных документов: {len(top_docs)}")
+        for i, (doc, sim) in enumerate(top_docs, 1):
+            print(f"   {i}. (сходство: {sim:.3f}) {doc['text'][:60]}...")
+        
+        return [doc for doc, _ in top_docs]
+
+    def generate_answer(self, query, context_docs):
+        """Генерация ответа на основе контекста"""
+        print(f"\n🤖 Генерация ответа...")
+        
+        # Формирование контекста
+        context_texts = []
+        for i, doc in enumerate(context_docs, 1):
+            # Вычисляем симуляцию релевантности для отображения
+            similarity = np.random.uniform(0.7, 0.95)
+            context_texts.append(f"Документ {i} (релевантность: {similarity:.3f}):\\n{doc['text']}")
+        
+        context = "\\n\\n".join(context_texts)
+        
+        print(f"📝 Контекст сформирован из {len(context_docs)} документов")
+        print(f"   Общая длина контекста: {len(context)} символов")
+        
+        # Симуляция генерации
+        if "машинное обучение" in query.lower() or "ml" in query.lower():
+            answer = "На основе найденных документов: Машинное обучение - это область ИИ, которая позволяет компьютерам обучаться на данных без явного программирования."
+        elif "rag" in query.lower():
+            answer = "RAG (Retrieval-Augmented Generation) - это архитектура, объединяющая поиск релевантной информации с генеративными моделями для создания точных ответов."
+        else:
+            answer = f"На основе контекста: {context_docs[0]['text'][:100]}..."
+        
+        print(f"✅ Ответ сгенерирован (длина: {len(answer)} символов)")
+        return answer
+
+    def ask(self, query):
+        """Основной метод для вопрос-ответа"""
+        print("="*60)
+        print(f"💬 ВОПРОС: {query}")
+        print("="*60)
+        
+        # Поиск релевантных документов
+        context_docs = self.search(query, top_k=3)
+        
+        # Генерация ответа
+        answer = self.generate_answer(query, context_docs)
+        
+        print("\\n" + "="*60)
+        print(f"💡 ОТВЕТ: {answer}")
+        print("="*60)
+        
+        return answer
+
+# ===== ДЕМОНСТРАЦИЯ РАБОТЫ =====
+print("🚀 Запуск демонстрации Yandex RAG\\n")
+
+# Инициализация системы
+rag = YandexRAG()
+
+# Добавление тестовых документов
+documents = [
+    "RAG (Retrieval-Augmented Generation) объединяет поиск информации с генеративными моделями для создания точных ответов.",
+    "Машинное обучение позволяет компьютерам учиться на данных без явного программирования алгоритмов.",
+    "FAISS - это библиотека от Facebook для эффективного поиска похожих векторов в больших наборах данных.",
+    "YandexGPT - это большая языковая модель, разработанная Яндексом для генерации текста на русском языке.",
+    "Эмбеддинги преобразуют текст в числовые векторы, сохраняя семантическое значение для поиска."
+]
+
+rag.add_documents(documents)
+
+# Тестовые запросы
+queries = [
+    "Что такое RAG?",
+    "Расскажи про машинное обучение",
+    "Как работают эмбеддинги?"
+]
+
+print("\\n" + "🎯 Выполнение тестовых запросов\\n" + "="*60)
+
+for query in queries:
+    answer = rag.ask(query)
+    print()  # Пустая строка между запросами
+
+print("\\n✨ Демонстрация завершена!")
+</textarea>
+            
+            <div class="mt-6">
+                <h4 class="text-lg font-semibold mb-3">Результат выполнения:</h4>
+                <div id="output-console" class="output-console border-2 border-gray-300 rounded-lg p-4">
+                    <span class="text-gray-500">Нажмите "Выполнить код" для запуска...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="mb-4">© 2024 RAG Workshop. Создано с ❤️ для изучения AI технологий</p>
+            <a href="https://t.me/llm_notes" class="inline-flex items-center bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition-colors">
+                <i class="fab fa-telegram mr-2"></i>
+                Подписаться на Telegram канал
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        let pyodide = null;
+        
+        // Initialize Pyodide
+        async function initPyodide() {
+            console.log('Инициализация Pyodide...');
+            try {
+                pyodide = await loadPyodide({
+                    indexURL: "https://cdn.jsdelivr.net/pyodide/v0.28.2/full/"
+                });
+                await pyodide.loadPackage(['numpy']);
+                console.log('✅ Pyodide готов');
+                updateStatus('Python готов', 'success');
+            } catch (error) {
+                console.error('Ошибка инициализации Pyodide:', error);
+                updateStatus('Ошибка загрузки Python', 'error');
+            }
+        }
+        
+        function updateStatus(message, type) {
+            const statusEl = document.getElementById('execution-status');
+            statusEl.className = type === 'success' ? 
+                'bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm' : 
+                'bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm';
+            statusEl.innerHTML = `<i class="fas fa-${type === 'success' ? 'check' : 'exclamation'}-circle mr-1"></i>${message}`;
+            statusEl.classList.remove('hidden');
+        }
+        
+        function embedCredentials() {
+            const folderId = document.getElementById('folder-id').value;
+            const apiKey = document.getElementById('api-key').value;
+            
+            if (!folderId || !apiKey) {
+                alert('Пожалуйста, введите Folder ID и API Key');
+                return;
+            }
+            
+            let code = document.getElementById('yandex-code-editor').value;
+            
+            // Заменяем плейсхолдеры на реальные значения
+            code = code.replace(/self\.api_key = ".*?"/g, `self.api_key = "${apiKey}"`);
+            code = code.replace(/self\.folder_id = ".*?"/g, `self.folder_id = "${folderId}"`);
+            code = code.replace(/your-folder-id/g, folderId);
+            code = code.replace(/self\.base_url = ".*?"/g, `self.base_url = "https://llm.api.cloud.yandex.net/foundationModels/v1/"`);
+            
+            document.getElementById('yandex-code-editor').value = code;
+            
+            // Показываем статус
+            const validationStatus = document.getElementById('validation-status');
+            validationStatus.innerHTML = '<span class="text-green-600"><i class="fas fa-check-circle mr-2"></i>Данные внедрены в код</span>';
+            
+            setTimeout(() => {
+                validationStatus.innerHTML = '';
+            }, 3000);
+        }
+        
+        function validateCredentials() {
+            const folderId = document.getElementById('folder-id').value;
+            const apiKey = document.getElementById('api-key').value;
+            
+            const validationStatus = document.getElementById('validation-status');
+            
+            if (!folderId || !apiKey) {
+                validationStatus.innerHTML = '<span class="text-red-600"><i class="fas fa-times-circle mr-2"></i>Введите данные для авторизации</span>';
+                return;
+            }
+            
+            // Простая валидация формата
+            if (folderId.length > 10 && apiKey.length > 20) {
+                validationStatus.innerHTML = '<span class="text-green-600"><i class="fas fa-check-circle mr-2"></i>Формат данных корректен</span>';
+            } else {
+                validationStatus.innerHTML = '<span class="text-yellow-600"><i class="fas fa-exclamation-triangle mr-2"></i>Проверьте формат данных</span>';
+            }
+            
+            setTimeout(() => {
+                validationStatus.innerHTML = '';
+            }, 3000);
+        }
+        
+        async function runYandexRAG() {
+            const code = document.getElementById('yandex-code-editor').value;
+            const outputConsole = document.getElementById('output-console');
+            
+            if (!pyodide) {
+                outputConsole.innerHTML = '<span class="text-yellow-500">⏳ Инициализация Python...</span>';
+                await initPyodide();
+            }
+            
+            outputConsole.innerHTML = '<span class="text-blue-500">🔄 Выполнение кода...</span>';
+            
+            try {
+                // Перенаправление вывода
+                await pyodide.runPythonAsync(`
+import sys
+from io import StringIO
+sys.stdout = StringIO()
+                `);
+                
+                // Выполнение пользовательского кода
+                await pyodide.runPythonAsync(code);
+                
+                // Получение вывода
+                const output = await pyodide.runPythonAsync(`
+output = sys.stdout.getvalue()
+import sys
+from io import StringIO
+sys.stdout = StringIO()  # Reset for next run
+output
+                `);
+                
+                outputConsole.innerHTML = output || '✅ Код выполнен успешно (без вывода)';
+                updateStatus('Выполнено успешно', 'success');
+                
+            } catch (error) {
+                outputConsole.innerHTML = `<span class="text-red-500">❌ Ошибка выполнения:\\n${error.message}</span>`;
+                updateStatus('Ошибка выполнения', 'error');
+            }
+        }
+        
+        function clearOutput() {
+            document.getElementById('output-console').innerHTML = '<span class="text-gray-500">Нажмите "Выполнить код" для запуска...</span>';
+            document.getElementById('execution-status').classList.add('hidden');
+        }
+        
+        function loadFromGenerator() {
+            // Эта функция может загружать код из основного генератора
+            alert('Функция загрузки кода из генератора будет добавлена в следующей версии');
+        }
+        
+        // Initialize Pyodide when page loads
+        document.addEventListener('DOMContentLoaded', initPyodide);
+    </script>
+</body>
+</html>

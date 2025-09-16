@@ -155,8 +155,14 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
-                    <i class="fas fa-brain text-purple-600 text-2xl mr-3"></i>
-                    <span class="text-xl font-bold text-gray-800">RAG Семинар</span>
+                    <a href="index.html" class="flex items-center hover:opacity-80 transition-opacity">
+                        <i class="fas fa-home text-purple-600 text-xl mr-3"></i>
+                        <span class="text-sm text-purple-600 font-semibold">На главную</span>
+                    </a>
+                    <div class="ml-6 pl-6 border-l border-gray-300 flex items-center">
+                        <i class="fas fa-brain text-purple-600 text-2xl mr-3"></i>
+                        <span class="text-xl font-bold text-gray-800">RAG Семинар</span>
+                    </div>
                 </div>
                 <div class="hidden md:flex space-x-8">
                     <a href="#overview" class="text-gray-700 hover:text-purple-600 transition-colors">Обзор</a>
@@ -231,7 +237,7 @@
             </h2>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow">
+                <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow cursor-pointer" onclick="location.href='#theory'; document.querySelector('[data-tab=\"rag-intro\"]').click();">
                     <div class="text-purple-600 text-4xl mb-4">
                         <i class="fas fa-sitemap"></i>
                     </div>
@@ -240,7 +246,7 @@
                     <div class="text-sm text-gray-500">⏱️ 10 минут</div>
                 </div>
 
-                <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow">
+                <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow cursor-pointer" onclick="location.href='#theory'; document.querySelector('[data-tab=\"embeddings\"]').click();">
                     <div class="text-blue-600 text-4xl mb-4">
                         <i class="fas fa-vector-square"></i>
                     </div>
@@ -249,7 +255,7 @@
                     <div class="text-sm text-gray-500">⏱️ 10 минут</div>
                 </div>
 
-                <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow">
+                <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow cursor-pointer" onclick="location.href='#theory'; document.querySelector('[data-tab=\"vector-search\"]').click();">
                     <div class="text-green-600 text-4xl mb-4">
                         <i class="fas fa-search"></i>
                     </div>
@@ -258,7 +264,7 @@
                     <div class="text-sm text-gray-500">⏱️ 15 минут</div>
                 </div>
 
-                <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow">
+                <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow cursor-pointer" onclick="location.href='#theory'; document.querySelector('[data-tab=\"metrics\"]').click();">
                     <div class="text-orange-600 text-4xl mb-4">
                         <i class="fas fa-chart-line"></i>
                     </div>
@@ -267,7 +273,7 @@
                     <div class="text-sm text-gray-500">⏱️ 5 минут</div>
                 </div>
 
-                <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow">
+                <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow cursor-pointer" onclick="location.href='#practice';">
                     <div class="text-red-600 text-4xl mb-4">
                         <i class="fas fa-code"></i>
                     </div>
@@ -276,7 +282,7 @@
                     <div class="text-sm text-gray-500">⏱️ 15 минут</div>
                 </div>
 
-                <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow">
+                <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow cursor-pointer" onclick="location.href='#yandex';">
                     <div class="text-indigo-600 text-4xl mb-4">
                         <i class="fas fa-brain"></i>
                     </div>
@@ -936,7 +942,6 @@ print(f"🤖 Ответ: {answer}")
                                 <select id="api-approach-select" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
                                     <option value="sdk">Yandex Cloud SDK</option>
                                     <option value="openai" selected>OpenAI Compatible API</option>
-                                    <option value="rest">REST API</option>
                                 </select>
                             </div>
                             
@@ -1067,10 +1072,10 @@ print(f"🤖 Ответ: {answer}")
                         Интерактивное изучение технологий Retrieval-Augmented Generation
                     </p>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                        <a href="https://github.com" class="text-gray-300 hover:text-white transition-colors" title="GitHub">
                             <i class="fab fa-github text-xl"></i>
                         </a>
-                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                        <a href="https://t.me/llm_notes" class="text-gray-300 hover:text-white transition-colors" title="Telegram канал">
                             <i class="fab fa-telegram text-xl"></i>
                         </a>
                     </div>
@@ -1099,6 +1104,12 @@ print(f"🤖 Ответ: {answer}")
             
             <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
                 <p>&copy; 2024 RAG Семинар. Сделано с ❤️ для изучения AI технологий</p>
+                <div class="mt-4">
+                    <a href="https://t.me/llm_notes" class="inline-flex items-center bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition-colors">
+                        <i class="fab fa-telegram mr-2"></i>
+                        Подписаться на Telegram канал
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
@@ -1301,6 +1312,8 @@ print(f"🤖 Ответ: {answer}")
             const topK = document.getElementById('topk-input').value;
             const chunkSize = document.getElementById('chunk-size-input').value;
             
+            console.log('Генерация кода с параметрами:', {model, apiApproach, topK, chunkSize});
+            
             let code = '';
             
             if (apiApproach === 'openai') {
@@ -1434,6 +1447,12 @@ answer = rag.ask("Ваш вопрос")\`;
             RAGSeminar.showNotification('Код сгенерирован!', 'success');
         }
         
+        // Делаем функции глобальными
+        window.generateYandexRAGCode = generateYandexRAGCode;
+        window.addQueryToVisualization = addQueryToVisualization;
+        window.findSimilarInVisualization = findSimilarInVisualization;
+        window.resetVisualization = resetVisualization;
+        
         // Get full seminar notes
         function getFullSeminarNotes() {
             return \`RAG (Retrieval-Augmented Generation) - Конспект семинара
@@ -1473,14 +1492,26 @@ answer = rag.ask("Ваш вопрос")\`;
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🎯 Инициализация интерактивных элементов...');
             
-            // Initialize tabs
-            RAGSeminar.initTabs('theory-tabs');
-            
-            // Initialize quiz
-            RAGSeminar.initQuiz('rag-quiz');
+            // Убедимся, что RAGSeminar доступен
+            if (typeof RAGSeminar === 'undefined') {
+                console.error('RAGSeminar не загружен! Ожидание загрузки...');
+                // Попробуем еще раз через секунду
+                setTimeout(() => {
+                    if (typeof RAGSeminar !== 'undefined') {
+                        RAGSeminar.initTabs('theory-tabs');
+                        RAGSeminar.initQuiz('rag-quiz');
+                    }
+                }, 1000);
+            } else {
+                // Initialize tabs
+                RAGSeminar.initTabs('theory-tabs');
+                
+                // Initialize quiz
+                RAGSeminar.initQuiz('rag-quiz');
+            }
             
             // Initialize visualization
-            setTimeout(initializeVisualization, 500);
+            setTimeout(initializeVisualization, 1000);
             
             console.log('✅ Все интерактивные элементы инициализированы');
         });

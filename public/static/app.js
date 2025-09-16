@@ -126,12 +126,24 @@ function createBackToTopButton() {
 async function initPyodide() {
     try {
         console.log('🐍 Загрузка Pyodide...');
+        updateSandboxStatus('loading');
+        
         pyodide = await loadPyodide({
             indexURL: "https://cdn.jsdelivr.net/pyodide/v0.28.2/full/"
         });
         
-        // Установка необходимых пакетов
-        await pyodide.loadPackage(['numpy', 'scikit-learn', 'matplotlib']);
+        // Установка базовых пакетов
+        console.log('📦 Установка пакетов...');
+        await pyodide.loadPackage(['numpy']);
+        
+        // Установка scikit-learn может быть медленной, делаем это опционально
+        try {
+            await pyodide.loadPackage(['scikit-learn']);
+            console.log('✅ scikit-learn загружен');
+        } catch (e) {
+            console.warn('⚠️ scikit-learn недоступен, используем базовые функции');
+        }
+        
         console.log('✅ Pyodide готов для выполнения Python кода');
         
         // Обновление статуса песочниц
@@ -146,17 +158,28 @@ async function initPyodide() {
 async function runPythonCode(code, outputElementId) {
     const outputElement = document.getElementById(outputElementId);
     
-    if (!pyodide) {
-        outputElement.innerHTML = '<div class="result-error">⚠️ Pyodide не инициализирован. Пожалуйста, подождите...</div>';
-        await initPyodide();
+    if (!outputElement) {
+        console.error(`Элемент вывода ${outputElementId} не найден`);
         return;
     }
     
-    outputElement.innerHTML = '<div class="loading">🔄 Выполнение кода...</div>';
+    if (!pyodide) {
+        outputElement.innerHTML = '<div class="text-yellow-600">⚠️ Pyodide не инициализирован. Инициализация...</div>';
+        await initPyodide();
+        if (!pyodide) {
+            outputElement.innerHTML = '<div class="text-red-600">❌ Не удалось инициализировать Pyodide</div>';
+            return;
+        }
+    }
+    
+    outputElement.innerHTML = '<div class="text-blue-600">🔄 Выполнение кода...</div>';
     
     try {
+        // Исправляем отступы в коде
+        const cleanCode = code.replace(/^\t/gm, '    ');
+        
         // Перехват print для вывода
-        pyodide.runPython(`
+        await pyodide.runPythonAsync(`
 import sys
 from io import StringIO
 old_stdout = sys.stdout
@@ -165,28 +188,27 @@ sys.stdout = buffer = StringIO()
         
         // Выполнение пользовательского кода
         const startTime = performance.now();
-        pyodide.runPython(code);
+        await pyodide.runPythonAsync(cleanCode);
         const executionTime = performance.now() - startTime;
         
         // Получение результата
-        const output = pyodide.runPython(`
+        const output = await pyodide.runPythonAsync(`
 sys.stdout = old_stdout
 buffer.getvalue()
         `);
         
         // Форматированный вывод
         outputElement.innerHTML = `
-            <div class="result-success">
-                <div class="text-xs text-gray-500 mb-2">✅ Выполнено за ${executionTime.toFixed(1)}мс</div>
-                <pre>${output}</pre>
-            </div>
+            <div class="text-green-600 text-xs mb-2">✅ Выполнено за ${executionTime.toFixed(1)}мс</div>
+            <pre class="text-gray-100 whitespace-pre-wrap">${output || 'Код выполнен успешно (без вывода)'}</pre>
         `;
         
     } catch (error) {
+        console.error('Ошибка выполнения Python кода:', error);
         outputElement.innerHTML = `
-            <div class="result-error">
+            <div class="text-red-500">
                 <strong>❌ Ошибка выполнения:</strong><br>
-                <pre>${error.message}</pre>
+                <pre class="text-red-400 mt-2">${error.message}</pre>
             </div>
         `;
     }
@@ -298,24 +320,36 @@ document.head.appendChild(styleSheet);
 
 function initTabs(tabsContainerId) {
     const tabsContainer = document.getElementById(tabsContainerId);
-    if (!tabsContainer) return;
+    if (!tabsContainer) {
+        console.error(`Контейнер табов ${tabsContainerId} не найден`);
+        return;
+    }
     
     const tabs = tabsContainer.querySelectorAll('.tab');
-    const tabContents = tabsContainer.parentElement.querySelectorAll('.tab-content');
+    const parentSection = tabsContainer.closest('section');
+    const tabContents = parentSection ? parentSection.querySelectorAll('.tab-content') : [];
+    
+    console.log(`Инициализация табов: найдено ${tabs.length} табов и ${tabContents.length} контентов`);
     
     tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            const targetTab = tab.getAttribute('data-tab');
+        tab.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetTab = this.getAttribute('data-tab');
+            
+            console.log(`Переключение на таб: ${targetTab}`);
             
             // Удаление активного состояния
             tabs.forEach(t => t.classList.remove('active'));
             tabContents.forEach(content => content.classList.remove('active'));
             
             // Добавление активного состояния
-            tab.classList.add('active');
+            this.classList.add('active');
             const targetContent = document.getElementById(targetTab);
             if (targetContent) {
                 targetContent.classList.add('active');
+                console.log(`Таб ${targetTab} активирован`);
+            } else {
+                console.error(`Контент для таба ${targetTab} не найден`);
             }
             
             // Аналитика переключения табов

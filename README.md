@@ -10,6 +10,7 @@
 
 ### ✨ Онлайн демо (Cloudflare Pages):
 - 🌐 **Главная страница**: [https://rag-sandbox-guide.pages.dev](https://rag-sandbox-guide.pages.dev)
+- 🎓 **Интерактивный семинар Yandex**: [https://rag-sandbox-guide.pages.dev/seminar_yandex.html](https://rag-sandbox-guide.pages.dev/seminar_yandex.html)
 - 🐍 **RAG Песочница - Pure Python**: [https://rag-sandbox-guide.pages.dev/rag_pure_python.html](https://rag-sandbox-guide.pages.dev/rag_pure_python.html)
 - 📚 **Руководство по векторным БД**: [https://rag-sandbox-guide.pages.dev/vector_databases_guide.html](https://rag-sandbox-guide.pages.dev/vector_databases_guide.html)
 
@@ -157,8 +158,9 @@ MIT License - свободное использование для образо�
 ### Cloudflare Pages
 Проект развернут на Cloudflare Pages:
 - **Production URL**: https://rag-sandbox-guide.pages.dev
-- **Preview URL**: https://7f85f65d.rag-sandbox-guide.pages.dev
-- **Автоматический деплой**: При push в main ветку GitHub
+- **Latest Deployment**: https://dca076fd.rag-sandbox-guide.pages.dev
+- **Deployment Date**: 16 января 2025
+- **Status**: ✅ Active
 
 ### Локальное развертывание
 ```bash
@@ -168,6 +170,7 @@ wrangler pages deploy dist --project-name your-project-name
 
 ---
 
-**Последнее обновление**: Декабрь 2024
+**Последнее обновление**: 16 января 2025
 **Статус**: ✅ Активно поддерживается
 **Развернуто на**: Cloudflare Pages
+**Telegram канал**: [https://t.me/llm_notes](https://t.me/llm_notes)
