@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐍 Python RAG Песочница - Pyodide Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <style>
+        .code-block {
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            max-width: 100%;
+        }
+        .output-block {
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            max-height: 600px;
+            overflow-y: auto;
+            line-height: 1.4;
+        }
+        .pipeline-diagram {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .loading {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Заголовок -->
+        <div class="bg-gray-800 rounded-lg p-6 mb-6">
+            <h1 class="text-3xl font-bold text-green-400 mb-2">
+                <i class="fas fa-python mr-2"></i>Python RAG Песочница
+            </h1>
+            <div class="flex flex-wrap gap-2 mb-4">
+                <span class="bg-green-600 text-white px-3 py-1 rounded-full text-sm">
+                    <i class="fas fa-check-circle mr-1"></i>Python готов
+                </span>
+                <span id="sklearn-status" class="bg-yellow-600 text-white px-3 py-1 rounded-full text-sm loading">
+                    <i class="fas fa-download mr-1"></i>Загрузка scikit-learn...
+                </span>
+                <span id="numpy-status" class="bg-yellow-600 text-white px-3 py-1 rounded-full text-sm loading">
+                    <i class="fas fa-download mr-1"></i>Загрузка numpy...
+                </span>
+            </div>
+            <p class="text-gray-400">
+                <i class="fas fa-lightbulb text-yellow-400 mr-2"></i>
+                Совет: Измените код ниже и нажмите "Запустить" для экспериментов!
+            </p>
+        </div>
+
+        <!-- Схема RAG Pipeline -->
+        <div class="bg-gray-800 rounded-lg p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-4 text-blue-400">
+                <i class="fas fa-diagram-project mr-2"></i>RAG Pipeline Architecture
+            </h2>
+            <div class="bg-gray-700 p-4 rounded-lg">
+                <img src="https://page.gensparksite.com/v1/base64_upload/74eb3dafeee4379bd5c6c799e3f0314e" 
+                     alt="RAG Pipeline Diagram" 
+                     class="pipeline-diagram">
+            </div>
+            <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div class="bg-gray-700 rounded p-3">
+                    <h4 class="font-bold text-yellow-400 mb-2">📥 Этап индексации (Steps 1-2):</h4>
+                    <ul class="list-decimal list-inside text-gray-300 space-y-1">
+                        <li><strong>Encode:</strong> Документы преобразуются в векторы через Embedding Model</li>
+                        <li><strong>Index:</strong> Векторы сохраняются в Vector Database</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-700 rounded p-3">
+                    <h4 class="font-bold text-green-400 mb-2">🔍 Этап поиска (Steps 3-7):</h4>
+                    <ul class="list-decimal list-inside text-gray-300 space-y-1" start="3">
+                        <li><strong>Encode Query:</strong> Запрос преобразуется в вектор</li>
+                        <li><strong>Similarity Search:</strong> Поиск похожих документов</li>
+                        <li><strong>Retrieve:</strong> Извлечение релевантных документов</li>
+                        <li><strong>Prompt:</strong> Формирование промпта с контекстом</li>
+                        <li><strong>Generate:</strong> LLM генерирует ответ</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Левая колонка - Код -->
+            <div class="bg-gray-800 rounded-lg p-4">
+                <h2 class="text-xl font-semibold mb-3 text-blue-400">
+                    <i class="fas fa-code mr-2"></i>Базовый пример RAG (Pyodide)
+                </h2>
+                <textarea id="codeInput" class="code-block w-full h-96 resize-none">
+import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+import textwrap
+
+class SimpleRAG:
+    """RAG система с TF-IDF векторизацией"""
+    
+    def __init__(self):
+        self.documents = []
+        self.vectorizer = TfidfVectorizer()
+        self.document_vectors = None
+        
+    def add_documents(self, docs):
+        """Этап 1-2: Encode + Index документов"""
+        self.documents = docs
+        # Создаем TF-IDF векторы (аналог Embedding Model)
+        self.document_vectors = self.vectorizer.fit_transform(docs)
+        return len(docs)
+    
+    def search(self, query, k=2):
+        """Этапы 3-5: Encode Query + Similarity Search + Retrieve"""
+        if not self.documents:
+            return []
+        
+        # Векторизация запроса
+        query_vector = self.vectorizer.transform([query])
+        
+        # Вычисление косинусного сходства
+        similarities = cosine_similarity(query_vector, self.document_vectors)[0]
+        
+        # Получение топ-k результатов
+        top_indices = similarities.argsort()[-k:][::-1]
+        
+        results = []
+        for idx in top_indices:
+            if similarities[idx] > 0:
+                results.append({
+                    'document': self.documents[idx],
+                    'score': float(similarities[idx]),
+                    'index': idx + 1
+                })
+        
+        return results
+    
+    def generate_answer(self, query, context_docs):
+        """Этапы 6-7: Prompt + Generate Response (упрощенная версия)"""
+        if not context_docs:
+            return "Релевантные документы не найдены."
+        
+        # Формируем промпт с контекстом
+        context = "\n".join([doc['document'] for doc in context_docs])
+        
+        # Простая логика генерации ответа
+        if "rag" in query.lower():
+            return "RAG (Retrieval-Augmented Generation) объединяет поиск и генерацию для точных ответов"
+        elif "быстр" in query.lower() or "алгоритм" in query.lower():
+            return "HNSW и FAISS показывают лучшую производительность для векторного поиска"
+        else:
+            return f"На основе контекста: {context_docs[0]['document'][:100]}..."
+
+# Инициализация
+print("🐍 Python RAG Песочница (Pyodide Edition)")
+print("=" * 70)
+
+rag = SimpleRAG()
+
+# Добавляем документы
+documents = [
+    "RAG (Retrieval-Augmented Generation) объединяет поиск и генерацию для точных ответов",
+    "FAISS - библиотека Facebook для быстрого поиска по векторам",  
+    "HNSW показывает лучшую производительность для приближенного поиска",
+    "Эмбеддинги преобразуют текст в числовые векторы для семантического поиска",
+    "Recall@k измеряет долю найденных релевантных документов"
+]
+
+num_docs = rag.add_documents(documents)
+print(f"✅ Добавлено {num_docs} документов в Vector Database")
+print()
+
+# Выполняем запросы
+queries = [
+    "Что такое RAG?",
+    "Какой алгоритм поиска самый быстрый?"
+]
+
+for query in queries:
+    print("=" * 70)
+    print(f"🔍 Query: '{query}'")
+    
+    # Поиск релевантных документов
+    results = rag.search(query, k=2)
+    print(f"📊 Найдено документов: {len(results)}")
+    
+    for result in results:
+        print(f"\n{result['index']}. (Score: {result['score']:.3f})")
+        wrapped = textwrap.fill(result['document'], width=66)
+        for line in wrapped.split('\n'):
+            print(f"   {line}")
+    
+    # Генерация ответа
+    answer = rag.generate_answer(query, results)
+    print(f"\n💡 Generated Response:")
+    wrapped = textwrap.fill(answer, width=66)
+    for line in wrapped.split('\n'):
+        print(f"   {line}")
+    print()
+
+print("=" * 70)
+print("✅ Pipeline completed successfully!")
+                </textarea>
+                <div class="mt-4 flex gap-3">
+                    <button id="runButton" onclick="runCode()" disabled class="bg-gray-600 text-white px-6 py-2 rounded-lg transition opacity-50 cursor-not-allowed">
+                        <i class="fas fa-spinner fa-spin mr-2"></i>Загрузка библиотек...
+                    </button>
+                    <button onclick="resetCode()" class="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-2 rounded-lg transition">
+                        <i class="fas fa-undo mr-2"></i>Сбросить
+                    </button>
+                </div>
+            </div>
+
+            <!-- Правая колонка - Результат -->
+            <div class="bg-gray-800 rounded-lg p-4">
+                <h2 class="text-xl font-semibold mb-3 text-green-400">
+                    <i class="fas fa-terminal mr-2"></i>Результат выполнения
+                </h2>
+                <div id="output" class="output-block">
+                    <span class="text-yellow-400">⏳ Инициализация Pyodide...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Панель с информацией о библиотеках -->
+        <div class="mt-6 bg-gray-800 rounded-lg p-6">
+            <h3 class="text-lg font-semibold mb-3 text-yellow-400">
+                <i class="fas fa-info-circle mr-2"></i>Используемые технологии
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                <div class="bg-gray-700 rounded p-3">
+                    <h4 class="font-bold text-green-400 mb-2">🐍 Pyodide</h4>
+                    <p class="text-gray-300">Python 3.11 в браузере с поддержкой научных библиотек</p>
+                </div>
+                <div class="bg-gray-700 rounded p-3">
+                    <h4 class="font-bold text-blue-400 mb-2">📊 Scikit-learn</h4>
+                    <p class="text-gray-300">TF-IDF векторизация и косинусное сходство</p>
+                </div>
+                <div class="bg-gray-700 rounded p-3">
+                    <h4 class="font-bold text-purple-400 mb-2">🔢 NumPy</h4>
+                    <p class="text-gray-300">Эффективные операции с векторами и матрицами</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let pyodide = null;
+        const originalCode = document.getElementById('codeInput').value;
+
+        async function main() {
+            const outputEl = document.getElementById('output');
+            outputEl.innerHTML = '<span class="text-yellow-400">⏳ Загрузка Python интерпретатора...</span>';
+            
+            // Загрузка Pyodide
+            pyodide = await loadPyodide({
+                indexURL: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/"
+            });
+            
+            outputEl.innerHTML = '<span class="text-yellow-400">📦 Установка пакетов...</span>';
+            
+            // Установка необходимых пакетов
+            await pyodide.loadPackage(["numpy", "scikit-learn"]);
+            
+            // Обновление статусов
+            document.getElementById('sklearn-status').className = 'bg-green-600 text-white px-3 py-1 rounded-full text-sm';
+            document.getElementById('sklearn-status').innerHTML = '<i class="fas fa-check-circle mr-1"></i>scikit-learn готов';
+            
+            document.getElementById('numpy-status').className = 'bg-green-600 text-white px-3 py-1 rounded-full text-sm';
+            document.getElementById('numpy-status').innerHTML = '<i class="fas fa-check-circle mr-1"></i>numpy готов';
+            
+            // Активация кнопки
+            const runBtn = document.getElementById('runButton');
+            runBtn.disabled = false;
+            runBtn.className = 'bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition';
+            runBtn.innerHTML = '<i class="fas fa-play mr-2"></i>Запустить код';
+            
+            outputEl.innerHTML = '<span class="text-green-400">✅ Готово к запуску! Нажмите "Запустить код"</span>';
+        }
+
+        async function runCode() {
+            if (!pyodide) return;
+            
+            const code = document.getElementById('codeInput').value;
+            const outputEl = document.getElementById('output');
+            
+            try {
+                // Перенаправление stdout
+                pyodide.runPython(`
+                    import sys
+                    from io import StringIO
+                    sys.stdout = StringIO()
+                `);
+                
+                // Выполнение кода
+                pyodide.runPython(code);
+                
+                // Получение вывода
+                const output = pyodide.runPython("sys.stdout.getvalue()");
+                outputEl.textContent = output;
+                
+                // Анимация
+                outputEl.classList.add('animate-pulse');
+                setTimeout(() => outputEl.classList.remove('animate-pulse'), 500);
+                
+            } catch (error) {
+                outputEl.innerHTML = `<span class="text-red-400">❌ Ошибка выполнения:</span>\n<span class="text-red-300">${error}</span>`;
+            }
+        }
+
+        function resetCode() {
+            document.getElementById('codeInput').value = originalCode;
+            document.getElementById('output').innerHTML = '<span class="text-green-400">✅ Код сброшен. Нажмите "Запустить код"</span>';
+        }
+
+        // Инициализация при загрузке страницы
+        main();
+    </script>
+</body>
+</html>

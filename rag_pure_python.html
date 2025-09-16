@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐍 Python RAG Песочница - Pure Python Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <style>
+        .code-block {
+            font-family: 'Courier New', monospace;
+            white-space: pre;
+            overflow-x: auto;
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .output-block {
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            max-height: 600px;
+            overflow-y: auto;
+            line-height: 1.4;
+        }
+        .pipeline-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: #fbbf24;
+            color: #1e1e1e;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 12px;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+        <!-- Заголовок -->
+        <div class="bg-gray-800 rounded-lg p-6 mb-6">
+            <h1 class="text-3xl font-bold text-green-400 mb-2">
+                <i class="fas fa-python mr-2"></i>Python RAG Песочница
+            </h1>
+            <p class="text-gray-400">
+                <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                Версия без внешних зависимостей - работает сразу!
+            </p>
+        </div>
+
+        <!-- Схема RAG Pipeline -->
+        <div class="bg-gray-800 rounded-lg p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-4 text-blue-400">
+                <i class="fas fa-diagram-project mr-2"></i>RAG Pipeline Architecture
+            </h2>
+            
+            <!-- Изображение схемы -->
+            <div class="bg-white p-4 rounded-lg mb-4">
+                <img src="https://page.gensparksite.com/v1/base64_upload/74eb3dafeee4379bd5c6c799e3f0314e" 
+                     alt="RAG Pipeline" 
+                     class="w-full max-w-4xl mx-auto">
+            </div>
+
+            <!-- Описание этапов -->
+            <div class="grid grid-cols-1 lg:grid-cols-7 gap-2 text-sm">
+                <div class="bg-gray-700 rounded p-3">
+                    <div class="flex items-center mb-2">
+                        <span class="pipeline-number">1</span>
+                        <span class="font-bold text-yellow-400">Encode</span>
+                    </div>
+                    <p class="text-gray-300 text-xs">Документы → Векторы</p>
+                </div>
+                <div class="bg-gray-700 rounded p-3">
+                    <div class="flex items-center mb-2">
+                        <span class="pipeline-number">2</span>
+                        <span class="font-bold text-yellow-400">Index</span>
+                    </div>
+                    <p class="text-gray-300 text-xs">Сохранение в БД</p>
+                </div>
+                <div class="bg-gray-700 rounded p-3">
+                    <div class="flex items-center mb-2">
+                        <span class="pipeline-number">3</span>
+                        <span class="font-bold text-yellow-400">Encode Query</span>
+                    </div>
+                    <p class="text-gray-300 text-xs">Запрос → Вектор</p>
+                </div>
+                <div class="bg-gray-700 rounded p-3">
+                    <div class="flex items-center mb-2">
+                        <span class="pipeline-number">4</span>
+                        <span class="font-bold text-yellow-400">Search</span>
+                    </div>
+                    <p class="text-gray-300 text-xs">Поиск похожих</p>
+                </div>
+                <div class="bg-gray-700 rounded p-3">
+                    <div class="flex items-center mb-2">
+                        <span class="pipeline-number">5</span>
+                        <span class="font-bold text-yellow-400">Retrieve</span>
+                    </div>
+                    <p class="text-gray-300 text-xs">Извлечение док-ов</p>
+                </div>
+                <div class="bg-gray-700 rounded p-3">
+                    <div class="flex items-center mb-2">
+                        <span class="pipeline-number">6</span>
+                        <span class="font-bold text-yellow-400">Prompt</span>
+                    </div>
+                    <p class="text-gray-300 text-xs">Создание промпта</p>
+                </div>
+                <div class="bg-gray-700 rounded p-3">
+                    <div class="flex items-center mb-2">
+                        <span class="pipeline-number">7</span>
+                        <span class="font-bold text-yellow-400">Response</span>
+                    </div>
+                    <p class="text-gray-300 text-xs">Генерация ответа</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Левая колонка - Код -->
+            <div class="bg-gray-800 rounded-lg p-4">
+                <h2 class="text-xl font-semibold mb-3 text-blue-400">
+                    <i class="fas fa-code mr-2"></i>Базовый пример RAG
+                </h2>
+                <textarea id="codeInput" class="code-block w-full" rows="30">
+import math
+import re
+from collections import Counter
+
+class SimpleRAG:
+    """RAG система на чистом Python без внешних зависимостей"""
+    
+    def __init__(self):
+        self.documents = []
+        self.doc_vectors = []
+        self.vocabulary = set()
+        
+    def tokenize(self, text):
+        """Простая токенизация текста"""
+        text = text.lower()
+        tokens = re.findall(r'\b[а-яa-z]+\b', text)
+        return tokens
+    
+    def create_vector(self, text, vocabulary):
+        """Создание вектора из текста (bag-of-words)"""
+        tokens = self.tokenize(text)
+        token_counts = Counter(tokens)
+        
+        vector = []
+        for word in sorted(vocabulary):
+            vector.append(token_counts.get(word, 0))
+        
+        # Нормализация вектора
+        magnitude = math.sqrt(sum(x**2 for x in vector))
+        if magnitude > 0:
+            vector = [x/magnitude for x in vector]
+        
+        return vector
+    
+    def cosine_similarity(self, vec1, vec2):
+        """Вычисление косинусного сходства"""
+        return sum(a * b for a, b in zip(vec1, vec2))
+    
+    def add_documents(self, docs):
+        """📍 Шаги 1-2: Encode + Index документов в Vector Database"""
+        print("📍 Шаг 1: Encode - Преобразование документов в векторы")
+        self.documents = docs
+        
+        # Построение словаря
+        for doc in docs:
+            tokens = self.tokenize(doc)
+            self.vocabulary.update(tokens)
+        
+        # Создание векторов для каждого документа
+        for i, doc in enumerate(docs, 1):
+            vector = self.create_vector(doc, self.vocabulary)
+            self.doc_vectors.append(vector)
+            print(f"   Документ {i}: вектор размерности {len(vector)}")
+        
+        print(f"📍 Шаг 2: Index - Сохранено {len(docs)} векторов в базе")
+        return len(docs)
+    
+    def search(self, query, k=2):
+        """📍 Шаги 3-5: Query Encoding + Similarity Search + Retrieve"""
+        print(f"\n📍 Шаг 3: Encode Query - '{query}'")
+        
+        # Векторизация запроса
+        query_vector = self.create_vector(query, self.vocabulary)
+        print(f"   Вектор запроса создан (размерность: {len(query_vector)})")
+        
+        print("📍 Шаг 4: Similarity Search - Поиск в Vector Database")
+        
+        # Вычисление сходства со всеми документами
+        similarities = []
+        for i, doc_vec in enumerate(self.doc_vectors):
+            sim = self.cosine_similarity(query_vector, doc_vec)
+            similarities.append((i, sim))
+            print(f"   Документ {i+1}: сходство = {sim:.3f}")
+        
+        # Сортировка по убыванию сходства
+        similarities.sort(key=lambda x: x[1], reverse=True)
+        
+        print(f"📍 Шаг 5: Retrieve - Извлечение топ-{k} документов")
+        
+        # Возврат топ-k результатов
+        results = []
+        for idx, score in similarities[:k]:
+            if score > 0:
+                results.append({
+                    'document': self.documents[idx],
+                    'score': score,
+                    'index': idx + 1
+                })
+        
+        return results
+    
+    def generate_answer(self, query, context_docs):
+        """📍 Шаги 6-7: Create Prompt + Generate Response"""
+        print("\n📍 Шаг 6: Prompt - Формирование промпта с контекстом")
+        
+        if not context_docs:
+            return "Релевантные документы не найдены"
+        
+        # Формирование контекста
+        context = "\\n".join([f"- {doc['document']}" for doc in context_docs])
+        prompt = f"Вопрос: {query}\\nКонтекст:\\n{context}\\nОтвет:"
+        
+        print("   Промпт сформирован с контекстом из документов")
+        print("📍 Шаг 7: Response - Генерация ответа LLM")
+        
+        # Упрощенная логика генерации ответа
+        query_lower = query.lower()
+        if "rag" in query_lower:
+            answer = "RAG (Retrieval-Augmented Generation) объединяет поиск по документам и генерацию ответов, обеспечивая точные результаты на основе релевантного контекста"
+        elif "быстр" in query_lower or "алгоритм" in query_lower:
+            answer = "Согласно документам, HNSW и FAISS показывают лучшую производительность для быстрого векторного поиска"
+        else:
+            answer = f"На основе найденных документов: {context_docs[0]['document']}"
+        
+        return answer
+
+# ========== ДЕМОНСТРАЦИЯ RAG PIPELINE ==========
+print("=" * 70)
+print("🚀 ДЕМОНСТРАЦИЯ RAG PIPELINE")
+print("=" * 70)
+
+# Инициализация RAG системы
+rag = SimpleRAG()
+
+# База документов
+documents = [
+    "RAG (Retrieval-Augmented Generation) объединяет поиск и генерацию для точных ответов",
+    "FAISS - библиотека Facebook для быстрого поиска по векторам",
+    "HNSW показывает лучшую производительность для приближенного поиска",
+    "Эмбеддинги преобразуют текст в числовые векторы для семантического поиска",
+    "Recall@k измеряет долю найденных релевантных документов"
+]
+
+print("\\n📚 ЭТАП ИНДЕКСАЦИИ")
+print("-" * 70)
+num_docs = rag.add_documents(documents)
+print(f"\\n✅ Индексация завершена: {num_docs} документов в базе")
+
+# Тестовые запросы
+queries = [
+    "Что такое RAG?",
+    "Какой алгоритм поиска самый быстрый?"
+]
+
+for query in queries:
+    print("\\n" + "=" * 70)
+    print(f"🔍 ОБРАБОТКА ЗАПРОСА: '{query}'")
+    print("=" * 70)
+    
+    # Поиск релевантных документов (шаги 3-5)
+    results = rag.search(query, k=2)
+    
+    print(f"\\n📊 Найдено релевантных документов: {len(results)}")
+    for result in results:
+        print(f"   [{result['index']}] Score: {result['score']:.3f}")
+        print(f"       {result['document'][:60]}...")
+    
+    # Генерация ответа (шаги 6-7)  
+    answer = rag.generate_answer(query, results)
+    
+    print(f"\\n✨ ФИНАЛЬНЫЙ ОТВЕТ:")
+    # Форматирование ответа с переносами
+    words = answer.split()
+    line = ""
+    for word in words:
+        if len(line) + len(word) + 1 <= 66:
+            line = line + " " + word if line else word
+        else:
+            print(f"   {line}")
+            line = word
+    if line:
+        print(f"   {line}")
+
+print("\\n" + "=" * 70)
+print("✅ RAG PIPELINE ВЫПОЛНЕН УСПЕШНО!")
+print("=" * 70)
+</textarea>
+                <div class="mt-4 flex gap-3">
+                    <button id="runButton" onclick="runCode()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition">
+                        <i class="fas fa-play mr-2"></i>Запустить код
+                    </button>
+                    <button onclick="clearOutput()" class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg transition">
+                        <i class="fas fa-eraser mr-2"></i>Очистить вывод
+                    </button>
+                </div>
+            </div>
+
+            <!-- Правая колонка - Результат -->
+            <div class="bg-gray-800 rounded-lg p-4">
+                <h2 class="text-xl font-semibold mb-3 text-green-400">
+                    <i class="fas fa-terminal mr-2"></i>Результат выполнения
+                </h2>
+                <div id="output" class="output-block">
+                    <span class="text-gray-400">Нажмите "Запустить код" для выполнения...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Информационная панель -->
+        <div class="mt-6 bg-blue-900 bg-opacity-30 border border-blue-500 rounded-lg p-6">
+            <h3 class="text-lg font-semibold mb-3 text-blue-400">
+                <i class="fas fa-lightbulb mr-2"></i>Особенности реализации
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div>
+                    <h4 class="font-bold text-green-400 mb-2">✅ Преимущества:</h4>
+                    <ul class="list-disc list-inside text-gray-300 space-y-1">
+                        <li>Работает без внешних библиотек</li>
+                        <li>Демонстрирует все 7 шагов pipeline</li>
+                        <li>Простой и понятный код</li>
+                        <li>Мгновенное выполнение</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-yellow-400 mb-2">📝 Упрощения:</h4>
+                    <ul class="list-disc list-inside text-gray-300 space-y-1">
+                        <li>Bag-of-words вместо настоящих эмбеддингов</li>
+                        <li>Простая логика генерации ответов</li>
+                        <li>Базовая токенизация</li>
+                        <li>Нет настоящей LLM</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let pyodide = null;
+
+        async function main() {
+            pyodide = await loadPyodide({
+                indexURL: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/"
+            });
+            
+            document.getElementById('output').innerHTML = '<span class="text-green-400">✅ Python готов! Нажмите "Запустить код"</span>';
+        }
+
+        async function runCode() {
+            if (!pyodide) {
+                await main();
+            }
+            
+            const code = document.getElementById('codeInput').value;
+            const outputEl = document.getElementById('output');
+            
+            try {
+                // Перенаправление stdout
+                pyodide.runPython(`
+                    import sys
+                    from io import StringIO
+                    sys.stdout = StringIO()
+                `);
+                
+                // Выполнение кода
+                pyodide.runPython(code);
+                
+                // Получение вывода
+                const output = pyodide.runPython("sys.stdout.getvalue()");
+                outputEl.textContent = output || "Код выполнен без вывода";
+                
+            } catch (error) {
+                outputEl.innerHTML = `<span class="text-red-400">❌ Ошибка:</span>\n${error}`;
+            }
+        }
+
+        function clearOutput() {
+            document.getElementById('output').innerHTML = '<span class="text-gray-400">Вывод очищен. Нажмите "Запустить код"</span>';
+        }
+
+        // Инициализация
+        main();
+    </script>
+</body>
+</html>

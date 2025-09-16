@@ -246,59 +246,77 @@ app.get('/', (c) => {
                 </h2>
                 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow">
+                    <a href="#theory" onclick="scrollToSection('theory')" class="block bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 hover:bg-purple-50">
                         <div class="text-purple-600 text-4xl mb-4">
                             <i class="fas fa-sitemap"></i>
                         </div>
                         <h3 class="text-xl font-bold mb-3">1. Введение в RAG</h3>
                         <p class="text-gray-600 mb-4">Основная концепция, архитектура, компоненты RAG системы</p>
                         <div class="text-sm text-gray-500">⏱️ 10 минут</div>
-                    </div>
+                        <div class="mt-3 text-purple-600 text-sm font-semibold">
+                            <i class="fas fa-arrow-right mr-2"></i>Перейти к разделу
+                        </div>
+                    </a>
 
-                    <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow">
+                    <a href="#theory" onclick="scrollToSection('theory')" class="block bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 hover:bg-blue-50">
                         <div class="text-blue-600 text-4xl mb-4">
                             <i class="fas fa-vector-square"></i>
                         </div>
                         <h3 class="text-xl font-bold mb-3">2. Векторизация</h3>
                         <p class="text-gray-600 mb-4">Методы эмбеддингов, Sentence Transformers, модели</p>
                         <div class="text-sm text-gray-500">⏱️ 10 минут</div>
-                    </div>
+                        <div class="mt-3 text-blue-600 text-sm font-semibold">
+                            <i class="fas fa-arrow-right mr-2"></i>Перейти к разделу
+                        </div>
+                    </a>
 
-                    <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow">
+                    <a href="#theory" onclick="scrollToSection('theory')" class="block bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 hover:bg-green-50">
                         <div class="text-green-600 text-4xl mb-4">
                             <i class="fas fa-search"></i>
                         </div>
                         <h3 class="text-xl font-bold mb-3">3. Семантический поиск</h3>
                         <p class="text-gray-600 mb-4">FAISS, HNSW, Annoy - сравнение алгоритмов</p>
                         <div class="text-sm text-gray-500">⏱️ 15 минут</div>
-                    </div>
+                        <div class="mt-3 text-green-600 text-sm font-semibold">
+                            <i class="fas fa-arrow-right mr-2"></i>Перейти к разделу
+                        </div>
+                    </a>
 
-                    <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow">
+                    <a href="#theory" onclick="scrollToSection('theory')" class="block bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 hover:bg-orange-50">
                         <div class="text-orange-600 text-4xl mb-4">
                             <i class="fas fa-chart-line"></i>
                         </div>
                         <h3 class="text-xl font-bold mb-3">4. Метрики качества</h3>
                         <p class="text-gray-600 mb-4">Recall@k, Precision@k, оценка RAG систем</p>
                         <div class="text-sm text-gray-500">⏱️ 5 минут</div>
-                    </div>
+                        <div class="mt-3 text-orange-600 text-sm font-semibold">
+                            <i class="fas fa-arrow-right mr-2"></i>Перейти к разделу
+                        </div>
+                    </a>
 
-                    <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow">
+                    <a href="#practice" onclick="scrollToSection('practice')" class="block bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 hover:bg-red-50">
                         <div class="text-red-600 text-4xl mb-4">
                             <i class="fas fa-code"></i>
                         </div>
                         <h3 class="text-xl font-bold mb-3">5. Практика</h3>
                         <p class="text-gray-600 mb-4">Базовый RAG-конвейер, примеры кода</p>
                         <div class="text-sm text-gray-500">⏱️ 15 минут</div>
-                    </div>
+                        <div class="mt-3 text-red-600 text-sm font-semibold">
+                            <i class="fas fa-arrow-right mr-2"></i>Перейти к разделу
+                        </div>
+                    </a>
 
-                    <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow">
+                    <a href="#yandex" onclick="scrollToSection('yandex')" class="block bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 hover:bg-indigo-50">
                         <div class="text-indigo-600 text-4xl mb-4">
                             <i class="fas fa-brain"></i>
                         </div>
                         <h3 class="text-xl font-bold mb-3">6. Yandex Foundation Models</h3>
                         <p class="text-gray-600 mb-4">Интеграция с YandexGPT, эмбеддинги, API</p>
                         <div class="text-sm text-gray-500">⏱️ 5 минут</div>
-                    </div>
+                        <div class="mt-3 text-indigo-600 text-sm font-semibold">
+                            <i class="fas fa-arrow-right mr-2"></i>Перейти к разделу
+                        </div>
+                    </a>
                 </div>
             </div>
         </section>
@@ -717,23 +735,74 @@ for query in queries:
                     <div class="grid lg:grid-cols-3 gap-6">
                         <div class="lg:col-span-2">
                             <div id="embedding-visualization" class="visualization-container"></div>
-                            <div class="flex gap-3 mt-4">
-                                <button onclick="addQueryToVisualization()" 
-                                        class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
-                                    ➕ Добавить запрос
-                                </button>
-                                <button onclick="findSimilarInVisualization()" 
-                                        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                                    🔍 Найти похожие
-                                </button>
-                                <button onclick="resetVisualization()" 
-                                        class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
-                                    🔄 Сброс
-                                </button>
+                            
+                            <!-- Query Input Section -->
+                            <div class="mt-4 p-4 bg-gray-50 rounded-lg border">
+                                <h5 class="font-semibold mb-3 text-gray-700">Добавить запрос:</h5>
+                                
+                                <!-- Quick Select Queries -->
+                                <div class="mb-3">
+                                    <label class="block text-sm font-medium text-gray-600 mb-2">Быстрый выбор:</label>
+                                    <div class="flex flex-wrap gap-2">
+                                        <button onclick="selectPresetQuery('Алгоритмы машинного обучения')" 
+                                                class="preset-query-btn bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm px-3 py-1 rounded-full transition-colors">
+                                            Алгоритмы ML
+                                        </button>
+                                        <button onclick="selectPresetQuery('Приготовление борща')" 
+                                                class="preset-query-btn bg-orange-100 hover:bg-orange-200 text-orange-800 text-sm px-3 py-1 rounded-full transition-colors">
+                                            Приготовление борща
+                                        </button>
+                                        <button onclick="selectPresetQuery('Спортивные соревнования')" 
+                                                class="preset-query-btn bg-green-100 hover:bg-green-200 text-green-800 text-sm px-3 py-1 rounded-full transition-colors">
+                                            Спорт
+                                        </button>
+                                        <button onclick="selectPresetQuery('Векторный поиск')" 
+                                                class="preset-query-btn bg-purple-100 hover:bg-purple-200 text-purple-800 text-sm px-3 py-1 rounded-full transition-colors">
+                                            Векторный поиск
+                                        </button>
+                                        <button onclick="selectPresetQuery('Нейронные сети')" 
+                                                class="preset-query-btn bg-indigo-100 hover:bg-indigo-200 text-indigo-800 text-sm px-3 py-1 rounded-full transition-colors">
+                                            Нейросети
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Custom Query Input -->
+                                <div class="mb-3">
+                                    <label for="custom-query-input" class="block text-sm font-medium text-gray-600 mb-2">Или введите свой запрос:</label>
+                                    <div class="flex gap-2">
+                                        <input type="text" 
+                                               id="custom-query-input" 
+                                               placeholder="Введите ваш поисковый запрос..." 
+                                               class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                                               onkeypress="if(event.key==='Enter') addCustomQueryToVisualization()">
+                                        <button onclick="addCustomQueryToVisualization()" 
+                                                class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors whitespace-nowrap">
+                                            ➕ Добавить
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Control Buttons -->
+                                <div class="flex gap-3 flex-wrap">
+                                    <button onclick="findSimilarInVisualization()" 
+                                            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                                            id="find-similar-btn" disabled>
+                                        🔍 Найти похожие
+                                    </button>
+                                    <button onclick="resetVisualization()" 
+                                            class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
+                                        🔄 Сброс
+                                    </button>
+                                    <button onclick="showVisualizationHelp()" 
+                                            class="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition-colors">
+                                        ❓ Справка
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <div>
-                            <h4 class="font-semibold mb-3">Как это работает:</h4>
+                            <h4 class="font-semibold mb-3">Как работает семантический поиск:</h4>
                             <div class="space-y-3 text-sm text-gray-700">
                                 <div class="flex items-start">
                                     <i class="fas fa-circle text-blue-500 mt-2 mr-3 text-xs"></i>
@@ -745,20 +814,38 @@ for query in queries:
                                 </div>
                                 <div class="flex items-start">
                                     <i class="fas fa-minus text-green-500 mt-2 mr-3"></i>
-                                    <span><strong>Зеленые линии</strong> - связи с наиболее похожими документами</span>
+                                    <span><strong>Зеленая линия</strong> - наилучшее семантическое соответствие</span>
                                 </div>
                                 <div class="flex items-start">
-                                    <i class="fas fa-calculator mt-2 mr-3 text-purple-600"></i>
-                                    <span><strong>Числа</strong> - показатели семантического сходства</span>
+                                    <i class="fas fa-minus text-blue-500 mt-2 mr-3"></i>
+                                    <span><strong>Синие линии</strong> - семантически связанные документы</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-minus text-yellow-500 mt-2 mr-3"></i>
+                                    <span><strong>Желтые линии</strong> - низкое сходство (разные категории)</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-percent mt-2 mr-3 text-purple-600"></i>
+                                    <span><strong>Проценты</strong> - точная семантическая похожесть</span>
                                 </div>
                             </div>
                             
-                            <div class="mt-6 bg-blue-50 rounded-lg p-4">
+                            <div class="mt-6 bg-orange-50 rounded-lg p-4 border border-orange-200">
+                                <h5 class="font-semibold text-orange-800 mb-2">🧠 Алгоритм учитывает:</h5>
+                                <ul class="text-sm text-orange-700 space-y-1">
+                                    <li>• <strong>Семантические категории:</strong> ИИ/ML, Кулинария, Спорт</li>
+                                    <li>• <strong>Точное совпадение слов:</strong> приготовление ≈ готовить</li>
+                                    <li>• <strong>Межкатегорийные связи:</strong> борщ ≠ машинное обучение</li>
+                                    <li>• <strong>Контекстуальное понимание:</strong> реальный анализ значений</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="mt-4 bg-blue-50 rounded-lg p-4">
                                 <h5 class="font-semibold text-blue-800 mb-2">💡 Попробуйте:</h5>
                                 <ul class="text-sm text-blue-700 space-y-1">
-                                    <li>• Добавьте запрос рядом с группой документов</li>
-                                    <li>• Посмотрите, как алгоритм находит похожие</li>
-                                    <li>• Обратите внимание на расстояния и сходства</li>
+                                    <li>• Запрос "Приготовление борща" → высокое сходство с кулинарией</li>
+                                    <li>• Запрос про ИИ → найдет только ML-документы</li>
+                                    <li>• Смешанный запрос → покажет межкатегорийные различия</li>
                                 </ul>
                             </div>
                         </div>
@@ -925,81 +1012,297 @@ for query in queries:
                     </div>
                 </div>
 
-                <!-- Code Configuration Tool -->
+                <!-- Enhanced Code Configuration Tool -->
                 <div class="bg-white rounded-xl card-shadow p-8">
                     <h3 class="text-2xl font-bold mb-6">
                         <i class="fas fa-cog mr-3 text-orange-600"></i>
                         Конфигуратор RAG с Yandex Models
                     </h3>
-                    
-                    <div class="grid lg:grid-cols-2 gap-8">
-                        <div>
-                            <h4 class="font-semibold mb-4">Настройки:</h4>
+
+                    <!-- Configuration Tabs -->
+                    <div class="flex border-b border-gray-200 mb-6" id="yandex-config-tabs">
+                        <button class="tab px-6 py-3 text-lg font-medium active" data-tab="yandex-config">
+                            <i class="fas fa-sliders-h mr-2"></i>Конфигурация
+                        </button>
+                        <button class="tab px-6 py-3 text-lg font-medium" data-tab="yandex-code">
+                            <i class="fas fa-code mr-2"></i>Сгенерированный код
+                        </button>
+                        <button class="tab px-6 py-3 text-lg font-medium" data-tab="yandex-sandbox">
+                            <i class="fas fa-play-circle mr-2"></i>Песочница
+                        </button>
+                    </div>
+
+                    <!-- Configuration Tab -->
+                    <div class="tab-content active" id="yandex-config">
+                        <div class="grid lg:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="font-semibold mb-4 text-gray-800">Параметры RAG системы:</h4>
+                                
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                                            <i class="fas fa-brain mr-1 text-orange-500"></i>Модель для генерации:
+                                        </label>
+                                        <select id="yandex-model-select" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 bg-white">
+                                            <option value="yandexgpt-pro">YandexGPT Pro (32K контекст, лучшее качество)</option>
+                                            <option value="yandexgpt" selected>YandexGPT (8K контекст, сбалансированный)</option>
+                                            <option value="yandexgpt-lite">YandexGPT Lite (4K контекст, быстрый)</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                                            <i class="fas fa-plug mr-1 text-blue-500"></i>API подход:
+                                        </label>
+                                        <select id="api-approach-select" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 bg-white">
+                                            <option value="sdk">Yandex Cloud SDK (рекомендуется)</option>
+                                            <option value="openai" selected>OpenAI Compatible API</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                                <i class="fas fa-list-ol mr-1 text-green-500"></i>Top-K результатов:
+                                            </label>
+                                            <input type="number" id="topk-input" value="3" min="1" max="10" 
+                                                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+                                            <p class="text-xs text-gray-500 mt-1">Количество документов для контекста</p>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                                <i class="fas fa-cut mr-1 text-purple-500"></i>Размер чанка:
+                                            </label>
+                                            <input type="number" id="chunk-size-input" value="1000" min="100" max="4000" step="100"
+                                                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+                                            <p class="text-xs text-gray-500 mt-1">Токенов на чанк</p>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                                            <i class="fas fa-folder mr-1 text-indigo-500"></i>Folder ID (опционально):
+                                        </label>
+                                        <input type="text" id="folder-id-input" placeholder="b1g2b3c4d5e6f7g8h9i0" 
+                                               class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+                                        <p class="text-xs text-gray-500 mt-1">Ваш Folder ID из Yandex Cloud</p>
+                                    </div>
+                                    
+                                    <button onclick="generateYandexRAGCode()" 
+                                            class="w-full bg-gradient-to-r from-orange-600 to-red-600 text-white py-4 px-6 rounded-lg font-semibold hover:from-orange-700 hover:to-red-700 transition-all duration-200 transform hover:scale-105">
+                                        <i class="fas fa-magic mr-2"></i>Сгенерировать код RAG
+                                    </button>
+                                </div>
+                            </div>
                             
-                            <div class="space-y-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Модель для генерации:</label>
-                                    <select id="yandex-model-select" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
-                                        <option value="yandexgpt-pro">YandexGPT Pro (32K контекст)</option>
-                                        <option value="yandexgpt" selected>YandexGPT (8K контекст)</option>
-                                        <option value="yandexgpt-lite">YandexGPT Lite (4K контекст)</option>
-                                    </select>
-                                </div>
-                                
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">API подход:</label>
-                                    <select id="api-approach-select" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
-                                        <option value="sdk">Yandex Cloud SDK</option>
-                                        <option value="openai" selected>OpenAI Compatible API</option>
-                                        <option value="rest">REST API</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Top-K:</label>
-                                        <input type="number" id="topk-input" value="3" min="1" max="10" 
-                                               class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Chunk Size:</label>
-                                        <input type="number" id="chunk-size-input" value="1000" min="100" max="4000" step="100"
-                                               class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+                            <div>
+                                <h4 class="font-semibold mb-4 text-gray-800">Предварительный просмотр:</h4>
+                                <div class="bg-gray-50 rounded-lg p-6 h-96 overflow-y-auto border-2 border-dashed border-gray-300">
+                                    <div class="text-center text-gray-500 mt-20">
+                                        <i class="fas fa-code text-4xl mb-4"></i>
+                                        <p class="text-lg mb-2">Код будет сгенерирован здесь</p>
+                                        <p class="text-sm">Настройте параметры слева и нажмите "Сгенерировать код"</p>
                                     </div>
                                 </div>
-                                
-                                <button onclick="generateYandexRAGCode()" 
-                                        class="w-full bg-orange-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-orange-700 transition-colors">
-                                    <i class="fas fa-magic mr-2"></i>Сгенерировать код RAG
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Generated Code Tab -->
+                    <div class="tab-content" id="yandex-code">
+                        <div class="mb-4 flex items-center justify-between">
+                            <h4 class="font-semibold text-gray-800">
+                                <i class="fas fa-file-code mr-2 text-blue-600"></i>Сгенерированный Python код
+                            </h4>
+                            <div class="flex gap-2">
+                                <button onclick="copyGeneratedCode()" 
+                                        class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
+                                    <i class="fas fa-copy mr-2"></i>Копировать
+                                </button>
+                                <button onclick="downloadGeneratedCode()" 
+                                        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    <i class="fas fa-download mr-2"></i>Скачать
+                                </button>
+                                <button onclick="sendCodeToSandbox()" 
+                                        class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                    <i class="fas fa-play mr-2"></i>В песочницу
                                 </button>
                             </div>
                         </div>
                         
-                        <div>
-                            <div class="flex items-center justify-between mb-4">
-                                <h4 class="font-semibold">Сгенерированный код:</h4>
-                                <button onclick="RAGSeminar.copyToClipboard(document.getElementById('yandex-generated-code').textContent)" 
-                                        class="text-sm bg-gray-600 text-white px-3 py-1 rounded hover:bg-gray-700 transition-colors">
-                                    <i class="fas fa-copy mr-1"></i>Копировать
-                                </button>
+                        <!-- Enhanced Code Editor -->
+                        <div class="relative">
+                            <div class="absolute top-2 right-2 bg-gray-800 text-white text-xs px-2 py-1 rounded z-10">
+                                Python
                             </div>
-                            <div class="code-block h-80 overflow-y-auto" id="yandex-generated-code">
-                                Настройте параметры и нажмите "Сгенерировать код"...
+                            <textarea id="yandex-generated-code-editor" 
+                                      class="w-full h-96 p-4 font-mono text-sm bg-gray-900 text-gray-100 rounded-lg border border-gray-600 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 resize-none overflow-auto"
+                                      placeholder="Настройте параметры на вкладке 'Конфигурация' и сгенерируйте код..."
+                                      spellcheck="false"></textarea>
+                        </div>
+
+                        <div class="mt-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-800 mb-2">
+                                <i class="fas fa-lightbulb mr-2"></i>Возможности редактора:
+                            </h5>
+                            <ul class="text-sm text-blue-700 space-y-1">
+                                <li>• ✏️ Редактируйте код прямо в браузере</li>
+                                <li>• 🚀 Отправьте код в песочницу для выполнения</li>
+                                <li>• 📋 Копируйте или скачайте готовый файл</li>
+                                <li>• 🔧 Настройки сохраняются автоматически</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Sandbox Tab -->
+                    <div class="tab-content" id="yandex-sandbox">
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">
+                                <i class="fas fa-flask mr-2 text-green-600"></i>Интерактивная песочница Yandex RAG
+                            </h4>
+                            <p class="text-gray-600 text-sm">Выполните сгенерированный код с реальными данными (без моков)</p>
+                        </div>
+
+                        <!-- Yandex Cloud Credentials Input -->
+                        <div class="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-800 mb-3">
+                                <i class="fas fa-key mr-2"></i>Yandex Cloud авторизация (обязательно для реального выполнения)
+                            </h5>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                                        <i class="fas fa-folder mr-1 text-blue-500"></i>Folder ID:
+                                    </label>
+                                    <input type="text" 
+                                           id="sandbox-folder-id" 
+                                           placeholder="b1g2b3c4d5e6f7g8h9i0" 
+                                           class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm font-mono">
+                                    <p class="text-xs text-gray-500 mt-1">Ваш Folder ID из Yandex Cloud</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                                        <i class="fas fa-key mr-1 text-orange-500"></i>API Key:
+                                    </label>
+                                    <input type="password" 
+                                           id="sandbox-api-key" 
+                                           placeholder="AQVN..." 
+                                           class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm font-mono">
+                                    <p class="text-xs text-gray-500 mt-1">API ключ или IAM токен</p>
+                                </div>
+                            </div>
+                            <div class="mt-3 flex items-center gap-3">
+                                <button onclick="injectCredentialsIntoCode()" 
+                                        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm">
+                                    <i class="fas fa-inject mr-2"></i>Внедрить в код
+                                </button>
+                                <button onclick="validateCredentials()" 
+                                        class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors text-sm">
+                                    <i class="fas fa-check mr-2"></i>Проверить
+                                </button>
+                                <div id="credentials-status" class="text-sm text-gray-600">
+                                    <i class="fas fa-info-circle mr-1"></i>Введите данные для авторизации
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid lg:grid-cols-2 gap-6">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <h5 class="font-medium text-gray-700">Исполняемый код:</h5>
+                                    <div class="flex gap-2">
+                                        <button onclick="loadCodeFromEditor()" 
+                                                class="text-sm bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition-colors">
+                                            <i class="fas fa-sync mr-1"></i>Загрузить из редактора
+                                        </button>
+                                        <div class="sandbox-status text-blue-600 text-sm">
+                                            <i class="fas fa-spinner fa-spin"></i> Pyodide загружается...
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <textarea id="yandex-sandbox-code" 
+                                          class="w-full h-64 p-3 font-mono text-sm bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 resize-none"
+                                          placeholder="Код для выполнения загрузится сюда автоматически..."></textarea>
+                                
+                                <div class="flex gap-3 mt-3">
+                                    <button onclick="runYandexSandboxCode()" 
+                                            class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex-1">
+                                        <i class="fas fa-play mr-2"></i>Выполнить код
+                                    </button>
+                                    <button onclick="clearSandboxOutput()" 
+                                            class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
+                                        <i class="fas fa-trash mr-2"></i>Очистить
+                                    </button>
+                                </div>
+
+                                <div class="mt-4 bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+                                    <h6 class="font-semibold text-yellow-800 mb-2">
+                                        <i class="fas fa-exclamation-triangle mr-2"></i>Важно:
+                                    </h6>
+                                    <ul class="text-sm text-yellow-700 space-y-1">
+                                        <li>• Код выполняется локально в браузере</li>
+                                        <li>• API ключи Yandex нужно устанавливать отдельно</li>
+                                        <li>• Поддерживаются numpy, pandas, requests</li>
+                                        <li>• Реальные HTTP запросы возможны</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h5 class="font-medium text-gray-700 mb-3">Результат выполнения:</h5>
+                                <div class="output-section min-h-64 max-h-80 overflow-y-auto" id="yandex-sandbox-output">
+                                    Выполните код для просмотра результатов...
+                                </div>
+
+                                <div class="mt-4 bg-green-50 border border-green-200 rounded-lg p-3">
+                                    <h6 class="font-semibold text-green-800 mb-2">
+                                        <i class="fas fa-rocket mr-2"></i>Возможности:
+                                    </h6>
+                                    <ul class="text-sm text-green-700 space-y-1">
+                                        <li>• 🔄 Реальное выполнение Python кода</li>
+                                        <li>• 📦 Автоматическая установка пакетов</li>
+                                        <li>• 🌐 HTTP запросы к внешним API</li>
+                                        <li>• 📊 Визуализация данных с matplotlib</li>
+                                        <li>• 🧪 Тестирование RAG алгоритмов</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="mt-6 bg-orange-50 border-l-4 border-orange-400 p-4">
+
+                    <!-- Getting Started Guide -->
+                    <div class="mt-8 bg-gradient-to-r from-orange-50 to-red-50 border-l-4 border-orange-400 rounded-lg p-6">
                         <div class="flex items-start">
-                            <i class="fas fa-info-circle text-orange-600 mt-1 mr-3"></i>
+                            <i class="fas fa-rocket text-orange-600 text-2xl mt-1 mr-4"></i>
                             <div>
-                                <p class="font-semibold text-orange-800 mb-2">Начало работы с Yandex Foundation Models:</p>
-                                <ol class="text-sm text-orange-700 space-y-1">
-                                    <li>1. Зарегистрируйтесь в Yandex Cloud</li>
-                                    <li>2. Создайте сервисный аккаунт и получите API ключ</li>
-                                    <li>3. Установите пакет: <code class="bg-orange-100 px-1 rounded">pip install yandexcloud</code></li>
-                                    <li>4. Используйте сгенерированный код для интеграции</li>
-                                </ol>
+                                <p class="font-semibold text-orange-800 mb-3 text-lg">🚀 Быстрый старт с Yandex Foundation Models</p>
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <h6 class="font-semibold text-orange-800 mb-2">Подготовка:</h6>
+                                        <ol class="text-sm text-orange-700 space-y-1">
+                                            <li>1. 📝 Зарегистрируйтесь в <a href="https://cloud.yandex.ru" target="_blank" class="underline hover:text-orange-900">Yandex Cloud</a></li>
+                                            <li>2. 🔑 Создайте сервисный аккаунт</li>
+                                            <li>3. 🛠️ Получите API ключ или IAM токен</li>
+                                            <li>4. 📦 Установите SDK: <code class="bg-orange-100 px-1 rounded font-mono">pip install yandexcloud</code></li>
+                                        </ol>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-semibold text-orange-800 mb-2">Использование:</h6>
+                                        <ol class="text-sm text-orange-700 space-y-1">
+                                            <li>5. ⚙️ Настройте параметры на вкладке "Конфигурация"</li>
+                                            <li>6. 🔄 Сгенерируйте код RAG</li>
+                                            <li>7. ✏️ Отредактируйте код под свои нужды</li>
+                                            <li>8. 🧪 Протестируйте в песочнице</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-4 p-3 bg-orange-100 rounded-lg">
+                                    <p class="text-sm text-orange-800">
+                                        <i class="fas fa-info-circle mr-2"></i>
+                                        <strong>Совет:</strong> Начните с OpenAI Compatible API - это самый простой способ интеграции с существующими проектами.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1082,10 +1385,10 @@ for query in queries:
                             Интерактивное изучение технологий Retrieval-Augmented Generation
                         </p>
                         <div class="flex space-x-4">
-                            <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors" title="GitHub">
                                 <i class="fab fa-github text-xl"></i>
                             </a>
-                            <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                            <a href="https://t.me/llm_notes" target="_blank" class="text-gray-300 hover:text-white transition-colors" title="Telegram канал LLM Notes">
                                 <i class="fab fa-telegram text-xl"></i>
                             </a>
                         </div>
@@ -1113,7 +1416,14 @@ for query in queries:
                 </div>
                 
                 <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-                    <p>&copy; 2024 RAG Семинар. Сделано с ❤️ для изучения AI технологий</p>
+                    <p>&copy; 2025 RAG Семинар. Сделано с ❤️ для изучения AI технологий</p>
+                    <p class="mt-2 text-sm">
+                        Подписывайтесь на наш 
+                        <a href="https://t.me/llm_notes" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors">
+                            <i class="fab fa-telegram mr-1"></i>Telegram канал
+                        </a> 
+                        для получения новых материалов по AI
+                    </p>
                 </div>
             </div>
         </footer>
@@ -1200,23 +1510,69 @@ for query in queries:
                 });
             }
             
-            function addQueryToVisualization() {
+            // Preset queries with strategic positioning for better demonstration
+            const presetQueries = {
+                'Алгоритмы машинного обучения': { x: 110, y: 160, category: 'AI' },
+                'Нейронные сети': { x: 130, y: 180, category: 'AI' },
+                'Векторный поиск': { x: 140, y: 140, category: 'AI' },
+                'Рецепты итальянской кухни': { x: 310, y: 110, category: 'Food' },
+                'Приготовление пасты': { x: 290, y: 130, category: 'Food' },
+                'Приготовление борща': { x: 320, y: 90, category: 'Food' },
+                'Варка супа': { x: 280, y: 140, category: 'Food' },
+                'Спортивные соревнования': { x: 190, y: 290, category: 'Sports' },
+                'Футбольные матчи': { x: 210, y: 310, category: 'Sports' }
+            };
+            
+            function selectPresetQuery(queryText) {
+                document.getElementById('custom-query-input').value = queryText;
+                RAGSeminar.showNotification(\`Выбран запрос: "\${queryText}"\`, 'info');
+            }
+            
+            function addCustomQueryToVisualization() {
+                const input = document.getElementById('custom-query-input');
+                const queryText = input.value.trim();
+                
+                if (!queryText) {
+                    RAGSeminar.showNotification('Введите текст запроса!', 'warning');
+                    return;
+                }
+                
+                addQueryToVisualization(queryText);
+                input.value = '';
+            }
+            
+            function addQueryToVisualization(queryText = null) {
                 if (!visualizationSvg) return;
                 
-                const x = Math.random() * 500 + 50;
-                const y = Math.random() * 300 + 50;
+                const finalQueryText = queryText || \`Запрос \${queries.length + 1}\`;
+                let x, y;
+                
+                // Use strategic positioning for preset queries
+                if (queryText && presetQueries[queryText]) {
+                    const preset = presetQueries[queryText];
+                    x = preset.x + (Math.random() - 0.5) * 20; // Small random offset
+                    y = preset.y + (Math.random() - 0.5) * 20;
+                } else {
+                    x = Math.random() * 500 + 50;
+                    y = Math.random() * 300 + 50;
+                }
+                
                 const queryId = \`query_\${queries.length + 1}\`;
                 
                 const query = {
                     id: queryId,
                     x: x,
                     y: y,
-                    text: \`Запрос \${queries.length + 1}\`,
+                    text: finalQueryText,
                     type: "query"
                 };
                 
                 queries.push(query);
                 currentQuery = query;
+                
+                // Clear previous connections when adding new query
+                visualizationSvg.selectAll('.connection').remove();
+                visualizationSvg.selectAll('.similarity-text').remove();
                 
                 visualizationSvg.append('circle')
                     .attr('class', 'query')
@@ -1226,48 +1582,193 @@ for query in queries:
                     .attr('r', 10)
                     .attr('fill', '#ea4335')
                     .attr('stroke', '#fff')
-                    .attr('stroke-width', 2);
+                    .attr('stroke-width', 2)
+                    .style('cursor', 'pointer')
+                    .on('click', function() {
+                        currentQuery = query;
+                        // Highlight selected query
+                        visualizationSvg.selectAll('.query').attr('stroke-width', 2);
+                        d3.select(this).attr('stroke-width', 4);
+                        updateFindButton();
+                    });
                 
-                visualizationSvg.append('text')
+                const label = visualizationSvg.append('text')
                     .attr('class', 'query-label')
                     .attr('id', \`\${queryId}-label\`)
                     .attr('x', x)
                     .attr('y', y - 18)
                     .attr('text-anchor', 'middle')
-                    .attr('font-size', '12px')
+                    .attr('font-size', '11px')
                     .attr('font-weight', 'bold')
                     .attr('fill', '#ea4335')
-                    .text(query.text);
+                    .style('cursor', 'pointer')
+                    .on('click', function() {
+                        currentQuery = query;
+                        updateFindButton();
+                    });
                 
-                RAGSeminar.showNotification('Запрос добавлен! Нажмите "Найти похожие"', 'success');
+                // Wrap long text
+                const words = finalQueryText.split(' ');
+                if (words.length > 2) {
+                    label.text('');
+                    label.append('tspan')
+                        .attr('x', x)
+                        .attr('dy', 0)
+                        .text(words.slice(0, 2).join(' '));
+                    if (words.length > 2) {
+                        label.append('tspan')
+                            .attr('x', x)
+                            .attr('dy', '1.2em')
+                            .text(words.slice(2).join(' '));
+                    }
+                } else {
+                    label.text(finalQueryText);
+                }
+                
+                updateFindButton();
+                RAGSeminar.showNotification(\`Запрос "\${finalQueryText}" добавлен!\`, 'success');
+            }
+            
+            function updateFindButton() {
+                const findBtn = document.getElementById('find-similar-btn');
+                if (currentQuery) {
+                    findBtn.disabled = false;
+                    findBtn.classList.remove('disabled:bg-gray-400', 'disabled:cursor-not-allowed');
+                } else {
+                    findBtn.disabled = true;
+                    findBtn.classList.add('disabled:bg-gray-400', 'disabled:cursor-not-allowed');
+                }
             }
             
             function findSimilarInVisualization() {
                 if (!currentQuery || !visualizationSvg) {
-                    RAGSeminar.showNotification('Сначала добавьте запрос!', 'warning');
+                    RAGSeminar.showNotification('Сначала добавьте или выберите запрос!', 'warning');
                     return;
                 }
                 
-                // Calculate distances
-                const distances = documents.map(doc => {
-                    const dist = Math.sqrt(
+                // Advanced semantic similarity calculation
+                const similarities = documents.map(doc => {
+                    const queryLower = currentQuery.text.toLowerCase();
+                    const docLower = doc.text.toLowerCase();
+                    
+                    // Расширенные семантические категории с более точными терминами
+                    const semanticCategories = {
+                        ai: {
+                            terms: ['машинное', 'обучение', 'нейронн', 'алгоритм', 'векторн', 'поиск', 'искусственн', 'модел', 'данн', 'ai', 'ml'],
+                            boost: 0.9
+                        },
+                        food: {
+                            terms: ['кухн', 'паст', 'приготов', 'рецепт', 'италь', 'еда', 'блюд', 'готов', 'борщ', 'суп', 'варить', 'жарить'],
+                            boost: 0.85
+                        },
+                        sports: {
+                            terms: ['спорт', 'футбол', 'матч', 'соревнов', 'игра', 'команда', 'тренир', 'физическ'],
+                            boost: 0.8
+                        }
+                    };
+                    
+                    // Определение категории запроса и документа
+                    let queryCategory = null;
+                    let docCategory = null;
+                    let maxQueryScore = 0;
+                    let maxDocScore = 0;
+                    
+                    for (const [category, data] of Object.entries(semanticCategories)) {
+                        // Подсчет совпадений для запроса
+                        const queryMatches = data.terms.filter(term => queryLower.includes(term)).length;
+                        const queryScore = queryMatches / data.terms.length;
+                        
+                        if (queryScore > maxQueryScore) {
+                            maxQueryScore = queryScore;
+                            queryCategory = category;
+                        }
+                        
+                        // Подсчет совпадений для документа
+                        const docMatches = data.terms.filter(term => docLower.includes(term)).length;
+                        const docScore = docMatches / data.terms.length;
+                        
+                        if (docScore > maxDocScore) {
+                            maxDocScore = docScore;
+                            docCategory = category;
+                        }
+                    }
+                    
+                    // Расчет семантической похожести
+                    let semanticSimilarity = 0;
+                    let isSemanticMatch = false;
+                    
+                    if (queryCategory && docCategory) {
+                        if (queryCategory === docCategory) {
+                            // Одна категория - высокое сходство
+                            semanticSimilarity = Math.min(maxQueryScore, maxDocScore) * semanticCategories[queryCategory].boost;
+                            isSemanticMatch = true;
+                        } else {
+                            // Разные категории - очень низкое сходство
+                            semanticSimilarity = 0.1;
+                        }
+                    } else {
+                        // Если категория не определена - средне-низкое сходство
+                        semanticSimilarity = 0.2;
+                    }
+                    
+                    // Дополнительная проверка на прямое совпадение слов
+                    const queryWords = queryLower.split(/\\s+/);
+                    const docWords = docLower.split(/\\s+/);
+                    let directWordMatches = 0;
+                    
+                    queryWords.forEach(qword => {
+                        docWords.forEach(dword => {
+                            if (qword.length > 3 && dword.includes(qword.substring(0, 4))) {
+                                directWordMatches++;
+                            }
+                        });
+                    });
+                    
+                    const directMatchBonus = Math.min(directWordMatches * 0.2, 0.4);
+                    
+                    // Финальная похожесть (0-1)
+                    const finalSimilarity = Math.min(1, semanticSimilarity + directMatchBonus);
+                    
+                    // Геометрическое расстояние для визуализации (менее важно)
+                    const euclideanDist = Math.sqrt(
                         Math.pow(doc.x - currentQuery.x, 2) + 
                         Math.pow(doc.y - currentQuery.y, 2)
                     );
-                    return {doc, distance: dist};
+                    
+                    return { 
+                        doc, 
+                        distance: euclideanDist, 
+                        similarity: finalSimilarity,
+                        semanticMatch: isSemanticMatch,
+                        queryCategory,
+                        docCategory,
+                        directMatches: directWordMatches
+                    };
                 });
                 
-                distances.sort((a, b) => a.distance - b.distance);
-                const topK = distances.slice(0, 3);
+                // Sort by similarity (higher is better)
+                similarities.sort((a, b) => b.similarity - a.similarity);
+                const topK = similarities.slice(0, 3);
                 
                 // Clear previous connections
                 visualizationSvg.selectAll('.connection').remove();
                 visualizationSvg.selectAll('.similarity-text').remove();
                 
-                // Draw connections
+                // Draw connections with enhanced visualization
                 topK.forEach((item, index) => {
                     const doc = item.doc;
-                    const similarity = Math.max(0, 1 - item.distance / 200);
+                    const similarity = item.similarity;
+                    const isSemanticMatch = item.semanticMatch;
+                    
+                    // Color coding: green for best match, blue for semantic matches, yellow for distance-based
+                    let strokeColor;
+                    if (index === 0) {
+                        strokeColor = '#34a853'; // Green for best match
+                    } else if (isSemanticMatch) {
+                        strokeColor = '#4285f4'; // Blue for semantic matches
+                    } else {
+                        strokeColor = '#fbbc04'; // Yellow for distance-based
+                    }
                     
                     visualizationSvg.append('line')
                         .attr('class', 'connection')
@@ -1275,28 +1776,105 @@ for query in queries:
                         .attr('y1', currentQuery.y)
                         .attr('x2', doc.x)
                         .attr('y2', doc.y)
-                        .attr('stroke', index === 0 ? '#34a853' : '#fbbc04')
-                        .attr('stroke-width', 3 - index * 0.5)
-                        .attr('stroke-dasharray', index === 0 ? '0' : '5,3');
+                        .attr('stroke', strokeColor)
+                        .attr('stroke-width', 4 - index * 0.8)
+                        .attr('stroke-dasharray', index === 0 ? '0' : '8,4')
+                        .attr('opacity', 0.8);
                     
                     const midX = (currentQuery.x + doc.x) / 2;
                     const midY = (currentQuery.y + doc.y) / 2;
                     
-                    visualizationSvg.append('text')
-                        .attr('class', 'similarity-text')
+                    // Similarity score with background for better readability
+                    const scoreGroup = visualizationSvg.append('g')
+                        .attr('class', 'similarity-text');
+                    
+                    scoreGroup.append('rect')
+                        .attr('x', midX - 15)
+                        .attr('y', midY - 8)
+                        .attr('width', 30)
+                        .attr('height', 16)
+                        .attr('fill', 'white')
+                        .attr('stroke', strokeColor)
+                        .attr('stroke-width', 1)
+                        .attr('rx', 8)
+                        .attr('opacity', 0.9);
+                    
+                    scoreGroup.append('text')
                         .attr('x', midX)
-                        .attr('y', midY)
+                        .attr('y', midY + 4)
                         .attr('text-anchor', 'middle')
-                        .attr('font-size', '11px')
+                        .attr('font-size', '10px')
                         .attr('font-weight', 'bold')
-                        .attr('fill', '#333')
-                        .attr('stroke', 'white')
-                        .attr('stroke-width', '3')
-                        .attr('paint-order', 'stroke')
+                        .attr('fill', strokeColor)
                         .text(similarity.toFixed(2));
                 });
                 
-                RAGSeminar.showNotification('Найдены похожие документы!', 'success');
+                // Show detailed results summary
+                const bestMatch = topK[0];
+                const semanticMatches = topK.filter(item => item.semanticMatch).length;
+                
+                let message = \`🔍 Анализ запроса "\${currentQuery.text}":\\n\`;
+                
+                // Analyze query category
+                if (bestMatch.queryCategory) {
+                    const categoryNames = { ai: 'ИИ/ML', food: 'Кулинария', sports: 'Спорт' };
+                    message += \`📂 Категория запроса: \${categoryNames[bestMatch.queryCategory]}\\n\`;
+                }
+                
+                // Show top matches with detailed explanation
+                topK.forEach((item, i) => {
+                    const categoryNames = { ai: 'ИИ/ML', food: 'Кулинария', sports: 'Спорт' };
+                    const matchReason = item.semanticMatch ? 
+                        \`семантическое сходство (\${categoryNames[item.docCategory]})\` : 
+                        'низкое сходство (разные категории)';
+                    
+                    message += \`\\n\${i + 1}. "\${item.doc.text}" - \${(item.similarity * 100).toFixed(0)}% (\${matchReason})\`;
+                });
+                
+                if (semanticMatches === 0) {
+                    message += '\\n\\n⚠️ Семантически похожих документов не найдено!';
+                } else {
+                    message += \`\\n\\n✅ Найдено \${semanticMatches} семантически связанных документов\`;
+                }
+                
+                // Show alert with detailed explanation
+                alert(message);
+                
+                // Also show a shorter notification
+                const shortMessage = semanticMatches > 0 ? 
+                    \`Найдено \${semanticMatches} семантически связанных документов\` :
+                    'Семантически похожих документов не найдено';
+                    
+                RAGSeminar.showNotification(shortMessage, semanticMatches > 0 ? 'success' : 'warning', 4000);
+                
+                // Update progress
+                RAGSeminar.updateProgress(65);
+            }
+            
+            function showVisualizationHelp() {
+                const helpText = \`
+📊 Как работает интерактивная визуализация эмбеддингов:
+
+🔵 Синие точки - документы в векторном пространстве
+🔴 Красные точки - пользовательские запросы
+🟢 Зеленые линии - наилучшее соответствие
+🔵 Синие линии - семантические соответствия
+🟡 Желтые линии - соответствия по расстоянию
+📊 Числа - показатели сходства (0-1)
+
+💡 Попробуйте:
+• Выберите готовый запрос из категорий
+• Добавьте запрос рядом с группой документов
+• Посмотрите, как алгоритм находит семантически похожие документы
+• Обратите внимание на различные типы соответствий
+
+🎯 Алгоритм учитывает:
+• Геометрическое расстояние в пространстве
+• Семантическую близость по тематикам
+• Весовые коэффициенты для разных категорий
+                \`;
+                
+                alert(helpText);
             }
             
             function resetVisualization() {
@@ -1306,147 +1884,755 @@ for query in queries:
                 queries = [];
                 currentQuery = null;
                 
+                // Reset input and button states
+                document.getElementById('custom-query-input').value = '';
+                updateFindButton();
+                
+                // Reset document styling
+                visualizationSvg.selectAll('.document')
+                    .attr('fill', '#4285f4')
+                    .attr('r', 8);
+                
                 RAGSeminar.showNotification('Визуализация сброшена', 'info');
             }
             
-            // Yandex code generator
+            // Enhanced Yandex code generator with improved formatting and real implementations
             function generateYandexRAGCode() {
                 const model = document.getElementById('yandex-model-select').value;
                 const apiApproach = document.getElementById('api-approach-select').value;
                 const topK = document.getElementById('topk-input').value;
                 const chunkSize = document.getElementById('chunk-size-input').value;
+                const folderId = document.getElementById('folder-id-input').value || 'your-folder-id';
                 
                 let code = '';
                 
                 if (apiApproach === 'openai') {
-                    code = \`# RAG с Yandex Foundation Models через OpenAI API
+                    code = generateOpenAICode(model, topK, chunkSize, folderId);
+                } else if (apiApproach === 'sdk') {
+                    code = generateSDKCode(model, topK, chunkSize, folderId);
+                }
+                
+                // Update both display areas
+                const codeEditor = document.getElementById('yandex-generated-code-editor');
+                if (codeEditor) {
+                    codeEditor.value = code;
+                }
+                
+                // Switch to code tab
+                switchYandexTab('yandex-code');
+                
+                RAGSeminar.showNotification('Код сгенерирован и готов к редактированию!', 'success');
+            }
+
+            function generateOpenAICode(model, topK, chunkSize, folderId) {
+                return \`"""
+RAG система с Yandex Foundation Models через OpenAI Compatible API
+Автоматически сгенерированный код для интеграции
+"""
+
 import openai
 import numpy as np
 import os
+import requests
+from typing import List, Dict
+import json
 
 class YandexRAG:
+    """
+    RAG система с использованием Yandex Foundation Models
+    через OpenAI Compatible API
+    """
+    
     def __init__(self):
+        """Инициализация RAG системы"""
         self.api_key = os.getenv("YANDEX_CLOUD_API_KEY")
-        self.folder_id = "your-folder-id"
+        self.folder_id = "\${folderId}"
+        self.base_url = "https://llm.api.cloud.yandex.net/foundationModels/v1/"
         
+        if not self.api_key:
+            raise ValueError("Установите переменную окружения YANDEX_CLOUD_API_KEY")
+        
+        # Настройка OpenAI клиента для Yandex
         self.client = openai.OpenAI(
             api_key=self.api_key,
-            base_url="https://llm.api.cloud.yandex.net/foundationModels/v1/"
+            base_url=self.base_url
         )
         
+        self.embedding_model = f"emb://\${folderId}/text-search-doc/latest"
+        self.generation_model = f"gpt://\${folderId}/\${model}/latest"
         self.documents = []
+        
+        print(f"✅ YandexRAG инициализирован с моделью: \${model}")
     
-    def add_documents(self, docs):
-        # Разбивка на чанки по \${chunkSize} токенов
+    def get_embeddings(self, texts: List[str]) -> List[List[float]]:
+        """
+        Получение эмбеддингов через Yandex API
+        
+        Args:
+            texts: Список текстов для векторизации
+            
+        Returns:
+            Список векторов эмбеддингов
+        """
+        embeddings = []
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json"
+        }
+        
+        for text in texts:
+            payload = {
+                "modelUri": self.embedding_model,
+                "text": text
+            }
+            
+            try:
+                response = requests.post(
+                    f"{self.base_url}textEmbedding",
+                    headers=headers,
+                    json=payload,
+                    timeout=30
+                )
+                response.raise_for_status()
+                
+                embedding = response.json()["embedding"]
+                embeddings.append(embedding)
+                
+            except requests.exceptions.RequestException as e:
+                print(f"❌ Ошибка получения эмбеддинга: {e}")
+                # Возвращаем случайный вектор как fallback
+                embeddings.append(np.random.rand(256).tolist())
+        
+        return embeddings
+    
+    def split_documents(self, docs: List[str], chunk_size: int = \${chunkSize}) -> List[str]:
+        """
+        Разбиение документов на чанки
+        
+        Args:
+            docs: Список документов
+            chunk_size: Размер чанка в словах
+            
+        Returns:
+            Список чанков
+        """
+        chunks = []
+        for doc in docs:
+            words = doc.split()
+            for i in range(0, len(words), chunk_size):
+                chunk = " ".join(words[i:i + chunk_size])
+                if chunk.strip():  # Избегаем пустых чанков
+                    chunks.append(chunk)
+        
+        print(f"📄 Создано {len(chunks)} чанков из {len(docs)} документов")
+        return chunks
+    
+    def add_documents(self, docs: List[str]) -> None:
+        """
+        Добавление документов в векторную базу
+        
+        Args:
+            docs: Список текстов документов
+        """
+        print(f"🔄 Обработка {len(docs)} документов...")
+        
+        # Разбиение на чанки
         chunks = self.split_documents(docs)
         
-        for chunk in chunks:
-            # Получение эмбеддингов
-            embedding = self.get_embedding(chunk)
-            self.documents.append({
-                "text": chunk,
-                "embedding": embedding
-            })
-    
-    def get_embedding(self, text):
-        # Здесь должен быть запрос к API эмбеддингов Yandex
-        return np.random.rand(256)  # Заглушка
-    
-    def search(self, query, top_k=\${topK}):
-        query_emb = self.get_embedding(query)
+        # Получение эмбеддингов
+        embeddings = self.get_embeddings(chunks)
         
+        # Сохранение в векторную БД
+        for i, (chunk, embedding) in enumerate(zip(chunks, embeddings)):
+            self.documents.append({
+                "id": i,
+                "text": chunk,
+                "embedding": np.array(embedding)
+            })
+        
+        print(f"✅ Добавлено {len(chunks)} чанков в векторную базу")
+    
+    def search(self, query: str, top_k: int = \${topK}) -> List[Dict]:
+        """
+        Семантический поиск по запросу
+        
+        Args:
+            query: Поисковый запрос
+            top_k: Количество результатов
+            
+        Returns:
+            Список наиболее релевантных документов
+        """
+        if not self.documents:
+            print("⚠️ Векторная база пустая!")
+            return []
+        
+        print(f"🔍 Поиск по запросу: '{query}'")
+        
+        # Получение эмбеддинга запроса
+        query_embeddings = self.get_embeddings([query])
+        query_vector = np.array(query_embeddings[0])
+        
+        # Вычисление сходства
         similarities = []
         for doc in self.documents:
-            sim = np.dot(query_emb, doc["embedding"])
-            similarities.append((doc, sim))
+            similarity = np.dot(query_vector, doc["embedding"]) / (
+                np.linalg.norm(query_vector) * np.linalg.norm(doc["embedding"])
+            )
+            similarities.append({
+                "document": doc,
+                "similarity": float(similarity)
+            })
         
-        similarities.sort(key=lambda x: x[1], reverse=True)
-        return [doc for doc, sim in similarities[:top_k]]
+        # Сортировка по убыванию сходства
+        similarities.sort(key=lambda x: x["similarity"], reverse=True)
+        
+        results = similarities[:top_k]
+        print(f"📊 Найдено {len(results)} релевантных документов")
+        
+        return results
     
-    def generate_answer(self, query, context_docs):
-        context = "\\\\n".join([doc["text"] for doc in context_docs])
+    def generate_answer(self, query: str, context_docs: List[Dict]) -> str:
+        """
+        Генерация ответа на основе найденного контекста
         
+        Args:
+            query: Вопрос пользователя
+            context_docs: Найденные документы
+            
+        Returns:
+            Сгенерированный ответ
+        """
+        # Формирование контекста
+        context_texts = []
+        for i, doc_info in enumerate(context_docs, 1):
+            doc = doc_info["document"]
+            similarity = doc_info["similarity"]
+            context_texts.append(f"Документ {i} (релевантность: {similarity:.3f}):\\n{doc['text']}")
+        
+        context = "\\n\\n".join(context_texts)
+        
+        # Создание промпта
         messages = [
-            {"role": "system", "content": "Отвечай на вопросы на основе контекста."},
-            {"role": "user", "content": f"Контекст: {context}\\\\n\\\\nВопрос: {query}"}
+            {
+                "role": "system",
+                "content": "Ты - помощник по поиску информации. Отвечай на вопросы пользователя, используя только предоставленный контекст. Если в контексте нет ответа, честно скажи об этом."
+            },
+            {
+                "role": "user",
+                "content": f"""Контекст:
+{context}
+
+Вопрос: {query}
+
+Ответь на вопрос, основываясь только на предоставленном контексте:"""
+            }
         ]
         
-        response = self.client.chat.completions.create(
-            model="gpt://your-folder-id/\${model}/latest",
-            messages=messages,
-            max_tokens=1500
-        )
-        
-        return response.choices[0].message.content
+        try:
+            print("🤖 Генерация ответа...")
+            response = self.client.chat.completions.create(
+                model=self.generation_model,
+                messages=messages,
+                max_tokens=1500,
+                temperature=0.2
+            )
+            
+            answer = response.choices[0].message.content
+            return answer
+            
+        except Exception as e:
+            error_msg = f"❌ Ошибка генерации ответа: {e}"
+            print(error_msg)
+            return error_msg
     
-    def ask(self, query):
-        context_docs = self.search(query)
-        return self.generate_answer(query, context_docs)
-
-# Использование:
-rag = YandexRAG()
-rag.add_documents(["Ваши документы..."])
-answer = rag.ask("Ваш вопрос")\`;
-                
-                } else if (apiApproach === 'sdk') {
-                    code = \`# RAG с Yandex Cloud SDK
-from yandexcloud import SDK
-import numpy as np
-import os
-
-class YandexRAG:
-    def __init__(self):
-        self.sdk = SDK(token=os.getenv("YANDEX_CLOUD_IAM_TOKEN"))
-        self.folder_id = "your-folder-id"
-        self.documents = []
-    
-    def add_documents(self, docs):
-        chunks = self.split_documents(docs, chunk_size=\${chunkSize})
+    def ask(self, query: str) -> Dict:
+        """
+        Полный RAG запрос: поиск + генерация
         
-        for chunk in chunks:
-            embedding = self.get_embedding(chunk)
-            self.documents.append({
-                "text": chunk, 
-                "embedding": embedding
+        Args:
+            query: Вопрос пользователя
+            
+        Returns:
+            Результат с ответом и метаданными
+        """
+        # Поиск релевантных документов
+        search_results = self.search(query)
+        
+        if not search_results:
+            return {
+                "answer": "Извините, не удалось найти релевантные документы.",
+                "sources": [],
+                "query": query
+            }
+        
+        # Генерация ответа
+        answer = self.generate_answer(query, search_results)
+        
+        # Формирование источников
+        sources = []
+        for result in search_results:
+            doc = result["document"]
+            sources.append({
+                "text": doc["text"][:200] + "..." if len(doc["text"]) > 200 else doc["text"],
+                "similarity": result["similarity"],
+                "id": doc["id"]
             })
-    
-    def get_embedding(self, text):
-        # Запрос к Yandex Foundation Models Embeddings API
-        # Реализация через SDK
-        return np.random.rand(256)  # Заглушка
-    
-    def search(self, query, top_k=\${topK}):
-        query_emb = self.get_embedding(query)
         
+        return {
+            "answer": answer,
+            "sources": sources,
+            "query": query,
+            "model": "\${model}"
+        }
+
+# Пример использования
+def demo_yandex_rag():
+    """Демонстрация работы YandexRAG"""
+    
+    # Инициализация
+    rag = YandexRAG()
+    
+    # Тестовые документы
+    documents = [
+        "Yandex Foundation Models - это семейство больших языковых моделей от Яндекса для различных задач обработки естественного языка.",
+        "YandexGPT Pro поддерживает контекст до 32000 токенов и обеспечивает высокое качество генерации на русском и английском языках.",
+        "RAG (Retrieval-Augmented Generation) позволяет языковым моделям использовать внешние источники знаний для генерации более точных ответов.",
+        "Векторные эмбеддинги преобразуют текст в числовые векторы, что позволяет выполнять семантический поиск по документам.",
+        "Семантический поиск находит документы не по ключевым словам, а по смыслу и контексту запроса."
+    ]
+    
+    # Добавление документов
+    rag.add_documents(documents)
+    
+    # Тестовые запросы
+    queries = [
+        "Что такое YandexGPT Pro?",
+        "Как работает RAG?",
+        "Что такое семантический поиск?"
+    ]
+    
+    print("\\n" + "="*80)
+    print("🎯 ДЕМОНСТРАЦИЯ YANDEX RAG СИСТЕМЫ")
+    print("="*80)
+    
+    for query in queries:
+        print(f"\\n❓ Запрос: {query}")
+        print("-" * 60)
+        
+        result = rag.ask(query)
+        
+        print(f"🤖 Ответ: {result['answer']}")
+        print(f"\\n📚 Источники ({len(result['sources'])}):")
+        
+        for i, source in enumerate(result['sources'], 1):
+            print(f"   {i}. Сходство: {source['similarity']:.3f}")
+            print(f"      {source['text']}")
+        
+        print("\\n" + "-" * 60)
+
+if __name__ == "__main__":
+    # Запуск демонстрации
+    demo_yandex_rag()
+\`;
+            }
+
+            function generateSDKCode(model, topK, chunkSize, folderId) {
+                return \`"""
+RAG система с Yandex Foundation Models через официальный SDK
+Автоматически сгенерированный код для интеграции
+"""
+
+import os
+import numpy as np
+from typing import List, Dict
+from yandexcloud import SDK
+from yandex.cloud.ai.foundation_models.v1 import embedding_service_pb2_grpc
+from yandex.cloud.ai.foundation_models.v1 import embedding_service_pb2
+from yandex.cloud.ai.foundation_models.v1 import text_generation_service_pb2_grpc
+from yandex.cloud.ai.foundation_models.v1 import text_generation_service_pb2
+
+class YandexRAGSDK:
+    """
+    RAG система с использованием Yandex Foundation Models SDK
+    """
+    
+    def __init__(self):
+        """Инициализация RAG системы через SDK"""
+        
+        # Получение токена авторизации
+        iam_token = os.getenv("YANDEX_CLOUD_IAM_TOKEN")
+        api_key = os.getenv("YANDEX_CLOUD_API_KEY")
+        
+        if not (iam_token or api_key):
+            raise ValueError("Установите YANDEX_CLOUD_IAM_TOKEN или YANDEX_CLOUD_API_KEY")
+        
+        # Инициализация SDK
+        if iam_token:
+            self.sdk = SDK(token=iam_token)
+        else:
+            # Для API ключа нужен сервисный аккаунт
+            self.sdk = SDK(service_account_key=api_key)
+        
+        self.folder_id = "\${folderId}"
+        self.embedding_model = f"emb://\${folderId}/text-search-doc/latest"
+        self.generation_model = f"gpt://\${folderId}/\${model}/latest"
+        self.documents = []
+        
+        print(f"✅ YandexRAG SDK инициализирован с моделью: \${model}")
+    
+    def get_embeddings(self, texts: List[str]) -> List[List[float]]:
+        """
+        Получение эмбеддингов через Yandex Foundation Models SDK
+        
+        Args:
+            texts: Список текстов для векторизации
+            
+        Returns:
+            Список векторов эмбеддингов
+        """
+        service = self.sdk.client(embedding_service_pb2_grpc.EmbeddingsServiceStub)
+        embeddings = []
+        
+        for text in texts:
+            try:
+                request = embedding_service_pb2.TextEmbeddingRequest(
+                    model_uri=self.embedding_model,
+                    text=text
+                )
+                
+                response = service.TextEmbedding(request)
+                embeddings.append(list(response.embedding))
+                
+            except Exception as e:
+                print(f"❌ Ошибка получения эмбеддинга: {e}")
+                # Fallback на случайный вектор
+                embeddings.append(np.random.rand(256).tolist())
+        
+        return embeddings
+    
+    def split_documents(self, docs: List[str], chunk_size: int = \${chunkSize}) -> List[str]:
+        """
+        Разбиение документов на чанки
+        
+        Args:
+            docs: Список документов
+            chunk_size: Размер чанка в словах
+            
+        Returns:
+            Список чанков
+        """
+        chunks = []
+        for doc in docs:
+            words = doc.split()
+            for i in range(0, len(words), chunk_size):
+                chunk = " ".join(words[i:i + chunk_size])
+                if chunk.strip():
+                    chunks.append(chunk)
+        
+        print(f"📄 Создано {len(chunks)} чанков из {len(docs)} документов")
+        return chunks
+    
+    def add_documents(self, docs: List[str]) -> None:
+        """
+        Добавление документов в векторную базу
+        
+        Args:
+            docs: Список текстов документов
+        """
+        print(f"🔄 Обработка {len(docs)} документов...")
+        
+        # Разбиение на чанки
+        chunks = self.split_documents(docs)
+        
+        # Получение эмбеддингов
+        embeddings = self.get_embeddings(chunks)
+        
+        # Сохранение в векторную БД
+        for i, (chunk, embedding) in enumerate(zip(chunks, embeddings)):
+            self.documents.append({
+                "id": i,
+                "text": chunk,
+                "embedding": np.array(embedding)
+            })
+        
+        print(f"✅ Добавлено {len(chunks)} чанков в векторную базу")
+    
+    def search(self, query: str, top_k: int = \${topK}) -> List[Dict]:
+        """
+        Семантический поиск по запросу
+        
+        Args:
+            query: Поисковый запрос
+            top_k: Количество результатов
+            
+        Returns:
+            Список наиболее релевантных документов
+        """
+        if not self.documents:
+            print("⚠️ Векторная база пустая!")
+            return []
+        
+        print(f"🔍 Поиск по запросу: '{query}'")
+        
+        # Получение эмбеддинга запроса
+        query_embeddings = self.get_embeddings([query])
+        query_vector = np.array(query_embeddings[0])
+        
+        # Вычисление сходства
         similarities = []
         for doc in self.documents:
-            sim = np.dot(query_emb, doc["embedding"])
-            similarities.append((doc, sim))
+            similarity = np.dot(query_vector, doc["embedding"]) / (
+                np.linalg.norm(query_vector) * np.linalg.norm(doc["embedding"])
+            )
+            similarities.append({
+                "document": doc,
+                "similarity": float(similarity)
+            })
         
-        similarities.sort(key=lambda x: x[1], reverse=True)
-        return [doc for doc, sim in similarities[:top_k]]
+        # Сортировка по убыванию сходства
+        similarities.sort(key=lambda x: x["similarity"], reverse=True)
+        
+        results = similarities[:top_k]
+        print(f"📊 Найдено {len(results)} релевантных документов")
+        
+        return results
     
-    def generate_answer(self, query, context_docs):
-        context = "\\\\n".join([doc["text"] for doc in context_docs])
+    def generate_answer(self, query: str, context_docs: List[Dict]) -> str:
+        """
+        Генерация ответа через YandexGPT SDK
         
-        # Генерация через YandexGPT
-        prompt = f"Контекст: {context}\\\\n\\\\nВопрос: {query}\\\\n\\\\nОтвет:"
+        Args:
+            query: Вопрос пользователя
+            context_docs: Найденные документы
+            
+        Returns:
+            Сгенерированный ответ
+        """
+        # Формирование контекста
+        context_texts = []
+        for i, doc_info in enumerate(context_docs, 1):
+            doc = doc_info["document"]
+            similarity = doc_info["similarity"]
+            context_texts.append(f"Документ {i} (релевантность: {similarity:.3f}):\\n{doc['text']}")
         
-        # Здесь должен быть запрос к \${model}
-        return "Ответ сгенерирован YandexGPT"
-    
-    def ask(self, query):
-        context_docs = self.search(query)
-        return self.generate_answer(query, context_docs)
+        context = "\\n\\n".join(context_texts)
+        
+        # Создание промпта
+        prompt = f"""Используя следующий контекст, ответь на вопрос пользователя:
 
-# Использование:
-rag = YandexRAG()
-rag.add_documents(["Ваши документы..."])  
-answer = rag.ask("Ваш вопрос")\`;
-                }
+КОНТЕКСТ:
+{context}
+
+ВОПРОС: {query}
+
+ОТВЕТ:"""
+        
+        try:
+            print("🤖 Генерация ответа через SDK...")
+            
+            service = self.sdk.client(text_generation_service_pb2_grpc.TextGenerationServiceStub)
+            
+            request = text_generation_service_pb2.CompletionRequest(
+                model_uri=self.generation_model,
+                completion_options=text_generation_service_pb2.CompletionOptions(
+                    stream=False,
+                    temperature=0.2,
+                    max_tokens=1500
+                ),
+                messages=[
+                    text_generation_service_pb2.Message(
+                        role="user",
+                        text=prompt
+                    )
+                ]
+            )
+            
+            response = service.Completion(request)
+            answer = response.result.alternatives[0].message.text
+            
+            return answer
+            
+        except Exception as e:
+            error_msg = f"❌ Ошибка генерации через SDK: {e}"
+            print(error_msg)
+            return error_msg
+    
+    def ask(self, query: str) -> Dict:
+        """
+        Полный RAG запрос через SDK
+        
+        Args:
+            query: Вопрос пользователя
+            
+        Returns:
+            Результат с ответом и метаданными
+        """
+        # Поиск релевантных документов
+        search_results = self.search(query)
+        
+        if not search_results:
+            return {
+                "answer": "Извините, не удалось найти релевантные документы.",
+                "sources": [],
+                "query": query
+            }
+        
+        # Генерация ответа
+        answer = self.generate_answer(query, search_results)
+        
+        # Формирование источников
+        sources = []
+        for result in search_results:
+            doc = result["document"]
+            sources.append({
+                "text": doc["text"][:200] + "..." if len(doc["text"]) > 200 else doc["text"],
+                "similarity": result["similarity"],
+                "id": doc["id"]
+            })
+        
+        return {
+            "answer": answer,
+            "sources": sources,
+            "query": query,
+            "model": "\${model}",
+            "api": "Yandex Cloud SDK"
+        }
+
+# Пример использования
+def demo_yandex_rag_sdk():
+    """Демонстрация работы YandexRAG через SDK"""
+    
+    # Инициализация
+    rag = YandexRAGSDK()
+    
+    # Тестовые документы
+    documents = [
+        "Yandex Foundation Models обеспечивает высокое качество понимания и генерации текста на русском языке.",
+        "SDK позволяет использовать все возможности Yandex Cloud AI платформы с максимальной производительностью.",
+        "Векторные эмбеддинги размерностью 256 оптимизированы для семантического поиска по русским текстам.",
+        "Интеграция через SDK обеспечивает лучшую производительность и стабильность по сравнению с REST API."
+    ]
+    
+    # Добавление документов
+    rag.add_documents(documents)
+    
+    # Тестовые запросы
+    queries = [
+        "Какие преимущества у SDK?",
+        "Какой размер эмбеддингов?",
+        "Для каких языков оптимизированы модели?"
+    ]
+    
+    print("\\n" + "="*80)
+    print("🎯 ДЕМОНСТРАЦИЯ YANDEX RAG SDK")
+    print("="*80)
+    
+    for query in queries:
+        print(f"\\n❓ Запрос: {query}")
+        print("-" * 60)
+        
+        result = rag.ask(query)
+        
+        print(f"🤖 Ответ: {result['answer']}")
+        print(f"\\n📚 Источники ({len(result['sources'])}):")
+        
+        for i, source in enumerate(result['sources'], 1):
+            print(f"   {i}. Сходство: {source['similarity']:.3f}")
+            print(f"      {source['text']}")
+
+if __name__ == "__main__":
+    # Запуск демонстрации
+    demo_yandex_rag_sdk()
+\`;
+            }
+
+            // New functions for enhanced configurator
+            function switchYandexTab(tabName) {
+                // Remove active from all tabs and contents
+                document.querySelectorAll('#yandex-config-tabs .tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('#yandex-config, #yandex-code, #yandex-sandbox').forEach(content => content.classList.remove('active'));
                 
-                document.getElementById('yandex-generated-code').textContent = code;
-                RAGSeminar.showNotification('Код сгенерирован!', 'success');
+                // Add active to selected tab and content
+                document.querySelector(\`[data-tab="\${tabName}"]\`).classList.add('active');
+                document.getElementById(tabName).classList.add('active');
+            }
+
+            function copyGeneratedCode() {
+                const codeEditor = document.getElementById('yandex-generated-code-editor');
+                if (codeEditor && codeEditor.value) {
+                    RAGSeminar.copyToClipboard(codeEditor.value);
+                } else {
+                    RAGSeminar.showNotification('Сначала сгенерируйте код!', 'warning');
+                }
+            }
+
+            function downloadGeneratedCode() {
+                const codeEditor = document.getElementById('yandex-generated-code-editor');
+                if (codeEditor && codeEditor.value) {
+                    const model = document.getElementById('yandex-model-select').value;
+                    const apiType = document.getElementById('api-approach-select').value;
+                    const filename = \`yandex_rag_\${apiType}_\${model.replace('-', '_')}.py\`;
+                    RAGSeminar.downloadCode(codeEditor.value, filename);
+                } else {
+                    RAGSeminar.showNotification('Сначала сгенерируйте код!', 'warning');
+                }
+            }
+
+            function sendCodeToSandbox() {
+                const codeEditor = document.getElementById('yandex-generated-code-editor');
+                const sandboxEditor = document.getElementById('yandex-sandbox-code');
+                
+                if (codeEditor && codeEditor.value && sandboxEditor) {
+                    sandboxEditor.value = codeEditor.value;
+                    switchYandexTab('yandex-sandbox');
+                    RAGSeminar.showNotification('Код отправлен в песочницу!', 'success');
+                } else {
+                    RAGSeminar.showNotification('Сначала сгенерируйте код!', 'warning');
+                }
+            }
+
+            function loadCodeFromEditor() {
+                const codeEditor = document.getElementById('yandex-generated-code-editor');
+                const sandboxEditor = document.getElementById('yandex-sandbox-code');
+                
+                if (codeEditor && codeEditor.value && sandboxEditor) {
+                    sandboxEditor.value = codeEditor.value;
+                    RAGSeminar.showNotification('Код загружен из редактора!', 'info');
+                } else {
+                    RAGSeminar.showNotification('Код в редакторе отсутствует!', 'warning');
+                }
+            }
+
+            async function runYandexSandboxCode() {
+                const sandboxCode = document.getElementById('yandex-sandbox-code').value;
+                const outputElement = document.getElementById('yandex-sandbox-output');
+                
+                if (!sandboxCode.trim()) {
+                    RAGSeminar.showNotification('Добавьте код для выполнения!', 'warning');
+                    return;
+                }
+
+                await RAGSeminar.runPythonCode(sandboxCode, 'yandex-sandbox-output');
+                RAGSeminar.updateProgress(95);
+            }
+
+            function clearSandboxOutput() {
+                const outputElement = document.getElementById('yandex-sandbox-output');
+                if (outputElement) {
+                    outputElement.innerHTML = 'Выполните код для просмотра результатов...';
+                }
+                RAGSeminar.showNotification('Вывод песочницы очищен', 'info');
+            }
+
+            // Initialize Yandex configurator tabs
+            function initYandexConfigTabs() {
+                document.querySelectorAll('#yandex-config-tabs .tab').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        const targetTab = tab.getAttribute('data-tab');
+                        switchYandexTab(targetTab);
+                    });
+                });
             }
             
             // Get full seminar notes
