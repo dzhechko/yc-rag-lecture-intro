@@ -418,8 +418,20 @@ output
         }
         
         function loadFromGenerator() {
-            // Эта функция может загружать код из основного генератора
-            alert('Функция загрузки кода из генератора будет добавлена в следующей версии');
+            // Проверяем, есть ли сохраненный код в localStorage
+            const savedCode = localStorage.getItem('yandex_generated_code');
+            if (savedCode) {
+                document.getElementById('yandex-code-editor').value = savedCode;
+                updateStatus('Код загружен из генератора', 'success');
+                
+                // Очищаем localStorage после загрузки
+                localStorage.removeItem('yandex_generated_code');
+            } else {
+                // Предлагаем перейти на страницу семинара
+                if (confirm('Сначала сгенерируйте код в семинаре. Перейти на страницу семинара?')) {
+                    window.location.href = 'seminar_yandex.html#yandex';
+                }
+            }
         }
         
         // Initialize Pyodide when page loads

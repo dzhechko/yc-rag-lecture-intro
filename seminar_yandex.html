@@ -1444,7 +1444,41 @@ answer = rag.ask("Ваш вопрос")\`;
             }
             
             document.getElementById('yandex-generated-code').textContent = code;
-            RAGSeminar.showNotification('Код сгенерирован!', 'success');
+            
+            // Сохраняем код в localStorage для передачи в песочницу
+            localStorage.setItem('yandex_generated_code', code);
+            
+            RAGSeminar.showNotification('Код сгенерирован! Можете открыть его в песочнице.', 'success');
+            
+            // Добавляем кнопку для открытия в песочнице
+            const codeBlock = document.getElementById('yandex-generated-code');
+            if (codeBlock && !document.getElementById('open-in-sandbox-btn')) {
+                const btn = document.createElement('button');
+                btn.id = 'open-in-sandbox-btn';
+                btn.className = 'mt-4 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors';
+                btn.innerHTML = '<i class="fas fa-external-link-alt mr-2"></i>Открыть в песочнице';
+                btn.onclick = function() {
+                    window.open('yandex_rag_sandbox.html', '_blank');
+                };
+                codeBlock.parentElement.appendChild(btn);
+            }
+        }
+        
+        // Функции для интерактивной песочницы Yandex
+        function injectCredentialsIntoCode() {
+            // Эта функция для совместимости с интерактивной песочницей
+            console.log('Функция внедрения учетных данных');
+            RAGSeminar.showNotification('Для работы с учетными данными используйте страницу "Песочница RAG"', 'info');
+            // Открыть песочницу в новой вкладке
+            window.open('yandex_rag_sandbox.html', '_blank');
+        }
+        
+        function validateCredentials() {
+            // Эта функция для совместимости
+            console.log('Функция валидации учетных данных');
+            RAGSeminar.showNotification('Для проверки учетных данных используйте страницу "Песочница RAG"', 'info');
+            // Открыть песочницу в новой вкладке
+            window.open('yandex_rag_sandbox.html', '_blank');
         }
         
         // Делаем функции глобальными
@@ -1452,6 +1486,8 @@ answer = rag.ask("Ваш вопрос")\`;
         window.addQueryToVisualization = addQueryToVisualization;
         window.findSimilarInVisualization = findSimilarInVisualization;
         window.resetVisualization = resetVisualization;
+        window.injectCredentialsIntoCode = injectCredentialsIntoCode;
+        window.validateCredentials = validateCredentials;
         
         // Get full seminar notes
         function getFullSeminarNotes() {
