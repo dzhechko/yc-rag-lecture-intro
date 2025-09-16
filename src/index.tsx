@@ -1,12 +1,1508 @@
 import { Hono } from 'hono'
-import { renderer } from './renderer'
+import { cors } from 'hono/cors'
+import { serveStatic } from 'hono/cloudflare-workers'
 
 const app = new Hono()
 
-app.use(renderer)
+// Enable CORS for frontend-backend communication
+app.use('/api/*', cors())
 
+// Serve static files from public directory
+app.use('/static/*', serveStatic({ root: './public' }))
+
+// Main page route
 app.get('/', (c) => {
-  return c.render(<h1>Hello!</h1>)
+  return c.html(`
+    <!DOCTYPE html>
+    <html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- SEO Meta Tags -->
+        <title>RAG (Retrieval Augmented Generation) - Онлайн семинар | Практический курс с Yandex Foundation Models</title>
+        <meta name="description" content="Изучите RAG: архитектуру, векторные базы данных, семантический поиск. Практические примеры с Python, FAISS, HNSW, Yandex Foundation Models. Интерактивные упражнения и код.">
+        <meta name="keywords" content="RAG, Retrieval Augmented Generation, векторный поиск, эмбеддинги, FAISS, HNSW, семантический поиск, машинное обучение, Python, Yandex Foundation Models">
+        
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="RAG - Retrieval Augmented Generation | Интерактивный семинар">
+        <meta property="og:description" content="Полный курс по RAG: от теории до практики. Изучите архитектуру, векторные БД, метрики оценки. Онлайн песочница Python с Yandex Models.">
+        
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:title" content="RAG Семинар - Retrieval Augmented Generation">
+        <meta property="twitter:description" content="Изучите RAG с нуля: архитектура, векторный поиск, практические примеры с Yandex Foundation Models">
+        
+        <!-- Structured Data -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Course",
+            "name": "RAG (Retrieval Augmented Generation) - Практический семинар",
+            "description": "Комплексное изучение технологии RAG: архитектура, векторные базы данных, семантический поиск, практическая реализация с Yandex Foundation Models",
+            "provider": {
+                "@type": "Organization",
+                "name": "AI Education Hub"
+            },
+            "courseMode": "online",
+            "duration": "PT1H",
+            "educationalLevel": "Intermediate",
+            "teaches": ["RAG Architecture", "Vector Databases", "Semantic Search", "FAISS", "HNSW", "Recall@k", "Yandex Foundation Models"]
+        }
+        </script>
+        
+        <!-- External Libraries -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/pyodide/v0.28.2/full/pyodide.js"></script>
+        
+        <!-- Custom Styles -->
+        <link href="/static/styles.css" rel="stylesheet">
+        
+        <style>
+            .gradient-bg {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+            .section-padding {
+                padding: 4rem 1rem;
+            }
+            .card-shadow {
+                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            }
+            .code-editor {
+                font-family: 'Courier New', monospace;
+                font-size: 14px;
+                line-height: 1.5;
+                border: 1px solid #e2e8f0;
+                border-radius: 8px;
+                padding: 16px;
+                background: #f8fafc;
+            }
+            .output-section {
+                background: #1a202c;
+                color: #e2e8f0;
+                border-radius: 8px;
+                padding: 16px;
+                margin-top: 12px;
+                font-family: 'Courier New', monospace;
+                font-size: 14px;
+                line-height: 1.4;
+                white-space: pre-wrap;
+                overflow-x: auto;
+            }
+            .tab {
+                transition: all 0.2s ease;
+                cursor: pointer;
+                border-bottom: 3px solid transparent;
+            }
+            .tab.active {
+                border-bottom-color: #667eea;
+                background-color: #f7fafc;
+            }
+            .tab-content {
+                display: none;
+            }
+            .tab-content.active {
+                display: block;
+            }
+            .quiz-option {
+                transition: all 0.2s ease;
+                cursor: pointer;
+                border: 2px solid #e2e8f0;
+            }
+            .quiz-option:hover {
+                border-color: #667eea;
+                background-color: #f7fafc;
+            }
+            .quiz-option.selected {
+                border-color: #667eea;
+                background-color: #edf2f7;
+            }
+            .quiz-option.correct {
+                border-color: #48bb78;
+                background-color: #f0fff4;
+            }
+            .quiz-option.incorrect {
+                border-color: #f56565;
+                background-color: #fed7d7;
+            }
+            .visualization-container {
+                border: 2px solid #e2e8f0;
+                border-radius: 12px;
+                padding: 20px;
+                background: white;
+            }
+            
+            /* Mobile Responsiveness */
+            @media (max-width: 768px) {
+                .section-padding {
+                    padding: 2rem 1rem;
+                }
+                .code-editor {
+                    font-size: 12px;
+                    height: 250px !important;
+                }
+                .grid {
+                    grid-template-columns: 1fr !important;
+                }
+            }
+            
+            /* Progress Bar */
+            .progress-bar {
+                width: 100%;
+                height: 8px;
+                background: #e2e8f0;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+            .progress-fill {
+                height: 100%;
+                background: linear-gradient(90deg, #667eea, #764ba2);
+                transition: width 0.3s ease;
+            }
+        </style>
+    </head>
+    <body class="bg-gray-50">
+        <!-- Navigation -->
+        <nav class="bg-white shadow-lg sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <i class="fas fa-brain text-purple-600 text-2xl mr-3"></i>
+                        <span class="text-xl font-bold text-gray-800">RAG Семинар</span>
+                    </div>
+                    <div class="hidden md:flex space-x-8">
+                        <a href="#overview" class="text-gray-700 hover:text-purple-600 transition-colors">Обзор</a>
+                        <a href="#theory" class="text-gray-700 hover:text-purple-600 transition-colors">Теория</a>
+                        <a href="#practice" class="text-gray-700 hover:text-purple-600 transition-colors">Практика</a>
+                        <a href="#quiz" class="text-gray-700 hover:text-purple-600 transition-colors">Квиз</a>
+                        <a href="#yandex" class="text-gray-700 hover:text-purple-600 transition-colors">Yandex Models</a>
+                    </div>
+                    <button class="md:hidden">
+                        <i class="fas fa-bars text-gray-700"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="gradient-bg text-white section-padding">
+            <div class="max-w-6xl mx-auto text-center">
+                <div class="mb-8">
+                    <i class="fas fa-rocket text-6xl mb-6 opacity-90"></i>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                    RAG: Retrieval Augmented Generation
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90">
+                    Интерактивный онлайн-семинар по архитектуре RAG
+                </p>
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 mb-8 max-w-4xl mx-auto">
+                    <div class="grid md:grid-cols-3 gap-6 text-center">
+                        <div>
+                            <i class="fas fa-clock text-3xl mb-2"></i>
+                            <div class="text-lg font-semibold">60 минут</div>
+                            <div class="opacity-80">Продолжительность</div>
+                        </div>
+                        <div>
+                            <i class="fas fa-code text-3xl mb-2"></i>
+                            <div class="text-lg font-semibold">Практические примеры</div>
+                            <div class="opacity-80">Python + Yandex Models</div>
+                        </div>
+                        <div>
+                            <i class="fas fa-play-circle text-3xl mb-2"></i>
+                            <div class="text-lg font-semibold">Интерактивность</div>
+                            <div class="opacity-80">Песочница + Визуализации</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#overview" class="inline-block bg-white text-purple-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-colors">
+                    Начать изучение <i class="fas fa-arrow-down ml-2"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- Progress Indicator -->
+        <div class="bg-white py-4 shadow-sm">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="flex items-center justify-between text-sm text-gray-600 mb-2">
+                    <span>Прогресс семинара</span>
+                    <span id="progress-text">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overview Section -->
+        <section id="overview" class="section-padding">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">
+                    <i class="fas fa-map mr-3 text-purple-600"></i>
+                    Структура семинара
+                </h2>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow">
+                        <div class="text-purple-600 text-4xl mb-4">
+                            <i class="fas fa-sitemap"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">1. Введение в RAG</h3>
+                        <p class="text-gray-600 mb-4">Основная концепция, архитектура, компоненты RAG системы</p>
+                        <div class="text-sm text-gray-500">⏱️ 10 минут</div>
+                    </div>
+
+                    <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow">
+                        <div class="text-blue-600 text-4xl mb-4">
+                            <i class="fas fa-vector-square"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">2. Векторизация</h3>
+                        <p class="text-gray-600 mb-4">Методы эмбеддингов, Sentence Transformers, модели</p>
+                        <div class="text-sm text-gray-500">⏱️ 10 минут</div>
+                    </div>
+
+                    <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow">
+                        <div class="text-green-600 text-4xl mb-4">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">3. Семантический поиск</h3>
+                        <p class="text-gray-600 mb-4">FAISS, HNSW, Annoy - сравнение алгоритмов</p>
+                        <div class="text-sm text-gray-500">⏱️ 15 минут</div>
+                    </div>
+
+                    <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow">
+                        <div class="text-orange-600 text-4xl mb-4">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">4. Метрики качества</h3>
+                        <p class="text-gray-600 mb-4">Recall@k, Precision@k, оценка RAG систем</p>
+                        <div class="text-sm text-gray-500">⏱️ 5 минут</div>
+                    </div>
+
+                    <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow">
+                        <div class="text-red-600 text-4xl mb-4">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">5. Практика</h3>
+                        <p class="text-gray-600 mb-4">Базовый RAG-конвейер, примеры кода</p>
+                        <div class="text-sm text-gray-500">⏱️ 15 минут</div>
+                    </div>
+
+                    <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-shadow">
+                        <div class="text-indigo-600 text-4xl mb-4">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">6. Yandex Foundation Models</h3>
+                        <p class="text-gray-600 mb-4">Интеграция с YandexGPT, эмбеддинги, API</p>
+                        <div class="text-sm text-gray-500">⏱️ 5 минут</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Theory Section -->
+        <section id="theory" class="bg-white section-padding">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">
+                    <i class="fas fa-book mr-3 text-purple-600"></i>
+                    Теоретические основы
+                </h2>
+
+                <!-- Tabs Navigation -->
+                <div class="flex flex-wrap border-b border-gray-200 mb-8" id="theory-tabs">
+                    <button class="tab px-6 py-3 text-lg font-medium active" data-tab="rag-intro">
+                        RAG Архитектура
+                    </button>
+                    <button class="tab px-6 py-3 text-lg font-medium" data-tab="embeddings">
+                        Эмбеддинги
+                    </button>
+                    <button class="tab px-6 py-3 text-lg font-medium" data-tab="vector-search">
+                        Векторный поиск
+                    </button>
+                    <button class="tab px-6 py-3 text-lg font-medium" data-tab="metrics">
+                        Метрики
+                    </button>
+                </div>
+
+                <!-- Tab Contents -->
+                <div class="tab-content active" id="rag-intro">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4">Что такое RAG?</h3>
+                            <div class="space-y-4 text-gray-700">
+                                <p><strong>RAG (Retrieval-Augmented Generation)</strong> — гибридная архитектура, объединяющая механизмы поиска с генеративными языковыми моделями.</p>
+                                
+                                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                                    <p class="font-semibold">Проблема:</p>
+                                    <p>LLM склонны к галлюцинациям и не имеют доступа к актуальной информации</p>
+                                </div>
+                                
+                                <div class="bg-green-50 border-l-4 border-green-400 p-4">
+                                    <p class="font-semibold">Решение:</p>
+                                    <p>Внешние источники знаний + генеративная модель = точные и обоснованные ответы</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-4">Архитектура RAG</h4>
+                            <div class="bg-gray-100 rounded-lg p-6 font-mono text-sm">
+                                <div class="text-center">
+                                    <div class="mb-4">┌─────────────────┐</div>
+                                    <div class="mb-2">│   Retriever     │</div>
+                                    <div class="mb-4">│ (поиск данных)  │</div>
+                                    <div class="mb-4">└─────────────────┘</div>
+                                    <div class="mb-4">         ↓</div>
+                                    <div class="mb-4">┌─────────────────┐</div>
+                                    <div class="mb-2">│  Vector Store   │</div>
+                                    <div class="mb-4">│ (база знаний)   │</div>
+                                    <div class="mb-4">└─────────────────┘</div>
+                                    <div class="mb-4">         ↓</div>
+                                    <div class="mb-4">┌─────────────────┐</div>
+                                    <div class="mb-2">│   Generator     │</div>
+                                    <div class="mb-4">│ (генерация LLM) │</div>
+                                    <div class="mb-4">└─────────────────┘</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 bg-blue-50 rounded-lg p-6">
+                        <h4 class="text-lg font-semibold mb-4">Фазы работы RAG:</h4>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-semibold text-blue-800 mb-2">1. Индексация (Offline)</h5>
+                                <p class="text-sm text-gray-700">документы → чанки → эмбеддинги → векторная БД</p>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-blue-800 mb-2">2. Поиск и генерация (Online)</h5>
+                                <p class="text-sm text-gray-700">запрос → поиск → контекст → LLM → ответ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="embeddings">
+                    <h3 class="text-2xl font-bold mb-6">Методы векторизации и эмбеддинги</h3>
+                    
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <h4 class="font-semibold mb-3 text-gray-800">Классические</h4>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li>• One-hot encoding</li>
+                                <li>• Bag of words</li>
+                                <li>• TF-IDF</li>
+                            </ul>
+                        </div>
+                        <div class="bg-blue-50 rounded-lg p-6">
+                            <h4 class="font-semibold mb-3 text-blue-800">Современные</h4>
+                            <ul class="space-y-2 text-sm text-blue-700">
+                                <li>• Word2Vec</li>
+                                <li>• BERT</li>
+                                <li>• Sentence Transformers</li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-6">
+                            <h4 class="font-semibold mb-3 text-green-800">SOTA модели</h4>
+                            <ul class="space-y-2 text-sm text-green-700">
+                                <li>• all-MiniLM-L6-v2</li>
+                                <li>• bge-base-en-v1.5</li>
+                                <li>• YandexGPT Embeddings</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border rounded-lg p-6">
+                        <h4 class="font-semibold mb-4">Sentence Transformers</h4>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <ul class="space-y-2 text-sm">
+                                    <li>✅ <strong>10,000+</strong> предобученных моделей на Hugging Face</li>
+                                    <li>✅ Поддержка embedding, reranker, sparse encoder моделей</li>
+                                    <li>✅ Простой API для семантического поиска</li>
+                                    <li>✅ Оптимизация для различных задач</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-100 rounded p-4 font-mono text-xs">
+                                <div class="text-green-600"># Пример использования</div>
+                                <div>from sentence_transformers import SentenceTransformer</div>
+                                <div><br></div>
+                                <div>model = SentenceTransformer("all-MiniLM-L6-v2")</div>
+                                <div>sentences = ["Пример текста", "Другой текст"]</div>
+                                <div>embeddings = model.encode(sentences)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="vector-search">
+                    <h3 class="text-2xl font-bold mb-6">Семантический поиск: FAISS vs HNSW vs Annoy</h3>
+                    
+                    <div class="overflow-x-auto mb-8">
+                        <table class="w-full border-collapse bg-white rounded-lg overflow-hidden shadow-sm">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="border p-4 text-left">Алгоритм</th>
+                                    <th class="border p-4 text-center">Скорость</th>
+                                    <th class="border p-4 text-center">Память</th>
+                                    <th class="border p-4 text-center">Точность</th>
+                                    <th class="border p-4 text-center">Сжатие</th>
+                                    <th class="border p-4 text-center">GPU</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="border p-4 font-semibold">HNSW</td>
+                                    <td class="border p-4 text-center">⭐⭐⭐⭐⭐</td>
+                                    <td class="border p-4 text-center">⭐⭐⭐</td>
+                                    <td class="border p-4 text-center">⭐⭐⭐⭐⭐</td>
+                                    <td class="border p-4 text-center">❌</td>
+                                    <td class="border p-4 text-center">❌</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="border p-4 font-semibold">FAISS</td>
+                                    <td class="border p-4 text-center">⭐⭐⭐</td>
+                                    <td class="border p-4 text-center">⭐⭐⭐⭐⭐</td>
+                                    <td class="border p-4 text-center">⭐⭐⭐⭐</td>
+                                    <td class="border p-4 text-center">✅</td>
+                                    <td class="border p-4 text-center">✅</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="border p-4 font-semibold">Annoy</td>
+                                    <td class="border p-4 text-center">⭐⭐</td>
+                                    <td class="border p-4 text-center">⭐⭐</td>
+                                    <td class="border p-4 text-center">⭐⭐⭐</td>
+                                    <td class="border p-4 text-center">❌</td>
+                                    <td class="border p-4 text-center">❌</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded">
+                            <h4 class="font-bold text-blue-800 mb-2">HNSW</h4>
+                            <p class="text-sm text-blue-700 mb-3">Hierarchical Navigable Small World</p>
+                            <div class="text-xs">
+                                <div class="mb-2"><strong>Принцип:</strong> Многослойный граф с быстрой навигацией</div>
+                                <div class="mb-2">✅ State-of-the-art результаты</div>
+                                <div>❌ Больше памяти на рёбра графа</div>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-50 border-l-4 border-green-400 p-6 rounded">
+                            <h4 class="font-bold text-green-800 mb-2">FAISS</h4>
+                            <p class="text-sm text-green-700 mb-3">Facebook AI Similarity Search</p>
+                            <div class="text-xs">
+                                <div class="mb-2"><strong>Принцип:</strong> Кластеризация + Product Quantization</div>
+                                <div class="mb-2">✅ Сжатие векторов, GPU ускорение</div>
+                                <div>❌ Сложность настройки</div>
+                            </div>
+                        </div>
+
+                        <div class="bg-orange-50 border-l-4 border-orange-400 p-6 rounded">
+                            <h4 class="font-bold text-orange-800 mb-2">Annoy</h4>
+                            <p class="text-sm text-orange-700 mb-3">Approximate Nearest neighbors Oh Yeah</p>
+                            <div class="text-xs">
+                                <div class="mb-2"><strong>Принцип:</strong> Бинарные деревья с рандомными проекциями</div>
+                                <div class="mb-2">✅ Простота реализации</div>
+                                <div>❌ Высокое потребление памяти</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="metrics">
+                    <h3 class="text-2xl font-bold mb-6">Оценка качества поиска: Recall@k</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <h4 class="text-lg font-semibold mb-4 text-blue-800">Метрики поиска (Retrieval)</h4>
+                            <div class="space-y-4">
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <h5 class="font-semibold">Recall@k</h5>
+                                    <p class="text-sm text-gray-600">Доля релевантных документов среди топ-k результатов</p>
+                                </div>
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <h5 class="font-semibold">Precision@k</h5>
+                                    <p class="text-sm text-gray-600">Точность среди топ-k результатов</p>
+                                </div>
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <h5 class="font-semibold">MRR</h5>
+                                    <p class="text-sm text-gray-600">Mean Reciprocal Rank - обратный ранг первого релевантного результата</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-4 text-green-800">Метрики генерации</h4>
+                            <div class="space-y-4">
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <h5 class="font-semibold">Answer Relevancy</h5>
+                                    <p class="text-sm text-gray-600">Релевантность ответа запросу</p>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <h5 class="font-semibold">Faithfulness</h5>
+                                    <p class="text-sm text-gray-600">Отсутствие галлюцинаций относительно контекста</p>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <h5 class="font-semibold">Context Relevancy</h5>
+                                    <p class="text-sm text-gray-600">Релевантность извлеченного контекста</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border-2 border-purple-200 rounded-lg p-6">
+                        <h4 class="text-lg font-semibold mb-4">Формула Recall@k</h4>
+                        <div class="bg-purple-50 rounded-lg p-6 text-center">
+                            <div class="text-xl font-mono">
+                                Recall@k = <span class="text-purple-600 font-bold">Количество релевантных документов в топ-k</span>
+                                / <span class="text-blue-600 font-bold">Общее количество релевантных документов</span>
+                            </div>
+                            <div class="mt-4 text-sm text-gray-600">
+                                Например: если из 5 релевантных документов найдено 3 в топ-10, то Recall@10 = 3/5 = 0.6
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practice Section -->
+        <section id="practice" class="section-padding section-bg-pattern">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">
+                    <i class="fas fa-code mr-3 text-green-600"></i>
+                    Практические примеры
+                </h2>
+
+                <!-- Python Sandbox -->
+                <div class="bg-white rounded-xl card-shadow p-8 mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-2xl font-bold">🐍 Python RAG Песочница</h3>
+                        <div class="sandbox-status text-blue-600">
+                            <i class="fas fa-spinner fa-spin"></i> Загрузка Pyodide...
+                        </div>
+                    </div>
+                    
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
+                        <p class="text-sm"><strong>💡 Совет:</strong> Измените код ниже и нажмите "Запустить" для экспериментов!</p>
+                    </div>
+                    
+                    <div class="grid lg:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold mb-3">Базовый пример RAG</h4>
+                            <textarea class="code-editor w-full h-80 resize-none" id="basic-rag-code">
+# Простой пример RAG системы
+import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
+
+class SimpleRAG:
+    def __init__(self):
+        self.documents = []
+        self.embeddings = []
+    
+    def add_documents(self, docs):
+        """Добавление документов (с мок-эмбеддингами)"""
+        for doc in docs:
+            # Простая имитация эмбеддинга
+            embedding = np.random.rand(5)  # 5-мерный вектор
+            self.documents.append(doc)
+            self.embeddings.append(embedding)
+        print(f"✅ Добавлено {len(docs)} документов")
+    
+    def search(self, query, top_k=2):
+        """Поиск наиболее релевантных документов"""
+        if not self.documents:
+            return []
+        
+        # Мок-эмбеддинг запроса
+        query_emb = np.random.rand(5)
+        
+        # Вычисляем сходство
+        similarities = []
+        for i, doc_emb in enumerate(self.embeddings):
+            sim = cosine_similarity([query_emb], [doc_emb])[0][0]
+            similarities.append((i, sim))
+        
+        # Сортируем по убыванию сходства
+        similarities.sort(key=lambda x: x[1], reverse=True)
+        
+        # Возвращаем топ-k документов
+        results = []
+        for i in range(min(top_k, len(similarities))):
+            doc_idx, score = similarities[i]
+            results.append({
+                'document': self.documents[doc_idx],
+                'score': score
+            })
+        
+        return results
+    
+    def ask(self, query):
+        """RAG запрос: поиск + генерация ответа"""
+        print(f"🔍 Поиск по запросу: '{query}'")
+        
+        # Поиск релевантных документов
+        results = self.search(query)
+        
+        if not results:
+            return "Нет релевантных документов"
+        
+        # Формирование контекста
+        context = "\\n".join([r['document'] for r in results])
+        
+        # Простая имитация генерации
+        print(f"📄 Найдено документов: {len(results)}")
+        for i, result in enumerate(results, 1):
+            print(f"   {i}. ({result['score']:.3f}) {result['document'][:50]}...")
+        
+        return f"На основе найденного контекста: {context[:100]}..."
+
+# Демонстрация
+rag = SimpleRAG()
+
+# Добавляем тестовые документы
+documents = [
+    "RAG (Retrieval-Augmented Generation) объединяет поиск и генерацию для точных ответов",
+    "FAISS - библиотека Facebook для быстрого поиска по векторам",
+    "HNSW показывает лучшую производительность для приближенного поиска",
+    "Эмбеддинги преобразуют текст в числовые векторы для семантического поиска",
+    "Recall@k измеряет долю найденных релевантных документов в топ-k результатах"
+]
+
+rag.add_documents(documents)
+
+# Тестируем запросы
+queries = [
+    "Что такое RAG?",
+    "Какой алгоритм поиска самый быстрый?",
+    "Как измерить качество поиска?"
+]
+
+for query in queries:
+    print("\\n" + "="*60)
+    answer = rag.ask(query)
+    print(f"🤖 Ответ: {answer}")
+                            </textarea>
+                            <div class="flex gap-3 mt-4">
+                                <button onclick="RAGSeminar.runPythonCode(document.getElementById('basic-rag-code').value, 'basic-rag-output')" 
+                                        class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                    <i class="fas fa-play mr-2"></i>Запустить код
+                                </button>
+                                <button onclick="RAGSeminar.copyToClipboard(document.getElementById('basic-rag-code').value)" 
+                                        class="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-700 transition-colors">
+                                    <i class="fas fa-copy mr-2"></i>Копировать
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-3">Результат выполнения</h4>
+                            <div class="output-section min-h-80" id="basic-rag-output">
+                                Нажмите "Запустить код" для выполнения примера...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Embedding Visualization -->
+                <div class="bg-white rounded-xl card-shadow p-8 mb-8">
+                    <h3 class="text-2xl font-bold mb-6">
+                        <i class="fas fa-project-diagram mr-3 text-blue-600"></i>
+                        Интерактивная визуализация эмбеддингов
+                    </h3>
+                    
+                    <div class="grid lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-2">
+                            <div id="embedding-visualization" class="visualization-container"></div>
+                            <div class="flex gap-3 mt-4">
+                                <button onclick="addQueryToVisualization()" 
+                                        class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                                    ➕ Добавить запрос
+                                </button>
+                                <button onclick="findSimilarInVisualization()" 
+                                        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    🔍 Найти похожие
+                                </button>
+                                <button onclick="resetVisualization()" 
+                                        class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
+                                    🔄 Сброс
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-3">Как это работает:</h4>
+                            <div class="space-y-3 text-sm text-gray-700">
+                                <div class="flex items-start">
+                                    <i class="fas fa-circle text-blue-500 mt-2 mr-3 text-xs"></i>
+                                    <span><strong>Синие точки</strong> - документы в векторном пространстве</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-circle text-red-500 mt-2 mr-3 text-xs"></i>
+                                    <span><strong>Красные точки</strong> - пользовательские запросы</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-minus text-green-500 mt-2 mr-3"></i>
+                                    <span><strong>Зеленые линии</strong> - связи с наиболее похожими документами</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-calculator mt-2 mr-3 text-purple-600"></i>
+                                    <span><strong>Числа</strong> - показатели семантического сходства</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 bg-blue-50 rounded-lg p-4">
+                                <h5 class="font-semibold text-blue-800 mb-2">💡 Попробуйте:</h5>
+                                <ul class="text-sm text-blue-700 space-y-1">
+                                    <li>• Добавьте запрос рядом с группой документов</li>
+                                    <li>• Посмотрите, как алгоритм находит похожие</li>
+                                    <li>• Обратите внимание на расстояния и сходства</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz" class="bg-white section-padding">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">
+                    <i class="fas fa-brain mr-3 text-purple-600"></i>
+                    Проверьте свои знания
+                </h2>
+                
+                <div class="bg-gradient-to-r from-purple-100 to-blue-100 rounded-xl p-8 mb-8">
+                    <div class="text-center">
+                        <i class="fas fa-trophy text-4xl text-yellow-500 mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-4">Квиз по RAG технологиям</h3>
+                        <p class="text-gray-600 mb-6">Проверьте, насколько хорошо вы усвоили материал семинара. 5 вопросов о ключевых концепциях RAG.</p>
+                        
+                        <div class="grid md:grid-cols-3 gap-6 text-center">
+                            <div class="bg-white rounded-lg p-4">
+                                <i class="fas fa-question-circle text-2xl text-blue-600 mb-2"></i>
+                                <div class="font-semibold">5 вопросов</div>
+                                <div class="text-sm text-gray-600">О ключевых концепциях</div>
+                            </div>
+                            <div class="bg-white rounded-lg p-4">
+                                <i class="fas fa-clock text-2xl text-green-600 mb-2"></i>
+                                <div class="font-semibold">Без ограничения</div>
+                                <div class="text-sm text-gray-600">Времени на обдумывание</div>
+                            </div>
+                            <div class="bg-white rounded-lg p-4">
+                                <i class="fas fa-medal text-2xl text-yellow-600 mb-2"></i>
+                                <div class="font-semibold">Мгновенный</div>
+                                <div class="text-sm text-gray-600">Результат с объяснениями</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quiz Container -->
+                <div id="rag-quiz"></div>
+            </div>
+        </section>
+
+        <!-- Yandex Models Section -->
+        <section id="yandex" class="section-padding bg-gradient-to-br from-orange-50 to-red-50">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">
+                    <i class="fas fa-rocket mr-3 text-orange-600"></i>
+                    Yandex Foundation Models для RAG
+                </h2>
+
+                <!-- Model Comparison -->
+                <div class="grid lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-all duration-300">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-star text-2xl text-yellow-500 mr-3"></i>
+                            <h3 class="text-xl font-bold">YandexGPT Pro</h3>
+                        </div>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between">
+                                <span>Контекст:</span>
+                                <span class="font-semibold">32,000 токенов</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Качество:</span>
+                                <div class="flex">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                </div>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Скорость:</span>
+                                <div class="flex">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                </div>
+                            </div>
+                            <div class="pt-3 border-t">
+                                <p class="text-gray-600">Лучший выбор для сложных RAG задач с длинным контекстом</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-all duration-300">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-balance-scale text-2xl text-blue-500 mr-3"></i>
+                            <h3 class="text-xl font-bold">YandexGPT</h3>
+                        </div>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between">
+                                <span>Контекст:</span>
+                                <span class="font-semibold">8,000 токенов</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Качество:</span>
+                                <div class="flex">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                </div>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Скорость:</span>
+                                <div class="flex">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                </div>
+                            </div>
+                            <div class="pt-3 border-t">
+                                <p class="text-gray-600">Сбалансированное решение для большинства RAG применений</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl card-shadow p-6 hover:shadow-xl transition-all duration-300">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-bolt text-2xl text-green-500 mr-3"></i>
+                            <h3 class="text-xl font-bold">YandexGPT Lite</h3>
+                        </div>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between">
+                                <span>Контекст:</span>
+                                <span class="font-semibold">4,000 токенов</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Качество:</span>
+                                <div class="flex">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                </div>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Скорость:</span>
+                                <div class="flex">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                </div>
+                            </div>
+                            <div class="pt-3 border-t">
+                                <p class="text-gray-600">Быстрые ответы для простых RAG запросов</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Code Configuration Tool -->
+                <div class="bg-white rounded-xl card-shadow p-8">
+                    <h3 class="text-2xl font-bold mb-6">
+                        <i class="fas fa-cog mr-3 text-orange-600"></i>
+                        Конфигуратор RAG с Yandex Models
+                    </h3>
+                    
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-semibold mb-4">Настройки:</h4>
+                            
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Модель для генерации:</label>
+                                    <select id="yandex-model-select" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+                                        <option value="yandexgpt-pro">YandexGPT Pro (32K контекст)</option>
+                                        <option value="yandexgpt" selected>YandexGPT (8K контекст)</option>
+                                        <option value="yandexgpt-lite">YandexGPT Lite (4K контекст)</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">API подход:</label>
+                                    <select id="api-approach-select" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+                                        <option value="sdk">Yandex Cloud SDK</option>
+                                        <option value="openai" selected>OpenAI Compatible API</option>
+                                        <option value="rest">REST API</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Top-K:</label>
+                                        <input type="number" id="topk-input" value="3" min="1" max="10" 
+                                               class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Chunk Size:</label>
+                                        <input type="number" id="chunk-size-input" value="1000" min="100" max="4000" step="100"
+                                               class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+                                    </div>
+                                </div>
+                                
+                                <button onclick="generateYandexRAGCode()" 
+                                        class="w-full bg-orange-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-orange-700 transition-colors">
+                                    <i class="fas fa-magic mr-2"></i>Сгенерировать код RAG
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="font-semibold">Сгенерированный код:</h4>
+                                <button onclick="RAGSeminar.copyToClipboard(document.getElementById('yandex-generated-code').textContent)" 
+                                        class="text-sm bg-gray-600 text-white px-3 py-1 rounded hover:bg-gray-700 transition-colors">
+                                    <i class="fas fa-copy mr-1"></i>Копировать
+                                </button>
+                            </div>
+                            <div class="code-block h-80 overflow-y-auto" id="yandex-generated-code">
+                                Настройте параметры и нажмите "Сгенерировать код"...
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 bg-orange-50 border-l-4 border-orange-400 p-4">
+                        <div class="flex items-start">
+                            <i class="fas fa-info-circle text-orange-600 mt-1 mr-3"></i>
+                            <div>
+                                <p class="font-semibold text-orange-800 mb-2">Начало работы с Yandex Foundation Models:</p>
+                                <ol class="text-sm text-orange-700 space-y-1">
+                                    <li>1. Зарегистрируйтесь в Yandex Cloud</li>
+                                    <li>2. Создайте сервисный аккаунт и получите API ключ</li>
+                                    <li>3. Установите пакет: <code class="bg-orange-100 px-1 rounded">pip install yandexcloud</code></li>
+                                    <li>4. Используйте сгенерированный код для интеграции</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion Section -->
+        <section class="gradient-bg text-white section-padding">
+            <div class="max-w-4xl mx-auto text-center">
+                <i class="fas fa-graduation-cap text-6xl mb-6 opacity-90"></i>
+                <h2 class="text-4xl font-bold mb-6">Поздравляем!</h2>
+                <p class="text-xl mb-8 opacity-90">
+                    Вы изучили основы RAG технологии и готовы применить знания на практике
+                </p>
+                
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 mb-8">
+                    <h3 class="text-2xl font-bold mb-6">Что вы изучили:</h3>
+                    <div class="grid md:grid-cols-2 gap-6 text-left">
+                        <div>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-300 mt-1 mr-3"></i>
+                                    <span>Архитектуру RAG систем</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-300 mt-1 mr-3"></i>
+                                    <span>Методы векторизации и эмбеддинги</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-300 mt-1 mr-3"></i>
+                                    <span>Алгоритмы семантического поиска</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-300 mt-1 mr-3"></i>
+                                    <span>Метрики оценки качества</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-300 mt-1 mr-3"></i>
+                                    <span>Практическую реализацию RAG</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-300 mt-1 mr-3"></i>
+                                    <span>Интеграцию с Yandex Foundation Models</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#overview" class="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-redo mr-2"></i>Пройти еще раз
+                    </a>
+                    <button onclick="RAGSeminar.downloadCode(getFullSeminarNotes(), 'rag-seminar-notes.txt')" 
+                            class="bg-purple-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-purple-700 transition-colors">
+                        <i class="fas fa-download mr-2"></i>Скачать конспект
+                    </button>
+                </div>
+                
+                <div class="mt-8 text-sm opacity-75">
+                    <p>Спасибо за участие в семинаре! Удачи в изучении RAG технологий 🚀</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-12">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">
+                            <i class="fas fa-brain mr-2"></i>RAG Семинар
+                        </h3>
+                        <p class="text-gray-300 mb-4">
+                            Интерактивное изучение технологий Retrieval-Augmented Generation
+                        </p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                                <i class="fab fa-github text-xl"></i>
+                            </a>
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                                <i class="fab fa-telegram text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-semibold mb-4">Разделы</h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <li><a href="#overview" class="hover:text-white transition-colors">Обзор</a></li>
+                            <li><a href="#theory" class="hover:text-white transition-colors">Теория</a></li>
+                            <li><a href="#practice" class="hover:text-white transition-colors">Практика</a></li>
+                            <li><a href="#quiz" class="hover:text-white transition-colors">Квиз</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-semibold mb-4">Технологии</h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <li>Python & Pyodide</li>
+                            <li>D3.js Визуализации</li>
+                            <li>Yandex Foundation Models</li>
+                            <li>Cloudflare Pages</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                    <p>&copy; 2024 RAG Семинар. Сделано с ❤️ для изучения AI технологий</p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Load scripts -->
+        <script src="/static/app.js"></script>
+        
+        <script>
+            // Visualization and interaction functions
+            let visualizationSvg = null;
+            let queries = [];
+            let currentQuery = null;
+            
+            // Document data for visualization
+            const documents = [
+                {id: "doc1", x: 100, y: 150, text: "Машинное обучение", type: "document"},
+                {id: "doc2", x: 120, y: 170, text: "Нейронные сети", type: "document"},
+                {id: "doc3", x: 300, y: 100, text: "Приготовление пасты", type: "document"},
+                {id: "doc4", x: 320, y: 120, text: "Итальянская кухня", type: "document"},
+                {id: "doc5", x: 200, y: 300, text: "Футбольный матч", type: "document"},
+                {id: "doc6", x: 180, y: 280, text: "Спортивные новости", type: "document"}
+            ];
+            
+            function initializeVisualization() {
+                const container = document.getElementById('embedding-visualization');
+                if (!container || visualizationSvg) return;
+                
+                const width = 600, height = 400;
+                
+                visualizationSvg = d3.select(container)
+                    .append('svg')
+                    .attr('width', '100%')
+                    .attr('height', height)
+                    .attr('viewBox', \`0 0 \${width} \${height}\`)
+                    .style('background', 'white');
+                
+                // Add documents
+                const dots = visualizationSvg.selectAll('.document')
+                    .data(documents)
+                    .enter()
+                    .append('circle')
+                    .attr('class', 'document')
+                    .attr('cx', d => d.x)
+                    .attr('cy', d => d.y)
+                    .attr('r', 8)
+                    .attr('fill', '#4285f4')
+                    .attr('stroke', '#fff')
+                    .attr('stroke-width', 2)
+                    .style('cursor', 'pointer');
+                
+                // Add labels
+                visualizationSvg.selectAll('.label')
+                    .data(documents)
+                    .enter()
+                    .append('text')
+                    .attr('class', 'label')
+                    .attr('x', d => d.x)
+                    .attr('y', d => d.y - 15)
+                    .attr('text-anchor', 'middle')
+                    .attr('font-size', '12px')
+                    .attr('fill', '#333')
+                    .text(d => d.text);
+                
+                // Tooltips
+                dots.on('mouseover', function(event, d) {
+                    d3.select('body').append('div')
+                        .attr('class', 'tooltip')
+                        .style('position', 'absolute')
+                        .style('background', 'rgba(0,0,0,0.8)')
+                        .style('color', 'white')
+                        .style('padding', '8px')
+                        .style('border-radius', '4px')
+                        .style('pointer-events', 'none')
+                        .style('opacity', 0)
+                        .html(\`<strong>\${d.text}</strong><br>ID: \${d.id}\`)
+                        .style('left', (event.pageX + 10) + 'px')
+                        .style('top', (event.pageY - 10) + 'px')
+                        .transition()
+                        .duration(200)
+                        .style('opacity', 1);
+                })
+                .on('mouseout', function() {
+                    d3.selectAll('.tooltip').remove();
+                });
+            }
+            
+            function addQueryToVisualization() {
+                if (!visualizationSvg) return;
+                
+                const x = Math.random() * 500 + 50;
+                const y = Math.random() * 300 + 50;
+                const queryId = \`query_\${queries.length + 1}\`;
+                
+                const query = {
+                    id: queryId,
+                    x: x,
+                    y: y,
+                    text: \`Запрос \${queries.length + 1}\`,
+                    type: "query"
+                };
+                
+                queries.push(query);
+                currentQuery = query;
+                
+                visualizationSvg.append('circle')
+                    .attr('class', 'query')
+                    .attr('id', queryId)
+                    .attr('cx', x)
+                    .attr('cy', y)
+                    .attr('r', 10)
+                    .attr('fill', '#ea4335')
+                    .attr('stroke', '#fff')
+                    .attr('stroke-width', 2);
+                
+                visualizationSvg.append('text')
+                    .attr('class', 'query-label')
+                    .attr('id', \`\${queryId}-label\`)
+                    .attr('x', x)
+                    .attr('y', y - 18)
+                    .attr('text-anchor', 'middle')
+                    .attr('font-size', '12px')
+                    .attr('font-weight', 'bold')
+                    .attr('fill', '#ea4335')
+                    .text(query.text);
+                
+                RAGSeminar.showNotification('Запрос добавлен! Нажмите "Найти похожие"', 'success');
+            }
+            
+            function findSimilarInVisualization() {
+                if (!currentQuery || !visualizationSvg) {
+                    RAGSeminar.showNotification('Сначала добавьте запрос!', 'warning');
+                    return;
+                }
+                
+                // Calculate distances
+                const distances = documents.map(doc => {
+                    const dist = Math.sqrt(
+                        Math.pow(doc.x - currentQuery.x, 2) + 
+                        Math.pow(doc.y - currentQuery.y, 2)
+                    );
+                    return {doc, distance: dist};
+                });
+                
+                distances.sort((a, b) => a.distance - b.distance);
+                const topK = distances.slice(0, 3);
+                
+                // Clear previous connections
+                visualizationSvg.selectAll('.connection').remove();
+                visualizationSvg.selectAll('.similarity-text').remove();
+                
+                // Draw connections
+                topK.forEach((item, index) => {
+                    const doc = item.doc;
+                    const similarity = Math.max(0, 1 - item.distance / 200);
+                    
+                    visualizationSvg.append('line')
+                        .attr('class', 'connection')
+                        .attr('x1', currentQuery.x)
+                        .attr('y1', currentQuery.y)
+                        .attr('x2', doc.x)
+                        .attr('y2', doc.y)
+                        .attr('stroke', index === 0 ? '#34a853' : '#fbbc04')
+                        .attr('stroke-width', 3 - index * 0.5)
+                        .attr('stroke-dasharray', index === 0 ? '0' : '5,3');
+                    
+                    const midX = (currentQuery.x + doc.x) / 2;
+                    const midY = (currentQuery.y + doc.y) / 2;
+                    
+                    visualizationSvg.append('text')
+                        .attr('class', 'similarity-text')
+                        .attr('x', midX)
+                        .attr('y', midY)
+                        .attr('text-anchor', 'middle')
+                        .attr('font-size', '11px')
+                        .attr('font-weight', 'bold')
+                        .attr('fill', '#333')
+                        .attr('stroke', 'white')
+                        .attr('stroke-width', '3')
+                        .attr('paint-order', 'stroke')
+                        .text(similarity.toFixed(2));
+                });
+                
+                RAGSeminar.showNotification('Найдены похожие документы!', 'success');
+            }
+            
+            function resetVisualization() {
+                if (!visualizationSvg) return;
+                
+                visualizationSvg.selectAll('.query, .query-label, .connection, .similarity-text').remove();
+                queries = [];
+                currentQuery = null;
+                
+                RAGSeminar.showNotification('Визуализация сброшена', 'info');
+            }
+            
+            // Yandex code generator
+            function generateYandexRAGCode() {
+                const model = document.getElementById('yandex-model-select').value;
+                const apiApproach = document.getElementById('api-approach-select').value;
+                const topK = document.getElementById('topk-input').value;
+                const chunkSize = document.getElementById('chunk-size-input').value;
+                
+                let code = '';
+                
+                if (apiApproach === 'openai') {
+                    code = \`# RAG с Yandex Foundation Models через OpenAI API
+import openai
+import numpy as np
+import os
+
+class YandexRAG:
+    def __init__(self):
+        self.api_key = os.getenv("YANDEX_CLOUD_API_KEY")
+        self.folder_id = "your-folder-id"
+        
+        self.client = openai.OpenAI(
+            api_key=self.api_key,
+            base_url="https://llm.api.cloud.yandex.net/foundationModels/v1/"
+        )
+        
+        self.documents = []
+    
+    def add_documents(self, docs):
+        # Разбивка на чанки по \${chunkSize} токенов
+        chunks = self.split_documents(docs)
+        
+        for chunk in chunks:
+            # Получение эмбеддингов
+            embedding = self.get_embedding(chunk)
+            self.documents.append({
+                "text": chunk,
+                "embedding": embedding
+            })
+    
+    def get_embedding(self, text):
+        # Здесь должен быть запрос к API эмбеддингов Yandex
+        return np.random.rand(256)  # Заглушка
+    
+    def search(self, query, top_k=\${topK}):
+        query_emb = self.get_embedding(query)
+        
+        similarities = []
+        for doc in self.documents:
+            sim = np.dot(query_emb, doc["embedding"])
+            similarities.append((doc, sim))
+        
+        similarities.sort(key=lambda x: x[1], reverse=True)
+        return [doc for doc, sim in similarities[:top_k]]
+    
+    def generate_answer(self, query, context_docs):
+        context = "\\\\n".join([doc["text"] for doc in context_docs])
+        
+        messages = [
+            {"role": "system", "content": "Отвечай на вопросы на основе контекста."},
+            {"role": "user", "content": f"Контекст: {context}\\\\n\\\\nВопрос: {query}"}
+        ]
+        
+        response = self.client.chat.completions.create(
+            model="gpt://your-folder-id/\${model}/latest",
+            messages=messages,
+            max_tokens=1500
+        )
+        
+        return response.choices[0].message.content
+    
+    def ask(self, query):
+        context_docs = self.search(query)
+        return self.generate_answer(query, context_docs)
+
+# Использование:
+rag = YandexRAG()
+rag.add_documents(["Ваши документы..."])
+answer = rag.ask("Ваш вопрос")\`;
+                
+                } else if (apiApproach === 'sdk') {
+                    code = \`# RAG с Yandex Cloud SDK
+from yandexcloud import SDK
+import numpy as np
+import os
+
+class YandexRAG:
+    def __init__(self):
+        self.sdk = SDK(token=os.getenv("YANDEX_CLOUD_IAM_TOKEN"))
+        self.folder_id = "your-folder-id"
+        self.documents = []
+    
+    def add_documents(self, docs):
+        chunks = self.split_documents(docs, chunk_size=\${chunkSize})
+        
+        for chunk in chunks:
+            embedding = self.get_embedding(chunk)
+            self.documents.append({
+                "text": chunk, 
+                "embedding": embedding
+            })
+    
+    def get_embedding(self, text):
+        # Запрос к Yandex Foundation Models Embeddings API
+        # Реализация через SDK
+        return np.random.rand(256)  # Заглушка
+    
+    def search(self, query, top_k=\${topK}):
+        query_emb = self.get_embedding(query)
+        
+        similarities = []
+        for doc in self.documents:
+            sim = np.dot(query_emb, doc["embedding"])
+            similarities.append((doc, sim))
+        
+        similarities.sort(key=lambda x: x[1], reverse=True)
+        return [doc for doc, sim in similarities[:top_k]]
+    
+    def generate_answer(self, query, context_docs):
+        context = "\\\\n".join([doc["text"] for doc in context_docs])
+        
+        # Генерация через YandexGPT
+        prompt = f"Контекст: {context}\\\\n\\\\nВопрос: {query}\\\\n\\\\nОтвет:"
+        
+        # Здесь должен быть запрос к \${model}
+        return "Ответ сгенерирован YandexGPT"
+    
+    def ask(self, query):
+        context_docs = self.search(query)
+        return self.generate_answer(query, context_docs)
+
+# Использование:
+rag = YandexRAG()
+rag.add_documents(["Ваши документы..."])  
+answer = rag.ask("Ваш вопрос")\`;
+                }
+                
+                document.getElementById('yandex-generated-code').textContent = code;
+                RAGSeminar.showNotification('Код сгенерирован!', 'success');
+            }
+            
+            // Get full seminar notes
+            function getFullSeminarNotes() {
+                return \`RAG (Retrieval-Augmented Generation) - Конспект семинара
+
+=== ОСНОВНЫЕ КОНЦЕПЦИИ ===
+- RAG объединяет поиск информации с генерацией текста
+- Решает проблему галлюцинаций LLM
+- Состоит из Retriever + Generator компонентов
+
+=== АРХИТЕКТУРА ===
+1. Индексация: документы → чанки → эмбеддинги → векторная БД
+2. Поиск и генерация: запрос → поиск → контекст → LLM → ответ
+
+=== АЛГОРИТМЫ ПОИСКА ===
+- HNSW: лучшая производительность на CPU
+- FAISS: сжатие векторов, GPU поддержка  
+- Annoy: простота реализации
+
+=== МЕТРИКИ ===
+- Recall@k: доля найденных релевантных документов
+- Precision@k: точность среди топ-k
+- Faithfulness: отсутствие галлюцинаций
+
+=== YANDEX FOUNDATION MODELS ===
+- YandexGPT Pro: 32K контекст, высокое качество
+- YandexGPT: 8K контекст, сбалансированность
+- YandexGPT Lite: 4K контекст, высокая скорость
+
+=== ПРАКТИЧЕСКИЕ СОВЕТЫ ===
+- Выбирайте размер чанков в зависимости от задачи
+- Настраивайте top-k для оптимального контекста
+- Используйте метрики для оценки качества
+- Экспериментируйте с разными моделями эмбеддингов\`;
+            }
+            
+            // Initialize everything when DOM is loaded
+            document.addEventListener('DOMContentLoaded', function() {
+                console.log('🎯 Инициализация интерактивных элементов...');
+                
+                // Initialize tabs
+                RAGSeminar.initTabs('theory-tabs');
+                
+                // Initialize quiz
+                RAGSeminar.initQuiz('rag-quiz');
+                
+                // Initialize visualization
+                setTimeout(initializeVisualization, 500);
+                
+                console.log('✅ Все интерактивные элементы инициализированы');
+            });
+        </script>
+    </body>
+    </html>
+  `)
 })
 
 export default app
