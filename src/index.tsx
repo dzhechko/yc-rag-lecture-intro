@@ -1361,6 +1361,9 @@ for query in queries:
                     <a href="#overview" class="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
                         <i class="fas fa-redo mr-2"></i>Пройти еще раз
                     </a>
+                    <a href="/vector_databases_enhanced_guide" class="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-database mr-2"></i>Векторные БД: Подробно
+                    </a>
                     <button onclick="RAGSeminar.downloadCode(getFullSeminarNotes(), 'rag-seminar-notes.txt')" 
                             class="bg-purple-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-purple-700 transition-colors">
                         <i class="fas fa-download mr-2"></i>Скачать конспект
@@ -1401,6 +1404,7 @@ for query in queries:
                             <li><a href="#theory" class="hover:text-white transition-colors">Теория</a></li>
                             <li><a href="#practice" class="hover:text-white transition-colors">Практика</a></li>
                             <li><a href="#quiz" class="hover:text-white transition-colors">Квиз</a></li>
+                            <li><a href="/vector_databases_enhanced_guide" class="hover:text-white transition-colors text-blue-400">📚 Векторные БД: Подробно</a></li>
                         </ul>
                     </div>
                     
@@ -2689,6 +2693,81 @@ if __name__ == "__main__":
     </body>
     </html>
   `)
+})
+
+// Enhanced Vector Databases Guide route
+app.get('/vector_databases_enhanced_guide.html', (c) => {
+  return c.redirect('/vector_databases_enhanced_guide')
+})
+
+app.get('/vector_databases_enhanced_guide', async (c) => {
+  // Since we can't read files in Cloudflare Workers, we'll include the content inline
+  // This is a workaround for the Cloudflare Pages environment
+  return c.html(`<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 Полное руководство по векторным базам данных | FAISS, HNSW, Annoy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .section-padding { padding: 4rem 1rem; }
+        .card-shadow { box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .code-block { 
+            background: #1a202c; color: #e2e8f0; border-radius: 8px; padding: 16px; 
+            font-family: 'Courier New', monospace; font-size: 14px; line-height: 1.4; overflow-x: auto; 
+        }
+        .timeline-item { position: relative; padding-left: 2rem; margin-bottom: 2rem; }
+        .timeline-item::before { 
+            content: ''; position: absolute; left: 0; top: 0.5rem; width: 1rem; height: 1rem; 
+            background: #4f46e5; border-radius: 50%; 
+        }
+        .fact-box { border-left: 4px solid #10b981; background: #f0fdf4; padding: 1rem; margin: 1rem 0; }
+        .warning-box { border-left: 4px solid #f59e0b; background: #fffbeb; padding: 1rem; margin: 1rem 0; }
+        .nav-sticky { position: sticky; top: 20px; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <header class="gradient-bg text-white">
+        <div class="container mx-auto px-4 py-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <i class="fas fa-database text-4xl mr-4"></i>
+                    <div>
+                        <h1 class="text-4xl font-bold">Векторные базы данных</h1>
+                        <p class="text-xl opacity-90">Полное руководство для студентов | 2024-2025</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-4">
+                    <a href="/" class="bg-white bg-opacity-20 px-4 py-2 rounded-lg hover:bg-opacity-30 transition-colors">
+                        <i class="fas fa-home mr-2"></i>Главная
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded-xl p-8 card-shadow">
+            <h2 class="text-3xl font-bold mb-6 text-center">🚧 Страница в разработке</h2>
+            <p class="text-lg text-center text-gray-600 mb-6">
+                Подробное руководство по векторным базам данных с улучшенным содержанием скоро будет доступно.
+                А пока вы можете ознакомиться с базовым руководством.
+            </p>
+            <div class="text-center space-x-4">
+                <a href="/" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors inline-block">
+                    <i class="fas fa-home mr-2"></i>Главная страница
+                </a>
+                <a href="/vector_databases_guide.html" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors inline-block">
+                    <i class="fas fa-book mr-2"></i>Базовое руководство
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>`)
 })
 
 export default app

@@ -1,7 +1,7 @@
 var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 
-// node_modules/unenv/dist/runtime/_internal/utils.mjs
+// ../node_modules/unenv/dist/runtime/_internal/utils.mjs
 // @__NO_SIDE_EFFECTS__
 function createNotImplementedError(name) {
   return new Error(`[unenv] ${name} is not implemented yet!`);
@@ -26,7 +26,7 @@ function notImplementedClass(name) {
 }
 __name(notImplementedClass, "notImplementedClass");
 
-// node_modules/unenv/dist/runtime/node/internal/perf_hooks/performance.mjs
+// ../node_modules/unenv/dist/runtime/node/internal/perf_hooks/performance.mjs
 var _timeOrigin = globalThis.performance?.timeOrigin ?? Date.now();
 var _performanceNow = globalThis.performance?.now ? globalThis.performance.now.bind(globalThis.performance) : () => Date.now() - _timeOrigin;
 var nodeTiming = {
@@ -264,7 +264,7 @@ var PerformanceObserver = class {
 };
 var performance = globalThis.performance && "addEventListener" in globalThis.performance ? globalThis.performance : new Performance();
 
-// node_modules/@cloudflare/unenv-preset/dist/runtime/polyfill/performance.mjs
+// ../node_modules/@cloudflare/unenv-preset/dist/runtime/polyfill/performance.mjs
 globalThis.performance = performance;
 globalThis.Performance = Performance;
 globalThis.PerformanceEntry = PerformanceEntry;
@@ -274,14 +274,14 @@ globalThis.PerformanceObserver = PerformanceObserver;
 globalThis.PerformanceObserverEntryList = PerformanceObserverEntryList;
 globalThis.PerformanceResourceTiming = PerformanceResourceTiming;
 
-// node_modules/unenv/dist/runtime/node/console.mjs
+// ../node_modules/unenv/dist/runtime/node/console.mjs
 import { Writable } from "node:stream";
 
-// node_modules/unenv/dist/runtime/mock/noop.mjs
+// ../node_modules/unenv/dist/runtime/mock/noop.mjs
 var noop_default = Object.assign(() => {
 }, { __unenv__: true });
 
-// node_modules/unenv/dist/runtime/node/console.mjs
+// ../node_modules/unenv/dist/runtime/node/console.mjs
 var _console = globalThis.console;
 var _ignoreErrors = true;
 var _stderr = new Writable();
@@ -313,7 +313,7 @@ var _times = /* @__PURE__ */ new Map();
 var _stdoutErrorHandler = noop_default;
 var _stderrErrorHandler = noop_default;
 
-// node_modules/@cloudflare/unenv-preset/dist/runtime/node/console.mjs
+// ../node_modules/@cloudflare/unenv-preset/dist/runtime/node/console.mjs
 var workerdConsole = globalThis["console"];
 var {
   assert,
@@ -354,10 +354,10 @@ Object.assign(workerdConsole, {
 });
 var console_default = workerdConsole;
 
-// node_modules/wrangler/_virtual_unenv_global_polyfill-@cloudflare-unenv-preset-node-console
+// ../node_modules/wrangler/_virtual_unenv_global_polyfill-@cloudflare-unenv-preset-node-console
 globalThis.console = console_default;
 
-// node_modules/unenv/dist/runtime/node/internal/process/hrtime.mjs
+// ../node_modules/unenv/dist/runtime/node/internal/process/hrtime.mjs
 var hrtime = /* @__PURE__ */ Object.assign(/* @__PURE__ */ __name(function hrtime2(startTime) {
   const now = Date.now();
   const seconds = Math.trunc(now / 1e3);
@@ -376,10 +376,10 @@ var hrtime = /* @__PURE__ */ Object.assign(/* @__PURE__ */ __name(function hrtim
   return BigInt(Date.now() * 1e6);
 }, "bigint") });
 
-// node_modules/unenv/dist/runtime/node/internal/process/process.mjs
+// ../node_modules/unenv/dist/runtime/node/internal/process/process.mjs
 import { EventEmitter } from "node:events";
 
-// node_modules/unenv/dist/runtime/node/internal/tty/read-stream.mjs
+// ../node_modules/unenv/dist/runtime/node/internal/tty/read-stream.mjs
 var ReadStream = class {
   static {
     __name(this, "ReadStream");
@@ -396,7 +396,7 @@ var ReadStream = class {
   }
 };
 
-// node_modules/unenv/dist/runtime/node/internal/tty/write-stream.mjs
+// ../node_modules/unenv/dist/runtime/node/internal/tty/write-stream.mjs
 var WriteStream = class {
   static {
     __name(this, "WriteStream");
@@ -408,7 +408,7 @@ var WriteStream = class {
   constructor(fd) {
     this.fd = fd;
   }
-  clearLine(dir4, callback) {
+  clearLine(dir3, callback) {
     callback && callback();
     return false;
   }
@@ -424,10 +424,10 @@ var WriteStream = class {
     callback && callback();
     return false;
   }
-  getColorDepth(env3) {
+  getColorDepth(env2) {
     return 1;
   }
-  hasColors(count4, env3) {
+  hasColors(count3, env2) {
     return false;
   }
   getWindowSize() {
@@ -446,11 +446,11 @@ var WriteStream = class {
   }
 };
 
-// node_modules/unenv/dist/runtime/node/internal/process/node-version.mjs
+// ../node_modules/unenv/dist/runtime/node/internal/process/node-version.mjs
 var NODE_VERSION = "22.14.0";
 
-// node_modules/unenv/dist/runtime/node/internal/process/process.mjs
-var Process = class _Process2 extends EventEmitter {
+// ../node_modules/unenv/dist/runtime/node/internal/process/process.mjs
+var Process = class _Process extends EventEmitter {
   static {
     __name(this, "Process");
   }
@@ -462,7 +462,7 @@ var Process = class _Process2 extends EventEmitter {
     this.env = impl.env;
     this.hrtime = impl.hrtime;
     this.nextTick = impl.nextTick;
-    for (const prop of [...Object.getOwnPropertyNames(_Process2.prototype), ...Object.getOwnPropertyNames(EventEmitter.prototype)]) {
+    for (const prop of [...Object.getOwnPropertyNames(_Process.prototype), ...Object.getOwnPropertyNames(EventEmitter.prototype)]) {
       const value = this[prop];
       if (typeof value === "function") {
         this[prop] = value.bind(this);
@@ -494,8 +494,8 @@ var Process = class _Process2 extends EventEmitter {
   }
   // --- cwd ---
   #cwd = "/";
-  chdir(cwd3) {
-    this.#cwd = cwd3;
+  chdir(cwd2) {
+    this.#cwd = cwd2;
   }
   cwd() {
     return this.#cwd;
@@ -684,7 +684,7 @@ var Process = class _Process2 extends EventEmitter {
   _linkedBinding = void 0;
 };
 
-// node_modules/@cloudflare/unenv-preset/dist/runtime/node/process.mjs
+// ../node_modules/@cloudflare/unenv-preset/dist/runtime/node/process.mjs
 var globalProcess = globalThis["process"];
 var getBuiltinModule = globalProcess.getBuiltinModule;
 var { exit, platform, nextTick } = getBuiltinModule(
@@ -912,944 +912,27 @@ var _process = {
 };
 var process_default = _process;
 
-// node_modules/wrangler/_virtual_unenv_global_polyfill-@cloudflare-unenv-preset-node-process
+// ../node_modules/wrangler/_virtual_unenv_global_polyfill-@cloudflare-unenv-preset-node-process
 globalThis.process = process_default;
 
-// .wrangler/tmp/pages-wjyXW2/bundledWorker-0.20473437360477686.mjs
-import { Writable as Writable2 } from "node:stream";
-import { EventEmitter as EventEmitter2 } from "node:events";
-var __defProp2 = Object.defineProperty;
-var __name2 = /* @__PURE__ */ __name((target, value) => __defProp2(target, "name", { value, configurable: true }), "__name");
-// @__NO_SIDE_EFFECTS__
-function createNotImplementedError2(name) {
-  return new Error(`[unenv] ${name} is not implemented yet!`);
-}
-__name(createNotImplementedError2, "createNotImplementedError");
-__name2(createNotImplementedError2, "createNotImplementedError");
-// @__NO_SIDE_EFFECTS__
-function notImplemented2(name) {
-  const fn = /* @__PURE__ */ __name2(() => {
-    throw /* @__PURE__ */ createNotImplementedError2(name);
-  }, "fn");
-  return Object.assign(fn, { __unenv__: true });
-}
-__name(notImplemented2, "notImplemented");
-__name2(notImplemented2, "notImplemented");
-// @__NO_SIDE_EFFECTS__
-function notImplementedClass2(name) {
-  return class {
-    __unenv__ = true;
-    constructor() {
-      throw new Error(`[unenv] ${name} is not implemented yet!`);
-    }
-  };
-}
-__name(notImplementedClass2, "notImplementedClass");
-__name2(notImplementedClass2, "notImplementedClass");
-var _timeOrigin2 = globalThis.performance?.timeOrigin ?? Date.now();
-var _performanceNow2 = globalThis.performance?.now ? globalThis.performance.now.bind(globalThis.performance) : () => Date.now() - _timeOrigin2;
-var nodeTiming2 = {
-  name: "node",
-  entryType: "node",
-  startTime: 0,
-  duration: 0,
-  nodeStart: 0,
-  v8Start: 0,
-  bootstrapComplete: 0,
-  environment: 0,
-  loopStart: 0,
-  loopExit: 0,
-  idleTime: 0,
-  uvMetricsInfo: {
-    loopCount: 0,
-    events: 0,
-    eventsWaiting: 0
-  },
-  detail: void 0,
-  toJSON() {
-    return this;
-  }
-};
-var PerformanceEntry2 = class {
-  static {
-    __name(this, "PerformanceEntry");
-  }
-  static {
-    __name2(this, "PerformanceEntry");
-  }
-  __unenv__ = true;
-  detail;
-  entryType = "event";
-  name;
-  startTime;
-  constructor(name, options) {
-    this.name = name;
-    this.startTime = options?.startTime || _performanceNow2();
-    this.detail = options?.detail;
-  }
-  get duration() {
-    return _performanceNow2() - this.startTime;
-  }
-  toJSON() {
-    return {
-      name: this.name,
-      entryType: this.entryType,
-      startTime: this.startTime,
-      duration: this.duration,
-      detail: this.detail
-    };
-  }
-};
-var PerformanceMark3 = class PerformanceMark22 extends PerformanceEntry2 {
-  static {
-    __name(this, "PerformanceMark2");
-  }
-  static {
-    __name2(this, "PerformanceMark");
-  }
-  entryType = "mark";
-  constructor() {
-    super(...arguments);
-  }
-  get duration() {
-    return 0;
-  }
-};
-var PerformanceMeasure2 = class extends PerformanceEntry2 {
-  static {
-    __name(this, "PerformanceMeasure");
-  }
-  static {
-    __name2(this, "PerformanceMeasure");
-  }
-  entryType = "measure";
-};
-var PerformanceResourceTiming2 = class extends PerformanceEntry2 {
-  static {
-    __name(this, "PerformanceResourceTiming");
-  }
-  static {
-    __name2(this, "PerformanceResourceTiming");
-  }
-  entryType = "resource";
-  serverTiming = [];
-  connectEnd = 0;
-  connectStart = 0;
-  decodedBodySize = 0;
-  domainLookupEnd = 0;
-  domainLookupStart = 0;
-  encodedBodySize = 0;
-  fetchStart = 0;
-  initiatorType = "";
-  name = "";
-  nextHopProtocol = "";
-  redirectEnd = 0;
-  redirectStart = 0;
-  requestStart = 0;
-  responseEnd = 0;
-  responseStart = 0;
-  secureConnectionStart = 0;
-  startTime = 0;
-  transferSize = 0;
-  workerStart = 0;
-  responseStatus = 0;
-};
-var PerformanceObserverEntryList2 = class {
-  static {
-    __name(this, "PerformanceObserverEntryList");
-  }
-  static {
-    __name2(this, "PerformanceObserverEntryList");
-  }
-  __unenv__ = true;
-  getEntries() {
-    return [];
-  }
-  getEntriesByName(_name, _type) {
-    return [];
-  }
-  getEntriesByType(type) {
-    return [];
-  }
-};
-var Performance2 = class {
-  static {
-    __name(this, "Performance");
-  }
-  static {
-    __name2(this, "Performance");
-  }
-  __unenv__ = true;
-  timeOrigin = _timeOrigin2;
-  eventCounts = /* @__PURE__ */ new Map();
-  _entries = [];
-  _resourceTimingBufferSize = 0;
-  navigation = void 0;
-  timing = void 0;
-  timerify(_fn, _options) {
-    throw /* @__PURE__ */ createNotImplementedError2("Performance.timerify");
-  }
-  get nodeTiming() {
-    return nodeTiming2;
-  }
-  eventLoopUtilization() {
-    return {};
-  }
-  markResourceTiming() {
-    return new PerformanceResourceTiming2("");
-  }
-  onresourcetimingbufferfull = null;
-  now() {
-    if (this.timeOrigin === _timeOrigin2) {
-      return _performanceNow2();
-    }
-    return Date.now() - this.timeOrigin;
-  }
-  clearMarks(markName) {
-    this._entries = markName ? this._entries.filter((e) => e.name !== markName) : this._entries.filter((e) => e.entryType !== "mark");
-  }
-  clearMeasures(measureName) {
-    this._entries = measureName ? this._entries.filter((e) => e.name !== measureName) : this._entries.filter((e) => e.entryType !== "measure");
-  }
-  clearResourceTimings() {
-    this._entries = this._entries.filter((e) => e.entryType !== "resource" || e.entryType !== "navigation");
-  }
-  getEntries() {
-    return this._entries;
-  }
-  getEntriesByName(name, type) {
-    return this._entries.filter((e) => e.name === name && (!type || e.entryType === type));
-  }
-  getEntriesByType(type) {
-    return this._entries.filter((e) => e.entryType === type);
-  }
-  mark(name, options) {
-    const entry = new PerformanceMark3(name, options);
-    this._entries.push(entry);
-    return entry;
-  }
-  measure(measureName, startOrMeasureOptions, endMark) {
-    let start;
-    let end;
-    if (typeof startOrMeasureOptions === "string") {
-      start = this.getEntriesByName(startOrMeasureOptions, "mark")[0]?.startTime;
-      end = this.getEntriesByName(endMark, "mark")[0]?.startTime;
-    } else {
-      start = Number.parseFloat(startOrMeasureOptions?.start) || this.now();
-      end = Number.parseFloat(startOrMeasureOptions?.end) || this.now();
-    }
-    const entry = new PerformanceMeasure2(measureName, {
-      startTime: start,
-      detail: {
-        start,
-        end
-      }
-    });
-    this._entries.push(entry);
-    return entry;
-  }
-  setResourceTimingBufferSize(maxSize) {
-    this._resourceTimingBufferSize = maxSize;
-  }
-  addEventListener(type, listener, options) {
-    throw /* @__PURE__ */ createNotImplementedError2("Performance.addEventListener");
-  }
-  removeEventListener(type, listener, options) {
-    throw /* @__PURE__ */ createNotImplementedError2("Performance.removeEventListener");
-  }
-  dispatchEvent(event) {
-    throw /* @__PURE__ */ createNotImplementedError2("Performance.dispatchEvent");
-  }
-  toJSON() {
-    return this;
-  }
-};
-var PerformanceObserver2 = class {
-  static {
-    __name(this, "PerformanceObserver");
-  }
-  static {
-    __name2(this, "PerformanceObserver");
-  }
-  __unenv__ = true;
-  static supportedEntryTypes = [];
-  _callback = null;
-  constructor(callback) {
-    this._callback = callback;
-  }
-  takeRecords() {
-    return [];
-  }
-  disconnect() {
-    throw /* @__PURE__ */ createNotImplementedError2("PerformanceObserver.disconnect");
-  }
-  observe(options) {
-    throw /* @__PURE__ */ createNotImplementedError2("PerformanceObserver.observe");
-  }
-  bind(fn) {
-    return fn;
-  }
-  runInAsyncScope(fn, thisArg, ...args) {
-    return fn.call(thisArg, ...args);
-  }
-  asyncId() {
-    return 0;
-  }
-  triggerAsyncId() {
-    return 0;
-  }
-  emitDestroy() {
-    return this;
-  }
-};
-var performance2 = globalThis.performance && "addEventListener" in globalThis.performance ? globalThis.performance : new Performance2();
-globalThis.performance = performance2;
-globalThis.Performance = Performance2;
-globalThis.PerformanceEntry = PerformanceEntry2;
-globalThis.PerformanceMark = PerformanceMark3;
-globalThis.PerformanceMeasure = PerformanceMeasure2;
-globalThis.PerformanceObserver = PerformanceObserver2;
-globalThis.PerformanceObserverEntryList = PerformanceObserverEntryList2;
-globalThis.PerformanceResourceTiming = PerformanceResourceTiming2;
-var noop_default2 = Object.assign(() => {
-}, { __unenv__: true });
-var _console2 = globalThis.console;
-var _ignoreErrors2 = true;
-var _stderr2 = new Writable2();
-var _stdout2 = new Writable2();
-var log3 = _console2?.log ?? noop_default2;
-var info3 = _console2?.info ?? log3;
-var trace3 = _console2?.trace ?? info3;
-var debug3 = _console2?.debug ?? log3;
-var table3 = _console2?.table ?? log3;
-var error3 = _console2?.error ?? log3;
-var warn3 = _console2?.warn ?? error3;
-var createTask3 = _console2?.createTask ?? /* @__PURE__ */ notImplemented2("console.createTask");
-var clear3 = _console2?.clear ?? noop_default2;
-var count3 = _console2?.count ?? noop_default2;
-var countReset3 = _console2?.countReset ?? noop_default2;
-var dir3 = _console2?.dir ?? noop_default2;
-var dirxml3 = _console2?.dirxml ?? noop_default2;
-var group3 = _console2?.group ?? noop_default2;
-var groupEnd3 = _console2?.groupEnd ?? noop_default2;
-var groupCollapsed3 = _console2?.groupCollapsed ?? noop_default2;
-var profile3 = _console2?.profile ?? noop_default2;
-var profileEnd3 = _console2?.profileEnd ?? noop_default2;
-var time3 = _console2?.time ?? noop_default2;
-var timeEnd3 = _console2?.timeEnd ?? noop_default2;
-var timeLog3 = _console2?.timeLog ?? noop_default2;
-var timeStamp3 = _console2?.timeStamp ?? noop_default2;
-var Console2 = _console2?.Console ?? /* @__PURE__ */ notImplementedClass2("console.Console");
-var _times2 = /* @__PURE__ */ new Map();
-var _stdoutErrorHandler2 = noop_default2;
-var _stderrErrorHandler2 = noop_default2;
-var workerdConsole2 = globalThis["console"];
-var {
-  assert: assert3,
-  clear: clear22,
-  // @ts-expect-error undocumented public API
-  context: context2,
-  count: count22,
-  countReset: countReset22,
-  // @ts-expect-error undocumented public API
-  createTask: createTask22,
-  debug: debug22,
-  dir: dir22,
-  dirxml: dirxml22,
-  error: error22,
-  group: group22,
-  groupCollapsed: groupCollapsed22,
-  groupEnd: groupEnd22,
-  info: info22,
-  log: log22,
-  profile: profile22,
-  profileEnd: profileEnd22,
-  table: table22,
-  time: time22,
-  timeEnd: timeEnd22,
-  timeLog: timeLog22,
-  timeStamp: timeStamp22,
-  trace: trace22,
-  warn: warn22
-} = workerdConsole2;
-Object.assign(workerdConsole2, {
-  Console: Console2,
-  _ignoreErrors: _ignoreErrors2,
-  _stderr: _stderr2,
-  _stderrErrorHandler: _stderrErrorHandler2,
-  _stdout: _stdout2,
-  _stdoutErrorHandler: _stdoutErrorHandler2,
-  _times: _times2
-});
-var console_default2 = workerdConsole2;
-globalThis.console = console_default2;
-var hrtime4 = /* @__PURE__ */ Object.assign(/* @__PURE__ */ __name2(/* @__PURE__ */ __name(function hrtime22(startTime) {
-  const now = Date.now();
-  const seconds = Math.trunc(now / 1e3);
-  const nanos = now % 1e3 * 1e6;
-  if (startTime) {
-    let diffSeconds = seconds - startTime[0];
-    let diffNanos = nanos - startTime[0];
-    if (diffNanos < 0) {
-      diffSeconds = diffSeconds - 1;
-      diffNanos = 1e9 + diffNanos;
-    }
-    return [diffSeconds, diffNanos];
-  }
-  return [seconds, nanos];
-}, "hrtime2"), "hrtime"), { bigint: /* @__PURE__ */ __name2(/* @__PURE__ */ __name(function bigint2() {
-  return BigInt(Date.now() * 1e6);
-}, "bigint"), "bigint") });
-var ReadStream2 = class {
-  static {
-    __name(this, "ReadStream");
-  }
-  static {
-    __name2(this, "ReadStream");
-  }
-  fd;
-  isRaw = false;
-  isTTY = false;
-  constructor(fd) {
-    this.fd = fd;
-  }
-  setRawMode(mode) {
-    this.isRaw = mode;
-    return this;
-  }
-};
-var WriteStream2 = class {
-  static {
-    __name(this, "WriteStream");
-  }
-  static {
-    __name2(this, "WriteStream");
-  }
-  fd;
-  columns = 80;
-  rows = 24;
-  isTTY = false;
-  constructor(fd) {
-    this.fd = fd;
-  }
-  clearLine(dir32, callback) {
-    callback && callback();
-    return false;
-  }
-  clearScreenDown(callback) {
-    callback && callback();
-    return false;
-  }
-  cursorTo(x2, y, callback) {
-    callback && typeof callback === "function" && callback();
-    return false;
-  }
-  moveCursor(dx, dy, callback) {
-    callback && callback();
-    return false;
-  }
-  getColorDepth(env22) {
-    return 1;
-  }
-  hasColors(count32, env22) {
-    return false;
-  }
-  getWindowSize() {
-    return [this.columns, this.rows];
-  }
-  write(str, encoding, cb) {
-    if (str instanceof Uint8Array) {
-      str = new TextDecoder().decode(str);
-    }
-    try {
-      console.log(str);
-    } catch {
-    }
-    cb && typeof cb === "function" && cb();
-    return false;
-  }
-};
-var NODE_VERSION2 = "22.14.0";
-var Process2 = class _Process extends EventEmitter2 {
-  static {
-    __name(this, "_Process");
-  }
-  static {
-    __name2(this, "Process");
-  }
-  env;
-  hrtime;
-  nextTick;
-  constructor(impl) {
-    super();
-    this.env = impl.env;
-    this.hrtime = impl.hrtime;
-    this.nextTick = impl.nextTick;
-    for (const prop of [...Object.getOwnPropertyNames(_Process.prototype), ...Object.getOwnPropertyNames(EventEmitter2.prototype)]) {
-      const value = this[prop];
-      if (typeof value === "function") {
-        this[prop] = value.bind(this);
-      }
-    }
-  }
-  // --- event emitter ---
-  emitWarning(warning, type, code) {
-    console.warn(`${code ? `[${code}] ` : ""}${type ? `${type}: ` : ""}${warning}`);
-  }
-  emit(...args) {
-    return super.emit(...args);
-  }
-  listeners(eventName) {
-    return super.listeners(eventName);
-  }
-  // --- stdio (lazy initializers) ---
-  #stdin;
-  #stdout;
-  #stderr;
-  get stdin() {
-    return this.#stdin ??= new ReadStream2(0);
-  }
-  get stdout() {
-    return this.#stdout ??= new WriteStream2(1);
-  }
-  get stderr() {
-    return this.#stderr ??= new WriteStream2(2);
-  }
-  // --- cwd ---
-  #cwd = "/";
-  chdir(cwd22) {
-    this.#cwd = cwd22;
-  }
-  cwd() {
-    return this.#cwd;
-  }
-  // --- dummy props and getters ---
-  arch = "";
-  platform = "";
-  argv = [];
-  argv0 = "";
-  execArgv = [];
-  execPath = "";
-  title = "";
-  pid = 200;
-  ppid = 100;
-  get version() {
-    return `v${NODE_VERSION2}`;
-  }
-  get versions() {
-    return { node: NODE_VERSION2 };
-  }
-  get allowedNodeEnvironmentFlags() {
-    return /* @__PURE__ */ new Set();
-  }
-  get sourceMapsEnabled() {
-    return false;
-  }
-  get debugPort() {
-    return 0;
-  }
-  get throwDeprecation() {
-    return false;
-  }
-  get traceDeprecation() {
-    return false;
-  }
-  get features() {
-    return {};
-  }
-  get release() {
-    return {};
-  }
-  get connected() {
-    return false;
-  }
-  get config() {
-    return {};
-  }
-  get moduleLoadList() {
-    return [];
-  }
-  constrainedMemory() {
-    return 0;
-  }
-  availableMemory() {
-    return 0;
-  }
-  uptime() {
-    return 0;
-  }
-  resourceUsage() {
-    return {};
-  }
-  // --- noop methods ---
-  ref() {
-  }
-  unref() {
-  }
-  // --- unimplemented methods ---
-  umask() {
-    throw /* @__PURE__ */ createNotImplementedError2("process.umask");
-  }
-  getBuiltinModule() {
-    return void 0;
-  }
-  getActiveResourcesInfo() {
-    throw /* @__PURE__ */ createNotImplementedError2("process.getActiveResourcesInfo");
-  }
-  exit() {
-    throw /* @__PURE__ */ createNotImplementedError2("process.exit");
-  }
-  reallyExit() {
-    throw /* @__PURE__ */ createNotImplementedError2("process.reallyExit");
-  }
-  kill() {
-    throw /* @__PURE__ */ createNotImplementedError2("process.kill");
-  }
-  abort() {
-    throw /* @__PURE__ */ createNotImplementedError2("process.abort");
-  }
-  dlopen() {
-    throw /* @__PURE__ */ createNotImplementedError2("process.dlopen");
-  }
-  setSourceMapsEnabled() {
-    throw /* @__PURE__ */ createNotImplementedError2("process.setSourceMapsEnabled");
-  }
-  loadEnvFile() {
-    throw /* @__PURE__ */ createNotImplementedError2("process.loadEnvFile");
-  }
-  disconnect() {
-    throw /* @__PURE__ */ createNotImplementedError2("process.disconnect");
-  }
-  cpuUsage() {
-    throw /* @__PURE__ */ createNotImplementedError2("process.cpuUsage");
-  }
-  setUncaughtExceptionCaptureCallback() {
-    throw /* @__PURE__ */ createNotImplementedError2("process.setUncaughtExceptionCaptureCallback");
-  }
-  hasUncaughtExceptionCaptureCallback() {
-    throw /* @__PURE__ */ createNotImplementedError2("process.hasUncaughtExceptionCaptureCallback");
-  }
-  initgroups() {
-    throw /* @__PURE__ */ createNotImplementedError2("process.initgroups");
-  }
-  openStdin() {
-    throw /* @__PURE__ */ createNotImplementedError2("process.openStdin");
-  }
-  assert() {
-    throw /* @__PURE__ */ createNotImplementedError2("process.assert");
-  }
-  binding() {
-    throw /* @__PURE__ */ createNotImplementedError2("process.binding");
-  }
-  // --- attached interfaces ---
-  permission = { has: /* @__PURE__ */ notImplemented2("process.permission.has") };
-  report = {
-    directory: "",
-    filename: "",
-    signal: "SIGUSR2",
-    compact: false,
-    reportOnFatalError: false,
-    reportOnSignal: false,
-    reportOnUncaughtException: false,
-    getReport: /* @__PURE__ */ notImplemented2("process.report.getReport"),
-    writeReport: /* @__PURE__ */ notImplemented2("process.report.writeReport")
-  };
-  finalization = {
-    register: /* @__PURE__ */ notImplemented2("process.finalization.register"),
-    unregister: /* @__PURE__ */ notImplemented2("process.finalization.unregister"),
-    registerBeforeExit: /* @__PURE__ */ notImplemented2("process.finalization.registerBeforeExit")
-  };
-  memoryUsage = Object.assign(() => ({
-    arrayBuffers: 0,
-    rss: 0,
-    external: 0,
-    heapTotal: 0,
-    heapUsed: 0
-  }), { rss: /* @__PURE__ */ __name2(() => 0, "rss") });
-  // --- undefined props ---
-  mainModule = void 0;
-  domain = void 0;
-  // optional
-  send = void 0;
-  exitCode = void 0;
-  channel = void 0;
-  getegid = void 0;
-  geteuid = void 0;
-  getgid = void 0;
-  getgroups = void 0;
-  getuid = void 0;
-  setegid = void 0;
-  seteuid = void 0;
-  setgid = void 0;
-  setgroups = void 0;
-  setuid = void 0;
-  // internals
-  _events = void 0;
-  _eventsCount = void 0;
-  _exiting = void 0;
-  _maxListeners = void 0;
-  _debugEnd = void 0;
-  _debugProcess = void 0;
-  _fatalException = void 0;
-  _getActiveHandles = void 0;
-  _getActiveRequests = void 0;
-  _kill = void 0;
-  _preload_modules = void 0;
-  _rawDebug = void 0;
-  _startProfilerIdleNotifier = void 0;
-  _stopProfilerIdleNotifier = void 0;
-  _tickCallback = void 0;
-  _disconnect = void 0;
-  _handleQueue = void 0;
-  _pendingMessage = void 0;
-  _channel = void 0;
-  _send = void 0;
-  _linkedBinding = void 0;
-};
-var globalProcess2 = globalThis["process"];
-var getBuiltinModule2 = globalProcess2.getBuiltinModule;
-var { exit: exit2, platform: platform2, nextTick: nextTick2 } = getBuiltinModule2(
-  "node:process"
-);
-var unenvProcess2 = new Process2({
-  env: globalProcess2.env,
-  hrtime: hrtime4,
-  nextTick: nextTick2
-});
-var {
-  abort: abort2,
-  addListener: addListener2,
-  allowedNodeEnvironmentFlags: allowedNodeEnvironmentFlags2,
-  hasUncaughtExceptionCaptureCallback: hasUncaughtExceptionCaptureCallback2,
-  setUncaughtExceptionCaptureCallback: setUncaughtExceptionCaptureCallback2,
-  loadEnvFile: loadEnvFile2,
-  sourceMapsEnabled: sourceMapsEnabled2,
-  arch: arch2,
-  argv: argv2,
-  argv0: argv02,
-  chdir: chdir2,
-  config: config2,
-  connected: connected2,
-  constrainedMemory: constrainedMemory2,
-  availableMemory: availableMemory2,
-  cpuUsage: cpuUsage2,
-  cwd: cwd2,
-  debugPort: debugPort2,
-  dlopen: dlopen2,
-  disconnect: disconnect2,
-  emit: emit2,
-  emitWarning: emitWarning2,
-  env: env2,
-  eventNames: eventNames2,
-  execArgv: execArgv2,
-  execPath: execPath2,
-  finalization: finalization2,
-  features: features2,
-  getActiveResourcesInfo: getActiveResourcesInfo2,
-  getMaxListeners: getMaxListeners2,
-  hrtime: hrtime32,
-  kill: kill2,
-  listeners: listeners2,
-  listenerCount: listenerCount2,
-  memoryUsage: memoryUsage2,
-  on: on2,
-  off: off2,
-  once: once2,
-  pid: pid2,
-  ppid: ppid2,
-  prependListener: prependListener2,
-  prependOnceListener: prependOnceListener2,
-  rawListeners: rawListeners2,
-  release: release2,
-  removeAllListeners: removeAllListeners2,
-  removeListener: removeListener2,
-  report: report2,
-  resourceUsage: resourceUsage2,
-  setMaxListeners: setMaxListeners2,
-  setSourceMapsEnabled: setSourceMapsEnabled2,
-  stderr: stderr2,
-  stdin: stdin2,
-  stdout: stdout2,
-  title: title2,
-  throwDeprecation: throwDeprecation2,
-  traceDeprecation: traceDeprecation2,
-  umask: umask2,
-  uptime: uptime2,
-  version: version2,
-  versions: versions2,
-  domain: domain2,
-  initgroups: initgroups2,
-  moduleLoadList: moduleLoadList2,
-  reallyExit: reallyExit2,
-  openStdin: openStdin2,
-  assert: assert22,
-  binding: binding2,
-  send: send2,
-  exitCode: exitCode2,
-  channel: channel2,
-  getegid: getegid2,
-  geteuid: geteuid2,
-  getgid: getgid2,
-  getgroups: getgroups2,
-  getuid: getuid2,
-  setegid: setegid2,
-  seteuid: seteuid2,
-  setgid: setgid2,
-  setgroups: setgroups2,
-  setuid: setuid2,
-  permission: permission2,
-  mainModule: mainModule2,
-  _events: _events2,
-  _eventsCount: _eventsCount2,
-  _exiting: _exiting2,
-  _maxListeners: _maxListeners2,
-  _debugEnd: _debugEnd2,
-  _debugProcess: _debugProcess2,
-  _fatalException: _fatalException2,
-  _getActiveHandles: _getActiveHandles2,
-  _getActiveRequests: _getActiveRequests2,
-  _kill: _kill2,
-  _preload_modules: _preload_modules2,
-  _rawDebug: _rawDebug2,
-  _startProfilerIdleNotifier: _startProfilerIdleNotifier2,
-  _stopProfilerIdleNotifier: _stopProfilerIdleNotifier2,
-  _tickCallback: _tickCallback2,
-  _disconnect: _disconnect2,
-  _handleQueue: _handleQueue2,
-  _pendingMessage: _pendingMessage2,
-  _channel: _channel2,
-  _send: _send2,
-  _linkedBinding: _linkedBinding2
-} = unenvProcess2;
-var _process2 = {
-  abort: abort2,
-  addListener: addListener2,
-  allowedNodeEnvironmentFlags: allowedNodeEnvironmentFlags2,
-  hasUncaughtExceptionCaptureCallback: hasUncaughtExceptionCaptureCallback2,
-  setUncaughtExceptionCaptureCallback: setUncaughtExceptionCaptureCallback2,
-  loadEnvFile: loadEnvFile2,
-  sourceMapsEnabled: sourceMapsEnabled2,
-  arch: arch2,
-  argv: argv2,
-  argv0: argv02,
-  chdir: chdir2,
-  config: config2,
-  connected: connected2,
-  constrainedMemory: constrainedMemory2,
-  availableMemory: availableMemory2,
-  cpuUsage: cpuUsage2,
-  cwd: cwd2,
-  debugPort: debugPort2,
-  dlopen: dlopen2,
-  disconnect: disconnect2,
-  emit: emit2,
-  emitWarning: emitWarning2,
-  env: env2,
-  eventNames: eventNames2,
-  execArgv: execArgv2,
-  execPath: execPath2,
-  exit: exit2,
-  finalization: finalization2,
-  features: features2,
-  getBuiltinModule: getBuiltinModule2,
-  getActiveResourcesInfo: getActiveResourcesInfo2,
-  getMaxListeners: getMaxListeners2,
-  hrtime: hrtime32,
-  kill: kill2,
-  listeners: listeners2,
-  listenerCount: listenerCount2,
-  memoryUsage: memoryUsage2,
-  nextTick: nextTick2,
-  on: on2,
-  off: off2,
-  once: once2,
-  pid: pid2,
-  platform: platform2,
-  ppid: ppid2,
-  prependListener: prependListener2,
-  prependOnceListener: prependOnceListener2,
-  rawListeners: rawListeners2,
-  release: release2,
-  removeAllListeners: removeAllListeners2,
-  removeListener: removeListener2,
-  report: report2,
-  resourceUsage: resourceUsage2,
-  setMaxListeners: setMaxListeners2,
-  setSourceMapsEnabled: setSourceMapsEnabled2,
-  stderr: stderr2,
-  stdin: stdin2,
-  stdout: stdout2,
-  title: title2,
-  throwDeprecation: throwDeprecation2,
-  traceDeprecation: traceDeprecation2,
-  umask: umask2,
-  uptime: uptime2,
-  version: version2,
-  versions: versions2,
-  // @ts-expect-error old API
-  domain: domain2,
-  initgroups: initgroups2,
-  moduleLoadList: moduleLoadList2,
-  reallyExit: reallyExit2,
-  openStdin: openStdin2,
-  assert: assert22,
-  binding: binding2,
-  send: send2,
-  exitCode: exitCode2,
-  channel: channel2,
-  getegid: getegid2,
-  geteuid: geteuid2,
-  getgid: getgid2,
-  getgroups: getgroups2,
-  getuid: getuid2,
-  setegid: setegid2,
-  seteuid: seteuid2,
-  setgid: setgid2,
-  setgroups: setgroups2,
-  setuid: setuid2,
-  permission: permission2,
-  mainModule: mainModule2,
-  _events: _events2,
-  _eventsCount: _eventsCount2,
-  _exiting: _exiting2,
-  _maxListeners: _maxListeners2,
-  _debugEnd: _debugEnd2,
-  _debugProcess: _debugProcess2,
-  _fatalException: _fatalException2,
-  _getActiveHandles: _getActiveHandles2,
-  _getActiveRequests: _getActiveRequests2,
-  _kill: _kill2,
-  _preload_modules: _preload_modules2,
-  _rawDebug: _rawDebug2,
-  _startProfilerIdleNotifier: _startProfilerIdleNotifier2,
-  _stopProfilerIdleNotifier: _stopProfilerIdleNotifier2,
-  _tickCallback: _tickCallback2,
-  _disconnect: _disconnect2,
-  _handleQueue: _handleQueue2,
-  _pendingMessage: _pendingMessage2,
-  _channel: _channel2,
-  _send: _send2,
-  _linkedBinding: _linkedBinding2
-};
-var process_default2 = _process2;
-globalThis.process = process_default2;
+// _worker.js
 var wt = Object.defineProperty;
-var ze = /* @__PURE__ */ __name2((e) => {
+var ze = /* @__PURE__ */ __name((e) => {
   throw TypeError(e);
 }, "ze");
-var At = /* @__PURE__ */ __name2((e, t, s) => t in e ? wt(e, t, { enumerable: true, configurable: true, writable: true, value: s }) : e[t] = s, "At");
-var p = /* @__PURE__ */ __name2((e, t, s) => At(e, typeof t != "symbol" ? t + "" : t, s), "p");
-var Te = /* @__PURE__ */ __name2((e, t, s) => t.has(e) || ze("Cannot " + s), "Te");
-var o = /* @__PURE__ */ __name2((e, t, s) => (Te(e, t, "read from private field"), s ? s.call(e) : t.get(e)), "o");
-var x = /* @__PURE__ */ __name2((e, t, s) => t.has(e) ? ze("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(e) : t.set(e, s), "x");
-var m = /* @__PURE__ */ __name2((e, t, s, r) => (Te(e, t, "write to private field"), r ? r.call(e, s) : t.set(e, s), s), "m");
-var h = /* @__PURE__ */ __name2((e, t, s) => (Te(e, t, "access private method"), s), "h");
-var De = /* @__PURE__ */ __name2((e, t, s, r) => ({ set _(i) {
+var _t = /* @__PURE__ */ __name((e, t, s) => t in e ? wt(e, t, { enumerable: true, configurable: true, writable: true, value: s }) : e[t] = s, "_t");
+var p = /* @__PURE__ */ __name((e, t, s) => _t(e, typeof t != "symbol" ? t + "" : t, s), "p");
+var Te = /* @__PURE__ */ __name((e, t, s) => t.has(e) || ze("Cannot " + s), "Te");
+var o = /* @__PURE__ */ __name((e, t, s) => (Te(e, t, "read from private field"), s ? s.call(e) : t.get(e)), "o");
+var x = /* @__PURE__ */ __name((e, t, s) => t.has(e) ? ze("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(e) : t.set(e, s), "x");
+var m = /* @__PURE__ */ __name((e, t, s, r) => (Te(e, t, "write to private field"), r ? r.call(e, s) : t.set(e, s), s), "m");
+var h = /* @__PURE__ */ __name((e, t, s) => (Te(e, t, "access private method"), s), "h");
+var De = /* @__PURE__ */ __name((e, t, s, r) => ({ set _(i) {
   m(e, t, i, s);
 }, get _() {
   return o(e, t, r);
 } }), "De");
-var Ne = /* @__PURE__ */ __name2((e, t, s) => (r, i) => {
+var Ne = /* @__PURE__ */ __name((e, t, s) => (r, i) => {
   let a = -1;
   return n(0);
   async function n(d) {
@@ -1866,55 +949,52 @@ var Ne = /* @__PURE__ */ __name2((e, t, s) => (r, i) => {
     return l && (r.finalized === false || c) && (r.res = l), r;
   }
   __name(n, "n");
-  __name2(n, "n");
 }, "Ne");
-var _t = Symbol();
-var St = /* @__PURE__ */ __name2(async (e, t = /* @__PURE__ */ Object.create(null)) => {
+var At = Symbol();
+var St = /* @__PURE__ */ __name(async (e, t = /* @__PURE__ */ Object.create(null)) => {
   const { all: s = false, dot: r = false } = t, a = (e instanceof it ? e.raw.headers : e.headers).get("Content-Type");
-  return a != null && a.startsWith("multipart/form-data") || a != null && a.startsWith("application/x-www-form-urlencoded") ? Rt(e, { all: s, dot: r }) : {};
+  return a != null && a.startsWith("multipart/form-data") || a != null && a.startsWith("application/x-www-form-urlencoded") ? kt(e, { all: s, dot: r }) : {};
 }, "St");
-async function Rt(e, t) {
+async function kt(e, t) {
   const s = await e.formData();
-  return s ? kt(s, t) : {};
+  return s ? Rt(s, t) : {};
 }
-__name(Rt, "Rt");
-__name2(Rt, "Rt");
-function kt(e, t) {
+__name(kt, "kt");
+function Rt(e, t) {
   const s = /* @__PURE__ */ Object.create(null);
   return e.forEach((r, i) => {
     t.all || i.endsWith("[]") ? Et(s, i, r) : s[i] = r;
   }), t.dot && Object.entries(s).forEach(([r, i]) => {
-    r.includes(".") && (qt(s, r, i), delete s[r]);
+    r.includes(".") && (Ct(s, r, i), delete s[r]);
   }), s;
 }
-__name(kt, "kt");
-__name2(kt, "kt");
-var Et = /* @__PURE__ */ __name2((e, t, s) => {
+__name(Rt, "Rt");
+var Et = /* @__PURE__ */ __name((e, t, s) => {
   e[t] !== void 0 ? Array.isArray(e[t]) ? e[t].push(s) : e[t] = [e[t], s] : t.endsWith("[]") ? e[t] = [s] : e[t] = s;
 }, "Et");
-var qt = /* @__PURE__ */ __name2((e, t, s) => {
+var Ct = /* @__PURE__ */ __name((e, t, s) => {
   let r = e;
   const i = t.split(".");
   i.forEach((a, n) => {
     n === i.length - 1 ? r[a] = s : ((!r[a] || typeof r[a] != "object" || Array.isArray(r[a]) || r[a] instanceof File) && (r[a] = /* @__PURE__ */ Object.create(null)), r = r[a]);
   });
-}, "qt");
-var Ze = /* @__PURE__ */ __name2((e) => {
+}, "Ct");
+var Ze = /* @__PURE__ */ __name((e) => {
   const t = e.split("/");
   return t[0] === "" && t.shift(), t;
 }, "Ze");
-var Ct = /* @__PURE__ */ __name2((e) => {
+var qt = /* @__PURE__ */ __name((e) => {
   const { groups: t, path: s } = Tt(e), r = Ze(s);
   return Gt(r, t);
-}, "Ct");
-var Tt = /* @__PURE__ */ __name2((e) => {
+}, "qt");
+var Tt = /* @__PURE__ */ __name((e) => {
   const t = [];
   return e = e.replace(/\{[^}]+\}/g, (s, r) => {
     const i = `@${r}`;
     return t.push([i, s]), i;
   }), { groups: t, path: e };
 }, "Tt");
-var Gt = /* @__PURE__ */ __name2((e, t) => {
+var Gt = /* @__PURE__ */ __name((e, t) => {
   for (let s = t.length - 1; s >= 0; s--) {
     const [r] = t[s];
     for (let i = e.length - 1; i >= 0; i--) if (e[i].includes(r)) {
@@ -1924,17 +1004,17 @@ var Gt = /* @__PURE__ */ __name2((e, t) => {
   }
   return e;
 }, "Gt");
-var we = {};
-var It = /* @__PURE__ */ __name2((e, t) => {
+var _e = {};
+var It = /* @__PURE__ */ __name((e, t) => {
   if (e === "*") return "*";
   const s = e.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);
   if (s) {
     const r = `${e}#${t}`;
-    return we[r] || (s[2] ? we[r] = t && t[0] !== ":" && t[0] !== "*" ? [r, s[1], new RegExp(`^${s[2]}(?=/${t})`)] : [e, s[1], new RegExp(`^${s[2]}$`)] : we[r] = [e, s[1], true]), we[r];
+    return _e[r] || (s[2] ? _e[r] = t && t[0] !== ":" && t[0] !== "*" ? [r, s[1], new RegExp(`^${s[2]}(?=/${t})`)] : [e, s[1], new RegExp(`^${s[2]}$`)] : _e[r] = [e, s[1], true]), _e[r];
   }
   return null;
 }, "It");
-var je = /* @__PURE__ */ __name2((e, t) => {
+var je = /* @__PURE__ */ __name((e, t) => {
   try {
     return t(e);
   } catch {
@@ -1947,8 +1027,8 @@ var je = /* @__PURE__ */ __name2((e, t) => {
     });
   }
 }, "je");
-var Pt = /* @__PURE__ */ __name2((e) => je(e, decodeURI), "Pt");
-var et = /* @__PURE__ */ __name2((e) => {
+var Pt = /* @__PURE__ */ __name((e) => je(e, decodeURI), "Pt");
+var et = /* @__PURE__ */ __name((e) => {
   const t = e.url, s = t.indexOf("/", t.indexOf(":") + 4);
   let r = s;
   for (; r < t.length; r++) {
@@ -1960,12 +1040,12 @@ var et = /* @__PURE__ */ __name2((e) => {
   }
   return t.slice(s, r);
 }, "et");
-var Mt = /* @__PURE__ */ __name2((e) => {
+var Mt = /* @__PURE__ */ __name((e) => {
   const t = et(e);
   return t.length > 1 && t.at(-1) === "/" ? t.slice(0, -1) : t;
 }, "Mt");
-var te = /* @__PURE__ */ __name2((e, t, ...s) => (s.length && (t = te(t, ...s)), `${(e == null ? void 0 : e[0]) === "/" ? "" : "/"}${e}${t === "/" ? "" : `${(e == null ? void 0 : e.at(-1)) === "/" ? "" : "/"}${(t == null ? void 0 : t[0]) === "/" ? t.slice(1) : t}`}`), "te");
-var tt = /* @__PURE__ */ __name2((e) => {
+var te = /* @__PURE__ */ __name((e, t, ...s) => (s.length && (t = te(t, ...s)), `${(e == null ? void 0 : e[0]) === "/" ? "" : "/"}${e}${t === "/" ? "" : `${(e == null ? void 0 : e.at(-1)) === "/" ? "" : "/"}${(t == null ? void 0 : t[0]) === "/" ? t.slice(1) : t}`}`), "te");
+var tt = /* @__PURE__ */ __name((e) => {
   if (e.charCodeAt(e.length - 1) !== 63 || !e.includes(":")) return null;
   const t = e.split("/"), s = [];
   let r = "";
@@ -1978,8 +1058,8 @@ var tt = /* @__PURE__ */ __name2((e) => {
     } else r += "/" + i;
   }), s.filter((i, a, n) => n.indexOf(i) === a);
 }, "tt");
-var Ge = /* @__PURE__ */ __name2((e) => /[%+]/.test(e) ? (e.indexOf("+") !== -1 && (e = e.replace(/\+/g, " ")), e.indexOf("%") !== -1 ? je(e, rt) : e) : e, "Ge");
-var st = /* @__PURE__ */ __name2((e, t, s) => {
+var Ge = /* @__PURE__ */ __name((e) => /[%+]/.test(e) ? (e.indexOf("+") !== -1 && (e = e.replace(/\+/g, " ")), e.indexOf("%") !== -1 ? je(e, rt) : e) : e, "Ge");
+var st = /* @__PURE__ */ __name((e, t, s) => {
   let r;
   if (!s && t && !/[%+]/.test(t)) {
     let n = e.indexOf(`?${t}`, 8);
@@ -2008,11 +1088,11 @@ var st = /* @__PURE__ */ __name2((e, t, s) => {
   return t ? i[t] : i;
 }, "st");
 var jt = st;
-var Ot = /* @__PURE__ */ __name2((e, t) => st(e, t, true), "Ot");
+var Ot = /* @__PURE__ */ __name((e, t) => st(e, t, true), "Ot");
 var rt = decodeURIComponent;
-var Le = /* @__PURE__ */ __name2((e) => je(e, rt), "Le");
+var Le = /* @__PURE__ */ __name((e) => je(e, rt), "Le");
 var ie;
-var q;
+var C;
 var D;
 var at;
 var ot;
@@ -2023,14 +1103,11 @@ var it = (He = class {
   static {
     __name(this, "He");
   }
-  static {
-    __name2(this, "He");
-  }
   constructor(e, t = "/", s = [[]]) {
     x(this, D);
     p(this, "raw");
     x(this, ie);
-    x(this, q);
+    x(this, C);
     p(this, "routeIndex", 0);
     p(this, "path");
     p(this, "bodyCache", {});
@@ -2040,7 +1117,7 @@ var it = (He = class {
       const i = Object.keys(t2)[0];
       return i ? t2[i].then((a) => (i === "json" && (a = JSON.stringify(a)), new Response(a)[e2]())) : t2[e2] = s2[e2]();
     });
-    this.raw = e, this.path = t, m(this, q, s), m(this, ie, {});
+    this.raw = e, this.path = t, m(this, C, s), m(this, ie, {});
   }
   param(e) {
     return e ? h(this, D, at).call(this, e) : h(this, D, ot).call(this);
@@ -2089,84 +1166,81 @@ var it = (He = class {
   get method() {
     return this.raw.method;
   }
-  get [_t]() {
-    return o(this, q);
+  get [At]() {
+    return o(this, C);
   }
   get matchedRoutes() {
-    return o(this, q)[0].map(([[, e]]) => e);
+    return o(this, C)[0].map(([[, e]]) => e);
   }
   get routePath() {
-    return o(this, q)[0].map(([[, e]]) => e)[this.routeIndex].path;
+    return o(this, C)[0].map(([[, e]]) => e)[this.routeIndex].path;
   }
-}, ie = /* @__PURE__ */ new WeakMap(), q = /* @__PURE__ */ new WeakMap(), D = /* @__PURE__ */ new WeakSet(), at = /* @__PURE__ */ __name2(function(e) {
-  const t = o(this, q)[0][this.routeIndex][1][e], s = h(this, D, Pe).call(this, t);
+}, ie = /* @__PURE__ */ new WeakMap(), C = /* @__PURE__ */ new WeakMap(), D = /* @__PURE__ */ new WeakSet(), at = /* @__PURE__ */ __name(function(e) {
+  const t = o(this, C)[0][this.routeIndex][1][e], s = h(this, D, Pe).call(this, t);
   return s ? /\%/.test(s) ? Le(s) : s : void 0;
-}, "at"), ot = /* @__PURE__ */ __name2(function() {
-  const e = {}, t = Object.keys(o(this, q)[0][this.routeIndex][1]);
+}, "at"), ot = /* @__PURE__ */ __name(function() {
+  const e = {}, t = Object.keys(o(this, C)[0][this.routeIndex][1]);
   for (const s of t) {
-    const r = h(this, D, Pe).call(this, o(this, q)[0][this.routeIndex][1][s]);
+    const r = h(this, D, Pe).call(this, o(this, C)[0][this.routeIndex][1][s]);
     r && typeof r == "string" && (e[s] = /\%/.test(r) ? Le(r) : r);
   }
   return e;
-}, "ot"), Pe = /* @__PURE__ */ __name2(function(e) {
-  return o(this, q)[1] ? o(this, q)[1][e] : e;
+}, "ot"), Pe = /* @__PURE__ */ __name(function(e) {
+  return o(this, C)[1] ? o(this, C)[1][e] : e;
 }, "Pe"), L = /* @__PURE__ */ new WeakMap(), He);
 var zt = { Stringify: 1 };
-var nt = /* @__PURE__ */ __name2(async (e, t, s, r, i) => {
+var nt = /* @__PURE__ */ __name(async (e, t, s, r, i) => {
   typeof e == "object" && !(e instanceof String) && (e instanceof Promise || (e = e.toString()), e instanceof Promise && (e = await e));
   const a = e.callbacks;
   return a != null && a.length ? (i ? i[0] += e : i = [e], Promise.all(a.map((d) => d({ phase: t, buffer: i, context: r }))).then((d) => Promise.all(d.filter(Boolean).map((l) => nt(l, t, false, r, i))).then(() => i[0]))) : Promise.resolve(e);
 }, "nt");
 var Dt = "text/plain; charset=UTF-8";
-var Ie = /* @__PURE__ */ __name2((e, t) => ({ "Content-Type": e, ...t }), "Ie");
-var ge;
+var Ie = /* @__PURE__ */ __name((e, t) => ({ "Content-Type": e, ...t }), "Ie");
 var xe;
+var he;
 var M;
 var ae;
 var j;
-var k;
-var he;
+var R;
+var be;
 var oe;
 var ne;
-var V;
-var be;
+var U;
 var ve;
-var Y;
+var ye;
+var F;
 var se;
 var Ke;
 var Nt = (Ke = class {
   static {
     __name(this, "Ke");
   }
-  static {
-    __name2(this, "Ke");
-  }
   constructor(e, t) {
-    x(this, Y);
-    x(this, ge);
+    x(this, F);
     x(this, xe);
+    x(this, he);
     p(this, "env", {});
     x(this, M);
     p(this, "finalized", false);
     p(this, "error");
     x(this, ae);
     x(this, j);
-    x(this, k);
-    x(this, he);
+    x(this, R);
+    x(this, be);
     x(this, oe);
     x(this, ne);
-    x(this, V);
-    x(this, be);
+    x(this, U);
     x(this, ve);
+    x(this, ye);
     p(this, "render", (...e2) => (o(this, oe) ?? m(this, oe, (t2) => this.html(t2)), o(this, oe).call(this, ...e2)));
-    p(this, "setLayout", (e2) => m(this, he, e2));
-    p(this, "getLayout", () => o(this, he));
+    p(this, "setLayout", (e2) => m(this, be, e2));
+    p(this, "getLayout", () => o(this, be));
     p(this, "setRenderer", (e2) => {
       m(this, oe, e2);
     });
     p(this, "header", (e2, t2, s) => {
-      this.finalized && m(this, k, new Response(o(this, k).body, o(this, k)));
-      const r = o(this, k) ? o(this, k).headers : o(this, V) ?? m(this, V, new Headers());
+      this.finalized && m(this, R, new Response(o(this, R).body, o(this, R)));
+      const r = o(this, R) ? o(this, R).headers : o(this, U) ?? m(this, U, new Headers());
       t2 === void 0 ? r.delete(e2) : s != null && s.append ? r.append(e2, t2) : r.set(e2, t2);
     });
     p(this, "status", (e2) => {
@@ -2176,12 +1250,12 @@ var Nt = (Ke = class {
       o(this, M) ?? m(this, M, /* @__PURE__ */ new Map()), o(this, M).set(e2, t2);
     });
     p(this, "get", (e2) => o(this, M) ? o(this, M).get(e2) : void 0);
-    p(this, "newResponse", (...e2) => h(this, Y, se).call(this, ...e2));
-    p(this, "body", (e2, t2, s) => h(this, Y, se).call(this, e2, t2, s));
-    p(this, "text", (e2, t2, s) => !o(this, V) && !o(this, ae) && !t2 && !s && !this.finalized ? new Response(e2) : h(this, Y, se).call(this, e2, t2, Ie(Dt, s)));
-    p(this, "json", (e2, t2, s) => h(this, Y, se).call(this, JSON.stringify(e2), t2, Ie("application/json", s)));
+    p(this, "newResponse", (...e2) => h(this, F, se).call(this, ...e2));
+    p(this, "body", (e2, t2, s) => h(this, F, se).call(this, e2, t2, s));
+    p(this, "text", (e2, t2, s) => !o(this, U) && !o(this, ae) && !t2 && !s && !this.finalized ? new Response(e2) : h(this, F, se).call(this, e2, t2, Ie(Dt, s)));
+    p(this, "json", (e2, t2, s) => h(this, F, se).call(this, JSON.stringify(e2), t2, Ie("application/json", s)));
     p(this, "html", (e2, t2, s) => {
-      const r = /* @__PURE__ */ __name2((i) => h(this, Y, se).call(this, i, t2, Ie("text/html; charset=UTF-8", s)), "r");
+      const r = /* @__PURE__ */ __name((i) => h(this, F, se).call(this, i, t2, Ie("text/html; charset=UTF-8", s)), "r");
       return typeof e2 == "object" ? nt(e2, zt.Stringify, false, {}).then(r) : r(e2);
     });
     p(this, "redirect", (e2, t2) => {
@@ -2189,10 +1263,10 @@ var Nt = (Ke = class {
       return this.header("Location", /[^\x00-\xFF]/.test(s) ? encodeURI(s) : s), this.newResponse(null, t2 ?? 302);
     });
     p(this, "notFound", () => (o(this, ne) ?? m(this, ne, () => new Response()), o(this, ne).call(this, this)));
-    m(this, ge, e), t && (m(this, j, t.executionCtx), this.env = t.env, m(this, ne, t.notFoundHandler), m(this, ve, t.path), m(this, be, t.matchResult));
+    m(this, xe, e), t && (m(this, j, t.executionCtx), this.env = t.env, m(this, ne, t.notFoundHandler), m(this, ye, t.path), m(this, ve, t.matchResult));
   }
   get req() {
-    return o(this, xe) ?? m(this, xe, new it(o(this, ge), o(this, ve), o(this, be))), o(this, xe);
+    return o(this, he) ?? m(this, he, new it(o(this, xe), o(this, ye), o(this, ve))), o(this, he);
   }
   get event() {
     if (o(this, j) && "respondWith" in o(this, j)) return o(this, j);
@@ -2203,24 +1277,24 @@ var Nt = (Ke = class {
     throw Error("This context has no ExecutionContext");
   }
   get res() {
-    return o(this, k) || m(this, k, new Response(null, { headers: o(this, V) ?? m(this, V, new Headers()) }));
+    return o(this, R) || m(this, R, new Response(null, { headers: o(this, U) ?? m(this, U, new Headers()) }));
   }
   set res(e) {
-    if (o(this, k) && e) {
+    if (o(this, R) && e) {
       e = new Response(e.body, e);
-      for (const [t, s] of o(this, k).headers.entries()) if (t !== "content-type") if (t === "set-cookie") {
-        const r = o(this, k).headers.getSetCookie();
+      for (const [t, s] of o(this, R).headers.entries()) if (t !== "content-type") if (t === "set-cookie") {
+        const r = o(this, R).headers.getSetCookie();
         e.headers.delete("set-cookie");
         for (const i of r) e.headers.append("set-cookie", i);
       } else e.headers.set(t, s);
     }
-    m(this, k, e), this.finalized = true;
+    m(this, R, e), this.finalized = true;
   }
   get var() {
     return o(this, M) ? Object.fromEntries(o(this, M)) : {};
   }
-}, ge = /* @__PURE__ */ new WeakMap(), xe = /* @__PURE__ */ new WeakMap(), M = /* @__PURE__ */ new WeakMap(), ae = /* @__PURE__ */ new WeakMap(), j = /* @__PURE__ */ new WeakMap(), k = /* @__PURE__ */ new WeakMap(), he = /* @__PURE__ */ new WeakMap(), oe = /* @__PURE__ */ new WeakMap(), ne = /* @__PURE__ */ new WeakMap(), V = /* @__PURE__ */ new WeakMap(), be = /* @__PURE__ */ new WeakMap(), ve = /* @__PURE__ */ new WeakMap(), Y = /* @__PURE__ */ new WeakSet(), se = /* @__PURE__ */ __name2(function(e, t, s) {
-  const r = o(this, k) ? new Headers(o(this, k).headers) : o(this, V) ?? new Headers();
+}, xe = /* @__PURE__ */ new WeakMap(), he = /* @__PURE__ */ new WeakMap(), M = /* @__PURE__ */ new WeakMap(), ae = /* @__PURE__ */ new WeakMap(), j = /* @__PURE__ */ new WeakMap(), R = /* @__PURE__ */ new WeakMap(), be = /* @__PURE__ */ new WeakMap(), oe = /* @__PURE__ */ new WeakMap(), ne = /* @__PURE__ */ new WeakMap(), U = /* @__PURE__ */ new WeakMap(), ve = /* @__PURE__ */ new WeakMap(), ye = /* @__PURE__ */ new WeakMap(), F = /* @__PURE__ */ new WeakSet(), se = /* @__PURE__ */ __name(function(e, t, s) {
+  const r = o(this, R) ? new Headers(o(this, R).headers) : o(this, U) ?? new Headers();
   if (typeof t == "object" && "headers" in t) {
     const a = t.headers instanceof Headers ? t.headers : new Headers(t.headers);
     for (const [n, d] of a) n.toLowerCase() === "set-cookie" ? r.append(n, d) : r.set(n, d);
@@ -2235,42 +1309,36 @@ var Nt = (Ke = class {
 }, "se"), Ke);
 var w = "ALL";
 var Lt = "all";
-var Yt = ["get", "post", "put", "delete", "options", "patch"];
+var Ft = ["get", "post", "put", "delete", "options", "patch"];
 var lt = "Can not add a route since the matcher is already built.";
 var dt = class extends Error {
   static {
     __name(this, "dt");
   }
-  static {
-    __name2(this, "dt");
-  }
 };
-var Ft = "__COMPOSED_HANDLER";
-var $t = /* @__PURE__ */ __name2((e) => e.text("404 Not Found", 404), "$t");
-var Ye = /* @__PURE__ */ __name2((e, t) => {
+var Yt = "__COMPOSED_HANDLER";
+var $t = /* @__PURE__ */ __name((e) => e.text("404 Not Found", 404), "$t");
+var Fe = /* @__PURE__ */ __name((e, t) => {
   if ("getResponse" in e) {
     const s = e.getResponse();
     return t.newResponse(s.body, s);
   }
   return console.error(e), t.text("Internal Server Error", 500);
-}, "Ye");
-var C;
-var A;
+}, "Fe");
+var q;
+var _;
 var ut;
 var T;
 var B;
 var Ae;
-var _e;
+var Se;
 var Be;
 var ct = (Be = class {
   static {
     __name(this, "Be");
   }
-  static {
-    __name2(this, "Be");
-  }
   constructor(t = {}) {
-    x(this, A);
+    x(this, _);
     p(this, "get");
     p(this, "post");
     p(this, "put");
@@ -2283,33 +1351,33 @@ var ct = (Be = class {
     p(this, "router");
     p(this, "getPath");
     p(this, "_basePath", "/");
-    x(this, C, "/");
+    x(this, q, "/");
     p(this, "routes", []);
     x(this, T, $t);
-    p(this, "errorHandler", Ye);
+    p(this, "errorHandler", Fe);
     p(this, "onError", (t2) => (this.errorHandler = t2, this));
     p(this, "notFound", (t2) => (m(this, T, t2), this));
-    p(this, "fetch", (t2, ...s) => h(this, A, _e).call(this, t2, s[1], s[0], t2.method));
+    p(this, "fetch", (t2, ...s) => h(this, _, Se).call(this, t2, s[1], s[0], t2.method));
     p(this, "request", (t2, s, r2, i2) => t2 instanceof Request ? this.fetch(s ? new Request(t2, s) : t2, r2, i2) : (t2 = t2.toString(), this.fetch(new Request(/^https?:\/\//.test(t2) ? t2 : `http://localhost${te("/", t2)}`, s), r2, i2)));
     p(this, "fire", () => {
       addEventListener("fetch", (t2) => {
-        t2.respondWith(h(this, A, _e).call(this, t2.request, t2, void 0, t2.request.method));
+        t2.respondWith(h(this, _, Se).call(this, t2.request, t2, void 0, t2.request.method));
       });
     });
-    [...Yt, Lt].forEach((a) => {
-      this[a] = (n, ...d) => (typeof n == "string" ? m(this, C, n) : h(this, A, B).call(this, a, o(this, C), n), d.forEach((l) => {
-        h(this, A, B).call(this, a, o(this, C), l);
+    [...Ft, Lt].forEach((a) => {
+      this[a] = (n, ...d) => (typeof n == "string" ? m(this, q, n) : h(this, _, B).call(this, a, o(this, q), n), d.forEach((l) => {
+        h(this, _, B).call(this, a, o(this, q), l);
       }), this);
     }), this.on = (a, n, ...d) => {
       for (const l of [n].flat()) {
-        m(this, C, l);
+        m(this, q, l);
         for (const c of [a].flat()) d.map((u) => {
-          h(this, A, B).call(this, c.toUpperCase(), o(this, C), u);
+          h(this, _, B).call(this, c.toUpperCase(), o(this, q), u);
         });
       }
       return this;
-    }, this.use = (a, ...n) => (typeof a == "string" ? m(this, C, a) : (m(this, C, "*"), n.unshift(a)), n.forEach((d) => {
-      h(this, A, B).call(this, w, o(this, C), d);
+    }, this.use = (a, ...n) => (typeof a == "string" ? m(this, q, a) : (m(this, q, "*"), n.unshift(a)), n.forEach((d) => {
+      h(this, _, B).call(this, w, o(this, q), d);
     }), this);
     const { strict: r, ...i } = t;
     Object.assign(this, i), this.getPath = r ?? true ? t.getPath ?? et : Mt;
@@ -2319,16 +1387,16 @@ var ct = (Be = class {
     return s.routes.map((i) => {
       var n;
       let a;
-      s.errorHandler === Ye ? a = i.handler : (a = /* @__PURE__ */ __name2(async (d, l) => (await Ne([], s.errorHandler)(d, () => i.handler(d, l))).res, "a"), a[Ft] = i.handler), h(n = r, A, B).call(n, i.method, i.path, a);
+      s.errorHandler === Fe ? a = i.handler : (a = /* @__PURE__ */ __name(async (d, l) => (await Ne([], s.errorHandler)(d, () => i.handler(d, l))).res, "a"), a[Yt] = i.handler), h(n = r, _, B).call(n, i.method, i.path, a);
     }), this;
   }
   basePath(t) {
-    const s = h(this, A, ut).call(this);
+    const s = h(this, _, ut).call(this);
     return s._basePath = te(this._basePath, t), s;
   }
   mount(t, s, r) {
     let i, a;
-    r && (typeof r == "function" ? a = r : (a = r.optionHandler, r.replaceRequest === false ? i = /* @__PURE__ */ __name2((l) => l, "i") : i = r.replaceRequest));
+    r && (typeof r == "function" ? a = r : (a = r.optionHandler, r.replaceRequest === false ? i = /* @__PURE__ */ __name((l) => l, "i") : i = r.replaceRequest));
     const n = a ? (l) => {
       const c = a(l);
       return Array.isArray(c) ? c : [c];
@@ -2347,25 +1415,25 @@ var ct = (Be = class {
         return f.pathname = f.pathname.slice(c) || "/", new Request(f, u);
       };
     })());
-    const d = /* @__PURE__ */ __name2(async (l, c) => {
+    const d = /* @__PURE__ */ __name(async (l, c) => {
       const u = await s(i(l.req.raw), ...n(l));
       if (u) return u;
       await c();
     }, "d");
-    return h(this, A, B).call(this, w, te(t, "*"), d), this;
+    return h(this, _, B).call(this, w, te(t, "*"), d), this;
   }
-}, C = /* @__PURE__ */ new WeakMap(), A = /* @__PURE__ */ new WeakSet(), ut = /* @__PURE__ */ __name2(function() {
+}, q = /* @__PURE__ */ new WeakMap(), _ = /* @__PURE__ */ new WeakSet(), ut = /* @__PURE__ */ __name(function() {
   const t = new ct({ router: this.router, getPath: this.getPath });
   return t.errorHandler = this.errorHandler, m(t, T, o(this, T)), t.routes = this.routes, t;
-}, "ut"), T = /* @__PURE__ */ new WeakMap(), B = /* @__PURE__ */ __name2(function(t, s, r) {
+}, "ut"), T = /* @__PURE__ */ new WeakMap(), B = /* @__PURE__ */ __name(function(t, s, r) {
   t = t.toUpperCase(), s = te(this._basePath, s);
   const i = { basePath: this._basePath, path: s, method: t, handler: r };
   this.router.add(t, s, [r, i]), this.routes.push(i);
-}, "B"), Ae = /* @__PURE__ */ __name2(function(t, s) {
+}, "B"), Ae = /* @__PURE__ */ __name(function(t, s) {
   if (t instanceof Error) return this.errorHandler(t, s);
   throw t;
-}, "Ae"), _e = /* @__PURE__ */ __name2(function(t, s, r, i) {
-  if (i === "HEAD") return (async () => new Response(null, await h(this, A, _e).call(this, t, s, r, "GET")))();
+}, "Ae"), Se = /* @__PURE__ */ __name(function(t, s, r, i) {
+  if (i === "HEAD") return (async () => new Response(null, await h(this, _, Se).call(this, t, s, r, "GET")))();
   const a = this.getPath(t, { env: r }), n = this.router.match(i, a), d = new Nt(t, { path: a, matchResult: n, env: r, executionCtx: s, notFoundHandler: o(this, T) });
   if (n[0].length === 1) {
     let c;
@@ -2374,9 +1442,9 @@ var ct = (Be = class {
         d.res = await o(this, T).call(this, d);
       });
     } catch (u) {
-      return h(this, A, Ae).call(this, u, d);
+      return h(this, _, Ae).call(this, u, d);
     }
-    return c instanceof Promise ? c.then((u) => u || (d.finalized ? d.res : o(this, T).call(this, d))).catch((u) => h(this, A, Ae).call(this, u, d)) : c ?? o(this, T).call(this, d);
+    return c instanceof Promise ? c.then((u) => u || (d.finalized ? d.res : o(this, T).call(this, d))).catch((u) => h(this, _, Ae).call(this, u, d)) : c ?? o(this, T).call(this, d);
   }
   const l = Ne(n[0], this.errorHandler, o(this, T));
   return (async () => {
@@ -2385,21 +1453,20 @@ var ct = (Be = class {
       if (!c.finalized) throw new Error("Context is not finalized. Did you forget to return a Response object or `await next()`?");
       return c.res;
     } catch (c) {
-      return h(this, A, Ae).call(this, c, d);
+      return h(this, _, Ae).call(this, c, d);
     }
   })();
-}, "_e"), Be);
+}, "Se"), Be);
 var Re = "[^/]+";
-var me = ".*";
-var pe = "(?:|/.*)";
+var pe = ".*";
+var ge = "(?:|/.*)";
 var re = Symbol();
 var Ht = new Set(".\\+*[^]$()");
 function Kt(e, t) {
-  return e.length === 1 ? t.length === 1 ? e < t ? -1 : 1 : -1 : t.length === 1 || e === me || e === pe ? 1 : t === me || t === pe ? -1 : e === Re ? 1 : t === Re ? -1 : e.length === t.length ? e < t ? -1 : 1 : t.length - e.length;
+  return e.length === 1 ? t.length === 1 ? e < t ? -1 : 1 : -1 : t.length === 1 || e === pe || e === ge ? 1 : t === pe || t === ge ? -1 : e === Re ? 1 : t === Re ? -1 : e.length === t.length ? e < t ? -1 : 1 : t.length - e.length;
 }
 __name(Kt, "Kt");
-__name2(Kt, "Kt");
-var U;
+var V;
 var W;
 var G;
 var Qe;
@@ -2407,35 +1474,32 @@ var Me = (Qe = class {
   static {
     __name(this, "Qe");
   }
-  static {
-    __name2(this, "Qe");
-  }
   constructor() {
-    x(this, U);
+    x(this, V);
     x(this, W);
     x(this, G, /* @__PURE__ */ Object.create(null));
   }
   insert(t, s, r, i, a) {
     if (t.length === 0) {
-      if (o(this, U) !== void 0) throw re;
+      if (o(this, V) !== void 0) throw re;
       if (a) return;
-      m(this, U, s);
+      m(this, V, s);
       return;
     }
-    const [n, ...d] = t, l = n === "*" ? d.length === 0 ? ["", "", me] : ["", "", Re] : n === "/*" ? ["", "", pe] : n.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);
+    const [n, ...d] = t, l = n === "*" ? d.length === 0 ? ["", "", pe] : ["", "", Re] : n === "/*" ? ["", "", ge] : n.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);
     let c;
     if (l) {
       const u = l[1];
       let f = l[2] || Re;
       if (u && l[2] && (f === ".*" || (f = f.replace(/^\((?!\?:)(?=[^)]+\)$)/, "(?:"), /\((?!\?:)/.test(f)))) throw re;
       if (c = o(this, G)[f], !c) {
-        if (Object.keys(o(this, G)).some((g) => g !== me && g !== pe)) throw re;
+        if (Object.keys(o(this, G)).some((g) => g !== pe && g !== ge)) throw re;
         if (a) return;
         c = o(this, G)[f] = new Me(), u !== "" && m(c, W, i.varIndex++);
       }
       !a && u !== "" && r.push([u, o(c, W)]);
     } else if (c = o(this, G)[n], !c) {
-      if (Object.keys(o(this, G)).some((u) => u.length > 1 && u !== me && u !== pe)) throw re;
+      if (Object.keys(o(this, G)).some((u) => u.length > 1 && u !== pe && u !== ge)) throw re;
       if (a) return;
       c = o(this, G)[n] = new Me();
     }
@@ -2446,22 +1510,19 @@ var Me = (Qe = class {
       const i = o(this, G)[r];
       return (typeof o(i, W) == "number" ? `(${r})@${o(i, W)}` : Ht.has(r) ? `\\${r}` : r) + i.buildRegExpStr();
     });
-    return typeof o(this, U) == "number" && s.unshift(`#${o(this, U)}`), s.length === 0 ? "" : s.length === 1 ? s[0] : "(?:" + s.join("|") + ")";
+    return typeof o(this, V) == "number" && s.unshift(`#${o(this, V)}`), s.length === 0 ? "" : s.length === 1 ? s[0] : "(?:" + s.join("|") + ")";
   }
-}, U = /* @__PURE__ */ new WeakMap(), W = /* @__PURE__ */ new WeakMap(), G = /* @__PURE__ */ new WeakMap(), Qe);
-var ke;
-var ye;
-var Ve;
-var Bt = (Ve = class {
+}, V = /* @__PURE__ */ new WeakMap(), W = /* @__PURE__ */ new WeakMap(), G = /* @__PURE__ */ new WeakMap(), Qe);
+var Ee;
+var we;
+var Ue;
+var Bt = (Ue = class {
   static {
-    __name(this, "Ve");
-  }
-  static {
-    __name2(this, "Ve");
+    __name(this, "Ue");
   }
   constructor() {
-    x(this, ke, { varIndex: 0 });
-    x(this, ye, new Me());
+    x(this, Ee, { varIndex: 0 });
+    x(this, we, new Me());
   }
   insert(e, t, s) {
     const r = [], i = [];
@@ -2480,50 +1541,48 @@ var Bt = (Ve = class {
         break;
       }
     }
-    return o(this, ye).insert(a, t, r, o(this, ke), s), r;
+    return o(this, we).insert(a, t, r, o(this, Ee), s), r;
   }
   buildRegExp() {
-    let e = o(this, ye).buildRegExpStr();
+    let e = o(this, we).buildRegExpStr();
     if (e === "") return [/^$/, [], []];
     let t = 0;
     const s = [], r = [];
     return e = e.replace(/#(\d+)|@(\d+)|\.\*\$/g, (i, a, n) => a !== void 0 ? (s[++t] = Number(a), "$()") : (n !== void 0 && (r[Number(n)] = ++t), "")), [new RegExp(`^${e}`), s, r];
   }
-}, ke = /* @__PURE__ */ new WeakMap(), ye = /* @__PURE__ */ new WeakMap(), Ve);
+}, Ee = /* @__PURE__ */ new WeakMap(), we = /* @__PURE__ */ new WeakMap(), Ue);
 var ft = [];
 var Qt = [/^$/, [], /* @__PURE__ */ Object.create(null)];
-var Se = /* @__PURE__ */ Object.create(null);
+var ke = /* @__PURE__ */ Object.create(null);
 function mt(e) {
-  return Se[e] ?? (Se[e] = new RegExp(e === "*" ? "" : `^${e.replace(/\/\*$|([.\\+*[^\]$()])/g, (t, s) => s ? `\\${s}` : "(?:|/.*)")}$`));
+  return ke[e] ?? (ke[e] = new RegExp(e === "*" ? "" : `^${e.replace(/\/\*$|([.\\+*[^\]$()])/g, (t, s) => s ? `\\${s}` : "(?:|/.*)")}$`));
 }
 __name(mt, "mt");
-__name2(mt, "mt");
-function Vt() {
-  Se = /* @__PURE__ */ Object.create(null);
+function Ut() {
+  ke = /* @__PURE__ */ Object.create(null);
 }
-__name(Vt, "Vt");
-__name2(Vt, "Vt");
-function Ut(e) {
+__name(Ut, "Ut");
+function Vt(e) {
   var c;
   const t = new Bt(), s = [];
   if (e.length === 0) return Qt;
   const r = e.map((u) => [!/\*|\/:/.test(u[0]), ...u]).sort(([u, f], [g, y]) => u ? 1 : g ? -1 : f.length - y.length), i = /* @__PURE__ */ Object.create(null);
   for (let u = 0, f = -1, g = r.length; u < g; u++) {
     const [y, E, b] = r[u];
-    y ? i[E] = [b.map(([R]) => [R, /* @__PURE__ */ Object.create(null)]), ft] : f++;
+    y ? i[E] = [b.map(([k]) => [k, /* @__PURE__ */ Object.create(null)]), ft] : f++;
     let v;
     try {
       v = t.insert(E, f, y);
-    } catch (R) {
-      throw R === re ? new dt(E) : R;
+    } catch (k) {
+      throw k === re ? new dt(E) : k;
     }
-    y || (s[f] = b.map(([R, Z]) => {
-      const ce = /* @__PURE__ */ Object.create(null);
+    y || (s[f] = b.map(([k, Z]) => {
+      const ue = /* @__PURE__ */ Object.create(null);
       for (Z -= 1; Z >= 0; Z--) {
-        const [I, qe] = v[Z];
-        ce[I] = qe;
+        const [I, Ce] = v[Z];
+        ue[I] = Ce;
       }
-      return [R, ce];
+      return [k, ue];
     }));
   }
   const [a, n, d] = t.buildRegExp();
@@ -2531,44 +1590,39 @@ function Ut(e) {
     const E = (c = s[u][g]) == null ? void 0 : c[1];
     if (!E) continue;
     const b = Object.keys(E);
-    for (let v = 0, R = b.length; v < R; v++) E[b[v]] = d[E[b[v]]];
+    for (let v = 0, k = b.length; v < k; v++) E[b[v]] = d[E[b[v]]];
   }
   const l = [];
   for (const u in n) l[u] = s[n[u]];
   return [a, l, i];
 }
-__name(Ut, "Ut");
-__name2(Ut, "Ut");
+__name(Vt, "Vt");
 function ee(e, t) {
   if (e) {
     for (const s of Object.keys(e).sort((r, i) => i.length - r.length)) if (mt(s).test(t)) return [...e[s]];
   }
 }
 __name(ee, "ee");
-__name2(ee, "ee");
-var F;
+var Y;
 var $;
 var de;
 var pt;
 var gt;
-var Ue;
-var Wt = (Ue = class {
+var Ve;
+var Wt = (Ve = class {
   static {
-    __name(this, "Ue");
-  }
-  static {
-    __name2(this, "Ue");
+    __name(this, "Ve");
   }
   constructor() {
     x(this, de);
     p(this, "name", "RegExpRouter");
-    x(this, F);
+    x(this, Y);
     x(this, $);
-    m(this, F, { [w]: /* @__PURE__ */ Object.create(null) }), m(this, $, { [w]: /* @__PURE__ */ Object.create(null) });
+    m(this, Y, { [w]: /* @__PURE__ */ Object.create(null) }), m(this, $, { [w]: /* @__PURE__ */ Object.create(null) });
   }
   add(e, t, s) {
     var d;
-    const r = o(this, F), i = o(this, $);
+    const r = o(this, Y), i = o(this, $);
     if (!r || !i) throw new Error(lt);
     r[e] || [r, i].forEach((l) => {
       l[e] = /* @__PURE__ */ Object.create(null), Object.keys(l[w]).forEach((c) => {
@@ -2600,7 +1654,7 @@ var Wt = (Ue = class {
     }
   }
   match(e, t) {
-    Vt();
+    Ut();
     const s = h(this, de, pt).call(this);
     return this.match = (r, i) => {
       const a = s[r] || s[w], n = a[2][i];
@@ -2611,28 +1665,25 @@ var Wt = (Ue = class {
       return [a[1][l], d];
     }, this.match(e, t);
   }
-}, F = /* @__PURE__ */ new WeakMap(), $ = /* @__PURE__ */ new WeakMap(), de = /* @__PURE__ */ new WeakSet(), pt = /* @__PURE__ */ __name2(function() {
+}, Y = /* @__PURE__ */ new WeakMap(), $ = /* @__PURE__ */ new WeakMap(), de = /* @__PURE__ */ new WeakSet(), pt = /* @__PURE__ */ __name(function() {
   const e = /* @__PURE__ */ Object.create(null);
-  return Object.keys(o(this, $)).concat(Object.keys(o(this, F))).forEach((t) => {
+  return Object.keys(o(this, $)).concat(Object.keys(o(this, Y))).forEach((t) => {
     e[t] || (e[t] = h(this, de, gt).call(this, t));
-  }), m(this, F, m(this, $, void 0)), e;
-}, "pt"), gt = /* @__PURE__ */ __name2(function(e) {
+  }), m(this, Y, m(this, $, void 0)), e;
+}, "pt"), gt = /* @__PURE__ */ __name(function(e) {
   const t = [];
   let s = e === w;
-  return [o(this, F), o(this, $)].forEach((r) => {
+  return [o(this, Y), o(this, $)].forEach((r) => {
     const i = r[e] ? Object.keys(r[e]).map((a) => [a, r[e][a]]) : [];
     i.length !== 0 ? (s || (s = true), t.push(...i)) : e !== w && t.push(...Object.keys(r[w]).map((a) => [a, r[w][a]]));
-  }), s ? Ut(t) : null;
-}, "gt"), Ue);
+  }), s ? Vt(t) : null;
+}, "gt"), Ve);
 var H;
 var O;
 var We;
 var Xt = (We = class {
   static {
     __name(this, "We");
-  }
-  static {
-    __name2(this, "We");
   }
   constructor(e) {
     p(this, "name", "SmartRouter");
@@ -2668,12 +1719,12 @@ var Xt = (We = class {
     return o(this, H)[0];
   }
 }, H = /* @__PURE__ */ new WeakMap(), O = /* @__PURE__ */ new WeakMap(), We);
-var fe = /* @__PURE__ */ Object.create(null);
+var me = /* @__PURE__ */ Object.create(null);
 var K;
 var S;
 var X;
 var le;
-var _;
+var A;
 var z;
 var Q;
 var Xe;
@@ -2681,16 +1732,13 @@ var xt = (Xe = class {
   static {
     __name(this, "Xe");
   }
-  static {
-    __name2(this, "Xe");
-  }
   constructor(e, t, s) {
     x(this, z);
     x(this, K);
     x(this, S);
     x(this, X);
     x(this, le, 0);
-    x(this, _, fe);
+    x(this, A, me);
     if (m(this, S, s || /* @__PURE__ */ Object.create(null)), m(this, K, []), e && t) {
       const r = /* @__PURE__ */ Object.create(null);
       r[e] = { handler: t, possibleKeys: [], score: 0 }, m(this, K, [r]);
@@ -2700,7 +1748,7 @@ var xt = (Xe = class {
   insert(e, t, s) {
     m(this, le, ++De(this, le)._);
     let r = this;
-    const i = Ct(t), a = [];
+    const i = qt(t), a = [];
     for (let n = 0, d = i.length; n < d; n++) {
       const l = i[n], c = i[n + 1], u = It(l, c), f = Array.isArray(u) ? u[0] : l;
       if (f in o(r, S)) {
@@ -2714,47 +1762,47 @@ var xt = (Xe = class {
   search(e, t) {
     var d;
     const s = [];
-    m(this, _, fe);
+    m(this, A, me);
     let i = [this];
     const a = Ze(t), n = [];
     for (let l = 0, c = a.length; l < c; l++) {
       const u = a[l], f = l === c - 1, g = [];
       for (let y = 0, E = i.length; y < E; y++) {
         const b = i[y], v = o(b, S)[u];
-        v && (m(v, _, o(b, _)), f ? (o(v, S)["*"] && s.push(...h(this, z, Q).call(this, o(v, S)["*"], e, o(b, _))), s.push(...h(this, z, Q).call(this, v, e, o(b, _)))) : g.push(v));
-        for (let R = 0, Z = o(b, X).length; R < Z; R++) {
-          const ce = o(b, X)[R], I = o(b, _) === fe ? {} : { ...o(b, _) };
-          if (ce === "*") {
+        v && (m(v, A, o(b, A)), f ? (o(v, S)["*"] && s.push(...h(this, z, Q).call(this, o(v, S)["*"], e, o(b, A))), s.push(...h(this, z, Q).call(this, v, e, o(b, A)))) : g.push(v));
+        for (let k = 0, Z = o(b, X).length; k < Z; k++) {
+          const ue = o(b, X)[k], I = o(b, A) === me ? {} : { ...o(b, A) };
+          if (ue === "*") {
             const N = o(b, S)["*"];
-            N && (s.push(...h(this, z, Q).call(this, N, e, o(b, _))), m(N, _, I), g.push(N));
+            N && (s.push(...h(this, z, Q).call(this, N, e, o(b, A))), m(N, A, I), g.push(N));
             continue;
           }
-          const [qe, Oe, ue] = ce;
-          if (!u && !(ue instanceof RegExp)) continue;
-          const P = o(b, S)[qe], yt = a.slice(l).join("/");
-          if (ue instanceof RegExp) {
-            const N = ue.exec(yt);
+          const [Ce, Oe, fe] = ue;
+          if (!u && !(fe instanceof RegExp)) continue;
+          const P = o(b, S)[Ce], yt = a.slice(l).join("/");
+          if (fe instanceof RegExp) {
+            const N = fe.exec(yt);
             if (N) {
-              if (I[Oe] = N[0], s.push(...h(this, z, Q).call(this, P, e, o(b, _), I)), Object.keys(o(P, S)).length) {
-                m(P, _, I);
-                const Ce = ((d = N[0].match(/\//)) == null ? void 0 : d.length) ?? 0;
-                (n[Ce] || (n[Ce] = [])).push(P);
+              if (I[Oe] = N[0], s.push(...h(this, z, Q).call(this, P, e, o(b, A), I)), Object.keys(o(P, S)).length) {
+                m(P, A, I);
+                const qe = ((d = N[0].match(/\//)) == null ? void 0 : d.length) ?? 0;
+                (n[qe] || (n[qe] = [])).push(P);
               }
               continue;
             }
           }
-          (ue === true || ue.test(u)) && (I[Oe] = u, f ? (s.push(...h(this, z, Q).call(this, P, e, I, o(b, _))), o(P, S)["*"] && s.push(...h(this, z, Q).call(this, o(P, S)["*"], e, I, o(b, _)))) : (m(P, _, I), g.push(P)));
+          (fe === true || fe.test(u)) && (I[Oe] = u, f ? (s.push(...h(this, z, Q).call(this, P, e, I, o(b, A))), o(P, S)["*"] && s.push(...h(this, z, Q).call(this, o(P, S)["*"], e, I, o(b, A)))) : (m(P, A, I), g.push(P)));
         }
       }
       i = g.concat(n.shift() ?? []);
     }
     return s.length > 1 && s.sort((l, c) => l.score - c.score), [s.map(({ handler: l, params: c }) => [l, c])];
   }
-}, K = /* @__PURE__ */ new WeakMap(), S = /* @__PURE__ */ new WeakMap(), X = /* @__PURE__ */ new WeakMap(), le = /* @__PURE__ */ new WeakMap(), _ = /* @__PURE__ */ new WeakMap(), z = /* @__PURE__ */ new WeakSet(), Q = /* @__PURE__ */ __name2(function(e, t, s, r) {
+}, K = /* @__PURE__ */ new WeakMap(), S = /* @__PURE__ */ new WeakMap(), X = /* @__PURE__ */ new WeakMap(), le = /* @__PURE__ */ new WeakMap(), A = /* @__PURE__ */ new WeakMap(), z = /* @__PURE__ */ new WeakSet(), Q = /* @__PURE__ */ __name(function(e, t, s, r) {
   const i = [];
   for (let a = 0, n = o(e, K).length; a < n; a++) {
     const d = o(e, K)[a], l = d[t] || d[w], c = {};
-    if (l !== void 0 && (l.params = /* @__PURE__ */ Object.create(null), i.push(l), s !== fe || r && r !== fe)) for (let u = 0, f = l.possibleKeys.length; u < f; u++) {
+    if (l !== void 0 && (l.params = /* @__PURE__ */ Object.create(null), i.push(l), s !== me || r && r !== me)) for (let u = 0, f = l.possibleKeys.length; u < f; u++) {
       const g = l.possibleKeys[u], y = c[l.score];
       l.params[g] = r != null && r[g] && !y ? r[g] : s[g] ?? (r == null ? void 0 : r[g]), c[l.score] = true;
     }
@@ -2766,9 +1814,6 @@ var Je;
 var Jt = (Je = class {
   static {
     __name(this, "Je");
-  }
-  static {
-    __name2(this, "Je");
   }
   constructor() {
     p(this, "name", "TrieRouter");
@@ -2791,14 +1836,11 @@ var ht = class extends ct {
   static {
     __name(this, "ht");
   }
-  static {
-    __name2(this, "ht");
-  }
   constructor(e = {}) {
     super(e), this.router = e.router ?? new Xt({ routers: [new Wt(), new Jt()] });
   }
 };
-var Zt = /* @__PURE__ */ __name2((e) => {
+var Zt = /* @__PURE__ */ __name((e) => {
   const s = { ...{ origin: "*", allowMethods: ["GET", "HEAD", "PUT", "POST", "DELETE", "PATCH"], allowHeaders: [], exposeHeaders: [] }, ...e }, r = /* @__PURE__ */ ((a) => typeof a == "string" ? a === "*" ? () => a : (n) => a === n ? n : null : typeof a == "function" ? a : (n) => a.includes(n) ? n : null)(s.origin), i = ((a) => typeof a == "function" ? a : Array.isArray(a) ? () => a : () => [])(s.allowMethods);
   return async function(n, d) {
     var u;
@@ -2806,7 +1848,6 @@ var Zt = /* @__PURE__ */ __name2((e) => {
       n.res.headers.set(f, g);
     }
     __name(l, "l");
-    __name2(l, "l");
     const c = await r(n.req.header("origin") || "", n);
     if (c && l("Access-Control-Allow-Origin", c), s.origin !== "*") {
       const f = n.req.header("Vary");
@@ -2827,15 +1868,15 @@ var Zt = /* @__PURE__ */ __name2((e) => {
   };
 }, "Zt");
 var es = /^\s*(?:text\/(?!event-stream(?:[;\s]|$))[^;\s]+|application\/(?:javascript|json|xml|xml-dtd|ecmascript|dart|postscript|rtf|tar|toml|vnd\.dart|vnd\.ms-fontobject|vnd\.ms-opentype|wasm|x-httpd-php|x-javascript|x-ns-proxy-autoconfig|x-sh|x-tar|x-virtualbox-hdd|x-virtualbox-ova|x-virtualbox-ovf|x-virtualbox-vbox|x-virtualbox-vdi|x-virtualbox-vhd|x-virtualbox-vmdk|x-www-form-urlencoded)|font\/(?:otf|ttf)|image\/(?:bmp|vnd\.adobe\.photoshop|vnd\.microsoft\.icon|vnd\.ms-dds|x-icon|x-ms-bmp)|message\/rfc822|model\/gltf-binary|x-shader\/x-fragment|x-shader\/x-vertex|[^;\s]+?\+(?:json|text|xml|yaml))(?:[;\s]|$)/i;
-var Fe = /* @__PURE__ */ __name2((e, t = ss) => {
+var Ye = /* @__PURE__ */ __name((e, t = ss) => {
   const s = /\.([a-zA-Z0-9]+?)$/, r = e.match(s);
   if (!r) return;
   let i = t[r[1]];
   return i && i.startsWith("text") && (i += "; charset=utf-8"), i;
-}, "Fe");
+}, "Ye");
 var ts = { aac: "audio/aac", avi: "video/x-msvideo", avif: "image/avif", av1: "video/av1", bin: "application/octet-stream", bmp: "image/bmp", css: "text/css", csv: "text/csv", eot: "application/vnd.ms-fontobject", epub: "application/epub+zip", gif: "image/gif", gz: "application/gzip", htm: "text/html", html: "text/html", ico: "image/x-icon", ics: "text/calendar", jpeg: "image/jpeg", jpg: "image/jpeg", js: "text/javascript", json: "application/json", jsonld: "application/ld+json", map: "application/json", mid: "audio/x-midi", midi: "audio/x-midi", mjs: "text/javascript", mp3: "audio/mpeg", mp4: "video/mp4", mpeg: "video/mpeg", oga: "audio/ogg", ogv: "video/ogg", ogx: "application/ogg", opus: "audio/opus", otf: "font/otf", pdf: "application/pdf", png: "image/png", rtf: "application/rtf", svg: "image/svg+xml", tif: "image/tiff", tiff: "image/tiff", ts: "video/mp2t", ttf: "font/ttf", txt: "text/plain", wasm: "application/wasm", webm: "video/webm", weba: "audio/webm", webmanifest: "application/manifest+json", webp: "image/webp", woff: "font/woff", woff2: "font/woff2", xhtml: "application/xhtml+xml", xml: "application/xml", zip: "application/zip", "3gp": "video/3gpp", "3g2": "video/3gpp2", gltf: "model/gltf+json", glb: "model/gltf-binary" };
 var ss = ts;
-var rs = /* @__PURE__ */ __name2((...e) => {
+var rs = /* @__PURE__ */ __name((...e) => {
   let t = e.filter((i) => i !== "").join("/");
   t = t.replace(new RegExp("(?<=\\/)\\/+", "g"), "");
   const s = t.split("/"), r = [];
@@ -2845,7 +1886,7 @@ var rs = /* @__PURE__ */ __name2((...e) => {
 var bt = { br: ".br", zstd: ".zst", gzip: ".gz" };
 var is = Object.keys(bt);
 var as = "index.html";
-var os = /* @__PURE__ */ __name2((e) => {
+var os = /* @__PURE__ */ __name((e) => {
   const t = e.root ?? "./", s = e.path, r = e.join ?? rs;
   return async (i, a) => {
     var u, f, g, y;
@@ -2863,14 +1904,14 @@ var os = /* @__PURE__ */ __name2((e) => {
     let c = await l(d, i);
     if (c instanceof Response) return i.newResponse(c.body, c);
     if (c) {
-      const E = e.mimes && Fe(d, e.mimes) || Fe(d);
+      const E = e.mimes && Ye(d, e.mimes) || Ye(d);
       if (i.header("Content-Type", E || "application/octet-stream"), e.precompressed && (!E || es.test(E))) {
         const b = new Set((f = i.req.header("Accept-Encoding")) == null ? void 0 : f.split(",").map((v) => v.trim()));
         for (const v of is) {
           if (!b.has(v)) continue;
-          const R = await l(d + bt[v], i);
-          if (R) {
-            c = R, i.header("Content-Encoding", v), i.header("Vary", "Accept-Encoding", { append: true });
+          const k = await l(d + bt[v], i);
+          if (k) {
+            c = k, i.header("Content-Encoding", v), i.header("Vary", "Accept-Encoding", { append: true });
             break;
           }
         }
@@ -2880,7 +1921,7 @@ var os = /* @__PURE__ */ __name2((e) => {
     await ((y = e.onNotFound) == null ? void 0 : y.call(e, d, i)), await a();
   };
 }, "os");
-var ns = /* @__PURE__ */ __name2(async (e, t) => {
+var ns = /* @__PURE__ */ __name(async (e, t) => {
   let s;
   t && t.manifest ? typeof t.manifest == "string" ? s = JSON.parse(t.manifest) : s = t.manifest : typeof __STATIC_CONTENT_MANIFEST == "string" ? s = JSON.parse(__STATIC_CONTENT_MANIFEST) : s = __STATIC_CONTENT_MANIFEST;
   let r;
@@ -2890,14 +1931,14 @@ var ns = /* @__PURE__ */ __name2(async (e, t) => {
   const a = await r.get(i, { type: "stream" });
   return a || null;
 }, "ns");
-var ls = /* @__PURE__ */ __name2((e) => async function(s, r) {
-  return os({ ...e, getContent: /* @__PURE__ */ __name2(async (a) => ns(a, { manifest: e.manifest, namespace: e.namespace ? e.namespace : s.env ? s.env.__STATIC_CONTENT : void 0 }), "getContent") })(s, r);
+var ls = /* @__PURE__ */ __name((e) => async function(s, r) {
+  return os({ ...e, getContent: /* @__PURE__ */ __name(async (a) => ns(a, { manifest: e.manifest, namespace: e.namespace ? e.namespace : s.env ? s.env.__STATIC_CONTENT : void 0 }), "getContent") })(s, r);
 }, "ls");
-var ds = /* @__PURE__ */ __name2((e) => ls(e), "ds");
-var Ee = new ht();
-Ee.use("/api/*", Zt());
-Ee.use("/static/*", ds({ root: "./public" }));
-Ee.get("/", (e) => e.html(`
+var ds = /* @__PURE__ */ __name((e) => ls(e), "ds");
+var ce = new ht();
+ce.use("/api/*", Zt());
+ce.use("/static/*", ds({ root: "./public" }));
+ce.get("/", (e) => e.html(`
     <!DOCTYPE html>
     <html lang="ru">
     <head>
@@ -4246,6 +3287,9 @@ for query in queries:
                     <a href="#overview" class="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
                         <i class="fas fa-redo mr-2"></i>\u041F\u0440\u043E\u0439\u0442\u0438 \u0435\u0449\u0435 \u0440\u0430\u0437
                     </a>
+                    <a href="/vector_databases_enhanced_guide" class="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-database mr-2"></i>\u0412\u0435\u043A\u0442\u043E\u0440\u043D\u044B\u0435 \u0411\u0414: \u041F\u043E\u0434\u0440\u043E\u0431\u043D\u043E
+                    </a>
                     <button onclick="RAGSeminar.downloadCode(getFullSeminarNotes(), 'rag-seminar-notes.txt')" 
                             class="bg-purple-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-purple-700 transition-colors">
                         <i class="fas fa-download mr-2"></i>\u0421\u043A\u0430\u0447\u0430\u0442\u044C \u043A\u043E\u043D\u0441\u043F\u0435\u043A\u0442
@@ -4286,6 +3330,7 @@ for query in queries:
                             <li><a href="#theory" class="hover:text-white transition-colors">\u0422\u0435\u043E\u0440\u0438\u044F</a></li>
                             <li><a href="#practice" class="hover:text-white transition-colors">\u041F\u0440\u0430\u043A\u0442\u0438\u043A\u0430</a></li>
                             <li><a href="#quiz" class="hover:text-white transition-colors">\u041A\u0432\u0438\u0437</a></li>
+                            <li><a href="/vector_databases_enhanced_guide" class="hover:text-white transition-colors text-blue-400">\u{1F4DA} \u0412\u0435\u043A\u0442\u043E\u0440\u043D\u044B\u0435 \u0411\u0414: \u041F\u043E\u0434\u0440\u043E\u0431\u043D\u043E</a></li>
                         </ul>
                     </div>
                     
@@ -5574,8 +4619,74 @@ if __name__ == "__main__":
     </body>
     </html>
   `));
+ce.get("/vector_databases_enhanced_guide.html", (e) => e.redirect("/vector_databases_enhanced_guide"));
+ce.get("/vector_databases_enhanced_guide", async (e) => e.html(`<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>\u{1F4DA} \u041F\u043E\u043B\u043D\u043E\u0435 \u0440\u0443\u043A\u043E\u0432\u043E\u0434\u0441\u0442\u0432\u043E \u043F\u043E \u0432\u0435\u043A\u0442\u043E\u0440\u043D\u044B\u043C \u0431\u0430\u0437\u0430\u043C \u0434\u0430\u043D\u043D\u044B\u0445 | FAISS, HNSW, Annoy</title>
+    <script src="https://cdn.tailwindcss.com"><\/script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .section-padding { padding: 4rem 1rem; }
+        .card-shadow { box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .code-block { 
+            background: #1a202c; color: #e2e8f0; border-radius: 8px; padding: 16px; 
+            font-family: 'Courier New', monospace; font-size: 14px; line-height: 1.4; overflow-x: auto; 
+        }
+        .timeline-item { position: relative; padding-left: 2rem; margin-bottom: 2rem; }
+        .timeline-item::before { 
+            content: ''; position: absolute; left: 0; top: 0.5rem; width: 1rem; height: 1rem; 
+            background: #4f46e5; border-radius: 50%; 
+        }
+        .fact-box { border-left: 4px solid #10b981; background: #f0fdf4; padding: 1rem; margin: 1rem 0; }
+        .warning-box { border-left: 4px solid #f59e0b; background: #fffbeb; padding: 1rem; margin: 1rem 0; }
+        .nav-sticky { position: sticky; top: 20px; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <header class="gradient-bg text-white">
+        <div class="container mx-auto px-4 py-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <i class="fas fa-database text-4xl mr-4"></i>
+                    <div>
+                        <h1 class="text-4xl font-bold">\u0412\u0435\u043A\u0442\u043E\u0440\u043D\u044B\u0435 \u0431\u0430\u0437\u044B \u0434\u0430\u043D\u043D\u044B\u0445</h1>
+                        <p class="text-xl opacity-90">\u041F\u043E\u043B\u043D\u043E\u0435 \u0440\u0443\u043A\u043E\u0432\u043E\u0434\u0441\u0442\u0432\u043E \u0434\u043B\u044F \u0441\u0442\u0443\u0434\u0435\u043D\u0442\u043E\u0432 | 2024-2025</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-4">
+                    <a href="/" class="bg-white bg-opacity-20 px-4 py-2 rounded-lg hover:bg-opacity-30 transition-colors">
+                        <i class="fas fa-home mr-2"></i>\u0413\u043B\u0430\u0432\u043D\u0430\u044F
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded-xl p-8 card-shadow">
+            <h2 class="text-3xl font-bold mb-6 text-center">\u{1F6A7} \u0421\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u0432 \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0435</h2>
+            <p class="text-lg text-center text-gray-600 mb-6">
+                \u041F\u043E\u0434\u0440\u043E\u0431\u043D\u043E\u0435 \u0440\u0443\u043A\u043E\u0432\u043E\u0434\u0441\u0442\u0432\u043E \u043F\u043E \u0432\u0435\u043A\u0442\u043E\u0440\u043D\u044B\u043C \u0431\u0430\u0437\u0430\u043C \u0434\u0430\u043D\u043D\u044B\u0445 \u0441 \u0443\u043B\u0443\u0447\u0448\u0435\u043D\u043D\u044B\u043C \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u043D\u0438\u0435\u043C \u0441\u043A\u043E\u0440\u043E \u0431\u0443\u0434\u0435\u0442 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E.
+                \u0410 \u043F\u043E\u043A\u0430 \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043E\u0437\u043D\u0430\u043A\u043E\u043C\u0438\u0442\u044C\u0441\u044F \u0441 \u0431\u0430\u0437\u043E\u0432\u044B\u043C \u0440\u0443\u043A\u043E\u0432\u043E\u0434\u0441\u0442\u0432\u043E\u043C.
+            </p>
+            <div class="text-center space-x-4">
+                <a href="/" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors inline-block">
+                    <i class="fas fa-home mr-2"></i>\u0413\u043B\u0430\u0432\u043D\u0430\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430
+                </a>
+                <a href="/vector_databases_guide.html" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors inline-block">
+                    <i class="fas fa-book mr-2"></i>\u0411\u0430\u0437\u043E\u0432\u043E\u0435 \u0440\u0443\u043A\u043E\u0432\u043E\u0434\u0441\u0442\u0432\u043E
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>`));
 var $e = new ht();
-var cs = Object.assign({ "/src/index.tsx": Ee });
+var cs = Object.assign({ "/src/index.tsx": ce });
 var vt = false;
 for (const [, e] of Object.entries(cs)) e && ($e.all("*", (t) => {
   let s;
@@ -5593,9 +4704,11 @@ for (const [, e] of Object.entries(cs)) e && ($e.all("*", (t) => {
   return e.fetch(t.req.raw, t.env, s);
 }), vt = true);
 if (!vt) throw new Error("Can't import modules from ['/src/index.ts','/src/index.tsx','/app/server.ts']");
-var drainBody = /* @__PURE__ */ __name2(async (request, env22, _ctx, middlewareCtx) => {
+
+// ../node_modules/wrangler/templates/middleware/middleware-ensure-req-body-drained.ts
+var drainBody = /* @__PURE__ */ __name(async (request, env2, _ctx, middlewareCtx) => {
   try {
-    return await middlewareCtx.next(request, env22);
+    return await middlewareCtx.next(request, env2);
   } finally {
     try {
       if (request.body !== null && !request.bodyUsed) {
@@ -5609,6 +4722,8 @@ var drainBody = /* @__PURE__ */ __name2(async (request, env22, _ctx, middlewareC
   }
 }, "drainBody");
 var middleware_ensure_req_body_drained_default = drainBody;
+
+// ../node_modules/wrangler/templates/middleware/middleware-miniflare3-json-error.ts
 function reduceError(e) {
   return {
     name: e?.name,
@@ -5618,31 +4733,33 @@ function reduceError(e) {
   };
 }
 __name(reduceError, "reduceError");
-__name2(reduceError, "reduceError");
-var jsonError = /* @__PURE__ */ __name2(async (request, env22, _ctx, middlewareCtx) => {
+var jsonError = /* @__PURE__ */ __name(async (request, env2, _ctx, middlewareCtx) => {
   try {
-    return await middlewareCtx.next(request, env22);
+    return await middlewareCtx.next(request, env2);
   } catch (e) {
-    const error32 = reduceError(e);
-    return Response.json(error32, {
+    const error3 = reduceError(e);
+    return Response.json(error3, {
       status: 500,
       headers: { "MF-Experimental-Error-Stack": "true" }
     });
   }
 }, "jsonError");
 var middleware_miniflare3_json_error_default = jsonError;
+
+// ../.wrangler/tmp/bundle-zxMs4N/middleware-insertion-facade.js
 var __INTERNAL_WRANGLER_MIDDLEWARE__ = [
   middleware_ensure_req_body_drained_default,
   middleware_miniflare3_json_error_default
 ];
 var middleware_insertion_facade_default = $e;
+
+// ../node_modules/wrangler/templates/middleware/common.ts
 var __facade_middleware__ = [];
 function __facade_register__(...args) {
   __facade_middleware__.push(...args.flat());
 }
 __name(__facade_register__, "__facade_register__");
-__name2(__facade_register__, "__facade_register__");
-function __facade_invokeChain__(request, env22, ctx, dispatch, middlewareChain) {
+function __facade_invokeChain__(request, env2, ctx, dispatch, middlewareChain) {
   const [head, ...tail] = middlewareChain;
   const middlewareCtx = {
     dispatch,
@@ -5650,29 +4767,26 @@ function __facade_invokeChain__(request, env22, ctx, dispatch, middlewareChain) 
       return __facade_invokeChain__(newRequest, newEnv, ctx, dispatch, tail);
     }
   };
-  return head(request, env22, ctx, middlewareCtx);
+  return head(request, env2, ctx, middlewareCtx);
 }
 __name(__facade_invokeChain__, "__facade_invokeChain__");
-__name2(__facade_invokeChain__, "__facade_invokeChain__");
-function __facade_invoke__(request, env22, ctx, dispatch, finalMiddleware) {
-  return __facade_invokeChain__(request, env22, ctx, dispatch, [
+function __facade_invoke__(request, env2, ctx, dispatch, finalMiddleware) {
+  return __facade_invokeChain__(request, env2, ctx, dispatch, [
     ...__facade_middleware__,
     finalMiddleware
   ]);
 }
 __name(__facade_invoke__, "__facade_invoke__");
-__name2(__facade_invoke__, "__facade_invoke__");
+
+// ../.wrangler/tmp/bundle-zxMs4N/middleware-loader.entry.ts
 var __Facade_ScheduledController__ = class ___Facade_ScheduledController__ {
-  static {
-    __name(this, "___Facade_ScheduledController__");
-  }
   constructor(scheduledTime, cron, noRetry) {
     this.scheduledTime = scheduledTime;
     this.cron = cron;
     this.#noRetry = noRetry;
   }
   static {
-    __name2(this, "__Facade_ScheduledController__");
+    __name(this, "__Facade_ScheduledController__");
   }
   #noRetry;
   noRetry() {
@@ -5689,16 +4803,16 @@ function wrapExportedHandler(worker) {
   for (const middleware of __INTERNAL_WRANGLER_MIDDLEWARE__) {
     __facade_register__(middleware);
   }
-  const fetchDispatcher = /* @__PURE__ */ __name2(function(request, env22, ctx) {
+  const fetchDispatcher = /* @__PURE__ */ __name(function(request, env2, ctx) {
     if (worker.fetch === void 0) {
       throw new Error("Handler does not export a fetch() function.");
     }
-    return worker.fetch(request, env22, ctx);
+    return worker.fetch(request, env2, ctx);
   }, "fetchDispatcher");
   return {
     ...worker,
-    fetch(request, env22, ctx) {
-      const dispatcher = /* @__PURE__ */ __name2(function(type, init) {
+    fetch(request, env2, ctx) {
+      const dispatcher = /* @__PURE__ */ __name(function(type, init) {
         if (type === "scheduled" && worker.scheduled !== void 0) {
           const controller = new __Facade_ScheduledController__(
             Date.now(),
@@ -5706,15 +4820,14 @@ function wrapExportedHandler(worker) {
             () => {
             }
           );
-          return worker.scheduled(controller, env22, ctx);
+          return worker.scheduled(controller, env2, ctx);
         }
       }, "dispatcher");
-      return __facade_invoke__(request, env22, ctx, dispatcher, fetchDispatcher);
+      return __facade_invoke__(request, env2, ctx, dispatcher, fetchDispatcher);
     }
   };
 }
 __name(wrapExportedHandler, "wrapExportedHandler");
-__name2(wrapExportedHandler, "wrapExportedHandler");
 function wrapWorkerEntrypoint(klass) {
   if (__INTERNAL_WRANGLER_MIDDLEWARE__ === void 0 || __INTERNAL_WRANGLER_MIDDLEWARE__.length === 0) {
     return klass;
@@ -5723,15 +4836,15 @@ function wrapWorkerEntrypoint(klass) {
     __facade_register__(middleware);
   }
   return class extends klass {
-    #fetchDispatcher = /* @__PURE__ */ __name2((request, env22, ctx) => {
-      this.env = env22;
+    #fetchDispatcher = /* @__PURE__ */ __name((request, env2, ctx) => {
+      this.env = env2;
       this.ctx = ctx;
       if (super.fetch === void 0) {
         throw new Error("Entrypoint class does not define a fetch() function.");
       }
       return super.fetch(request);
     }, "#fetchDispatcher");
-    #dispatcher = /* @__PURE__ */ __name2((type, init) => {
+    #dispatcher = /* @__PURE__ */ __name((type, init) => {
       if (type === "scheduled" && super.scheduled !== void 0) {
         const controller = new __Facade_ScheduledController__(
           Date.now(),
@@ -5754,7 +4867,6 @@ function wrapWorkerEntrypoint(klass) {
   };
 }
 __name(wrapWorkerEntrypoint, "wrapWorkerEntrypoint");
-__name2(wrapWorkerEntrypoint, "wrapWorkerEntrypoint");
 var WRAPPED_ENTRY;
 if (typeof middleware_insertion_facade_default === "object") {
   WRAPPED_ENTRY = wrapExportedHandler(middleware_insertion_facade_default);
@@ -5762,232 +4874,8 @@ if (typeof middleware_insertion_facade_default === "object") {
   WRAPPED_ENTRY = wrapWorkerEntrypoint(middleware_insertion_facade_default);
 }
 var middleware_loader_entry_default = WRAPPED_ENTRY;
-
-// node_modules/wrangler/templates/pages-dev-util.ts
-function isRoutingRuleMatch(pathname, routingRule) {
-  if (!pathname) {
-    throw new Error("Pathname is undefined.");
-  }
-  if (!routingRule) {
-    throw new Error("Routing rule is undefined.");
-  }
-  const ruleRegExp = transformRoutingRuleToRegExp(routingRule);
-  return pathname.match(ruleRegExp) !== null;
-}
-__name(isRoutingRuleMatch, "isRoutingRuleMatch");
-function transformRoutingRuleToRegExp(rule) {
-  let transformedRule;
-  if (rule === "/" || rule === "/*") {
-    transformedRule = rule;
-  } else if (rule.endsWith("/*")) {
-    transformedRule = `${rule.substring(0, rule.length - 2)}(/*)?`;
-  } else if (rule.endsWith("/")) {
-    transformedRule = `${rule.substring(0, rule.length - 1)}(/)?`;
-  } else if (rule.endsWith("*")) {
-    transformedRule = rule;
-  } else {
-    transformedRule = `${rule}(/)?`;
-  }
-  transformedRule = `^${transformedRule.replaceAll(/\./g, "\\.").replaceAll(/\*/g, ".*")}$`;
-  return new RegExp(transformedRule);
-}
-__name(transformRoutingRuleToRegExp, "transformRoutingRuleToRegExp");
-
-// .wrangler/tmp/pages-wjyXW2/0ki41fql1exl.js
-var define_ROUTES_default = { version: 1, include: ["/*"], exclude: ["/DEPLOYMENT.md", "/LICENSE", "/README.md", "/_worker.js.map", "/extract_html.py", "/index.html", "/rag_advanced.py", "/rag_example_formatted.py", "/rag_index.html", "/rag_pure_python.html", "/rag_pyodide_demo.html", "/rag_web_demo.html", "/seminar_yandex.html", "/static/*", "/vector_databases_guide.html"] };
-var routes = define_ROUTES_default;
-var pages_dev_pipeline_default = {
-  fetch(request, env3, context3) {
-    const { pathname } = new URL(request.url);
-    for (const exclude of routes.exclude) {
-      if (isRoutingRuleMatch(pathname, exclude)) {
-        return env3.ASSETS.fetch(request);
-      }
-    }
-    for (const include of routes.include) {
-      if (isRoutingRuleMatch(pathname, include)) {
-        const workerAsHandler = middleware_loader_entry_default;
-        if (workerAsHandler.fetch === void 0) {
-          throw new TypeError("Entry point missing `fetch` handler");
-        }
-        return workerAsHandler.fetch(request, env3, context3);
-      }
-    }
-    return env3.ASSETS.fetch(request);
-  }
-};
-
-// node_modules/wrangler/templates/middleware/middleware-ensure-req-body-drained.ts
-var drainBody2 = /* @__PURE__ */ __name(async (request, env3, _ctx, middlewareCtx) => {
-  try {
-    return await middlewareCtx.next(request, env3);
-  } finally {
-    try {
-      if (request.body !== null && !request.bodyUsed) {
-        const reader = request.body.getReader();
-        while (!(await reader.read()).done) {
-        }
-      }
-    } catch (e) {
-      console.error("Failed to drain the unused request body.", e);
-    }
-  }
-}, "drainBody");
-var middleware_ensure_req_body_drained_default2 = drainBody2;
-
-// node_modules/wrangler/templates/middleware/middleware-miniflare3-json-error.ts
-function reduceError2(e) {
-  return {
-    name: e?.name,
-    message: e?.message ?? String(e),
-    stack: e?.stack,
-    cause: e?.cause === void 0 ? void 0 : reduceError2(e.cause)
-  };
-}
-__name(reduceError2, "reduceError");
-var jsonError2 = /* @__PURE__ */ __name(async (request, env3, _ctx, middlewareCtx) => {
-  try {
-    return await middlewareCtx.next(request, env3);
-  } catch (e) {
-    const error4 = reduceError2(e);
-    return Response.json(error4, {
-      status: 500,
-      headers: { "MF-Experimental-Error-Stack": "true" }
-    });
-  }
-}, "jsonError");
-var middleware_miniflare3_json_error_default2 = jsonError2;
-
-// .wrangler/tmp/bundle-pvgMt1/middleware-insertion-facade.js
-var __INTERNAL_WRANGLER_MIDDLEWARE__2 = [
-  middleware_ensure_req_body_drained_default2,
-  middleware_miniflare3_json_error_default2
-];
-var middleware_insertion_facade_default2 = pages_dev_pipeline_default;
-
-// node_modules/wrangler/templates/middleware/common.ts
-var __facade_middleware__2 = [];
-function __facade_register__2(...args) {
-  __facade_middleware__2.push(...args.flat());
-}
-__name(__facade_register__2, "__facade_register__");
-function __facade_invokeChain__2(request, env3, ctx, dispatch, middlewareChain) {
-  const [head, ...tail] = middlewareChain;
-  const middlewareCtx = {
-    dispatch,
-    next(newRequest, newEnv) {
-      return __facade_invokeChain__2(newRequest, newEnv, ctx, dispatch, tail);
-    }
-  };
-  return head(request, env3, ctx, middlewareCtx);
-}
-__name(__facade_invokeChain__2, "__facade_invokeChain__");
-function __facade_invoke__2(request, env3, ctx, dispatch, finalMiddleware) {
-  return __facade_invokeChain__2(request, env3, ctx, dispatch, [
-    ...__facade_middleware__2,
-    finalMiddleware
-  ]);
-}
-__name(__facade_invoke__2, "__facade_invoke__");
-
-// .wrangler/tmp/bundle-pvgMt1/middleware-loader.entry.ts
-var __Facade_ScheduledController__2 = class ___Facade_ScheduledController__2 {
-  constructor(scheduledTime, cron, noRetry) {
-    this.scheduledTime = scheduledTime;
-    this.cron = cron;
-    this.#noRetry = noRetry;
-  }
-  static {
-    __name(this, "__Facade_ScheduledController__");
-  }
-  #noRetry;
-  noRetry() {
-    if (!(this instanceof ___Facade_ScheduledController__2)) {
-      throw new TypeError("Illegal invocation");
-    }
-    this.#noRetry();
-  }
-};
-function wrapExportedHandler2(worker) {
-  if (__INTERNAL_WRANGLER_MIDDLEWARE__2 === void 0 || __INTERNAL_WRANGLER_MIDDLEWARE__2.length === 0) {
-    return worker;
-  }
-  for (const middleware of __INTERNAL_WRANGLER_MIDDLEWARE__2) {
-    __facade_register__2(middleware);
-  }
-  const fetchDispatcher = /* @__PURE__ */ __name(function(request, env3, ctx) {
-    if (worker.fetch === void 0) {
-      throw new Error("Handler does not export a fetch() function.");
-    }
-    return worker.fetch(request, env3, ctx);
-  }, "fetchDispatcher");
-  return {
-    ...worker,
-    fetch(request, env3, ctx) {
-      const dispatcher = /* @__PURE__ */ __name(function(type, init) {
-        if (type === "scheduled" && worker.scheduled !== void 0) {
-          const controller = new __Facade_ScheduledController__2(
-            Date.now(),
-            init.cron ?? "",
-            () => {
-            }
-          );
-          return worker.scheduled(controller, env3, ctx);
-        }
-      }, "dispatcher");
-      return __facade_invoke__2(request, env3, ctx, dispatcher, fetchDispatcher);
-    }
-  };
-}
-__name(wrapExportedHandler2, "wrapExportedHandler");
-function wrapWorkerEntrypoint2(klass) {
-  if (__INTERNAL_WRANGLER_MIDDLEWARE__2 === void 0 || __INTERNAL_WRANGLER_MIDDLEWARE__2.length === 0) {
-    return klass;
-  }
-  for (const middleware of __INTERNAL_WRANGLER_MIDDLEWARE__2) {
-    __facade_register__2(middleware);
-  }
-  return class extends klass {
-    #fetchDispatcher = /* @__PURE__ */ __name((request, env3, ctx) => {
-      this.env = env3;
-      this.ctx = ctx;
-      if (super.fetch === void 0) {
-        throw new Error("Entrypoint class does not define a fetch() function.");
-      }
-      return super.fetch(request);
-    }, "#fetchDispatcher");
-    #dispatcher = /* @__PURE__ */ __name((type, init) => {
-      if (type === "scheduled" && super.scheduled !== void 0) {
-        const controller = new __Facade_ScheduledController__2(
-          Date.now(),
-          init.cron ?? "",
-          () => {
-          }
-        );
-        return super.scheduled(controller);
-      }
-    }, "#dispatcher");
-    fetch(request) {
-      return __facade_invoke__2(
-        request,
-        this.env,
-        this.ctx,
-        this.#dispatcher,
-        this.#fetchDispatcher
-      );
-    }
-  };
-}
-__name(wrapWorkerEntrypoint2, "wrapWorkerEntrypoint");
-var WRAPPED_ENTRY2;
-if (typeof middleware_insertion_facade_default2 === "object") {
-  WRAPPED_ENTRY2 = wrapExportedHandler2(middleware_insertion_facade_default2);
-} else if (typeof middleware_insertion_facade_default2 === "function") {
-  WRAPPED_ENTRY2 = wrapWorkerEntrypoint2(middleware_insertion_facade_default2);
-}
-var middleware_loader_entry_default2 = WRAPPED_ENTRY2;
 export {
-  __INTERNAL_WRANGLER_MIDDLEWARE__2 as __INTERNAL_WRANGLER_MIDDLEWARE__,
-  middleware_loader_entry_default2 as default
+  __INTERNAL_WRANGLER_MIDDLEWARE__,
+  middleware_loader_entry_default as default
 };
-//# sourceMappingURL=0ki41fql1exl.js.map
+//# sourceMappingURL=bundledWorker-0.5392857642760269.mjs.map
