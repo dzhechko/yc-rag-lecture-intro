@@ -40,6 +40,9 @@ dist/
 build/
 *.egg-info/
 
+# Wrangler temporary files
+.wrangler/
+
 # PM2
 .pm2/
 pids/
