@@ -169,10 +169,12 @@ MIT License - свободное использование для образо�
 - **Status**: ✅ Active и полностью функциональный
 - **JavaScript**: ✅ Все функции работают корректно
 
-### Cloudflare Pages (архив)
-Предыдущее развертывание:
+### Cloudflare Pages (Production) ✅
+Текущее развертывание на production:
 - **Production URL**: https://rag-sandbox-guide.pages.dev
-- **Status**: 📦 Archived
+- **Latest Deploy**: https://ae6a73ee.rag-sandbox-guide.pages.dev
+- **Deploy Date**: 17 сентября 2025, 05:55 UTC
+- **Status**: 🟢 Active and fully functional
 
 ### Локальное развертывание
 ```bash
