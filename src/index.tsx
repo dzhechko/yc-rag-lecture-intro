@@ -2948,6 +2948,185 @@ app.get('/vector_databases_enhanced_guide', (c) => {
                     </div>
                 </section>
 
+                <!-- RAG Architecture -->
+                <section id="rag-architecture" class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 card-shadow">
+                    <h2 class="text-3xl font-bold mb-6">
+                        <i class="fas fa-sitemap mr-3 text-indigo-600"></i>
+                        🏗️ Архитектура RAG (Retrieval Augmented Generation)
+                    </h2>
+                    
+                    <div class="prose max-w-none">
+                        <p class="text-lg leading-relaxed mb-6">
+                            RAG (Retrieval Augmented Generation) — это архитектурный подход, который объединяет возможности 
+                            поиска релевантной информации и генерации ответов с помощью больших языковых моделей.
+                        </p>
+
+                        <!-- RAG Architecture Diagram -->
+                        <div class="bg-white rounded-xl p-6 mb-8 border-2 border-indigo-200">
+                            <h3 class="text-xl font-semibold mb-4 text-center">📊 Схема работы RAG системы</h3>
+                            
+                            <!-- SVG Diagram -->
+                            <div class="flex justify-center mb-4">
+                                <svg viewBox="0 0 800 400" class="w-full max-w-4xl h-auto">
+                                    <!-- Background -->
+                                    <rect width="800" height="400" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2" rx="8"/>
+                                    
+                                    <!-- Additional Documents (Top Left) -->
+                                    <rect x="20" y="30" width="120" height="60" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" rx="4"/>
+                                    <text x="80" y="50" text-anchor="middle" class="text-xs font-medium" fill="#92400e">Дополнительные</text>
+                                    <text x="80" y="65" text-anchor="middle" class="text-xs font-medium" fill="#92400e">документы</text>
+                                    <text x="80" y="80" text-anchor="middle" class="text-xs font-medium" fill="#92400e">📄📄📄</text>
+                                    
+                                    <!-- Arrow 1: Documents to Embedding -->
+                                    <path d="M 140 60 L 180 60" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                    
+                                    <!-- Embedding Model -->
+                                    <rect x="190" y="30" width="120" height="60" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" rx="4"/>
+                                    <text x="250" y="50" text-anchor="middle" class="text-xs font-medium" fill="#1e40af">Модель</text>
+                                    <text x="250" y="65" text-anchor="middle" class="text-xs font-medium" fill="#1e40af">эмбеддингов</text>
+                                    <text x="250" y="80" text-anchor="middle" class="text-xs font-medium" fill="#1e40af">🧠</text>
+                                    
+                                    <!-- Arrow 2: Embedding to Vector DB -->
+                                    <path d="M 310 60 L 350 60" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                    
+                                    <!-- Vector Database -->
+                                    <rect x="360" y="30" width="120" height="60" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="2" rx="4"/>
+                                    <text x="420" y="50" text-anchor="middle" class="text-xs font-medium" fill="#7c3aed">Векторная</text>
+                                    <text x="420" y="65" text-anchor="middle" class="text-xs font-medium" fill="#7c3aed">база данных</text>
+                                    <text x="420" y="80" text-anchor="middle" class="text-xs font-medium" fill="#7c3aed">🗄️</text>
+                                    
+                                    <!-- User Query (Bottom Left) -->
+                                    <rect x="20" y="250" width="120" height="60" fill="#fce7f3" stroke="#ec4899" stroke-width="2" rx="4"/>
+                                    <text x="80" y="270" text-anchor="middle" class="text-xs font-medium" fill="#be185d">Пользовательский</text>
+                                    <text x="80" y="285" text-anchor="middle" class="text-xs font-medium" fill="#be185d">запрос</text>
+                                    <text x="80" y="300" text-anchor="middle" class="text-xs font-medium" fill="#be185d">❓</text>
+                                    
+                                    <!-- Arrow 3: Query to Similarity Search -->
+                                    <path d="M 140 280 L 250 280 L 250 200 L 380 200" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                    
+                                    <!-- Similarity Search -->
+                                    <rect x="390" y="170" width="120" height="60" fill="#ecfdf5" stroke="#10b981" stroke-width="2" rx="4"/>
+                                    <text x="450" y="190" text-anchor="middle" class="text-xs font-medium" fill="#047857">Поиск по</text>
+                                    <text x="450" y="205" text-anchor="middle" class="text-xs font-medium" fill="#047857">сходству</text>
+                                    <text x="450" y="220" text-anchor="middle" class="text-xs font-medium" fill="#047857">🔍</text>
+                                    
+                                    <!-- Arrow 4: Search to Similar Documents -->
+                                    <path d="M 510 200 L 550 200" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                    
+                                    <!-- Similar Documents -->
+                                    <rect x="560" y="170" width="120" height="60" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" rx="4"/>
+                                    <text x="620" y="190" text-anchor="middle" class="text-xs font-medium" fill="#92400e">Похожие</text>
+                                    <text x="620" y="205" text-anchor="middle" class="text-xs font-medium" fill="#92400e">документы</text>
+                                    <text x="620" y="220" text-anchor="middle" class="text-xs font-medium" fill="#92400e">📋</text>
+                                    
+                                    <!-- Arrow 5: Similar Docs to LLM -->
+                                    <path d="M 620 230 L 620 270 L 580 270" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                    
+                                    <!-- Large Language Model -->
+                                    <rect x="460" y="250" width="120" height="60" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2" rx="4"/>
+                                    <text x="520" y="270" text-anchor="middle" class="text-xs font-medium" fill="#7c3aed">Большая языковая</text>
+                                    <text x="520" y="285" text-anchor="middle" class="text-xs font-medium" fill="#7c3aed">модель (LLM)</text>
+                                    <text x="520" y="300" text-anchor="middle" class="text-xs font-medium" fill="#7c3aed">🤖</text>
+                                    
+                                    <!-- Arrow 6: LLM to Response -->
+                                    <path d="M 460 280 L 400 280" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                    
+                                    <!-- Response -->
+                                    <rect x="280" y="250" width="120" height="60" fill="#dcfce7" stroke="#22c55e" stroke-width="2" rx="4"/>
+                                    <text x="340" y="270" text-anchor="middle" class="text-xs font-medium" fill="#15803d">Итоговый</text>
+                                    <text x="340" y="285" text-anchor="middle" class="text-xs font-medium" fill="#15803d">ответ</text>
+                                    <text x="340" y="300" text-anchor="middle" class="text-xs font-medium" fill="#15803d">✅</text>
+                                    
+                                    <!-- Arrow marker definition -->
+                                    <defs>
+                                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/>
+                                        </marker>
+                                    </defs>
+                                    
+                                    <!-- Flow Labels -->
+                                    <text x="160" y="50" text-anchor="middle" class="text-xs" fill="#6b7280">1</text>
+                                    <text x="330" y="50" text-anchor="middle" class="text-xs" fill="#6b7280">2</text>
+                                    <text x="300" y="240" text-anchor="middle" class="text-xs" fill="#6b7280">3</text>
+                                    <text x="530" y="190" text-anchor="middle" class="text-xs" fill="#6b7280">4</text>
+                                    <text x="640" y="250" text-anchor="middle" class="text-xs" fill="#6b7280">5</text>
+                                    <text x="430" y="270" text-anchor="middle" class="text-xs" fill="#6b7280">6</text>
+                                </svg>
+                            </div>
+                            
+                            <!-- Process Description -->
+                            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                                <div class="space-y-2">
+                                    <div class="flex items-start">
+                                        <span class="inline-flex items-center justify-center w-6 h-6 bg-amber-100 text-amber-800 text-xs font-bold rounded-full mr-2 mt-0.5">1</span>
+                                        <span><strong>Индексация:</strong> Документы преобразуются в векторные представления</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <span class="inline-flex items-center justify-center w-6 h-6 bg-blue-100 text-blue-800 text-xs font-bold rounded-full mr-2 mt-0.5">2</span>
+                                        <span><strong>Хранение:</strong> Векторы сохраняются в специализированной БД</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <span class="inline-flex items-center justify-center w-6 h-6 bg-pink-100 text-pink-800 text-xs font-bold rounded-full mr-2 mt-0.5">3</span>
+                                        <span><strong>Запрос:</strong> Пользовательский вопрос векторизуется</span>
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex items-start">
+                                        <span class="inline-flex items-center justify-center w-6 h-6 bg-green-100 text-green-800 text-xs font-bold rounded-full mr-2 mt-0.5">4</span>
+                                        <span><strong>Поиск:</strong> Находятся наиболее релевантные документы</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <span class="inline-flex items-center justify-center w-6 h-6 bg-purple-100 text-purple-800 text-xs font-bold rounded-full mr-2 mt-0.5">5</span>
+                                        <span><strong>Контекст:</strong> Найденные документы передаются в LLM</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <span class="inline-flex items-center justify-center w-6 h-6 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full mr-2 mt-0.5">6</span>
+                                        <span><strong>Генерация:</strong> LLM создает ответ на основе контекста</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="text-2xl font-semibold mb-4">🚀 Преимущества RAG:</h3>
+                        <div class="grid md:grid-cols-2 gap-4 mb-6">
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-green-700 flex items-center">
+                                    <i class="fas fa-check-circle mr-2"></i>
+                                    Актуальность данных
+                                </h4>
+                                <p class="text-sm">Модель может работать с самой свежей информацией без переобучения</p>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-blue-700 flex items-center">
+                                    <i class="fas fa-search mr-2"></i>
+                                    Точность ответов
+                                </h4>
+                                <p class="text-sm">Ответы основаны на конкретных документах, а не на памяти модели</p>
+                            </div>
+                            <div class="bg-purple-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-purple-700 flex items-center">
+                                    <i class="fas fa-expand-arrows-alt mr-2"></i>
+                                    Масштабируемость
+                                </h4>
+                                <p class="text-sm">Можно добавлять новые документы без изменения архитектуры</p>
+                            </div>
+                            <div class="bg-orange-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-orange-700 flex items-center">
+                                    <i class="fas fa-eye mr-2"></i>
+                                    Прозрачность
+                                </h4>
+                                <p class="text-sm">Можно проследить источник информации для каждого ответа</p>
+                            </div>
+                        </div>
+
+                        <div class="fact-box">
+                            <strong>📊 Статистика применения RAG (2024-2025):</strong> По данным исследования Anthropic и OpenAI, 
+                            системы с RAG показывают на 30-60% более высокую точность ответов по сравнению с обычными языковыми 
+                            моделями при работе с корпоративными данными.
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Three Approaches -->
                 <section id="approaches" class="bg-white rounded-xl p-8 card-shadow">
                     <h2 class="text-3xl font-bold mb-6">
@@ -2972,19 +3151,29 @@ app.get('/vector_databases_enhanced_guide', (c) => {
 
                         <h4 class="text-xl font-semibold mb-3">📊 Рекомендуемые параметры:</h4>
                         <div class="code-block mb-4">
-• IVF: 
-  nlist = 100-100,000 (количество кластеров)
-
-• IVFPQ: 
-  m = 8-64 субвекторов
-  code_size = 4-8 бит
-
-• HNSW: 
-  M = 16-64
-  efConstruction = 100-500
-
-• GPU: 
-  батчи 100+ запросов для оптимальной производительности
+<div class="space-y-4">
+    <div>
+        <strong>• IVF:</strong><br>
+        &nbsp;&nbsp;nlist = 100-100,000 (количество кластеров)
+    </div>
+    
+    <div>
+        <strong>• IVFPQ:</strong><br>
+        &nbsp;&nbsp;m = 8-64 субвекторов<br>
+        &nbsp;&nbsp;code_size = 4-8 бит
+    </div>
+    
+    <div>
+        <strong>• HNSW:</strong><br>
+        &nbsp;&nbsp;M = 16-64<br>
+        &nbsp;&nbsp;efConstruction = 100-500
+    </div>
+    
+    <div>
+        <strong>• GPU:</strong><br>
+        &nbsp;&nbsp;батчи 100+ запросов для оптимальной производительности
+    </div>
+</div>
                         </div>
                     </div>
 
@@ -3006,9 +3195,22 @@ app.get('/vector_databases_enhanced_guide', (c) => {
                         <h4 class="text-xl font-semibold mb-3">📈 Конкретные бенчмарки SIFT1M</h4>
                         <p class="text-sm text-gray-600 mb-2">(Intel Xeon E5-2680 v2, 20 потоков, 2018):</p>
                         <div class="code-block mb-4">
-• HNSW Flat (efSearch=32): 0.020 мс/запрос, R@1=94.9%
-• HNSW + SQ (efSearch=32):  0.008 мс/запрос, R@1=85.1%  
-• IVF Flat (nprobe=64):     0.141 мс/запрос, R@1=94.7%
+<div class="space-y-3">
+    <div>
+        <strong>• HNSW Flat (efSearch=32):</strong><br>
+        &nbsp;&nbsp;0.020 мс/запрос, R@1=94.9%
+    </div>
+    
+    <div>
+        <strong>• HNSW + SQ (efSearch=32):</strong><br>
+        &nbsp;&nbsp;0.008 мс/запрос, R@1=85.1%
+    </div>
+    
+    <div>
+        <strong>• IVF Flat (nprobe=64):</strong><br>
+        &nbsp;&nbsp;0.141 мс/запрос, R@1=94.7%
+    </div>
+</div>
                         </div>
                         <p class="text-sm text-gray-600 mb-4">
                             <em>Источник: <a href="https://github.com/facebookresearch/faiss/wiki/Indexing-1M-vectors" class="text-blue-600">FAISS Wiki - Indexing 1M vectors</a></em>
@@ -3016,17 +3218,27 @@ app.get('/vector_databases_enhanced_guide', (c) => {
 
                         <h4 class="text-xl font-semibold mb-3">📊 Настройка параметров:</h4>
                         <div class="code-block mb-4">
-• M = 16-32: 
-  для экономии памяти
-
-• M = 32-64: 
-  для высокой точности  
-
-• efConstruction = 100-200: 
-  баланс время/качество
-
-• efSearch = 50-500: 
-  настройка в runtime под SLA
+<div class="space-y-4">
+    <div>
+        <strong>• M = 16-32:</strong><br>
+        &nbsp;&nbsp;для экономии памяти
+    </div>
+    
+    <div>
+        <strong>• M = 32-64:</strong><br>
+        &nbsp;&nbsp;для высокой точности
+    </div>
+    
+    <div>
+        <strong>• efConstruction = 100-200:</strong><br>
+        &nbsp;&nbsp;баланс время/качество
+    </div>
+    
+    <div>
+        <strong>• efSearch = 50-500:</strong><br>
+        &nbsp;&nbsp;настройка в runtime под SLA
+    </div>
+</div>
                         </div>
                     </div>
 
@@ -3047,17 +3259,27 @@ app.get('/vector_databases_enhanced_guide', (c) => {
 
                         <h4 class="text-xl font-semibold mb-3">📊 Параметры настройки:</h4>
                         <div class="code-block mb-4">
-• n_trees = 10-50: 
-  для быстрого поиска
-
-• n_trees = 50-100: 
-  для высокой точности
-
-• search_k = n_trees × 100-1000: 
-  компромисс скорость/качество
-
-• Ограничения: 
-  int32 IDs, max(id)+1 аллокация памяти
+<div class="space-y-4">
+    <div>
+        <strong>• n_trees = 10-50:</strong><br>
+        &nbsp;&nbsp;для быстрого поиска
+    </div>
+    
+    <div>
+        <strong>• n_trees = 50-100:</strong><br>
+        &nbsp;&nbsp;для высокой точности
+    </div>
+    
+    <div>
+        <strong>• search_k = n_trees × 100-1000:</strong><br>
+        &nbsp;&nbsp;компромисс скорость/качество
+    </div>
+    
+    <div>
+        <strong>• Ограничения:</strong><br>
+        &nbsp;&nbsp;int32 IDs, max(id)+1 аллокация памяти
+    </div>
+</div>
                         </div>
                     </div>
                 </section>
@@ -3118,15 +3340,23 @@ app.get('/vector_databases_enhanced_guide', (c) => {
                     <div class="warning-box">
                         <strong>⚠️ Практические ограничения (2024):</strong>
                         <div class="code-block mt-2">
-• FAISS GPU: 
-  k ≤ 2048, nprobe ≤ 2048, нужен батчинг
-
-• HNSW: 
-  память ~линейно растет с M, планируйте max_elements  
-
-• Annoy: 
-  полная иммутабельность после build()
-  int32 ID лимиты
+<div class="space-y-4">
+    <div>
+        <strong>• FAISS GPU:</strong><br>
+        &nbsp;&nbsp;k ≤ 2048, nprobe ≤ 2048, нужен батчинг
+    </div>
+    
+    <div>
+        <strong>• HNSW:</strong><br>
+        &nbsp;&nbsp;память ~линейно растет с M, планируйте max_elements
+    </div>
+    
+    <div>
+        <strong>• Annoy:</strong><br>
+        &nbsp;&nbsp;полная иммутабельность после build()<br>
+        &nbsp;&nbsp;int32 ID лимиты
+    </div>
+</div>
                         </div>
                     </div>
                 </section>
@@ -3140,17 +3370,17 @@ app.get('/vector_databases_enhanced_guide', (c) => {
                     
                     <h3 class="text-2xl font-semibold mb-4">FAISS с современными возможностями (2024-2025)</h3>
                     <div class="code-block mb-6">
-# Актуально для FAISS 1.10+ с cuVS поддержкой
+<pre class="language-python"><code># Актуально для FAISS 1.10+ с cuVS поддержкой
 import faiss
 import numpy as np
 
-# Параметры на основе проверенных рекомендаций  
+# Параметры на основе проверенных рекомендаций
 d, nb = 128, 1_000_000
 data = np.random.randn(nb, d).astype('float32')
 
 # HNSW индекс (параметры из SIFT1M бенчмарков)
 M = 32                  # диапазон 16-64
-ef_construction = 200   # диапазон 100-500  
+ef_construction = 200   # диапазон 100-500
 ef_search = 128         # настройка runtime 50-500
 
 # Создание и настройка индекса
@@ -3163,18 +3393,18 @@ index.hnsw.efSearch = ef_search
 D, I = index.search(queries, k=10)
 
 # Сохранение (совместимо между версиями)
-faiss.write_index(index, "modern_hnsw.index")
+faiss.write_index(index, "modern_hnsw.index")</code></pre>
                     </div>
 
                     <h3 class="text-2xl font-semibold mb-4">GPU ускорение (требует NVIDIA GPU + cuVS)</h3>
                     <div class="code-block mb-6">
-# Проверьте наличие cuVS: pip install faiss-gpu-cuvs
+<pre class="language-python"><code># Проверьте наличие cuVS: pip install faiss-gpu-cuvs
 if faiss.get_num_gpus() > 0:
     
     # GPU IVFPQ для больших датасетов
     quantizer = faiss.IndexFlatL2(d)
     nlist = 4096    # диапазон 100-100000
-    m = 32          # диапазон 8-64  
+    m = 32          # диапазон 8-64
     nbits = 8       # обычно 4-8
     
     # Создание GPU индекса
@@ -3186,7 +3416,7 @@ if faiss.get_num_gpus() > 0:
     gpu_index.add(data)
     
     # Настройка поиска
-    gpu_index.nprobe = 64    # диапазон 1-2048
+    gpu_index.nprobe = 64    # диапазон 1-2048</code></pre>
                     </div>
                 </section>
 
@@ -3288,17 +3518,27 @@ if faiss.get_num_gpus() > 0:
                         <div>
                             <h3 class="text-xl font-semibold mb-4">🚀 Быстрый старт (выбор за 30 секунд):</h3>
                             <div class="code-block mb-4">
-1. Учебный проект (&lt;100K векторов): 
-   → hnswlib
-
-2. Продакшн на CPU (высокая точность): 
-   → hnswlib  
-
-3. Продакшн с GPU (масштаб): 
-   → FAISS IVFPQ
-
-4. Легаси система (простота): 
-   → можно Annoy, но лучше hnswlib
+<div class="space-y-3">
+    <div>
+        <strong>1. Учебный проект (&lt;100K векторов):</strong><br>
+        &nbsp;&nbsp;→ hnswlib
+    </div>
+    
+    <div>
+        <strong>2. Продакшн на CPU (высокая точность):</strong><br>
+        &nbsp;&nbsp;→ hnswlib
+    </div>
+    
+    <div>
+        <strong>3. Продакшн с GPU (масштаб):</strong><br>
+        &nbsp;&nbsp;→ FAISS IVFPQ
+    </div>
+    
+    <div>
+        <strong>4. Легаси система (простота):</strong><br>
+        &nbsp;&nbsp;→ можно Annoy, но лучше hnswlib
+    </div>
+</div>
                             </div>
                         </div>
                         
