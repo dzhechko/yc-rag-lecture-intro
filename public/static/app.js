@@ -702,6 +702,151 @@ window.RAGSeminar = {
     updateProgress
 };
 
+// === YANDEX RAG ФУНКЦИИ ===
+
+// Функция для внедрения учетных данных в код
+function injectCredentialsIntoCode() {
+    console.log('🔑 Функция внедрения учетных данных в код');
+    
+    const folderId = document.getElementById('sandbox-folder-id')?.value || '';
+    const apiKey = document.getElementById('sandbox-api-key')?.value || '';
+    
+    if (!folderId || !apiKey) {
+        showNotification('Пожалуйста, заполните Folder ID и API ключ', 'error');
+        return;
+    }
+    
+    // Найти активную текстовую область с кодом
+    const activeCodeArea = document.querySelector('textarea[id*="code"]:not([style*="display: none"])') || 
+                          document.querySelector('textarea.code-editor') ||
+                          document.getElementById('yandex-rag-code');
+    
+    if (!activeCodeArea) {
+        showNotification('Не найдена область для редактирования кода', 'error');
+        return;
+    }
+    
+    let code = activeCodeArea.value;
+    
+    // Заменить placeholder'ы в коде
+    code = code.replace(/your_folder_id_here|YOUR_FOLDER_ID/g, folderId);
+    code = code.replace(/your_api_key_here|YOUR_API_KEY/g, apiKey);
+    
+    // Обновить код в текстовой области
+    activeCodeArea.value = code;
+    
+    // Обновить статус
+    const statusElement = document.getElementById('credentials-status');
+    if (statusElement) {
+        statusElement.innerHTML = '<i class="fas fa-check-circle mr-1 text-green-600"></i>Учетные данные внедрены в код';
+        statusElement.className = 'text-sm text-green-600';
+    }
+    
+    showNotification('✅ Учетные данные успешно внедрены в код!', 'success');
+    updateProgress(Math.min(currentProgress + 5, 100));
+}
+
+// Функция для валидации учетных данных
+function validateCredentials() {
+    console.log('✅ Функция валидации учетных данных');
+    
+    const folderId = document.getElementById('sandbox-folder-id')?.value || '';
+    const apiKey = document.getElementById('sandbox-api-key')?.value || '';
+    const statusElement = document.getElementById('credentials-status');
+    
+    if (!folderId || !apiKey) {
+        showNotification('Пожалуйста, заполните все поля для проверки', 'error');
+        if (statusElement) {
+            statusElement.innerHTML = '<i class="fas fa-exclamation-circle mr-1 text-red-600"></i>Заполните все поля';
+            statusElement.className = 'text-sm text-red-600';
+        }
+        return;
+    }
+    
+    // Базовая валидация формата
+    const folderIdPattern = /^b1[a-zA-Z0-9]{17}$/;
+    const apiKeyPattern = /^AQVN[a-zA-Z0-9_-]{40,}$/;
+    
+    let isValid = true;
+    let errorMessage = '';
+    
+    if (!folderIdPattern.test(folderId)) {
+        isValid = false;
+        errorMessage = 'Неверный формат Folder ID (должен начинаться с "b1" и содержать 19 символов)';
+    } else if (!apiKeyPattern.test(apiKey)) {
+        isValid = false;
+        errorMessage = 'Неверный формат API ключа (должен начинаться с "AQVN")';
+    }
+    
+    if (statusElement) {
+        if (isValid) {
+            statusElement.innerHTML = '<i class="fas fa-check-circle mr-1 text-green-600"></i>Формат учетных данных корректен';
+            statusElement.className = 'text-sm text-green-600';
+            showNotification('✅ Формат учетных данных корректен!', 'success');
+            updateProgress(Math.min(currentProgress + 5, 100));
+        } else {
+            statusElement.innerHTML = `<i class="fas fa-times-circle mr-1 text-red-600"></i>${errorMessage}`;
+            statusElement.className = 'text-sm text-red-600';
+            showNotification(errorMessage, 'error');
+        }
+    }
+}
+
+// Функция для отображения уведомлений
+function showNotification(message, type = 'info') {
+    // Создать уведомление, если его нет
+    let notification = document.getElementById('notification-container');
+    if (!notification) {
+        notification = document.createElement('div');
+        notification.id = 'notification-container';
+        notification.className = 'fixed top-4 right-4 z-50';
+        document.body.appendChild(notification);
+    }
+    
+    // Создать элемент уведомления
+    const notificationElement = document.createElement('div');
+    const bgColor = {
+        success: 'bg-green-500',
+        error: 'bg-red-500', 
+        warning: 'bg-yellow-500',
+        info: 'bg-blue-500'
+    }[type] || 'bg-gray-500';
+    
+    notificationElement.className = `${bgColor} text-white px-4 py-2 rounded-lg shadow-lg mb-2 transform transition-all duration-300 translate-x-full`;
+    notificationElement.innerHTML = `
+        <div class="flex items-center">
+            <span class="mr-2">${message}</span>
+            <button onclick="this.parentElement.parentElement.remove()" class="ml-auto text-white hover:text-gray-200">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    `;
+    
+    notification.appendChild(notificationElement);
+    
+    // Анимация появления
+    setTimeout(() => {
+        notificationElement.classList.remove('translate-x-full');
+    }, 10);
+    
+    // Автоматическое скрытие через 5 секунд
+    setTimeout(() => {
+        if (notificationElement.parentNode) {
+            notificationElement.classList.add('translate-x-full');
+            setTimeout(() => {
+                if (notificationElement.parentNode) {
+                    notificationElement.remove();
+                }
+            }, 300);
+        }
+    }, 5000);
+}
+
+// Добавляем функции в глобальную область
+window.injectCredentialsIntoCode = injectCredentialsIntoCode;
+window.validateCredentials = validateCredentials;
+window.showNotification = showNotification;
+
 // Для отладки
 window.pyodide = pyodide;
 
