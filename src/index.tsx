@@ -2965,93 +2965,12 @@ app.get('/vector_databases_enhanced_guide', (c) => {
                         <div class="bg-white rounded-xl p-6 mb-8 border-2 border-indigo-200">
                             <h3 class="text-xl font-semibold mb-4 text-center">📊 Схема работы RAG системы</h3>
                             
-                            <!-- SVG Diagram -->
+                            <!-- Professional RAG Diagram -->
                             <div class="flex justify-center mb-4">
-                                <svg viewBox="0 0 800 400" class="w-full max-w-4xl h-auto">
-                                    <!-- Background -->
-                                    <rect width="800" height="400" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2" rx="8"/>
-                                    
-                                    <!-- Additional Documents (Top Left) -->
-                                    <rect x="20" y="30" width="120" height="60" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" rx="4"/>
-                                    <text x="80" y="50" text-anchor="middle" class="text-xs font-medium" fill="#92400e">Дополнительные</text>
-                                    <text x="80" y="65" text-anchor="middle" class="text-xs font-medium" fill="#92400e">документы</text>
-                                    <text x="80" y="80" text-anchor="middle" class="text-xs font-medium" fill="#92400e">📄📄📄</text>
-                                    
-                                    <!-- Arrow 1: Documents to Embedding -->
-                                    <path d="M 140 60 L 180 60" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
-                                    
-                                    <!-- Embedding Model -->
-                                    <rect x="190" y="30" width="120" height="60" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" rx="4"/>
-                                    <text x="250" y="50" text-anchor="middle" class="text-xs font-medium" fill="#1e40af">Модель</text>
-                                    <text x="250" y="65" text-anchor="middle" class="text-xs font-medium" fill="#1e40af">эмбеддингов</text>
-                                    <text x="250" y="80" text-anchor="middle" class="text-xs font-medium" fill="#1e40af">🧠</text>
-                                    
-                                    <!-- Arrow 2: Embedding to Vector DB -->
-                                    <path d="M 310 60 L 350 60" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
-                                    
-                                    <!-- Vector Database -->
-                                    <rect x="360" y="30" width="120" height="60" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="2" rx="4"/>
-                                    <text x="420" y="50" text-anchor="middle" class="text-xs font-medium" fill="#7c3aed">Векторная</text>
-                                    <text x="420" y="65" text-anchor="middle" class="text-xs font-medium" fill="#7c3aed">база данных</text>
-                                    <text x="420" y="80" text-anchor="middle" class="text-xs font-medium" fill="#7c3aed">🗄️</text>
-                                    
-                                    <!-- User Query (Bottom Left) -->
-                                    <rect x="20" y="250" width="120" height="60" fill="#fce7f3" stroke="#ec4899" stroke-width="2" rx="4"/>
-                                    <text x="80" y="270" text-anchor="middle" class="text-xs font-medium" fill="#be185d">Пользовательский</text>
-                                    <text x="80" y="285" text-anchor="middle" class="text-xs font-medium" fill="#be185d">запрос</text>
-                                    <text x="80" y="300" text-anchor="middle" class="text-xs font-medium" fill="#be185d">❓</text>
-                                    
-                                    <!-- Arrow 3: Query to Similarity Search -->
-                                    <path d="M 140 280 L 250 280 L 250 200 L 380 200" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
-                                    
-                                    <!-- Similarity Search -->
-                                    <rect x="390" y="170" width="120" height="60" fill="#ecfdf5" stroke="#10b981" stroke-width="2" rx="4"/>
-                                    <text x="450" y="190" text-anchor="middle" class="text-xs font-medium" fill="#047857">Поиск по</text>
-                                    <text x="450" y="205" text-anchor="middle" class="text-xs font-medium" fill="#047857">сходству</text>
-                                    <text x="450" y="220" text-anchor="middle" class="text-xs font-medium" fill="#047857">🔍</text>
-                                    
-                                    <!-- Arrow 4: Search to Similar Documents -->
-                                    <path d="M 510 200 L 550 200" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
-                                    
-                                    <!-- Similar Documents -->
-                                    <rect x="560" y="170" width="120" height="60" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" rx="4"/>
-                                    <text x="620" y="190" text-anchor="middle" class="text-xs font-medium" fill="#92400e">Похожие</text>
-                                    <text x="620" y="205" text-anchor="middle" class="text-xs font-medium" fill="#92400e">документы</text>
-                                    <text x="620" y="220" text-anchor="middle" class="text-xs font-medium" fill="#92400e">📋</text>
-                                    
-                                    <!-- Arrow 5: Similar Docs to LLM -->
-                                    <path d="M 620 230 L 620 270 L 580 270" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
-                                    
-                                    <!-- Large Language Model -->
-                                    <rect x="460" y="250" width="120" height="60" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2" rx="4"/>
-                                    <text x="520" y="270" text-anchor="middle" class="text-xs font-medium" fill="#7c3aed">Большая языковая</text>
-                                    <text x="520" y="285" text-anchor="middle" class="text-xs font-medium" fill="#7c3aed">модель (LLM)</text>
-                                    <text x="520" y="300" text-anchor="middle" class="text-xs font-medium" fill="#7c3aed">🤖</text>
-                                    
-                                    <!-- Arrow 6: LLM to Response -->
-                                    <path d="M 460 280 L 400 280" stroke="#6b7280" stroke-width="2" marker-end="url(#arrowhead)"/>
-                                    
-                                    <!-- Response -->
-                                    <rect x="280" y="250" width="120" height="60" fill="#dcfce7" stroke="#22c55e" stroke-width="2" rx="4"/>
-                                    <text x="340" y="270" text-anchor="middle" class="text-xs font-medium" fill="#15803d">Итоговый</text>
-                                    <text x="340" y="285" text-anchor="middle" class="text-xs font-medium" fill="#15803d">ответ</text>
-                                    <text x="340" y="300" text-anchor="middle" class="text-xs font-medium" fill="#15803d">✅</text>
-                                    
-                                    <!-- Arrow marker definition -->
-                                    <defs>
-                                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                                            <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/>
-                                        </marker>
-                                    </defs>
-                                    
-                                    <!-- Flow Labels -->
-                                    <text x="160" y="50" text-anchor="middle" class="text-xs" fill="#6b7280">1</text>
-                                    <text x="330" y="50" text-anchor="middle" class="text-xs" fill="#6b7280">2</text>
-                                    <text x="300" y="240" text-anchor="middle" class="text-xs" fill="#6b7280">3</text>
-                                    <text x="530" y="190" text-anchor="middle" class="text-xs" fill="#6b7280">4</text>
-                                    <text x="640" y="250" text-anchor="middle" class="text-xs" fill="#6b7280">5</text>
-                                    <text x="430" y="270" text-anchor="middle" class="text-xs" fill="#6b7280">6</text>
-                                </svg>
+                                <img src="https://page.gensparksite.com/v1/base64_upload/9da94f785f148884ff0a927cf65dfa2e" 
+                                     alt="RAG Architecture Diagram" 
+                                     class="w-full max-w-4xl h-auto rounded-lg shadow-md border border-gray-200"
+                                     style="max-height: 400px; object-fit: contain;">
                             </div>
                             
                             <!-- Process Description -->
