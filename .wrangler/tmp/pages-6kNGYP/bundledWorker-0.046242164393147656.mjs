@@ -916,105 +916,105 @@ var process_default = _process;
 globalThis.process = process_default;
 
 // _worker.js
-var wt = Object.defineProperty;
-var ze = /* @__PURE__ */ __name((e) => {
+var St = Object.defineProperty;
+var Fe = /* @__PURE__ */ __name((e) => {
   throw TypeError(e);
-}, "ze");
-var _t = /* @__PURE__ */ __name((e, t, s) => t in e ? wt(e, t, { enumerable: true, configurable: true, writable: true, value: s }) : e[t] = s, "_t");
-var p = /* @__PURE__ */ __name((e, t, s) => _t(e, typeof t != "symbol" ? t + "" : t, s), "p");
-var Te = /* @__PURE__ */ __name((e, t, s) => t.has(e) || ze("Cannot " + s), "Te");
+}, "Fe");
+var At = /* @__PURE__ */ __name((e, t, s) => t in e ? St(e, t, { enumerable: true, configurable: true, writable: true, value: s }) : e[t] = s, "At");
+var p = /* @__PURE__ */ __name((e, t, s) => At(e, typeof t != "symbol" ? t + "" : t, s), "p");
+var Te = /* @__PURE__ */ __name((e, t, s) => t.has(e) || Fe("Cannot " + s), "Te");
 var o = /* @__PURE__ */ __name((e, t, s) => (Te(e, t, "read from private field"), s ? s.call(e) : t.get(e)), "o");
-var x = /* @__PURE__ */ __name((e, t, s) => t.has(e) ? ze("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(e) : t.set(e, s), "x");
-var m = /* @__PURE__ */ __name((e, t, s, r) => (Te(e, t, "write to private field"), r ? r.call(e, s) : t.set(e, s), s), "m");
-var h = /* @__PURE__ */ __name((e, t, s) => (Te(e, t, "access private method"), s), "h");
-var De = /* @__PURE__ */ __name((e, t, s, r) => ({ set _(i) {
-  m(e, t, i, s);
+var x = /* @__PURE__ */ __name((e, t, s) => t.has(e) ? Fe("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(e) : t.set(e, s), "x");
+var m = /* @__PURE__ */ __name((e, t, s, i) => (Te(e, t, "write to private field"), i ? i.call(e, s) : t.set(e, s), s), "m");
+var b = /* @__PURE__ */ __name((e, t, s) => (Te(e, t, "access private method"), s), "b");
+var De = /* @__PURE__ */ __name((e, t, s, i) => ({ set _(r) {
+  m(e, t, r, s);
 }, get _() {
-  return o(e, t, r);
+  return o(e, t, i);
 } }), "De");
-var Ne = /* @__PURE__ */ __name((e, t, s) => (r, i) => {
+var Oe = /* @__PURE__ */ __name((e, t, s) => (i, r) => {
   let a = -1;
   return n(0);
   async function n(d) {
     if (d <= a) throw new Error("next() called multiple times");
     a = d;
     let l, c = false, u;
-    if (e[d] ? (u = e[d][0][0], r.req.routeIndex = d) : u = d === e.length && i || void 0, u) try {
-      l = await u(r, () => n(d + 1));
+    if (e[d] ? (u = e[d][0][0], i.req.routeIndex = d) : u = d === e.length && r || void 0, u) try {
+      l = await u(i, () => n(d + 1));
     } catch (f) {
-      if (f instanceof Error && t) r.error = f, l = await t(f, r), c = true;
+      if (f instanceof Error && t) i.error = f, l = await t(f, i), c = true;
       else throw f;
     }
-    else r.finalized === false && s && (l = await s(r));
-    return l && (r.finalized === false || c) && (r.res = l), r;
+    else i.finalized === false && s && (l = await s(i));
+    return l && (i.finalized === false || c) && (i.res = l), i;
   }
   __name(n, "n");
-}, "Ne");
-var At = Symbol();
-var St = /* @__PURE__ */ __name(async (e, t = /* @__PURE__ */ Object.create(null)) => {
-  const { all: s = false, dot: r = false } = t, a = (e instanceof it ? e.raw.headers : e.headers).get("Content-Type");
-  return a != null && a.startsWith("multipart/form-data") || a != null && a.startsWith("application/x-www-form-urlencoded") ? kt(e, { all: s, dot: r }) : {};
-}, "St");
-async function kt(e, t) {
+}, "Oe");
+var _t = Symbol();
+var kt = /* @__PURE__ */ __name(async (e, t = /* @__PURE__ */ Object.create(null)) => {
+  const { all: s = false, dot: i = false } = t, a = (e instanceof rt ? e.raw.headers : e.headers).get("Content-Type");
+  return a != null && a.startsWith("multipart/form-data") || a != null && a.startsWith("application/x-www-form-urlencoded") ? Rt(e, { all: s, dot: i }) : {};
+}, "kt");
+async function Rt(e, t) {
   const s = await e.formData();
-  return s ? Rt(s, t) : {};
-}
-__name(kt, "kt");
-function Rt(e, t) {
-  const s = /* @__PURE__ */ Object.create(null);
-  return e.forEach((r, i) => {
-    t.all || i.endsWith("[]") ? Et(s, i, r) : s[i] = r;
-  }), t.dot && Object.entries(s).forEach(([r, i]) => {
-    r.includes(".") && (Ct(s, r, i), delete s[r]);
-  }), s;
+  return s ? Et(s, t) : {};
 }
 __name(Rt, "Rt");
-var Et = /* @__PURE__ */ __name((e, t, s) => {
+function Et(e, t) {
+  const s = /* @__PURE__ */ Object.create(null);
+  return e.forEach((i, r) => {
+    t.all || r.endsWith("[]") ? It(s, r, i) : s[r] = i;
+  }), t.dot && Object.entries(s).forEach(([i, r]) => {
+    i.includes(".") && (Ct(s, i, r), delete s[i]);
+  }), s;
+}
+__name(Et, "Et");
+var It = /* @__PURE__ */ __name((e, t, s) => {
   e[t] !== void 0 ? Array.isArray(e[t]) ? e[t].push(s) : e[t] = [e[t], s] : t.endsWith("[]") ? e[t] = [s] : e[t] = s;
-}, "Et");
+}, "It");
 var Ct = /* @__PURE__ */ __name((e, t, s) => {
-  let r = e;
-  const i = t.split(".");
-  i.forEach((a, n) => {
-    n === i.length - 1 ? r[a] = s : ((!r[a] || typeof r[a] != "object" || Array.isArray(r[a]) || r[a] instanceof File) && (r[a] = /* @__PURE__ */ Object.create(null)), r = r[a]);
+  let i = e;
+  const r = t.split(".");
+  r.forEach((a, n) => {
+    n === r.length - 1 ? i[a] = s : ((!i[a] || typeof i[a] != "object" || Array.isArray(i[a]) || i[a] instanceof File) && (i[a] = /* @__PURE__ */ Object.create(null)), i = i[a]);
   });
 }, "Ct");
 var Ze = /* @__PURE__ */ __name((e) => {
   const t = e.split("/");
   return t[0] === "" && t.shift(), t;
 }, "Ze");
-var qt = /* @__PURE__ */ __name((e) => {
-  const { groups: t, path: s } = Tt(e), r = Ze(s);
-  return Gt(r, t);
-}, "qt");
 var Tt = /* @__PURE__ */ __name((e) => {
-  const t = [];
-  return e = e.replace(/\{[^}]+\}/g, (s, r) => {
-    const i = `@${r}`;
-    return t.push([i, s]), i;
-  }), { groups: t, path: e };
+  const { groups: t, path: s } = qt(e), i = Ze(s);
+  return Pt(i, t);
 }, "Tt");
-var Gt = /* @__PURE__ */ __name((e, t) => {
+var qt = /* @__PURE__ */ __name((e) => {
+  const t = [];
+  return e = e.replace(/\{[^}]+\}/g, (s, i) => {
+    const r = `@${i}`;
+    return t.push([r, s]), r;
+  }), { groups: t, path: e };
+}, "qt");
+var Pt = /* @__PURE__ */ __name((e, t) => {
   for (let s = t.length - 1; s >= 0; s--) {
-    const [r] = t[s];
-    for (let i = e.length - 1; i >= 0; i--) if (e[i].includes(r)) {
-      e[i] = e[i].replace(r, t[s][1]);
+    const [i] = t[s];
+    for (let r = e.length - 1; r >= 0; r--) if (e[r].includes(i)) {
+      e[r] = e[r].replace(i, t[s][1]);
       break;
     }
   }
   return e;
-}, "Gt");
-var _e = {};
-var It = /* @__PURE__ */ __name((e, t) => {
+}, "Pt");
+var Se = {};
+var Gt = /* @__PURE__ */ __name((e, t) => {
   if (e === "*") return "*";
   const s = e.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);
   if (s) {
-    const r = `${e}#${t}`;
-    return _e[r] || (s[2] ? _e[r] = t && t[0] !== ":" && t[0] !== "*" ? [r, s[1], new RegExp(`^${s[2]}(?=/${t})`)] : [e, s[1], new RegExp(`^${s[2]}$`)] : _e[r] = [e, s[1], true]), _e[r];
+    const i = `${e}#${t}`;
+    return Se[i] || (s[2] ? Se[i] = t && t[0] !== ":" && t[0] !== "*" ? [i, s[1], new RegExp(`^${s[2]}(?=/${t})`)] : [e, s[1], new RegExp(`^${s[2]}$`)] : Se[i] = [e, s[1], true]), Se[i];
   }
   return null;
-}, "It");
-var je = /* @__PURE__ */ __name((e, t) => {
+}, "Gt");
+var Ne = /* @__PURE__ */ __name((e, t) => {
   try {
     return t(e);
   } catch {
@@ -1026,139 +1026,139 @@ var je = /* @__PURE__ */ __name((e, t) => {
       }
     });
   }
-}, "je");
-var Pt = /* @__PURE__ */ __name((e) => je(e, decodeURI), "Pt");
+}, "Ne");
+var Mt = /* @__PURE__ */ __name((e) => Ne(e, decodeURI), "Mt");
 var et = /* @__PURE__ */ __name((e) => {
   const t = e.url, s = t.indexOf("/", t.indexOf(":") + 4);
-  let r = s;
-  for (; r < t.length; r++) {
-    const i = t.charCodeAt(r);
-    if (i === 37) {
-      const a = t.indexOf("?", r), n = t.slice(s, a === -1 ? void 0 : a);
-      return Pt(n.includes("%25") ? n.replace(/%25/g, "%2525") : n);
-    } else if (i === 63) break;
+  let i = s;
+  for (; i < t.length; i++) {
+    const r = t.charCodeAt(i);
+    if (r === 37) {
+      const a = t.indexOf("?", i), n = t.slice(s, a === -1 ? void 0 : a);
+      return Mt(n.includes("%25") ? n.replace(/%25/g, "%2525") : n);
+    } else if (r === 63) break;
   }
-  return t.slice(s, r);
+  return t.slice(s, i);
 }, "et");
-var Mt = /* @__PURE__ */ __name((e) => {
+var Nt = /* @__PURE__ */ __name((e) => {
   const t = et(e);
   return t.length > 1 && t.at(-1) === "/" ? t.slice(0, -1) : t;
-}, "Mt");
-var te = /* @__PURE__ */ __name((e, t, ...s) => (s.length && (t = te(t, ...s)), `${(e == null ? void 0 : e[0]) === "/" ? "" : "/"}${e}${t === "/" ? "" : `${(e == null ? void 0 : e.at(-1)) === "/" ? "" : "/"}${(t == null ? void 0 : t[0]) === "/" ? t.slice(1) : t}`}`), "te");
+}, "Nt");
+var se = /* @__PURE__ */ __name((e, t, ...s) => (s.length && (t = se(t, ...s)), `${(e == null ? void 0 : e[0]) === "/" ? "" : "/"}${e}${t === "/" ? "" : `${(e == null ? void 0 : e.at(-1)) === "/" ? "" : "/"}${(t == null ? void 0 : t[0]) === "/" ? t.slice(1) : t}`}`), "se");
 var tt = /* @__PURE__ */ __name((e) => {
   if (e.charCodeAt(e.length - 1) !== 63 || !e.includes(":")) return null;
   const t = e.split("/"), s = [];
-  let r = "";
-  return t.forEach((i) => {
-    if (i !== "" && !/\:/.test(i)) r += "/" + i;
-    else if (/\:/.test(i)) if (/\?/.test(i)) {
-      s.length === 0 && r === "" ? s.push("/") : s.push(r);
-      const a = i.replace("?", "");
-      r += "/" + a, s.push(r);
-    } else r += "/" + i;
-  }), s.filter((i, a, n) => n.indexOf(i) === a);
+  let i = "";
+  return t.forEach((r) => {
+    if (r !== "" && !/\:/.test(r)) i += "/" + r;
+    else if (/\:/.test(r)) if (/\?/.test(r)) {
+      s.length === 0 && i === "" ? s.push("/") : s.push(i);
+      const a = r.replace("?", "");
+      i += "/" + a, s.push(i);
+    } else i += "/" + r;
+  }), s.filter((r, a, n) => n.indexOf(r) === a);
 }, "tt");
-var Ge = /* @__PURE__ */ __name((e) => /[%+]/.test(e) ? (e.indexOf("+") !== -1 && (e = e.replace(/\+/g, " ")), e.indexOf("%") !== -1 ? je(e, rt) : e) : e, "Ge");
+var qe = /* @__PURE__ */ __name((e) => /[%+]/.test(e) ? (e.indexOf("+") !== -1 && (e = e.replace(/\+/g, " ")), e.indexOf("%") !== -1 ? Ne(e, it) : e) : e, "qe");
 var st = /* @__PURE__ */ __name((e, t, s) => {
-  let r;
+  let i;
   if (!s && t && !/[%+]/.test(t)) {
     let n = e.indexOf(`?${t}`, 8);
     for (n === -1 && (n = e.indexOf(`&${t}`, 8)); n !== -1; ) {
       const d = e.charCodeAt(n + t.length + 1);
       if (d === 61) {
         const l = n + t.length + 2, c = e.indexOf("&", l);
-        return Ge(e.slice(l, c === -1 ? void 0 : c));
+        return qe(e.slice(l, c === -1 ? void 0 : c));
       } else if (d == 38 || isNaN(d)) return "";
       n = e.indexOf(`&${t}`, n + 1);
     }
-    if (r = /[%+]/.test(e), !r) return;
+    if (i = /[%+]/.test(e), !i) return;
   }
-  const i = {};
-  r ?? (r = /[%+]/.test(e));
+  const r = {};
+  i ?? (i = /[%+]/.test(e));
   let a = e.indexOf("?", 8);
   for (; a !== -1; ) {
     const n = e.indexOf("&", a + 1);
     let d = e.indexOf("=", a);
     d > n && n !== -1 && (d = -1);
     let l = e.slice(a + 1, d === -1 ? n === -1 ? void 0 : n : d);
-    if (r && (l = Ge(l)), a = n, l === "") continue;
+    if (i && (l = qe(l)), a = n, l === "") continue;
     let c;
-    d === -1 ? c = "" : (c = e.slice(d + 1, n === -1 ? void 0 : n), r && (c = Ge(c))), s ? (i[l] && Array.isArray(i[l]) || (i[l] = []), i[l].push(c)) : i[l] ?? (i[l] = c);
+    d === -1 ? c = "" : (c = e.slice(d + 1, n === -1 ? void 0 : n), i && (c = qe(c))), s ? (r[l] && Array.isArray(r[l]) || (r[l] = []), r[l].push(c)) : r[l] ?? (r[l] = c);
   }
-  return t ? i[t] : i;
+  return t ? r[t] : r;
 }, "st");
 var jt = st;
-var Ot = /* @__PURE__ */ __name((e, t) => st(e, t, true), "Ot");
-var rt = decodeURIComponent;
-var Le = /* @__PURE__ */ __name((e) => je(e, rt), "Le");
-var ie;
-var C;
+var Ft = /* @__PURE__ */ __name((e, t) => st(e, t, true), "Ft");
+var it = decodeURIComponent;
+var ze = /* @__PURE__ */ __name((e) => Ne(e, it), "ze");
+var ae;
+var I;
 var D;
 var at;
 var ot;
-var Pe;
-var L;
-var He;
-var it = (He = class {
+var Ge;
+var z;
+var $e;
+var rt = ($e = class {
   static {
-    __name(this, "He");
+    __name(this, "$e");
   }
   constructor(e, t = "/", s = [[]]) {
     x(this, D);
     p(this, "raw");
-    x(this, ie);
-    x(this, C);
+    x(this, ae);
+    x(this, I);
     p(this, "routeIndex", 0);
     p(this, "path");
     p(this, "bodyCache", {});
-    x(this, L, (e2) => {
-      const { bodyCache: t2, raw: s2 } = this, r = t2[e2];
-      if (r) return r;
-      const i = Object.keys(t2)[0];
-      return i ? t2[i].then((a) => (i === "json" && (a = JSON.stringify(a)), new Response(a)[e2]())) : t2[e2] = s2[e2]();
+    x(this, z, (e2) => {
+      const { bodyCache: t2, raw: s2 } = this, i = t2[e2];
+      if (i) return i;
+      const r = Object.keys(t2)[0];
+      return r ? t2[r].then((a) => (r === "json" && (a = JSON.stringify(a)), new Response(a)[e2]())) : t2[e2] = s2[e2]();
     });
-    this.raw = e, this.path = t, m(this, C, s), m(this, ie, {});
+    this.raw = e, this.path = t, m(this, I, s), m(this, ae, {});
   }
   param(e) {
-    return e ? h(this, D, at).call(this, e) : h(this, D, ot).call(this);
+    return e ? b(this, D, at).call(this, e) : b(this, D, ot).call(this);
   }
   query(e) {
     return jt(this.url, e);
   }
   queries(e) {
-    return Ot(this.url, e);
+    return Ft(this.url, e);
   }
   header(e) {
     if (e) return this.raw.headers.get(e) ?? void 0;
     const t = {};
-    return this.raw.headers.forEach((s, r) => {
-      t[r] = s;
+    return this.raw.headers.forEach((s, i) => {
+      t[i] = s;
     }), t;
   }
   async parseBody(e) {
     var t;
-    return (t = this.bodyCache).parsedBody ?? (t.parsedBody = await St(this, e));
+    return (t = this.bodyCache).parsedBody ?? (t.parsedBody = await kt(this, e));
   }
   json() {
-    return o(this, L).call(this, "text").then((e) => JSON.parse(e));
+    return o(this, z).call(this, "text").then((e) => JSON.parse(e));
   }
   text() {
-    return o(this, L).call(this, "text");
+    return o(this, z).call(this, "text");
   }
   arrayBuffer() {
-    return o(this, L).call(this, "arrayBuffer");
+    return o(this, z).call(this, "arrayBuffer");
   }
   blob() {
-    return o(this, L).call(this, "blob");
+    return o(this, z).call(this, "blob");
   }
   formData() {
-    return o(this, L).call(this, "formData");
+    return o(this, z).call(this, "formData");
   }
   addValidatedData(e, t) {
-    o(this, ie)[e] = t;
+    o(this, ae)[e] = t;
   }
   valid(e) {
-    return o(this, ie)[e];
+    return o(this, ae)[e];
   }
   get url() {
     return this.raw.url;
@@ -1166,126 +1166,126 @@ var it = (He = class {
   get method() {
     return this.raw.method;
   }
-  get [At]() {
-    return o(this, C);
+  get [_t]() {
+    return o(this, I);
   }
   get matchedRoutes() {
-    return o(this, C)[0].map(([[, e]]) => e);
+    return o(this, I)[0].map(([[, e]]) => e);
   }
   get routePath() {
-    return o(this, C)[0].map(([[, e]]) => e)[this.routeIndex].path;
+    return o(this, I)[0].map(([[, e]]) => e)[this.routeIndex].path;
   }
-}, ie = /* @__PURE__ */ new WeakMap(), C = /* @__PURE__ */ new WeakMap(), D = /* @__PURE__ */ new WeakSet(), at = /* @__PURE__ */ __name(function(e) {
-  const t = o(this, C)[0][this.routeIndex][1][e], s = h(this, D, Pe).call(this, t);
-  return s ? /\%/.test(s) ? Le(s) : s : void 0;
+}, ae = /* @__PURE__ */ new WeakMap(), I = /* @__PURE__ */ new WeakMap(), D = /* @__PURE__ */ new WeakSet(), at = /* @__PURE__ */ __name(function(e) {
+  const t = o(this, I)[0][this.routeIndex][1][e], s = b(this, D, Ge).call(this, t);
+  return s ? /\%/.test(s) ? ze(s) : s : void 0;
 }, "at"), ot = /* @__PURE__ */ __name(function() {
-  const e = {}, t = Object.keys(o(this, C)[0][this.routeIndex][1]);
+  const e = {}, t = Object.keys(o(this, I)[0][this.routeIndex][1]);
   for (const s of t) {
-    const r = h(this, D, Pe).call(this, o(this, C)[0][this.routeIndex][1][s]);
-    r && typeof r == "string" && (e[s] = /\%/.test(r) ? Le(r) : r);
+    const i = b(this, D, Ge).call(this, o(this, I)[0][this.routeIndex][1][s]);
+    i && typeof i == "string" && (e[s] = /\%/.test(i) ? ze(i) : i);
   }
   return e;
-}, "ot"), Pe = /* @__PURE__ */ __name(function(e) {
-  return o(this, C)[1] ? o(this, C)[1][e] : e;
-}, "Pe"), L = /* @__PURE__ */ new WeakMap(), He);
-var zt = { Stringify: 1 };
-var nt = /* @__PURE__ */ __name(async (e, t, s, r, i) => {
+}, "ot"), Ge = /* @__PURE__ */ __name(function(e) {
+  return o(this, I)[1] ? o(this, I)[1][e] : e;
+}, "Ge"), z = /* @__PURE__ */ new WeakMap(), $e);
+var Dt = { Stringify: 1 };
+var nt = /* @__PURE__ */ __name(async (e, t, s, i, r) => {
   typeof e == "object" && !(e instanceof String) && (e instanceof Promise || (e = e.toString()), e instanceof Promise && (e = await e));
   const a = e.callbacks;
-  return a != null && a.length ? (i ? i[0] += e : i = [e], Promise.all(a.map((d) => d({ phase: t, buffer: i, context: r }))).then((d) => Promise.all(d.filter(Boolean).map((l) => nt(l, t, false, r, i))).then(() => i[0]))) : Promise.resolve(e);
+  return a != null && a.length ? (r ? r[0] += e : r = [e], Promise.all(a.map((d) => d({ phase: t, buffer: r, context: i }))).then((d) => Promise.all(d.filter(Boolean).map((l) => nt(l, t, false, i, r))).then(() => r[0]))) : Promise.resolve(e);
 }, "nt");
-var Dt = "text/plain; charset=UTF-8";
-var Ie = /* @__PURE__ */ __name((e, t) => ({ "Content-Type": e, ...t }), "Ie");
+var Ot = "text/plain; charset=UTF-8";
+var Pe = /* @__PURE__ */ __name((e, t) => ({ "Content-Type": e, ...t }), "Pe");
 var xe;
-var he;
-var M;
-var ae;
-var j;
-var R;
 var be;
+var M;
 var oe;
+var N;
+var R;
+var he;
 var ne;
-var U;
+var le;
+var Q;
 var ve;
 var ye;
-var F;
-var se;
-var Ke;
-var Nt = (Ke = class {
+var L;
+var ie;
+var Be;
+var zt = (Be = class {
   static {
-    __name(this, "Ke");
+    __name(this, "Be");
   }
   constructor(e, t) {
-    x(this, F);
+    x(this, L);
     x(this, xe);
-    x(this, he);
+    x(this, be);
     p(this, "env", {});
     x(this, M);
     p(this, "finalized", false);
     p(this, "error");
-    x(this, ae);
-    x(this, j);
-    x(this, R);
-    x(this, be);
     x(this, oe);
+    x(this, N);
+    x(this, R);
+    x(this, he);
     x(this, ne);
-    x(this, U);
+    x(this, le);
+    x(this, Q);
     x(this, ve);
     x(this, ye);
-    p(this, "render", (...e2) => (o(this, oe) ?? m(this, oe, (t2) => this.html(t2)), o(this, oe).call(this, ...e2)));
-    p(this, "setLayout", (e2) => m(this, be, e2));
-    p(this, "getLayout", () => o(this, be));
+    p(this, "render", (...e2) => (o(this, ne) ?? m(this, ne, (t2) => this.html(t2)), o(this, ne).call(this, ...e2)));
+    p(this, "setLayout", (e2) => m(this, he, e2));
+    p(this, "getLayout", () => o(this, he));
     p(this, "setRenderer", (e2) => {
-      m(this, oe, e2);
+      m(this, ne, e2);
     });
     p(this, "header", (e2, t2, s) => {
       this.finalized && m(this, R, new Response(o(this, R).body, o(this, R)));
-      const r = o(this, R) ? o(this, R).headers : o(this, U) ?? m(this, U, new Headers());
-      t2 === void 0 ? r.delete(e2) : s != null && s.append ? r.append(e2, t2) : r.set(e2, t2);
+      const i = o(this, R) ? o(this, R).headers : o(this, Q) ?? m(this, Q, new Headers());
+      t2 === void 0 ? i.delete(e2) : s != null && s.append ? i.append(e2, t2) : i.set(e2, t2);
     });
     p(this, "status", (e2) => {
-      m(this, ae, e2);
+      m(this, oe, e2);
     });
     p(this, "set", (e2, t2) => {
       o(this, M) ?? m(this, M, /* @__PURE__ */ new Map()), o(this, M).set(e2, t2);
     });
     p(this, "get", (e2) => o(this, M) ? o(this, M).get(e2) : void 0);
-    p(this, "newResponse", (...e2) => h(this, F, se).call(this, ...e2));
-    p(this, "body", (e2, t2, s) => h(this, F, se).call(this, e2, t2, s));
-    p(this, "text", (e2, t2, s) => !o(this, U) && !o(this, ae) && !t2 && !s && !this.finalized ? new Response(e2) : h(this, F, se).call(this, e2, t2, Ie(Dt, s)));
-    p(this, "json", (e2, t2, s) => h(this, F, se).call(this, JSON.stringify(e2), t2, Ie("application/json", s)));
+    p(this, "newResponse", (...e2) => b(this, L, ie).call(this, ...e2));
+    p(this, "body", (e2, t2, s) => b(this, L, ie).call(this, e2, t2, s));
+    p(this, "text", (e2, t2, s) => !o(this, Q) && !o(this, oe) && !t2 && !s && !this.finalized ? new Response(e2) : b(this, L, ie).call(this, e2, t2, Pe(Ot, s)));
+    p(this, "json", (e2, t2, s) => b(this, L, ie).call(this, JSON.stringify(e2), t2, Pe("application/json", s)));
     p(this, "html", (e2, t2, s) => {
-      const r = /* @__PURE__ */ __name((i) => h(this, F, se).call(this, i, t2, Ie("text/html; charset=UTF-8", s)), "r");
-      return typeof e2 == "object" ? nt(e2, zt.Stringify, false, {}).then(r) : r(e2);
+      const i = /* @__PURE__ */ __name((r) => b(this, L, ie).call(this, r, t2, Pe("text/html; charset=UTF-8", s)), "i");
+      return typeof e2 == "object" ? nt(e2, Dt.Stringify, false, {}).then(i) : i(e2);
     });
     p(this, "redirect", (e2, t2) => {
       const s = String(e2);
       return this.header("Location", /[^\x00-\xFF]/.test(s) ? encodeURI(s) : s), this.newResponse(null, t2 ?? 302);
     });
-    p(this, "notFound", () => (o(this, ne) ?? m(this, ne, () => new Response()), o(this, ne).call(this, this)));
-    m(this, xe, e), t && (m(this, j, t.executionCtx), this.env = t.env, m(this, ne, t.notFoundHandler), m(this, ye, t.path), m(this, ve, t.matchResult));
+    p(this, "notFound", () => (o(this, le) ?? m(this, le, () => new Response()), o(this, le).call(this, this)));
+    m(this, xe, e), t && (m(this, N, t.executionCtx), this.env = t.env, m(this, le, t.notFoundHandler), m(this, ye, t.path), m(this, ve, t.matchResult));
   }
   get req() {
-    return o(this, he) ?? m(this, he, new it(o(this, xe), o(this, ye), o(this, ve))), o(this, he);
+    return o(this, be) ?? m(this, be, new rt(o(this, xe), o(this, ye), o(this, ve))), o(this, be);
   }
   get event() {
-    if (o(this, j) && "respondWith" in o(this, j)) return o(this, j);
+    if (o(this, N) && "respondWith" in o(this, N)) return o(this, N);
     throw Error("This context has no FetchEvent");
   }
   get executionCtx() {
-    if (o(this, j)) return o(this, j);
+    if (o(this, N)) return o(this, N);
     throw Error("This context has no ExecutionContext");
   }
   get res() {
-    return o(this, R) || m(this, R, new Response(null, { headers: o(this, U) ?? m(this, U, new Headers()) }));
+    return o(this, R) || m(this, R, new Response(null, { headers: o(this, Q) ?? m(this, Q, new Headers()) }));
   }
   set res(e) {
     if (o(this, R) && e) {
       e = new Response(e.body, e);
       for (const [t, s] of o(this, R).headers.entries()) if (t !== "content-type") if (t === "set-cookie") {
-        const r = o(this, R).headers.getSetCookie();
+        const i = o(this, R).headers.getSetCookie();
         e.headers.delete("set-cookie");
-        for (const i of r) e.headers.append("set-cookie", i);
+        for (const r of i) e.headers.append("set-cookie", r);
       } else e.headers.set(t, s);
     }
     m(this, R, e), this.finalized = true;
@@ -1293,52 +1293,52 @@ var Nt = (Ke = class {
   get var() {
     return o(this, M) ? Object.fromEntries(o(this, M)) : {};
   }
-}, xe = /* @__PURE__ */ new WeakMap(), he = /* @__PURE__ */ new WeakMap(), M = /* @__PURE__ */ new WeakMap(), ae = /* @__PURE__ */ new WeakMap(), j = /* @__PURE__ */ new WeakMap(), R = /* @__PURE__ */ new WeakMap(), be = /* @__PURE__ */ new WeakMap(), oe = /* @__PURE__ */ new WeakMap(), ne = /* @__PURE__ */ new WeakMap(), U = /* @__PURE__ */ new WeakMap(), ve = /* @__PURE__ */ new WeakMap(), ye = /* @__PURE__ */ new WeakMap(), F = /* @__PURE__ */ new WeakSet(), se = /* @__PURE__ */ __name(function(e, t, s) {
-  const r = o(this, R) ? new Headers(o(this, R).headers) : o(this, U) ?? new Headers();
+}, xe = /* @__PURE__ */ new WeakMap(), be = /* @__PURE__ */ new WeakMap(), M = /* @__PURE__ */ new WeakMap(), oe = /* @__PURE__ */ new WeakMap(), N = /* @__PURE__ */ new WeakMap(), R = /* @__PURE__ */ new WeakMap(), he = /* @__PURE__ */ new WeakMap(), ne = /* @__PURE__ */ new WeakMap(), le = /* @__PURE__ */ new WeakMap(), Q = /* @__PURE__ */ new WeakMap(), ve = /* @__PURE__ */ new WeakMap(), ye = /* @__PURE__ */ new WeakMap(), L = /* @__PURE__ */ new WeakSet(), ie = /* @__PURE__ */ __name(function(e, t, s) {
+  const i = o(this, R) ? new Headers(o(this, R).headers) : o(this, Q) ?? new Headers();
   if (typeof t == "object" && "headers" in t) {
     const a = t.headers instanceof Headers ? t.headers : new Headers(t.headers);
-    for (const [n, d] of a) n.toLowerCase() === "set-cookie" ? r.append(n, d) : r.set(n, d);
+    for (const [n, d] of a) n.toLowerCase() === "set-cookie" ? i.append(n, d) : i.set(n, d);
   }
-  if (s) for (const [a, n] of Object.entries(s)) if (typeof n == "string") r.set(a, n);
+  if (s) for (const [a, n] of Object.entries(s)) if (typeof n == "string") i.set(a, n);
   else {
-    r.delete(a);
-    for (const d of n) r.append(a, d);
+    i.delete(a);
+    for (const d of n) i.append(a, d);
   }
-  const i = typeof t == "number" ? t : (t == null ? void 0 : t.status) ?? o(this, ae);
-  return new Response(e, { status: i, headers: r });
-}, "se"), Ke);
+  const r = typeof t == "number" ? t : (t == null ? void 0 : t.status) ?? o(this, oe);
+  return new Response(e, { status: r, headers: i });
+}, "ie"), Be);
 var w = "ALL";
 var Lt = "all";
-var Ft = ["get", "post", "put", "delete", "options", "patch"];
+var Yt = ["get", "post", "put", "delete", "options", "patch"];
 var lt = "Can not add a route since the matcher is already built.";
 var dt = class extends Error {
   static {
     __name(this, "dt");
   }
 };
-var Yt = "__COMPOSED_HANDLER";
+var Ht = "__COMPOSED_HANDLER";
 var $t = /* @__PURE__ */ __name((e) => e.text("404 Not Found", 404), "$t");
-var Fe = /* @__PURE__ */ __name((e, t) => {
+var Le = /* @__PURE__ */ __name((e, t) => {
   if ("getResponse" in e) {
     const s = e.getResponse();
     return t.newResponse(s.body, s);
   }
   return console.error(e), t.text("Internal Server Error", 500);
-}, "Fe");
-var q;
-var _;
+}, "Le");
+var C;
+var S;
 var ut;
 var T;
-var B;
+var K;
 var Ae;
-var Se;
-var Be;
-var ct = (Be = class {
+var _e;
+var Ke;
+var ct = (Ke = class {
   static {
-    __name(this, "Be");
+    __name(this, "Ke");
   }
   constructor(t = {}) {
-    x(this, _);
+    x(this, S);
     p(this, "get");
     p(this, "post");
     p(this, "put");
@@ -1351,52 +1351,52 @@ var ct = (Be = class {
     p(this, "router");
     p(this, "getPath");
     p(this, "_basePath", "/");
-    x(this, q, "/");
+    x(this, C, "/");
     p(this, "routes", []);
     x(this, T, $t);
-    p(this, "errorHandler", Fe);
+    p(this, "errorHandler", Le);
     p(this, "onError", (t2) => (this.errorHandler = t2, this));
     p(this, "notFound", (t2) => (m(this, T, t2), this));
-    p(this, "fetch", (t2, ...s) => h(this, _, Se).call(this, t2, s[1], s[0], t2.method));
-    p(this, "request", (t2, s, r2, i2) => t2 instanceof Request ? this.fetch(s ? new Request(t2, s) : t2, r2, i2) : (t2 = t2.toString(), this.fetch(new Request(/^https?:\/\//.test(t2) ? t2 : `http://localhost${te("/", t2)}`, s), r2, i2)));
+    p(this, "fetch", (t2, ...s) => b(this, S, _e).call(this, t2, s[1], s[0], t2.method));
+    p(this, "request", (t2, s, i2, r2) => t2 instanceof Request ? this.fetch(s ? new Request(t2, s) : t2, i2, r2) : (t2 = t2.toString(), this.fetch(new Request(/^https?:\/\//.test(t2) ? t2 : `http://localhost${se("/", t2)}`, s), i2, r2)));
     p(this, "fire", () => {
       addEventListener("fetch", (t2) => {
-        t2.respondWith(h(this, _, Se).call(this, t2.request, t2, void 0, t2.request.method));
+        t2.respondWith(b(this, S, _e).call(this, t2.request, t2, void 0, t2.request.method));
       });
     });
-    [...Ft, Lt].forEach((a) => {
-      this[a] = (n, ...d) => (typeof n == "string" ? m(this, q, n) : h(this, _, B).call(this, a, o(this, q), n), d.forEach((l) => {
-        h(this, _, B).call(this, a, o(this, q), l);
+    [...Yt, Lt].forEach((a) => {
+      this[a] = (n, ...d) => (typeof n == "string" ? m(this, C, n) : b(this, S, K).call(this, a, o(this, C), n), d.forEach((l) => {
+        b(this, S, K).call(this, a, o(this, C), l);
       }), this);
     }), this.on = (a, n, ...d) => {
       for (const l of [n].flat()) {
-        m(this, q, l);
+        m(this, C, l);
         for (const c of [a].flat()) d.map((u) => {
-          h(this, _, B).call(this, c.toUpperCase(), o(this, q), u);
+          b(this, S, K).call(this, c.toUpperCase(), o(this, C), u);
         });
       }
       return this;
-    }, this.use = (a, ...n) => (typeof a == "string" ? m(this, q, a) : (m(this, q, "*"), n.unshift(a)), n.forEach((d) => {
-      h(this, _, B).call(this, w, o(this, q), d);
+    }, this.use = (a, ...n) => (typeof a == "string" ? m(this, C, a) : (m(this, C, "*"), n.unshift(a)), n.forEach((d) => {
+      b(this, S, K).call(this, w, o(this, C), d);
     }), this);
-    const { strict: r, ...i } = t;
-    Object.assign(this, i), this.getPath = r ?? true ? t.getPath ?? et : Mt;
+    const { strict: i, ...r } = t;
+    Object.assign(this, r), this.getPath = i ?? true ? t.getPath ?? et : Nt;
   }
   route(t, s) {
-    const r = this.basePath(t);
-    return s.routes.map((i) => {
+    const i = this.basePath(t);
+    return s.routes.map((r) => {
       var n;
       let a;
-      s.errorHandler === Fe ? a = i.handler : (a = /* @__PURE__ */ __name(async (d, l) => (await Ne([], s.errorHandler)(d, () => i.handler(d, l))).res, "a"), a[Yt] = i.handler), h(n = r, _, B).call(n, i.method, i.path, a);
+      s.errorHandler === Le ? a = r.handler : (a = /* @__PURE__ */ __name(async (d, l) => (await Oe([], s.errorHandler)(d, () => r.handler(d, l))).res, "a"), a[Ht] = r.handler), b(n = i, S, K).call(n, r.method, r.path, a);
     }), this;
   }
   basePath(t) {
-    const s = h(this, _, ut).call(this);
-    return s._basePath = te(this._basePath, t), s;
+    const s = b(this, S, ut).call(this);
+    return s._basePath = se(this._basePath, t), s;
   }
-  mount(t, s, r) {
-    let i, a;
-    r && (typeof r == "function" ? a = r : (a = r.optionHandler, r.replaceRequest === false ? i = /* @__PURE__ */ __name((l) => l, "i") : i = r.replaceRequest));
+  mount(t, s, i) {
+    let r, a;
+    i && (typeof i == "function" ? a = i : (a = i.optionHandler, i.replaceRequest === false ? r = /* @__PURE__ */ __name((l) => l, "r") : r = i.replaceRequest));
     const n = a ? (l) => {
       const c = a(l);
       return Array.isArray(c) ? c : [c];
@@ -1408,33 +1408,33 @@ var ct = (Be = class {
       }
       return [l.env, c];
     };
-    i || (i = (() => {
-      const l = te(this._basePath, t), c = l === "/" ? 0 : l.length;
+    r || (r = (() => {
+      const l = se(this._basePath, t), c = l === "/" ? 0 : l.length;
       return (u) => {
         const f = new URL(u.url);
         return f.pathname = f.pathname.slice(c) || "/", new Request(f, u);
       };
     })());
     const d = /* @__PURE__ */ __name(async (l, c) => {
-      const u = await s(i(l.req.raw), ...n(l));
+      const u = await s(r(l.req.raw), ...n(l));
       if (u) return u;
       await c();
     }, "d");
-    return h(this, _, B).call(this, w, te(t, "*"), d), this;
+    return b(this, S, K).call(this, w, se(t, "*"), d), this;
   }
-}, q = /* @__PURE__ */ new WeakMap(), _ = /* @__PURE__ */ new WeakSet(), ut = /* @__PURE__ */ __name(function() {
+}, C = /* @__PURE__ */ new WeakMap(), S = /* @__PURE__ */ new WeakSet(), ut = /* @__PURE__ */ __name(function() {
   const t = new ct({ router: this.router, getPath: this.getPath });
   return t.errorHandler = this.errorHandler, m(t, T, o(this, T)), t.routes = this.routes, t;
-}, "ut"), T = /* @__PURE__ */ new WeakMap(), B = /* @__PURE__ */ __name(function(t, s, r) {
-  t = t.toUpperCase(), s = te(this._basePath, s);
-  const i = { basePath: this._basePath, path: s, method: t, handler: r };
-  this.router.add(t, s, [r, i]), this.routes.push(i);
-}, "B"), Ae = /* @__PURE__ */ __name(function(t, s) {
+}, "ut"), T = /* @__PURE__ */ new WeakMap(), K = /* @__PURE__ */ __name(function(t, s, i) {
+  t = t.toUpperCase(), s = se(this._basePath, s);
+  const r = { basePath: this._basePath, path: s, method: t, handler: i };
+  this.router.add(t, s, [i, r]), this.routes.push(r);
+}, "K"), Ae = /* @__PURE__ */ __name(function(t, s) {
   if (t instanceof Error) return this.errorHandler(t, s);
   throw t;
-}, "Ae"), Se = /* @__PURE__ */ __name(function(t, s, r, i) {
-  if (i === "HEAD") return (async () => new Response(null, await h(this, _, Se).call(this, t, s, r, "GET")))();
-  const a = this.getPath(t, { env: r }), n = this.router.match(i, a), d = new Nt(t, { path: a, matchResult: n, env: r, executionCtx: s, notFoundHandler: o(this, T) });
+}, "Ae"), _e = /* @__PURE__ */ __name(function(t, s, i, r) {
+  if (r === "HEAD") return (async () => new Response(null, await b(this, S, _e).call(this, t, s, i, "GET")))();
+  const a = this.getPath(t, { env: i }), n = this.router.match(r, a), d = new zt(t, { path: a, matchResult: n, env: i, executionCtx: s, notFoundHandler: o(this, T) });
   if (n[0].length === 1) {
     let c;
     try {
@@ -1442,48 +1442,48 @@ var ct = (Be = class {
         d.res = await o(this, T).call(this, d);
       });
     } catch (u) {
-      return h(this, _, Ae).call(this, u, d);
+      return b(this, S, Ae).call(this, u, d);
     }
-    return c instanceof Promise ? c.then((u) => u || (d.finalized ? d.res : o(this, T).call(this, d))).catch((u) => h(this, _, Ae).call(this, u, d)) : c ?? o(this, T).call(this, d);
+    return c instanceof Promise ? c.then((u) => u || (d.finalized ? d.res : o(this, T).call(this, d))).catch((u) => b(this, S, Ae).call(this, u, d)) : c ?? o(this, T).call(this, d);
   }
-  const l = Ne(n[0], this.errorHandler, o(this, T));
+  const l = Oe(n[0], this.errorHandler, o(this, T));
   return (async () => {
     try {
       const c = await l(d);
       if (!c.finalized) throw new Error("Context is not finalized. Did you forget to return a Response object or `await next()`?");
       return c.res;
     } catch (c) {
-      return h(this, _, Ae).call(this, c, d);
+      return b(this, S, Ae).call(this, c, d);
     }
   })();
-}, "Se"), Be);
+}, "_e"), Ke);
 var Re = "[^/]+";
 var pe = ".*";
 var ge = "(?:|/.*)";
 var re = Symbol();
-var Ht = new Set(".\\+*[^]$()");
+var Bt = new Set(".\\+*[^]$()");
 function Kt(e, t) {
   return e.length === 1 ? t.length === 1 ? e < t ? -1 : 1 : -1 : t.length === 1 || e === pe || e === ge ? 1 : t === pe || t === ge ? -1 : e === Re ? 1 : t === Re ? -1 : e.length === t.length ? e < t ? -1 : 1 : t.length - e.length;
 }
 __name(Kt, "Kt");
-var V;
 var W;
-var G;
-var Qe;
-var Me = (Qe = class {
+var U;
+var q;
+var Ve;
+var Me = (Ve = class {
   static {
-    __name(this, "Qe");
+    __name(this, "Ve");
   }
   constructor() {
-    x(this, V);
     x(this, W);
-    x(this, G, /* @__PURE__ */ Object.create(null));
+    x(this, U);
+    x(this, q, /* @__PURE__ */ Object.create(null));
   }
-  insert(t, s, r, i, a) {
+  insert(t, s, i, r, a) {
     if (t.length === 0) {
-      if (o(this, V) !== void 0) throw re;
+      if (o(this, W) !== void 0) throw re;
       if (a) return;
-      m(this, V, s);
+      m(this, W, s);
       return;
     }
     const [n, ...d] = t, l = n === "*" ? d.length === 0 ? ["", "", pe] : ["", "", Re] : n === "/*" ? ["", "", ge] : n.match(/^\:([^\{\}]+)(?:\{(.+)\})?$/);
@@ -1492,65 +1492,65 @@ var Me = (Qe = class {
       const u = l[1];
       let f = l[2] || Re;
       if (u && l[2] && (f === ".*" || (f = f.replace(/^\((?!\?:)(?=[^)]+\)$)/, "(?:"), /\((?!\?:)/.test(f)))) throw re;
-      if (c = o(this, G)[f], !c) {
-        if (Object.keys(o(this, G)).some((g) => g !== pe && g !== ge)) throw re;
+      if (c = o(this, q)[f], !c) {
+        if (Object.keys(o(this, q)).some((g) => g !== pe && g !== ge)) throw re;
         if (a) return;
-        c = o(this, G)[f] = new Me(), u !== "" && m(c, W, i.varIndex++);
+        c = o(this, q)[f] = new Me(), u !== "" && m(c, U, r.varIndex++);
       }
-      !a && u !== "" && r.push([u, o(c, W)]);
-    } else if (c = o(this, G)[n], !c) {
-      if (Object.keys(o(this, G)).some((u) => u.length > 1 && u !== pe && u !== ge)) throw re;
+      !a && u !== "" && i.push([u, o(c, U)]);
+    } else if (c = o(this, q)[n], !c) {
+      if (Object.keys(o(this, q)).some((u) => u.length > 1 && u !== pe && u !== ge)) throw re;
       if (a) return;
-      c = o(this, G)[n] = new Me();
+      c = o(this, q)[n] = new Me();
     }
-    c.insert(d, s, r, i, a);
+    c.insert(d, s, i, r, a);
   }
   buildRegExpStr() {
-    const s = Object.keys(o(this, G)).sort(Kt).map((r) => {
-      const i = o(this, G)[r];
-      return (typeof o(i, W) == "number" ? `(${r})@${o(i, W)}` : Ht.has(r) ? `\\${r}` : r) + i.buildRegExpStr();
+    const s = Object.keys(o(this, q)).sort(Kt).map((i) => {
+      const r = o(this, q)[i];
+      return (typeof o(r, U) == "number" ? `(${i})@${o(r, U)}` : Bt.has(i) ? `\\${i}` : i) + r.buildRegExpStr();
     });
-    return typeof o(this, V) == "number" && s.unshift(`#${o(this, V)}`), s.length === 0 ? "" : s.length === 1 ? s[0] : "(?:" + s.join("|") + ")";
+    return typeof o(this, W) == "number" && s.unshift(`#${o(this, W)}`), s.length === 0 ? "" : s.length === 1 ? s[0] : "(?:" + s.join("|") + ")";
   }
-}, V = /* @__PURE__ */ new WeakMap(), W = /* @__PURE__ */ new WeakMap(), G = /* @__PURE__ */ new WeakMap(), Qe);
+}, W = /* @__PURE__ */ new WeakMap(), U = /* @__PURE__ */ new WeakMap(), q = /* @__PURE__ */ new WeakMap(), Ve);
 var Ee;
 var we;
-var Ue;
-var Bt = (Ue = class {
+var Qe;
+var Vt = (Qe = class {
   static {
-    __name(this, "Ue");
+    __name(this, "Qe");
   }
   constructor() {
     x(this, Ee, { varIndex: 0 });
     x(this, we, new Me());
   }
   insert(e, t, s) {
-    const r = [], i = [];
+    const i = [], r = [];
     for (let n = 0; ; ) {
       let d = false;
       if (e = e.replace(/\{[^}]+\}/g, (l) => {
         const c = `@\\${n}`;
-        return i[n] = [c, l], n++, d = true, c;
+        return r[n] = [c, l], n++, d = true, c;
       }), !d) break;
     }
     const a = e.match(/(?::[^\/]+)|(?:\/\*$)|./g) || [];
-    for (let n = i.length - 1; n >= 0; n--) {
-      const [d] = i[n];
+    for (let n = r.length - 1; n >= 0; n--) {
+      const [d] = r[n];
       for (let l = a.length - 1; l >= 0; l--) if (a[l].indexOf(d) !== -1) {
-        a[l] = a[l].replace(d, i[n][1]);
+        a[l] = a[l].replace(d, r[n][1]);
         break;
       }
     }
-    return o(this, we).insert(a, t, r, o(this, Ee), s), r;
+    return o(this, we).insert(a, t, i, o(this, Ee), s), i;
   }
   buildRegExp() {
     let e = o(this, we).buildRegExpStr();
     if (e === "") return [/^$/, [], []];
     let t = 0;
-    const s = [], r = [];
-    return e = e.replace(/#(\d+)|@(\d+)|\.\*\$/g, (i, a, n) => a !== void 0 ? (s[++t] = Number(a), "$()") : (n !== void 0 && (r[Number(n)] = ++t), "")), [new RegExp(`^${e}`), s, r];
+    const s = [], i = [];
+    return e = e.replace(/#(\d+)|@(\d+)|\.\*\$/g, (r, a, n) => a !== void 0 ? (s[++t] = Number(a), "$()") : (n !== void 0 && (i[Number(n)] = ++t), "")), [new RegExp(`^${e}`), s, i];
   }
-}, Ee = /* @__PURE__ */ new WeakMap(), we = /* @__PURE__ */ new WeakMap(), Ue);
+}, Ee = /* @__PURE__ */ new WeakMap(), we = /* @__PURE__ */ new WeakMap(), Qe);
 var ft = [];
 var Qt = [/^$/, [], /* @__PURE__ */ Object.create(null)];
 var ke = /* @__PURE__ */ Object.create(null);
@@ -1558,29 +1558,29 @@ function mt(e) {
   return ke[e] ?? (ke[e] = new RegExp(e === "*" ? "" : `^${e.replace(/\/\*$|([.\\+*[^\]$()])/g, (t, s) => s ? `\\${s}` : "(?:|/.*)")}$`));
 }
 __name(mt, "mt");
-function Ut() {
+function Wt() {
   ke = /* @__PURE__ */ Object.create(null);
 }
-__name(Ut, "Ut");
-function Vt(e) {
+__name(Wt, "Wt");
+function Ut(e) {
   var c;
-  const t = new Bt(), s = [];
+  const t = new Vt(), s = [];
   if (e.length === 0) return Qt;
-  const r = e.map((u) => [!/\*|\/:/.test(u[0]), ...u]).sort(([u, f], [g, y]) => u ? 1 : g ? -1 : f.length - y.length), i = /* @__PURE__ */ Object.create(null);
-  for (let u = 0, f = -1, g = r.length; u < g; u++) {
-    const [y, E, b] = r[u];
-    y ? i[E] = [b.map(([k]) => [k, /* @__PURE__ */ Object.create(null)]), ft] : f++;
+  const i = e.map((u) => [!/\*|\/:/.test(u[0]), ...u]).sort(([u, f], [g, y]) => u ? 1 : g ? -1 : f.length - y.length), r = /* @__PURE__ */ Object.create(null);
+  for (let u = 0, f = -1, g = i.length; u < g; u++) {
+    const [y, E, h] = i[u];
+    y ? r[E] = [h.map(([k]) => [k, /* @__PURE__ */ Object.create(null)]), ft] : f++;
     let v;
     try {
       v = t.insert(E, f, y);
     } catch (k) {
       throw k === re ? new dt(E) : k;
     }
-    y || (s[f] = b.map(([k, Z]) => {
+    y || (s[f] = h.map(([k, ee]) => {
       const ue = /* @__PURE__ */ Object.create(null);
-      for (Z -= 1; Z >= 0; Z--) {
-        const [I, Ce] = v[Z];
-        ue[I] = Ce;
+      for (ee -= 1; ee >= 0; ee--) {
+        const [P, Ie] = v[ee];
+        ue[P] = Ie;
       }
       return [k, ue];
     }));
@@ -1589,42 +1589,42 @@ function Vt(e) {
   for (let u = 0, f = s.length; u < f; u++) for (let g = 0, y = s[u].length; g < y; g++) {
     const E = (c = s[u][g]) == null ? void 0 : c[1];
     if (!E) continue;
-    const b = Object.keys(E);
-    for (let v = 0, k = b.length; v < k; v++) E[b[v]] = d[E[b[v]]];
+    const h = Object.keys(E);
+    for (let v = 0, k = h.length; v < k; v++) E[h[v]] = d[E[h[v]]];
   }
   const l = [];
   for (const u in n) l[u] = s[n[u]];
-  return [a, l, i];
+  return [a, l, r];
 }
-__name(Vt, "Vt");
-function ee(e, t) {
+__name(Ut, "Ut");
+function te(e, t) {
   if (e) {
-    for (const s of Object.keys(e).sort((r, i) => i.length - r.length)) if (mt(s).test(t)) return [...e[s]];
+    for (const s of Object.keys(e).sort((i, r) => r.length - i.length)) if (mt(s).test(t)) return [...e[s]];
   }
 }
-__name(ee, "ee");
+__name(te, "te");
 var Y;
-var $;
-var de;
+var H;
+var ce;
 var pt;
 var gt;
-var Ve;
-var Wt = (Ve = class {
+var We;
+var Xt = (We = class {
   static {
-    __name(this, "Ve");
+    __name(this, "We");
   }
   constructor() {
-    x(this, de);
+    x(this, ce);
     p(this, "name", "RegExpRouter");
     x(this, Y);
-    x(this, $);
-    m(this, Y, { [w]: /* @__PURE__ */ Object.create(null) }), m(this, $, { [w]: /* @__PURE__ */ Object.create(null) });
+    x(this, H);
+    m(this, Y, { [w]: /* @__PURE__ */ Object.create(null) }), m(this, H, { [w]: /* @__PURE__ */ Object.create(null) });
   }
   add(e, t, s) {
     var d;
-    const r = o(this, Y), i = o(this, $);
-    if (!r || !i) throw new Error(lt);
-    r[e] || [r, i].forEach((l) => {
+    const i = o(this, Y), r = o(this, H);
+    if (!i || !r) throw new Error(lt);
+    i[e] || [i, r].forEach((l) => {
       l[e] = /* @__PURE__ */ Object.create(null), Object.keys(l[w]).forEach((c) => {
         l[e][c] = [...l[w][c]];
       });
@@ -1632,186 +1632,186 @@ var Wt = (Ve = class {
     const a = (t.match(/\/:/g) || []).length;
     if (/\*$/.test(t)) {
       const l = mt(t);
-      e === w ? Object.keys(r).forEach((c) => {
+      e === w ? Object.keys(i).forEach((c) => {
         var u;
-        (u = r[c])[t] || (u[t] = ee(r[c], t) || ee(r[w], t) || []);
-      }) : (d = r[e])[t] || (d[t] = ee(r[e], t) || ee(r[w], t) || []), Object.keys(r).forEach((c) => {
-        (e === w || e === c) && Object.keys(r[c]).forEach((u) => {
-          l.test(u) && r[c][u].push([s, a]);
+        (u = i[c])[t] || (u[t] = te(i[c], t) || te(i[w], t) || []);
+      }) : (d = i[e])[t] || (d[t] = te(i[e], t) || te(i[w], t) || []), Object.keys(i).forEach((c) => {
+        (e === w || e === c) && Object.keys(i[c]).forEach((u) => {
+          l.test(u) && i[c][u].push([s, a]);
         });
-      }), Object.keys(i).forEach((c) => {
-        (e === w || e === c) && Object.keys(i[c]).forEach((u) => l.test(u) && i[c][u].push([s, a]));
+      }), Object.keys(r).forEach((c) => {
+        (e === w || e === c) && Object.keys(r[c]).forEach((u) => l.test(u) && r[c][u].push([s, a]));
       });
       return;
     }
     const n = tt(t) || [t];
     for (let l = 0, c = n.length; l < c; l++) {
       const u = n[l];
-      Object.keys(i).forEach((f) => {
+      Object.keys(r).forEach((f) => {
         var g;
-        (e === w || e === f) && ((g = i[f])[u] || (g[u] = [...ee(r[f], u) || ee(r[w], u) || []]), i[f][u].push([s, a - c + l + 1]));
+        (e === w || e === f) && ((g = r[f])[u] || (g[u] = [...te(i[f], u) || te(i[w], u) || []]), r[f][u].push([s, a - c + l + 1]));
       });
     }
   }
   match(e, t) {
-    Ut();
-    const s = h(this, de, pt).call(this);
-    return this.match = (r, i) => {
-      const a = s[r] || s[w], n = a[2][i];
+    Wt();
+    const s = b(this, ce, pt).call(this);
+    return this.match = (i, r) => {
+      const a = s[i] || s[w], n = a[2][r];
       if (n) return n;
-      const d = i.match(a[0]);
+      const d = r.match(a[0]);
       if (!d) return [[], ft];
       const l = d.indexOf("", 1);
       return [a[1][l], d];
     }, this.match(e, t);
   }
-}, Y = /* @__PURE__ */ new WeakMap(), $ = /* @__PURE__ */ new WeakMap(), de = /* @__PURE__ */ new WeakSet(), pt = /* @__PURE__ */ __name(function() {
+}, Y = /* @__PURE__ */ new WeakMap(), H = /* @__PURE__ */ new WeakMap(), ce = /* @__PURE__ */ new WeakSet(), pt = /* @__PURE__ */ __name(function() {
   const e = /* @__PURE__ */ Object.create(null);
-  return Object.keys(o(this, $)).concat(Object.keys(o(this, Y))).forEach((t) => {
-    e[t] || (e[t] = h(this, de, gt).call(this, t));
-  }), m(this, Y, m(this, $, void 0)), e;
+  return Object.keys(o(this, H)).concat(Object.keys(o(this, Y))).forEach((t) => {
+    e[t] || (e[t] = b(this, ce, gt).call(this, t));
+  }), m(this, Y, m(this, H, void 0)), e;
 }, "pt"), gt = /* @__PURE__ */ __name(function(e) {
   const t = [];
   let s = e === w;
-  return [o(this, Y), o(this, $)].forEach((r) => {
-    const i = r[e] ? Object.keys(r[e]).map((a) => [a, r[e][a]]) : [];
-    i.length !== 0 ? (s || (s = true), t.push(...i)) : e !== w && t.push(...Object.keys(r[w]).map((a) => [a, r[w][a]]));
-  }), s ? Vt(t) : null;
-}, "gt"), Ve);
-var H;
-var O;
-var We;
-var Xt = (We = class {
+  return [o(this, Y), o(this, H)].forEach((i) => {
+    const r = i[e] ? Object.keys(i[e]).map((a) => [a, i[e][a]]) : [];
+    r.length !== 0 ? (s || (s = true), t.push(...r)) : e !== w && t.push(...Object.keys(i[w]).map((a) => [a, i[w][a]]));
+  }), s ? Ut(t) : null;
+}, "gt"), We);
+var $;
+var j;
+var Ue;
+var Jt = (Ue = class {
   static {
-    __name(this, "We");
+    __name(this, "Ue");
   }
   constructor(e) {
     p(this, "name", "SmartRouter");
-    x(this, H, []);
-    x(this, O, []);
-    m(this, H, e.routers);
+    x(this, $, []);
+    x(this, j, []);
+    m(this, $, e.routers);
   }
   add(e, t, s) {
-    if (!o(this, O)) throw new Error(lt);
-    o(this, O).push([e, t, s]);
+    if (!o(this, j)) throw new Error(lt);
+    o(this, j).push([e, t, s]);
   }
   match(e, t) {
-    if (!o(this, O)) throw new Error("Fatal error");
-    const s = o(this, H), r = o(this, O), i = s.length;
+    if (!o(this, j)) throw new Error("Fatal error");
+    const s = o(this, $), i = o(this, j), r = s.length;
     let a = 0, n;
-    for (; a < i; a++) {
+    for (; a < r; a++) {
       const d = s[a];
       try {
-        for (let l = 0, c = r.length; l < c; l++) d.add(...r[l]);
+        for (let l = 0, c = i.length; l < c; l++) d.add(...i[l]);
         n = d.match(e, t);
       } catch (l) {
         if (l instanceof dt) continue;
         throw l;
       }
-      this.match = d.match.bind(d), m(this, H, [d]), m(this, O, void 0);
+      this.match = d.match.bind(d), m(this, $, [d]), m(this, j, void 0);
       break;
     }
-    if (a === i) throw new Error("Fatal error");
+    if (a === r) throw new Error("Fatal error");
     return this.name = `SmartRouter + ${this.activeRouter.name}`, n;
   }
   get activeRouter() {
-    if (o(this, O) || o(this, H).length !== 1) throw new Error("No active router has been determined yet.");
-    return o(this, H)[0];
+    if (o(this, j) || o(this, $).length !== 1) throw new Error("No active router has been determined yet.");
+    return o(this, $)[0];
   }
-}, H = /* @__PURE__ */ new WeakMap(), O = /* @__PURE__ */ new WeakMap(), We);
+}, $ = /* @__PURE__ */ new WeakMap(), j = /* @__PURE__ */ new WeakMap(), Ue);
 var me = /* @__PURE__ */ Object.create(null);
-var K;
-var S;
+var B;
+var _;
 var X;
-var le;
+var de;
 var A;
-var z;
-var Q;
+var F;
+var V;
 var Xe;
 var xt = (Xe = class {
   static {
     __name(this, "Xe");
   }
   constructor(e, t, s) {
-    x(this, z);
-    x(this, K);
-    x(this, S);
+    x(this, F);
+    x(this, B);
+    x(this, _);
     x(this, X);
-    x(this, le, 0);
+    x(this, de, 0);
     x(this, A, me);
-    if (m(this, S, s || /* @__PURE__ */ Object.create(null)), m(this, K, []), e && t) {
-      const r = /* @__PURE__ */ Object.create(null);
-      r[e] = { handler: t, possibleKeys: [], score: 0 }, m(this, K, [r]);
+    if (m(this, _, s || /* @__PURE__ */ Object.create(null)), m(this, B, []), e && t) {
+      const i = /* @__PURE__ */ Object.create(null);
+      i[e] = { handler: t, possibleKeys: [], score: 0 }, m(this, B, [i]);
     }
     m(this, X, []);
   }
   insert(e, t, s) {
-    m(this, le, ++De(this, le)._);
-    let r = this;
-    const i = qt(t), a = [];
-    for (let n = 0, d = i.length; n < d; n++) {
-      const l = i[n], c = i[n + 1], u = It(l, c), f = Array.isArray(u) ? u[0] : l;
-      if (f in o(r, S)) {
-        r = o(r, S)[f], u && a.push(u[1]);
+    m(this, de, ++De(this, de)._);
+    let i = this;
+    const r = Tt(t), a = [];
+    for (let n = 0, d = r.length; n < d; n++) {
+      const l = r[n], c = r[n + 1], u = Gt(l, c), f = Array.isArray(u) ? u[0] : l;
+      if (f in o(i, _)) {
+        i = o(i, _)[f], u && a.push(u[1]);
         continue;
       }
-      o(r, S)[f] = new xt(), u && (o(r, X).push(u), a.push(u[1])), r = o(r, S)[f];
+      o(i, _)[f] = new xt(), u && (o(i, X).push(u), a.push(u[1])), i = o(i, _)[f];
     }
-    return o(r, K).push({ [e]: { handler: s, possibleKeys: a.filter((n, d, l) => l.indexOf(n) === d), score: o(this, le) } }), r;
+    return o(i, B).push({ [e]: { handler: s, possibleKeys: a.filter((n, d, l) => l.indexOf(n) === d), score: o(this, de) } }), i;
   }
   search(e, t) {
     var d;
     const s = [];
     m(this, A, me);
-    let i = [this];
+    let r = [this];
     const a = Ze(t), n = [];
     for (let l = 0, c = a.length; l < c; l++) {
       const u = a[l], f = l === c - 1, g = [];
-      for (let y = 0, E = i.length; y < E; y++) {
-        const b = i[y], v = o(b, S)[u];
-        v && (m(v, A, o(b, A)), f ? (o(v, S)["*"] && s.push(...h(this, z, Q).call(this, o(v, S)["*"], e, o(b, A))), s.push(...h(this, z, Q).call(this, v, e, o(b, A)))) : g.push(v));
-        for (let k = 0, Z = o(b, X).length; k < Z; k++) {
-          const ue = o(b, X)[k], I = o(b, A) === me ? {} : { ...o(b, A) };
+      for (let y = 0, E = r.length; y < E; y++) {
+        const h = r[y], v = o(h, _)[u];
+        v && (m(v, A, o(h, A)), f ? (o(v, _)["*"] && s.push(...b(this, F, V).call(this, o(v, _)["*"], e, o(h, A))), s.push(...b(this, F, V).call(this, v, e, o(h, A)))) : g.push(v));
+        for (let k = 0, ee = o(h, X).length; k < ee; k++) {
+          const ue = o(h, X)[k], P = o(h, A) === me ? {} : { ...o(h, A) };
           if (ue === "*") {
-            const N = o(b, S)["*"];
-            N && (s.push(...h(this, z, Q).call(this, N, e, o(b, A))), m(N, A, I), g.push(N));
+            const O = o(h, _)["*"];
+            O && (s.push(...b(this, F, V).call(this, O, e, o(h, A))), m(O, A, P), g.push(O));
             continue;
           }
-          const [Ce, Oe, fe] = ue;
+          const [Ie, je, fe] = ue;
           if (!u && !(fe instanceof RegExp)) continue;
-          const P = o(b, S)[Ce], yt = a.slice(l).join("/");
+          const G = o(h, _)[Ie], wt = a.slice(l).join("/");
           if (fe instanceof RegExp) {
-            const N = fe.exec(yt);
-            if (N) {
-              if (I[Oe] = N[0], s.push(...h(this, z, Q).call(this, P, e, o(b, A), I)), Object.keys(o(P, S)).length) {
-                m(P, A, I);
-                const qe = ((d = N[0].match(/\//)) == null ? void 0 : d.length) ?? 0;
-                (n[qe] || (n[qe] = [])).push(P);
+            const O = fe.exec(wt);
+            if (O) {
+              if (P[je] = O[0], s.push(...b(this, F, V).call(this, G, e, o(h, A), P)), Object.keys(o(G, _)).length) {
+                m(G, A, P);
+                const Ce = ((d = O[0].match(/\//)) == null ? void 0 : d.length) ?? 0;
+                (n[Ce] || (n[Ce] = [])).push(G);
               }
               continue;
             }
           }
-          (fe === true || fe.test(u)) && (I[Oe] = u, f ? (s.push(...h(this, z, Q).call(this, P, e, I, o(b, A))), o(P, S)["*"] && s.push(...h(this, z, Q).call(this, o(P, S)["*"], e, I, o(b, A)))) : (m(P, A, I), g.push(P)));
+          (fe === true || fe.test(u)) && (P[je] = u, f ? (s.push(...b(this, F, V).call(this, G, e, P, o(h, A))), o(G, _)["*"] && s.push(...b(this, F, V).call(this, o(G, _)["*"], e, P, o(h, A)))) : (m(G, A, P), g.push(G)));
         }
       }
-      i = g.concat(n.shift() ?? []);
+      r = g.concat(n.shift() ?? []);
     }
     return s.length > 1 && s.sort((l, c) => l.score - c.score), [s.map(({ handler: l, params: c }) => [l, c])];
   }
-}, K = /* @__PURE__ */ new WeakMap(), S = /* @__PURE__ */ new WeakMap(), X = /* @__PURE__ */ new WeakMap(), le = /* @__PURE__ */ new WeakMap(), A = /* @__PURE__ */ new WeakMap(), z = /* @__PURE__ */ new WeakSet(), Q = /* @__PURE__ */ __name(function(e, t, s, r) {
-  const i = [];
-  for (let a = 0, n = o(e, K).length; a < n; a++) {
-    const d = o(e, K)[a], l = d[t] || d[w], c = {};
-    if (l !== void 0 && (l.params = /* @__PURE__ */ Object.create(null), i.push(l), s !== me || r && r !== me)) for (let u = 0, f = l.possibleKeys.length; u < f; u++) {
+}, B = /* @__PURE__ */ new WeakMap(), _ = /* @__PURE__ */ new WeakMap(), X = /* @__PURE__ */ new WeakMap(), de = /* @__PURE__ */ new WeakMap(), A = /* @__PURE__ */ new WeakMap(), F = /* @__PURE__ */ new WeakSet(), V = /* @__PURE__ */ __name(function(e, t, s, i) {
+  const r = [];
+  for (let a = 0, n = o(e, B).length; a < n; a++) {
+    const d = o(e, B)[a], l = d[t] || d[w], c = {};
+    if (l !== void 0 && (l.params = /* @__PURE__ */ Object.create(null), r.push(l), s !== me || i && i !== me)) for (let u = 0, f = l.possibleKeys.length; u < f; u++) {
       const g = l.possibleKeys[u], y = c[l.score];
-      l.params[g] = r != null && r[g] && !y ? r[g] : s[g] ?? (r == null ? void 0 : r[g]), c[l.score] = true;
+      l.params[g] = i != null && i[g] && !y ? i[g] : s[g] ?? (i == null ? void 0 : i[g]), c[l.score] = true;
     }
   }
-  return i;
-}, "Q"), Xe);
+  return r;
+}, "V"), Xe);
 var J;
 var Je;
-var Jt = (Je = class {
+var Zt = (Je = class {
   static {
     __name(this, "Je");
   }
@@ -1821,9 +1821,9 @@ var Jt = (Je = class {
     m(this, J, new xt());
   }
   add(e, t, s) {
-    const r = tt(t);
-    if (r) {
-      for (let i = 0, a = r.length; i < a; i++) o(this, J).insert(e, r[i], s);
+    const i = tt(t);
+    if (i) {
+      for (let r = 0, a = i.length; r < a; r++) o(this, J).insert(e, i[r], s);
       return;
     }
     o(this, J).insert(e, t, s);
@@ -1832,30 +1832,30 @@ var Jt = (Je = class {
     return o(this, J).search(e, t);
   }
 }, J = /* @__PURE__ */ new WeakMap(), Je);
-var ht = class extends ct {
+var bt = class extends ct {
   static {
-    __name(this, "ht");
+    __name(this, "bt");
   }
   constructor(e = {}) {
-    super(e), this.router = e.router ?? new Xt({ routers: [new Wt(), new Jt()] });
+    super(e), this.router = e.router ?? new Jt({ routers: [new Xt(), new Zt()] });
   }
 };
-var Zt = /* @__PURE__ */ __name((e) => {
-  const s = { ...{ origin: "*", allowMethods: ["GET", "HEAD", "PUT", "POST", "DELETE", "PATCH"], allowHeaders: [], exposeHeaders: [] }, ...e }, r = /* @__PURE__ */ ((a) => typeof a == "string" ? a === "*" ? () => a : (n) => a === n ? n : null : typeof a == "function" ? a : (n) => a.includes(n) ? n : null)(s.origin), i = ((a) => typeof a == "function" ? a : Array.isArray(a) ? () => a : () => [])(s.allowMethods);
+var es = /* @__PURE__ */ __name((e) => {
+  const s = { ...{ origin: "*", allowMethods: ["GET", "HEAD", "PUT", "POST", "DELETE", "PATCH"], allowHeaders: [], exposeHeaders: [] }, ...e }, i = /* @__PURE__ */ ((a) => typeof a == "string" ? a === "*" ? () => a : (n) => a === n ? n : null : typeof a == "function" ? a : (n) => a.includes(n) ? n : null)(s.origin), r = ((a) => typeof a == "function" ? a : Array.isArray(a) ? () => a : () => [])(s.allowMethods);
   return async function(n, d) {
     var u;
     function l(f, g) {
       n.res.headers.set(f, g);
     }
     __name(l, "l");
-    const c = await r(n.req.header("origin") || "", n);
+    const c = await i(n.req.header("origin") || "", n);
     if (c && l("Access-Control-Allow-Origin", c), s.origin !== "*") {
       const f = n.req.header("Vary");
       f ? l("Vary", f) : l("Vary", "Origin");
     }
     if (s.credentials && l("Access-Control-Allow-Credentials", "true"), (u = s.exposeHeaders) != null && u.length && l("Access-Control-Expose-Headers", s.exposeHeaders.join(",")), n.req.method === "OPTIONS") {
       s.maxAge != null && l("Access-Control-Max-Age", s.maxAge.toString());
-      const f = await i(n.req.header("origin") || "", n);
+      const f = await r(n.req.header("origin") || "", n);
       f.length && l("Access-Control-Allow-Methods", f.join(","));
       let g = s.allowHeaders;
       if (!(g != null && g.length)) {
@@ -1866,79 +1866,80 @@ var Zt = /* @__PURE__ */ __name((e) => {
     }
     await d();
   };
-}, "Zt");
-var es = /^\s*(?:text\/(?!event-stream(?:[;\s]|$))[^;\s]+|application\/(?:javascript|json|xml|xml-dtd|ecmascript|dart|postscript|rtf|tar|toml|vnd\.dart|vnd\.ms-fontobject|vnd\.ms-opentype|wasm|x-httpd-php|x-javascript|x-ns-proxy-autoconfig|x-sh|x-tar|x-virtualbox-hdd|x-virtualbox-ova|x-virtualbox-ovf|x-virtualbox-vbox|x-virtualbox-vdi|x-virtualbox-vhd|x-virtualbox-vmdk|x-www-form-urlencoded)|font\/(?:otf|ttf)|image\/(?:bmp|vnd\.adobe\.photoshop|vnd\.microsoft\.icon|vnd\.ms-dds|x-icon|x-ms-bmp)|message\/rfc822|model\/gltf-binary|x-shader\/x-fragment|x-shader\/x-vertex|[^;\s]+?\+(?:json|text|xml|yaml))(?:[;\s]|$)/i;
-var Ye = /* @__PURE__ */ __name((e, t = ss) => {
-  const s = /\.([a-zA-Z0-9]+?)$/, r = e.match(s);
-  if (!r) return;
-  let i = t[r[1]];
-  return i && i.startsWith("text") && (i += "; charset=utf-8"), i;
+}, "es");
+var ts = /^\s*(?:text\/(?!event-stream(?:[;\s]|$))[^;\s]+|application\/(?:javascript|json|xml|xml-dtd|ecmascript|dart|postscript|rtf|tar|toml|vnd\.dart|vnd\.ms-fontobject|vnd\.ms-opentype|wasm|x-httpd-php|x-javascript|x-ns-proxy-autoconfig|x-sh|x-tar|x-virtualbox-hdd|x-virtualbox-ova|x-virtualbox-ovf|x-virtualbox-vbox|x-virtualbox-vdi|x-virtualbox-vhd|x-virtualbox-vmdk|x-www-form-urlencoded)|font\/(?:otf|ttf)|image\/(?:bmp|vnd\.adobe\.photoshop|vnd\.microsoft\.icon|vnd\.ms-dds|x-icon|x-ms-bmp)|message\/rfc822|model\/gltf-binary|x-shader\/x-fragment|x-shader\/x-vertex|[^;\s]+?\+(?:json|text|xml|yaml))(?:[;\s]|$)/i;
+var Ye = /* @__PURE__ */ __name((e, t = is) => {
+  const s = /\.([a-zA-Z0-9]+?)$/, i = e.match(s);
+  if (!i) return;
+  let r = t[i[1]];
+  return r && r.startsWith("text") && (r += "; charset=utf-8"), r;
 }, "Ye");
-var ts = { aac: "audio/aac", avi: "video/x-msvideo", avif: "image/avif", av1: "video/av1", bin: "application/octet-stream", bmp: "image/bmp", css: "text/css", csv: "text/csv", eot: "application/vnd.ms-fontobject", epub: "application/epub+zip", gif: "image/gif", gz: "application/gzip", htm: "text/html", html: "text/html", ico: "image/x-icon", ics: "text/calendar", jpeg: "image/jpeg", jpg: "image/jpeg", js: "text/javascript", json: "application/json", jsonld: "application/ld+json", map: "application/json", mid: "audio/x-midi", midi: "audio/x-midi", mjs: "text/javascript", mp3: "audio/mpeg", mp4: "video/mp4", mpeg: "video/mpeg", oga: "audio/ogg", ogv: "video/ogg", ogx: "application/ogg", opus: "audio/opus", otf: "font/otf", pdf: "application/pdf", png: "image/png", rtf: "application/rtf", svg: "image/svg+xml", tif: "image/tiff", tiff: "image/tiff", ts: "video/mp2t", ttf: "font/ttf", txt: "text/plain", wasm: "application/wasm", webm: "video/webm", weba: "audio/webm", webmanifest: "application/manifest+json", webp: "image/webp", woff: "font/woff", woff2: "font/woff2", xhtml: "application/xhtml+xml", xml: "application/xml", zip: "application/zip", "3gp": "video/3gpp", "3g2": "video/3gpp2", gltf: "model/gltf+json", glb: "model/gltf-binary" };
-var ss = ts;
+var ss = { aac: "audio/aac", avi: "video/x-msvideo", avif: "image/avif", av1: "video/av1", bin: "application/octet-stream", bmp: "image/bmp", css: "text/css", csv: "text/csv", eot: "application/vnd.ms-fontobject", epub: "application/epub+zip", gif: "image/gif", gz: "application/gzip", htm: "text/html", html: "text/html", ico: "image/x-icon", ics: "text/calendar", jpeg: "image/jpeg", jpg: "image/jpeg", js: "text/javascript", json: "application/json", jsonld: "application/ld+json", map: "application/json", mid: "audio/x-midi", midi: "audio/x-midi", mjs: "text/javascript", mp3: "audio/mpeg", mp4: "video/mp4", mpeg: "video/mpeg", oga: "audio/ogg", ogv: "video/ogg", ogx: "application/ogg", opus: "audio/opus", otf: "font/otf", pdf: "application/pdf", png: "image/png", rtf: "application/rtf", svg: "image/svg+xml", tif: "image/tiff", tiff: "image/tiff", ts: "video/mp2t", ttf: "font/ttf", txt: "text/plain", wasm: "application/wasm", webm: "video/webm", weba: "audio/webm", webmanifest: "application/manifest+json", webp: "image/webp", woff: "font/woff", woff2: "font/woff2", xhtml: "application/xhtml+xml", xml: "application/xml", zip: "application/zip", "3gp": "video/3gpp", "3g2": "video/3gpp2", gltf: "model/gltf+json", glb: "model/gltf-binary" };
+var is = ss;
 var rs = /* @__PURE__ */ __name((...e) => {
-  let t = e.filter((i) => i !== "").join("/");
+  let t = e.filter((r) => r !== "").join("/");
   t = t.replace(new RegExp("(?<=\\/)\\/+", "g"), "");
-  const s = t.split("/"), r = [];
-  for (const i of s) i === ".." && r.length > 0 && r.at(-1) !== ".." ? r.pop() : i !== "." && r.push(i);
-  return r.join("/") || ".";
+  const s = t.split("/"), i = [];
+  for (const r of s) r === ".." && i.length > 0 && i.at(-1) !== ".." ? i.pop() : r !== "." && i.push(r);
+  return i.join("/") || ".";
 }, "rs");
-var bt = { br: ".br", zstd: ".zst", gzip: ".gz" };
-var is = Object.keys(bt);
-var as = "index.html";
-var os = /* @__PURE__ */ __name((e) => {
-  const t = e.root ?? "./", s = e.path, r = e.join ?? rs;
-  return async (i, a) => {
+var ht = { br: ".br", zstd: ".zst", gzip: ".gz" };
+var as = Object.keys(ht);
+var os = "index.html";
+var ns = /* @__PURE__ */ __name((e) => {
+  const t = e.root ?? "./", s = e.path, i = e.join ?? rs;
+  return async (r, a) => {
     var u, f, g, y;
-    if (i.finalized) return a();
+    if (r.finalized) return a();
     let n;
     if (e.path) n = e.path;
     else try {
-      if (n = decodeURIComponent(i.req.path), /(?:^|[\/\\])\.\.(?:$|[\/\\])/.test(n)) throw new Error();
+      if (n = decodeURIComponent(r.req.path), /(?:^|[\/\\])\.\.(?:$|[\/\\])/.test(n)) throw new Error();
     } catch {
-      return await ((u = e.onNotFound) == null ? void 0 : u.call(e, i.req.path, i)), a();
+      return await ((u = e.onNotFound) == null ? void 0 : u.call(e, r.req.path, r)), a();
     }
-    let d = r(t, !s && e.rewriteRequestPath ? e.rewriteRequestPath(n) : n);
-    e.isDir && await e.isDir(d) && (d = r(d, as));
+    let d = i(t, !s && e.rewriteRequestPath ? e.rewriteRequestPath(n) : n);
+    e.isDir && await e.isDir(d) && (d = i(d, os));
     const l = e.getContent;
-    let c = await l(d, i);
-    if (c instanceof Response) return i.newResponse(c.body, c);
+    let c = await l(d, r);
+    if (c instanceof Response) return r.newResponse(c.body, c);
     if (c) {
       const E = e.mimes && Ye(d, e.mimes) || Ye(d);
-      if (i.header("Content-Type", E || "application/octet-stream"), e.precompressed && (!E || es.test(E))) {
-        const b = new Set((f = i.req.header("Accept-Encoding")) == null ? void 0 : f.split(",").map((v) => v.trim()));
-        for (const v of is) {
-          if (!b.has(v)) continue;
-          const k = await l(d + bt[v], i);
+      if (r.header("Content-Type", E || "application/octet-stream"), e.precompressed && (!E || ts.test(E))) {
+        const h = new Set((f = r.req.header("Accept-Encoding")) == null ? void 0 : f.split(",").map((v) => v.trim()));
+        for (const v of as) {
+          if (!h.has(v)) continue;
+          const k = await l(d + ht[v], r);
           if (k) {
-            c = k, i.header("Content-Encoding", v), i.header("Vary", "Accept-Encoding", { append: true });
+            c = k, r.header("Content-Encoding", v), r.header("Vary", "Accept-Encoding", { append: true });
             break;
           }
         }
       }
-      return await ((g = e.onFound) == null ? void 0 : g.call(e, d, i)), i.body(c);
+      return await ((g = e.onFound) == null ? void 0 : g.call(e, d, r)), r.body(c);
     }
-    await ((y = e.onNotFound) == null ? void 0 : y.call(e, d, i)), await a();
+    await ((y = e.onNotFound) == null ? void 0 : y.call(e, d, r)), await a();
   };
-}, "os");
-var ns = /* @__PURE__ */ __name(async (e, t) => {
+}, "ns");
+var ls = /* @__PURE__ */ __name(async (e, t) => {
   let s;
   t && t.manifest ? typeof t.manifest == "string" ? s = JSON.parse(t.manifest) : s = t.manifest : typeof __STATIC_CONTENT_MANIFEST == "string" ? s = JSON.parse(__STATIC_CONTENT_MANIFEST) : s = __STATIC_CONTENT_MANIFEST;
-  let r;
-  t && t.namespace ? r = t.namespace : r = __STATIC_CONTENT;
-  const i = s[e] || e;
-  if (!i) return null;
-  const a = await r.get(i, { type: "stream" });
+  let i;
+  t && t.namespace ? i = t.namespace : i = __STATIC_CONTENT;
+  const r = s[e] || e;
+  if (!r) return null;
+  const a = await i.get(r, { type: "stream" });
   return a || null;
-}, "ns");
-var ls = /* @__PURE__ */ __name((e) => async function(s, r) {
-  return os({ ...e, getContent: /* @__PURE__ */ __name(async (a) => ns(a, { manifest: e.manifest, namespace: e.namespace ? e.namespace : s.env ? s.env.__STATIC_CONTENT : void 0 }), "getContent") })(s, r);
 }, "ls");
-var ds = /* @__PURE__ */ __name((e) => ls(e), "ds");
-var ce = new ht();
-ce.use("/api/*", Zt());
-ce.use("/static/*", ds({ root: "./public" }));
-ce.get("/", (e) => e.html(`
+var ds = /* @__PURE__ */ __name((e) => async function(s, i) {
+  return ns({ ...e, getContent: /* @__PURE__ */ __name(async (a) => ls(a, { manifest: e.manifest, namespace: e.namespace ? e.namespace : s.env ? s.env.__STATIC_CONTENT : void 0 }), "getContent") })(s, i);
+}, "ds");
+var vt = /* @__PURE__ */ __name((e) => ds(e), "vt");
+var Z = new bt();
+Z.use("/api/*", es());
+Z.use("/static/*", vt({ root: "./" }));
+Z.use("*.html", vt({ root: "./" }));
+Z.get("/", (e) => e.html(`
     <!DOCTYPE html>
     <html lang="ru">
     <head>
@@ -4619,34 +4620,86 @@ if __name__ == "__main__":
     </body>
     </html>
   `));
-ce.get("/vector_databases_enhanced_guide.html", (e) => e.redirect("/vector_databases_enhanced_guide"));
-ce.get("/vector_databases_enhanced_guide", async (e) => e.html(`<!DOCTYPE html>
+Z.get("/vector_databases_enhanced_guide", (e) => e.html(`<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>\u{1F4DA} \u041F\u043E\u043B\u043D\u043E\u0435 \u0440\u0443\u043A\u043E\u0432\u043E\u0434\u0441\u0442\u0432\u043E \u043F\u043E \u0432\u0435\u043A\u0442\u043E\u0440\u043D\u044B\u043C \u0431\u0430\u0437\u0430\u043C \u0434\u0430\u043D\u043D\u044B\u0445 | FAISS, HNSW, Annoy</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>\u{1F4DA} \u041F\u043E\u043B\u043D\u043E\u0435 \u0440\u0443\u043A\u043E\u0432\u043E\u0434\u0441\u0442\u0432\u043E \u043F\u043E \u0432\u0435\u043A\u0442\u043E\u0440\u043D\u044B\u043C \u0431\u0430\u0437\u0430\u043C \u0434\u0430\u043D\u043D\u044B\u0445 | FAISS, HNSW, Annoy - \u0421\u0442\u0443\u0434\u0435\u043D\u0442\u0430\u043C 2024-2025</title>
+    <meta name="description" content="\u0418\u0441\u0447\u0435\u0440\u043F\u044B\u0432\u0430\u044E\u0449\u0435\u0435 \u0440\u0443\u043A\u043E\u0432\u043E\u0434\u0441\u0442\u0432\u043E \u043F\u043E \u0432\u0435\u043A\u0442\u043E\u0440\u043D\u044B\u043C \u0411\u0414: FAISS, HNSW, Annoy. \u0425\u0440\u043E\u043D\u043E\u043B\u043E\u0433\u0438\u044F 2013-2025, \u043F\u0440\u043E\u0432\u0435\u0440\u0435\u043D\u043D\u044B\u0435 \u0444\u0430\u043A\u0442\u044B, \u0431\u0435\u043D\u0447\u043C\u0430\u0440\u043A\u0438 SIFT1M, \u043F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u044B \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438. \u0414\u043B\u044F \u0441\u0442\u0443\u0434\u0435\u043D\u0442\u043E\u0432 \u0438 \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u0447\u0438\u043E\u0432.">
+    <meta name="keywords" content="\u0432\u0435\u043A\u0442\u043E\u0440\u043D\u044B\u0435 \u0431\u0430\u0437\u044B \u0434\u0430\u043D\u043D\u044B\u0445, FAISS, HNSW, Annoy, ANN \u043F\u043E\u0438\u0441\u043A, \u044D\u043C\u0431\u0435\u0434\u0434\u0438\u043D\u0433\u0438, \u043C\u0430\u0448\u0438\u043D\u043D\u043E\u0435 \u043E\u0431\u0443\u0447\u0435\u043D\u0438\u0435, Meta, Spotify, NVIDIA cuVS">
+    
+    <!-- External Libraries -->
     <script src="https://cdn.tailwindcss.com"><\/script>
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"><\/script>
+    
     <style>
-        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .section-padding { padding: 4rem 1rem; }
-        .card-shadow { box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        .code-block { 
-            background: #1a202c; color: #e2e8f0; border-radius: 8px; padding: 16px; 
-            font-family: 'Courier New', monospace; font-size: 14px; line-height: 1.4; overflow-x: auto; 
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
-        .timeline-item { position: relative; padding-left: 2rem; margin-bottom: 2rem; }
-        .timeline-item::before { 
-            content: ''; position: absolute; left: 0; top: 0.5rem; width: 1rem; height: 1rem; 
-            background: #4f46e5; border-radius: 50%; 
+        .section-padding {
+            padding: 4rem 1rem;
         }
-        .fact-box { border-left: 4px solid #10b981; background: #f0fdf4; padding: 1rem; margin: 1rem 0; }
-        .warning-box { border-left: 4px solid #f59e0b; background: #fffbeb; padding: 1rem; margin: 1rem 0; }
-        .nav-sticky { position: sticky; top: 20px; }
+        .card-shadow {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .code-block {
+            background: #1a202c;
+            color: #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            overflow-x: auto;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: #4f46e5;
+            border-radius: 50%;
+        }
+        .benchmark-table {
+            overflow-x: auto;
+        }
+        .fact-box {
+            border-left: 4px solid #10b981;
+            background: #f0fdf4;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .warning-box {
+            border-left: 4px solid #f59e0b;
+            background: #fffbeb;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .error-box {
+            border-left: 4px solid #ef4444;
+            background: #fef2f2;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .nav-sticky {
+            position: sticky;
+            top: 20px;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
+    <!-- Header -->
     <header class="gradient-bg text-white">
         <div class="container mx-auto px-4 py-8">
             <div class="flex items-center justify-between">
@@ -4661,49 +4714,588 @@ ce.get("/vector_databases_enhanced_guide", async (e) => e.html(`<!DOCTYPE html>
                     <a href="/" class="bg-white bg-opacity-20 px-4 py-2 rounded-lg hover:bg-opacity-30 transition-colors">
                         <i class="fas fa-home mr-2"></i>\u0413\u043B\u0430\u0432\u043D\u0430\u044F
                     </a>
+                    <a href="/vector_databases_guide.html" class="bg-white bg-opacity-20 px-4 py-2 rounded-lg hover:bg-opacity-30 transition-colors">
+                        <i class="fas fa-book mr-2"></i>\u041E\u0441\u043D\u043E\u0432\u043D\u043E\u0435 \u0440\u0443\u043A\u043E\u0432\u043E\u0434\u0441\u0442\u0432\u043E
+                    </a>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- Main Content -->
     <div class="container mx-auto px-4 py-8">
-        <div class="bg-white rounded-xl p-8 card-shadow">
-            <h2 class="text-3xl font-bold mb-6 text-center">\u{1F6A7} \u0421\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u0432 \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0435</h2>
-            <p class="text-lg text-center text-gray-600 mb-6">
-                \u041F\u043E\u0434\u0440\u043E\u0431\u043D\u043E\u0435 \u0440\u0443\u043A\u043E\u0432\u043E\u0434\u0441\u0442\u0432\u043E \u043F\u043E \u0432\u0435\u043A\u0442\u043E\u0440\u043D\u044B\u043C \u0431\u0430\u0437\u0430\u043C \u0434\u0430\u043D\u043D\u044B\u0445 \u0441 \u0443\u043B\u0443\u0447\u0448\u0435\u043D\u043D\u044B\u043C \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u043D\u0438\u0435\u043C \u0441\u043A\u043E\u0440\u043E \u0431\u0443\u0434\u0435\u0442 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E.
-                \u0410 \u043F\u043E\u043A\u0430 \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043E\u0437\u043D\u0430\u043A\u043E\u043C\u0438\u0442\u044C\u0441\u044F \u0441 \u0431\u0430\u0437\u043E\u0432\u044B\u043C \u0440\u0443\u043A\u043E\u0432\u043E\u0434\u0441\u0442\u0432\u043E\u043C.
-            </p>
-            <div class="text-center space-x-4">
-                <a href="/" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors inline-block">
+        <div class="grid lg:grid-cols-4 gap-8">
+            <!-- Navigation Sidebar -->
+            <div class="lg:col-span-1">
+                <nav class="nav-sticky bg-white rounded-xl p-6 card-shadow">
+                    <h3 class="font-bold text-lg mb-4">\u{1F4CB} \u0421\u043E\u0434\u0435\u0440\u0436\u0430\u043D\u0438\u0435</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#timeline" class="text-blue-600 hover:text-blue-800 block py-1">\u{1F550} \u0425\u0440\u043E\u043D\u043E\u043B\u043E\u0433\u0438\u044F \u0440\u0430\u0437\u0432\u0438\u0442\u0438\u044F</a></li>
+                        <li><a href="#what-is" class="text-blue-600 hover:text-blue-800 block py-1">\u{1F50D} \u0427\u0442\u043E \u0442\u0430\u043A\u043E\u0435 \u0432\u0435\u043A\u0442\u043E\u0440\u043D\u044B\u0439 \u043F\u043E\u0438\u0441\u043A</a></li>
+                        <li><a href="#approaches" class="text-blue-600 hover:text-blue-800 block py-1">\u2699\uFE0F \u0422\u0440\u0438 \u043F\u043E\u0434\u0445\u043E\u0434\u0430</a></li>
+                        <li><a href="#faiss" class="text-blue-600 hover:text-blue-800 block py-1 pl-4">\u{1F527} FAISS</a></li>
+                        <li><a href="#hnsw" class="text-blue-600 hover:text-blue-800 block py-1 pl-4">\u{1F578}\uFE0F HNSW</a></li>
+                        <li><a href="#annoy" class="text-blue-600 hover:text-blue-800 block py-1 pl-4">\u{1F333} Annoy</a></li>
+                        <li><a href="#comparison" class="text-blue-600 hover:text-blue-800 block py-1">\u{1F4CA} \u0421\u0440\u0430\u0432\u043D\u0435\u043D\u0438\u0435</a></li>
+                        <li><a href="#code-examples" class="text-blue-600 hover:text-blue-800 block py-1">\u{1F4BB} \u041F\u0440\u0438\u043C\u0435\u0440\u044B \u043A\u043E\u0434\u0430</a></li>
+                        <li><a href="#sources" class="text-blue-600 hover:text-blue-800 block py-1">\u{1F4DA} \u0418\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0438</a></li>
+                        <li><a href="#practical-tips" class="text-blue-600 hover:text-blue-800 block py-1">\u{1F3AF} \u041F\u0440\u0430\u043A\u0442\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0441\u043E\u0432\u0435\u0442\u044B</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Content -->
+            <div class="lg:col-span-3 space-y-8">
+                
+                <!-- Timeline -->
+                <section id="timeline" class="bg-white rounded-xl p-8 card-shadow">
+                    <h2 class="text-3xl font-bold mb-6">
+                        <i class="fas fa-history mr-3 text-blue-600"></i>
+                        \u{1F550} \u0425\u0440\u043E\u043D\u043E\u043B\u043E\u0433\u0438\u044F \u0440\u0430\u0437\u0432\u0438\u0442\u0438\u044F \u0442\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u0439
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <div class="timeline-item">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-bold text-lg">2013</span>
+                                    <span class="text-blue-600 font-medium">Spotify</span>
+                                </div>
+                                <p>Spotify \u0432\u044B\u043F\u0443\u0441\u043A\u0430\u0435\u0442 <strong>Annoy</strong> (\u043F\u0435\u0440\u0432\u0430\u044F \u043F\u043E\u043F\u0443\u043B\u044F\u0440\u043D\u0430\u044F ANN \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0430)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-bold text-lg">2016</span>
+                                    <span class="text-green-600 font-medium">\u0410\u043A\u0430\u0434\u0435\u043C\u0438\u044F</span>
+                                </div>
+                                <p>\u041F\u0443\u0431\u043B\u0438\u043A\u0430\u0446\u0438\u044F \u0430\u043B\u0433\u043E\u0440\u0438\u0442\u043C\u0430 <strong>HNSW</strong> (Malkov & Yashunin, arXiv:1603.09320)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-bold text-lg">2017</span>
+                                    <span class="text-purple-600 font-medium">Meta FAIR</span>
+                                </div>
+                                <p>Meta FAIR \u0432\u044B\u043F\u0443\u0441\u043A\u0430\u0435\u0442 <strong>FAISS</strong> \u0441 GPU \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u043A\u043E\u0439</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-bold text-lg">2018</span>
+                                    <span class="text-blue-600 font-medium">Spotify</span>
+                                </div>
+                                <p>Spotify \u043D\u0430\u0447\u0438\u043D\u0430\u0435\u0442 \u044D\u043A\u0441\u043F\u0435\u0440\u0438\u043C\u0435\u043D\u0442\u044B \u0441 <strong>hnswlib</strong></p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-bold text-lg">2023</span>
+                                    <span class="text-blue-600 font-medium">Spotify</span>
+                                </div>
+                                <p>Spotify \u0430\u043D\u043E\u043D\u0441\u0438\u0440\u0443\u0435\u0442 <strong>Voyager</strong> (\u0437\u0430\u043C\u0435\u043D\u0430 Annoy \u043D\u0430 HNSW)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-bold text-lg">2024</span>
+                                    <span class="text-green-600 font-medium">NVIDIA + Meta</span>
+                                </div>
+                                <p><strong>FAISS 1.10</strong> \u0438\u043D\u0442\u0435\u0433\u0440\u0438\u0440\u0443\u0435\u0442 NVIDIA cuVS \u0434\u043B\u044F \u0443\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u044F</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="bg-blue-50 p-4 rounded-lg border-2 border-blue-200">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-bold text-lg text-blue-700">2025</span>
+                                    <span class="text-blue-600 font-medium">Meta Engineering</span>
+                                </div>
+                                <p><strong>Meta \u043F\u0443\u0431\u043B\u0438\u043A\u0443\u0435\u0442 \u0434\u0430\u043D\u043D\u044B\u0435 \u043E \xD78.1 \u0443\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0438 \u0441 cuVS</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- What is Vector Search -->
+                <section id="what-is" class="bg-white rounded-xl p-8 card-shadow">
+                    <h2 class="text-3xl font-bold mb-6">
+                        <i class="fas fa-search mr-3 text-green-600"></i>
+                        \u{1F50D} \u0427\u0442\u043E \u0442\u0430\u043A\u043E\u0435 \u0432\u0435\u043A\u0442\u043E\u0440\u043D\u044B\u0439 \u043F\u043E\u0438\u0441\u043A
+                    </h2>
+                    
+                    <div class="prose max-w-none">
+                        <p class="text-lg leading-relaxed mb-6">
+                            \u041F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u044C\u0442\u0435, \u0447\u0442\u043E \u0443 \u0432\u0430\u0441 \u0435\u0441\u0442\u044C \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0430 \u0441 \u043C\u0438\u043B\u043B\u0438\u043E\u043D\u043E\u043C \u043A\u043D\u0438\u0433, \u043D\u043E \u043A\u0430\u0442\u0430\u043B\u043E\u0433 \u043F\u043E\u0441\u0442\u0440\u043E\u0435\u043D \u043D\u0435 \u043F\u043E \u0430\u043B\u0444\u0430\u0432\u0438\u0442\u0443, 
+                            \u0430 \u043F\u043E "\u0441\u043C\u044B\u0441\u043B\u0443" - \u043F\u043E\u0445\u043E\u0436\u0438\u0435 \u043F\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u043D\u0438\u044E \u043A\u043D\u0438\u0433\u0438 \u0441\u0442\u043E\u044F\u0442 \u0440\u044F\u0434\u043E\u043C. \u0412\u0435\u043A\u0442\u043E\u0440\u043D\u044B\u0439 \u043F\u043E\u0438\u0441\u043A \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442 \u043F\u043E\u0445\u043E\u0436\u0438\u043C \u043E\u0431\u0440\u0430\u0437\u043E\u043C.
+                        </p>
+
+                        <h3 class="text-2xl font-semibold mb-4">\u{1F680} \u0421\u043E\u0432\u0440\u0435\u043C\u0435\u043D\u043D\u044B\u0435 \u043F\u0440\u0438\u043C\u0435\u043D\u0435\u043D\u0438\u044F (2024-2025):</h3>
+                        <div class="grid md:grid-cols-2 gap-4 mb-6">
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-blue-700">ChatGPT \u0438 Claude</h4>
+                                <p>\u043F\u043E\u0438\u0441\u043A \u0440\u0435\u043B\u0435\u0432\u0430\u043D\u0442\u043D\u043E\u0439 \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u0438 \u0432 \u0431\u0430\u0437\u0435 \u0437\u043D\u0430\u043D\u0438\u0439</p>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-green-700">Spotify/Apple Music</h4>
+                                <p>\u0440\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0430\u0446\u0438\u0438 \u043F\u043E\u0445\u043E\u0436\u0438\u0445 \u0442\u0440\u0435\u043A\u043E\u0432</p>
+                            </div>
+                            <div class="bg-purple-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-purple-700">Google/\u042F\u043D\u0434\u0435\u043A\u0441</h4>
+                                <p>\u043F\u043E\u0438\u0441\u043A \u043F\u043E\u0445\u043E\u0436\u0438\u0445 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439</p>
+                            </div>
+                            <div class="bg-orange-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-orange-700">E-commerce</h4>
+                                <p>"\u0442\u043E\u0432\u0430\u0440\u044B, \u043F\u043E\u0445\u043E\u0436\u0438\u0435 \u043D\u0430 \u044D\u0442\u043E\u0442"</p>
+                            </div>
+                        </div>
+
+                        <div class="fact-box">
+                            <strong>\u{1F4CA} \u041F\u0440\u043E\u0432\u0435\u0440\u0435\u043D\u043D\u044B\u0439 \u0444\u0430\u043A\u0442:</strong> \u041F\u043E \u0434\u0430\u043D\u043D\u044B\u043C \u0438\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u0439 2024 \u0433\u043E\u0434\u0430, \u0440\u044B\u043D\u043E\u043A \u0432\u0435\u043A\u0442\u043E\u0440\u043D\u044B\u0445 \u0431\u0430\u0437 \u0434\u0430\u043D\u043D\u044B\u0445 
+                            \u0432\u044B\u0440\u043E\u0441 \u043D\u0430 300%+ \u0437\u0430 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 2 \u0433\u043E\u0434\u0430 \u0431\u043B\u0430\u0433\u043E\u0434\u0430\u0440\u044F \u0431\u0443\u043C\u0443 LLM-\u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0439.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Three Approaches -->
+                <section id="approaches" class="bg-white rounded-xl p-8 card-shadow">
+                    <h2 class="text-3xl font-bold mb-6">
+                        <i class="fas fa-cogs mr-3 text-purple-600"></i>
+                        \u2699\uFE0F \u0422\u0440\u0438 \u043F\u043E\u0434\u0445\u043E\u0434\u0430 \u043A \u0440\u0435\u0448\u0435\u043D\u0438\u044E \u0437\u0430\u0434\u0430\u0447\u0438
+                    </h2>
+                    
+                    <!-- FAISS -->
+                    <div id="faiss" class="mb-10">
+                        <h3 class="text-2xl font-bold mb-4">\u{1F527} FAISS: "\u0428\u0432\u0435\u0439\u0446\u0430\u0440\u0441\u043A\u0438\u0439 \u043D\u043E\u0436" (Meta, 2017-2025)</h3>
+                        
+                        <p class="text-lg mb-4">
+                            <strong>\u0421\u0443\u0442\u044C \u043F\u0440\u043E\u0441\u0442\u044B\u043C\u0438 \u0441\u043B\u043E\u0432\u0430\u043C\u0438:</strong> \u041A\u0430\u043A \u0431\u043E\u043B\u044C\u0448\u043E\u0439 \u044F\u0449\u0438\u043A \u0441 \u0438\u043D\u0441\u0442\u0440\u0443\u043C\u0435\u043D\u0442\u0430\u043C\u0438 - \u0435\u0441\u0442\u044C \u043C\u043E\u043B\u043E\u0442\u043E\u043A \u0434\u043B\u044F \u043E\u0434\u043D\u0438\u0445 \u0437\u0430\u0434\u0430\u0447, 
+                            \u043E\u0442\u0432\u0435\u0440\u0442\u043A\u0430 \u0434\u043B\u044F \u0434\u0440\u0443\u0433\u0438\u0445. FAISS \u043F\u0440\u0435\u0434\u043B\u0430\u0433\u0430\u0435\u0442 \u0440\u0430\u0437\u043D\u044B\u0435 "\u0438\u043D\u0441\u0442\u0440\u0443\u043C\u0435\u043D\u0442\u044B" \u0434\u043B\u044F \u0440\u0430\u0437\u043D\u044B\u0445 \u0441\u043B\u0443\u0447\u0430\u0435\u0432.
+                        </p>
+
+                        <div class="fact-box">
+                            <strong>\u{1F4C8} \u041F\u0440\u043E\u0432\u0435\u0440\u0435\u043D\u043D\u044B\u0439 \u0444\u0430\u043A\u0442 (\u043C\u0430\u0439 2025):</strong> FAISS + NVIDIA cuVS \u043F\u043E\u043A\u0430\u0437\u0430\u043B \u0443\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 \u0434\u043E \xD78.1 
+                            \u043F\u043E latency \u0434\u043B\u044F IVFPQ \u043D\u0430 \u0434\u0430\u0442\u0430\u0441\u0435\u0442\u0435 5M\xD71536 \u043F\u0440\u0438 \u0442\u0435\u0441\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0438 \u043D\u0430 NVIDIA H100 vs Intel Xeon Platinum 8480CL<br>
+                            <em>\u0418\u0441\u0442\u043E\u0447\u043D\u0438\u043A: <a href="https://engineering.fb.com/2025/05/08/data-infrastructure/accelerating-gpu-indexes-in-faiss-with-nvidia-cuvs/" class="text-blue-600">Meta Engineering Blog</a></em>
+                        </div>
+
+                        <h4 class="text-xl font-semibold mb-3">\u{1F4CA} \u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0435\u043C\u044B\u0435 \u043F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u044B:</h4>
+                        <div class="code-block mb-4">
+\u2022 IVF: nlist = 100-100,000 (\u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043A\u043B\u0430\u0441\u0442\u0435\u0440\u043E\u0432)
+\u2022 IVFPQ: m = 8-64 \u0441\u0443\u0431\u0432\u0435\u043A\u0442\u043E\u0440\u043E\u0432, code_size = 4-8 \u0431\u0438\u0442
+\u2022 HNSW: M = 16-64, efConstruction = 100-500
+\u2022 GPU: \u0431\u0430\u0442\u0447\u0438 100+ \u0437\u0430\u043F\u0440\u043E\u0441\u043E\u0432 \u0434\u043B\u044F \u043E\u043F\u0442\u0438\u043C\u0430\u043B\u044C\u043D\u043E\u0439 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u0438
+                        </div>
+                    </div>
+
+                    <!-- HNSW -->
+                    <div id="hnsw" class="mb-10">
+                        <h3 class="text-2xl font-bold mb-4">\u{1F578}\uFE0F HNSW: "\u0423\u043C\u043D\u0430\u044F \u043D\u0430\u0432\u0438\u0433\u0430\u0446\u0438\u044F \u043F\u043E \u0433\u0440\u0430\u0444\u0443" (2016)</h3>
+                        
+                        <p class="text-lg mb-4">
+                            <strong>\u0421\u0443\u0442\u044C \u043F\u0440\u043E\u0441\u0442\u044B\u043C\u0438 \u0441\u043B\u043E\u0432\u0430\u043C\u0438:</strong> \u041A\u0430\u043A GPS-\u043D\u0430\u0432\u0438\u0433\u0430\u0442\u043E\u0440 \u0441 \u0440\u0430\u0437\u043D\u044B\u043C\u0438 "\u0441\u043B\u043E\u044F\u043C\u0438" \u0434\u043E\u0440\u043E\u0433 - \u0441\u043D\u0430\u0447\u0430\u043B\u0430 \u0435\u0434\u0435\u043C \u043F\u043E 
+                            \u0430\u0432\u0442\u043E\u0441\u0442\u0440\u0430\u0434\u0435 (\u0432\u0435\u0440\u0445\u043D\u0438\u0435 \u0441\u043B\u043E\u0438), \u043F\u043E\u0442\u043E\u043C \u043F\u043E \u0433\u043E\u0440\u043E\u0434\u0441\u043A\u0438\u043C \u0443\u043B\u0438\u0446\u0430\u043C (\u043D\u0438\u0436\u043D\u0438\u0435 \u0441\u043B\u043E\u0438).
+                        </p>
+
+                        <div class="fact-box">
+                            <strong>\u{1F3AF} \u041F\u0440\u043E\u0432\u0435\u0440\u0435\u043D\u043D\u044B\u0439 \u0444\u0430\u043A\u0442:</strong> \u0410\u043B\u0433\u043E\u0440\u0438\u0442\u043C \u0434\u043E\u0441\u0442\u0438\u0433\u0430\u0435\u0442 \u043B\u043E\u0433\u0430\u0440\u0438\u0444\u043C\u0438\u0447\u0435\u0441\u043A\u043E\u0439 \u0441\u043B\u043E\u0436\u043D\u043E\u0441\u0442\u0438 O(log n) \u0434\u043B\u044F \u043F\u043E\u0438\u0441\u043A\u0430 
+                            \u0438 \u043F\u043E\u0441\u0442\u0440\u043E\u0435\u043D\u0438\u044F, \u0447\u0442\u043E \u043F\u043E\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043D\u043E \u043E\u0440\u0438\u0433\u0438\u043D\u0430\u043B\u044C\u043D\u043E\u0439 \u0441\u0442\u0430\u0442\u044C\u0435\u0439 \u0438 \u043C\u043D\u043E\u0436\u0435\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u043C\u0438 \u043F\u0440\u0430\u043A\u0442\u0438\u0447\u0435\u0441\u043A\u0438\u043C\u0438 \u0442\u0435\u0441\u0442\u0430\u043C\u0438.<br>
+                            <em>\u0418\u0441\u0442\u043E\u0447\u043D\u0438\u043A: <a href="https://arxiv.org/pdf/1603.09320" class="text-blue-600">Malkov & Yashunin, 2016</a></em>
+                        </div>
+
+                        <h4 class="text-xl font-semibold mb-3">\u{1F4C8} \u041A\u043E\u043D\u043A\u0440\u0435\u0442\u043D\u044B\u0435 \u0431\u0435\u043D\u0447\u043C\u0430\u0440\u043A\u0438 SIFT1M</h4>
+                        <p class="text-sm text-gray-600 mb-2">(Intel Xeon E5-2680 v2, 20 \u043F\u043E\u0442\u043E\u043A\u043E\u0432, 2018):</p>
+                        <div class="code-block mb-4">
+\u2022 HNSW Flat (efSearch=32): 0.020 \u043C\u0441/\u0437\u0430\u043F\u0440\u043E\u0441, R@1=94.9%
+\u2022 HNSW + SQ (efSearch=32):  0.008 \u043C\u0441/\u0437\u0430\u043F\u0440\u043E\u0441, R@1=85.1%  
+\u2022 IVF Flat (nprobe=64):     0.141 \u043C\u0441/\u0437\u0430\u043F\u0440\u043E\u0441, R@1=94.7%
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">
+                            <em>\u0418\u0441\u0442\u043E\u0447\u043D\u0438\u043A: <a href="https://github.com/facebookresearch/faiss/wiki/Indexing-1M-vectors" class="text-blue-600">FAISS Wiki - Indexing 1M vectors</a></em>
+                        </p>
+
+                        <h4 class="text-xl font-semibold mb-3">\u{1F4CA} \u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430 \u043F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u043E\u0432:</h4>
+                        <div class="code-block mb-4">
+\u2022 M = 16-32: \u0434\u043B\u044F \u044D\u043A\u043E\u043D\u043E\u043C\u0438\u0438 \u043F\u0430\u043C\u044F\u0442\u0438
+\u2022 M = 32-64: \u0434\u043B\u044F \u0432\u044B\u0441\u043E\u043A\u043E\u0439 \u0442\u043E\u0447\u043D\u043E\u0441\u0442\u0438  
+\u2022 efConstruction = 100-200: \u0431\u0430\u043B\u0430\u043D\u0441 \u0432\u0440\u0435\u043C\u044F/\u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E
+\u2022 efSearch = 50-500: \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430 \u0432 runtime \u043F\u043E\u0434 SLA
+                        </div>
+                    </div>
+
+                    <!-- Annoy -->
+                    <div id="annoy" class="mb-10">
+                        <h3 class="text-2xl font-bold mb-4">\u{1F333} Annoy: "\u0411\u044B\u0441\u0442\u0440\u044B\u0435 \u0434\u0435\u0440\u0435\u0432\u044C\u044F \u0440\u0435\u0448\u0435\u043D\u0438\u0439" (Spotify, 2013-2023)</h3>
+                        
+                        <p class="text-lg mb-4">
+                            <strong>\u0421\u0443\u0442\u044C \u043F\u0440\u043E\u0441\u0442\u044B\u043C\u0438 \u0441\u043B\u043E\u0432\u0430\u043C\u0438:</strong> \u041A\u0430\u043A \u0438\u0433\u0440\u0430 "20 \u0432\u043E\u043F\u0440\u043E\u0441\u043E\u0432" - \u0441\u0442\u0440\u043E\u0438\u043C \u043C\u043D\u043E\u0433\u043E \u0434\u0435\u0440\u0435\u0432\u044C\u0435\u0432 \u0441 \u0432\u043E\u043F\u0440\u043E\u0441\u0430\u043C\u0438 
+                            "\u043B\u0435\u0432\u0435\u0435/\u043F\u0440\u0430\u0432\u0435\u0435 \u044D\u0442\u043E\u0439 \u043B\u0438\u043D\u0438\u0438?" \u0438 \u043D\u0430\u0445\u043E\u0434\u0438\u043C \u043E\u0442\u0432\u0435\u0442 \u0437\u0430 \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u043E \u0448\u0430\u0433\u043E\u0432.
+                        </p>
+
+                        <div class="warning-box">
+                            <strong>\u{1F4C5} \u0418\u0441\u0442\u043E\u0440\u0438\u0447\u0435\u0441\u043A\u0430\u044F \u0441\u043F\u0440\u0430\u0432\u043A\u0430:</strong> \u0412 \u043E\u043A\u0442\u044F\u0431\u0440\u0435 2023 Spotify \u0430\u043D\u043E\u043D\u0441\u0438\u0440\u043E\u0432\u0430\u043B \u043F\u0435\u0440\u0435\u0445\u043E\u0434 \u0441 Annoy \u043D\u0430 Voyager 
+                            (\u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 HNSW), \u0437\u0430\u044F\u0432\u0438\u0432 \u043E \xD710 \u0443\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0438 \u0441\u043A\u043E\u0440\u043E\u0441\u0442\u0438 \u043F\u0440\u0438 \u0442\u043E\u0439 \u0436\u0435 \u0442\u043E\u0447\u043D\u043E\u0441\u0442\u0438.<br>
+                            <em>\u0418\u0441\u0442\u043E\u0447\u043D\u0438\u043A: <a href="https://engineering.atspotify.com/introducing-voyager-spotifys-new-nearest-neighbor-search-library" class="text-blue-600">Spotify Engineering Blog</a></em>
+                        </div>
+
+                        <h4 class="text-xl font-semibold mb-3">\u{1F4CA} \u041F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u044B \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438:</h4>
+                        <div class="code-block mb-4">
+\u2022 n_trees = 10-50: \u0434\u043B\u044F \u0431\u044B\u0441\u0442\u0440\u043E\u0433\u043E \u043F\u043E\u0438\u0441\u043A\u0430
+\u2022 n_trees = 50-100: \u0434\u043B\u044F \u0432\u044B\u0441\u043E\u043A\u043E\u0439 \u0442\u043E\u0447\u043D\u043E\u0441\u0442\u0438
+\u2022 search_k = n_trees \xD7 100-1000: \u043A\u043E\u043C\u043F\u0440\u043E\u043C\u0438\u0441\u0441 \u0441\u043A\u043E\u0440\u043E\u0441\u0442\u044C/\u043A\u0430\u0447\u0435\u0441\u0442\u0432\u043E
+\u2022 \u041E\u0433\u0440\u0430\u043D\u0438\u0447\u0435\u043D\u0438\u044F: int32 IDs, max(id)+1 \u0430\u043B\u043B\u043E\u043A\u0430\u0446\u0438\u044F \u043F\u0430\u043C\u044F\u0442\u0438
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Comparison -->
+                <section id="comparison" class="bg-white rounded-xl p-8 card-shadow">
+                    <h2 class="text-3xl font-bold mb-6">
+                        <i class="fas fa-balance-scale mr-3 text-orange-600"></i>
+                        \u{1F4CA} \u041F\u0440\u0430\u043A\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0441\u0440\u0430\u0432\u043D\u0435\u043D\u0438\u0435 (\u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043E 2024-2025)
+                    </h2>
+                    
+                    <h3 class="text-2xl font-semibold mb-4">\u041A\u043E\u0433\u0434\u0430 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0447\u0442\u043E:</h3>
+                    <div class="benchmark-table">
+                        <table class="w-full border-collapse border border-gray-300 mb-6">
+                            <thead>
+                                <tr class="bg-gray-50">
+                                    <th class="border border-gray-300 p-3 text-left font-semibold">\u0421\u0446\u0435\u043D\u0430\u0440\u0438\u0439</th>
+                                    <th class="border border-gray-300 p-3 text-center font-semibold">FAISS</th>
+                                    <th class="border border-gray-300 p-3 text-center font-semibold">HNSW</th>
+                                    <th class="border border-gray-300 p-3 text-center font-semibold">Annoy</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-gray-300 p-3 font-medium">\u041C\u0438\u043B\u043B\u0438\u0430\u0440\u0434\u044B \u0432\u0435\u043A\u0442\u043E\u0440\u043E\u0432 + GPU</td>
+                                    <td class="border border-gray-300 p-3 text-center text-green-600">\u2705 \u041B\u0443\u0447\u0448\u0438\u0439 \u0432\u044B\u0431\u043E\u0440</td>
+                                    <td class="border border-gray-300 p-3 text-center text-red-600">\u274C \u0422\u043E\u043B\u044C\u043A\u043E CPU</td>
+                                    <td class="border border-gray-300 p-3 text-center text-red-600">\u274C \u0423\u0441\u0442\u0430\u0440\u0435\u043B</td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="border border-gray-300 p-3 font-medium">\u0412\u044B\u0441\u043E\u043A\u0430\u044F \u0442\u043E\u0447\u043D\u043E\u0441\u0442\u044C \u043D\u0430 CPU</td>
+                                    <td class="border border-gray-300 p-3 text-center text-green-600">\u2705 \u0425\u043E\u0440\u043E\u0448</td>
+                                    <td class="border border-gray-300 p-3 text-center text-green-600">\u2705 \u0418\u0434\u0435\u0430\u043B\u0435\u043D</td>
+                                    <td class="border border-gray-300 p-3 text-center text-yellow-600">\u26A0\uFE0F \u0421\u0440\u0435\u0434\u043D\u0435</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-300 p-3 font-medium">\u0411\u044B\u0441\u0442\u0440\u044B\u0439 \u0441\u0442\u0430\u0440\u0442 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F</td>
+                                    <td class="border border-gray-300 p-3 text-center text-yellow-600">\u26A0\uFE0F \u041C\u0435\u0434\u043B\u0435\u043D\u043D\u0435\u0435</td>
+                                    <td class="border border-gray-300 p-3 text-center text-yellow-600">\u26A0\uFE0F \u0421\u0440\u0435\u0434\u043D\u0435</td>
+                                    <td class="border border-gray-300 p-3 text-center text-green-600">\u2705 \u041E\u0442\u043B\u0438\u0447\u043D\u043E</td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="border border-gray-300 p-3 font-medium">\u0414\u0438\u043D\u0430\u043C\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F</td>
+                                    <td class="border border-gray-300 p-3 text-center text-green-600">\u2705 \u0414\u0430</td>
+                                    <td class="border border-gray-300 p-3 text-center text-green-600">\u2705 \u0414\u0430</td>
+                                    <td class="border border-gray-300 p-3 text-center text-red-600">\u274C \u0422\u043E\u043B\u044C\u043A\u043E rebuild</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-300 p-3 font-medium">\u041F\u0430\u043C\u044F\u0442\u044C \u043A\u0440\u0438\u0442\u0438\u0447\u043D\u0430</td>
+                                    <td class="border border-gray-300 p-3 text-center text-green-600">\u2705 IVFPQ \u0441\u0436\u0430\u0442\u0438\u0435</td>
+                                    <td class="border border-gray-300 p-3 text-center text-yellow-600">\u26A0\uFE0F \u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430 M</td>
+                                    <td class="border border-gray-300 p-3 text-center text-green-600">\u2705 mmap</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>\u26A0\uFE0F \u041F\u0440\u0430\u043A\u0442\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0435\u043D\u0438\u044F (2024):</strong>
+                        <div class="code-block mt-2">
+\u2022 FAISS GPU: k \u2264 2048, nprobe \u2264 2048, \u043D\u0443\u0436\u0435\u043D \u0431\u0430\u0442\u0447\u0438\u043D\u0433
+\u2022 HNSW: \u043F\u0430\u043C\u044F\u0442\u044C ~\u043B\u0438\u043D\u0435\u0439\u043D\u043E \u0440\u0430\u0441\u0442\u0435\u0442 \u0441 M, \u043F\u043B\u0430\u043D\u0438\u0440\u0443\u0439\u0442\u0435 max_elements  
+\u2022 Annoy: \u043F\u043E\u043B\u043D\u0430\u044F \u0438\u043C\u043C\u0443\u0442\u0430\u0431\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C \u043F\u043E\u0441\u043B\u0435 build(), int32 ID \u043B\u0438\u043C\u0438\u0442\u044B
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Code Examples -->
+                <section id="code-examples" class="bg-white rounded-xl p-8 card-shadow">
+                    <h2 class="text-3xl font-bold mb-6">
+                        <i class="fas fa-code mr-3 text-blue-600"></i>
+                        \u{1F4BB} \u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u044B\u0435 \u043F\u0440\u0438\u043C\u0435\u0440\u044B \u043A\u043E\u0434\u0430
+                    </h2>
+                    
+                    <h3 class="text-2xl font-semibold mb-4">FAISS \u0441 \u0441\u043E\u0432\u0440\u0435\u043C\u0435\u043D\u043D\u044B\u043C\u0438 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044F\u043C\u0438 (2024-2025)</h3>
+                    <div class="code-block mb-6">
+# \u0410\u043A\u0442\u0443\u0430\u043B\u044C\u043D\u043E \u0434\u043B\u044F FAISS 1.10+ \u0441 cuVS \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u043A\u043E\u0439
+import faiss
+import numpy as np
+
+# \u041F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u044B \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u043F\u0440\u043E\u0432\u0435\u0440\u0435\u043D\u043D\u044B\u0445 \u0440\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0430\u0446\u0438\u0439  
+d, nb = 128, 1_000_000
+data = np.random.randn(nb, d).astype('float32')
+
+# HNSW \u0438\u043D\u0434\u0435\u043A\u0441 (\u043F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u044B \u0438\u0437 SIFT1M \u0431\u0435\u043D\u0447\u043C\u0430\u0440\u043A\u043E\u0432)
+M = 32              # \u0434\u0438\u0430\u043F\u0430\u0437\u043E\u043D 16-64
+ef_construction = 200  # \u0434\u0438\u0430\u043F\u0430\u0437\u043E\u043D 100-500  
+ef_search = 128       # \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430 runtime 50-500
+
+index = faiss.IndexHNSWFlat(d, M)
+index.hnsw.efConstruction = ef_construction
+index.add(data)
+
+# \u041F\u043E\u0438\u0441\u043A \u0441 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u043E\u0439 \u0442\u043E\u0447\u043D\u043E\u0441\u0442\u0438
+index.hnsw.efSearch = ef_search
+D, I = index.search(queries, k=10)
+
+# \u0421\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u0435 (\u0441\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u043E \u043C\u0435\u0436\u0434\u0443 \u0432\u0435\u0440\u0441\u0438\u044F\u043C\u0438)
+faiss.write_index(index, "modern_hnsw.index")
+                    </div>
+
+                    <h3 class="text-2xl font-semibold mb-4">GPU \u0443\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 (\u0442\u0440\u0435\u0431\u0443\u0435\u0442 NVIDIA GPU + cuVS)</h3>
+                    <div class="code-block mb-6">
+# \u041F\u0440\u043E\u0432\u0435\u0440\u044C\u0442\u0435 \u043D\u0430\u043B\u0438\u0447\u0438\u0435 cuVS: pip install faiss-gpu-cuvs
+if faiss.get_num_gpus() > 0:
+    # GPU IVFPQ \u0434\u043B\u044F \u0431\u043E\u043B\u044C\u0448\u0438\u0445 \u0434\u0430\u0442\u0430\u0441\u0435\u0442\u043E\u0432
+    quantizer = faiss.IndexFlatL2(d)
+    nlist = 4096  # \u0434\u0438\u0430\u043F\u0430\u0437\u043E\u043D 100-100000
+    m = 32        # \u0434\u0438\u0430\u043F\u0430\u0437\u043E\u043D 8-64  
+    nbits = 8     # \u043E\u0431\u044B\u0447\u043D\u043E 4-8
+    
+    gpu_index = faiss.IndexIVFPQ(quantizer, d, nlist, m, nbits)
+    gpu_index = faiss.index_cpu_to_all_gpus(gpu_index)
+    
+    # \u0422\u0440\u0435\u043D\u0438\u0440\u043E\u0432\u043A\u0430 (\u043A\u0440\u0438\u0442\u0438\u0447\u043D\u043E \u0434\u043B\u044F \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u0430)
+    gpu_index.train(data[:100000])  # \u043C\u0438\u043D\u0438\u043C\u0443\u043C 1000\xD7nlist
+    gpu_index.add(data)
+    
+    gpu_index.nprobe = 64  # \u0434\u0438\u0430\u043F\u0430\u0437\u043E\u043D 1-2048
+                    </div>
+                </section>
+
+                <!-- Sources -->
+                <section id="sources" class="bg-white rounded-xl p-8 card-shadow">
+                    <h2 class="text-3xl font-bold mb-6">
+                        <i class="fas fa-book-open mr-3 text-green-600"></i>
+                        \u{1F4DA} \u041F\u0440\u043E\u0432\u0435\u0440\u0435\u043D\u043D\u044B\u0435 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0438 \u0434\u043B\u044F \u0443\u0433\u043B\u0443\u0431\u043B\u0451\u043D\u043D\u043E\u0433\u043E \u0438\u0437\u0443\u0447\u0435\u043D\u0438\u044F
+                    </h2>
+                    
+                    <div class="grid md:grid-cols-1 gap-6">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">\u{1F52C} \u041D\u0430\u0443\u0447\u043D\u044B\u0435 \u0441\u0442\u0430\u0442\u044C\u0438 (\u043F\u0435\u0440\u0432\u043E\u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0438):</h3>
+                            <ul class="space-y-2 mb-6">
+                                <li>
+                                    <strong>HNSW:</strong> 
+                                    <a href="https://arxiv.org/pdf/1603.09320" class="text-blue-600 hover:text-blue-800">
+                                        Malkov & Yashunin (2016)
+                                    </a> 
+                                    - \u043E\u0440\u0438\u0433\u0438\u043D\u0430\u043B\u044C\u043D\u0430\u044F \u0441\u0442\u0430\u0442\u044C\u044F \u0441 \u0442\u0435\u043E\u0440\u0435\u0442\u0438\u0447\u0435\u0441\u043A\u0438\u043C \u043E\u0431\u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u0435\u043C
+                                </li>
+                                <li>
+                                    <strong>FAISS:</strong> 
+                                    <a href="https://arxiv.org/abs/1702.08734" class="text-blue-600 hover:text-blue-800">
+                                        Johnson et al. (2019)
+                                    </a> 
+                                    - \u0430\u0440\u0445\u0438\u0442\u0435\u043A\u0442\u0443\u0440\u0430 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0438
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">\u{1F3E2} \u041E\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0435 \u0442\u0435\u0445\u043D\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0431\u043B\u043E\u0433\u0438:</h3>
+                            <ul class="space-y-2 mb-6">
+                                <li>
+                                    <a href="https://engineering.fb.com/2025/05/08/data-infrastructure/accelerating-gpu-indexes-in-faiss-with-nvidia-cuvs/" class="text-blue-600 hover:text-blue-800">
+                                        Meta Engineering
+                                    </a> 
+                                    - FAISS + cuVS (\u043C\u0430\u0439 2025)
+                                </li>
+                                <li>
+                                    <a href="https://engineering.atspotify.com/introducing-voyager-spotifys-new-nearest-neighbor-search-library" class="text-blue-600 hover:text-blue-800">
+                                        Spotify Engineering
+                                    </a> 
+                                    - Voyager \u0430\u043D\u043E\u043D\u0441 (\u043E\u043A\u0442\u044F\u0431\u0440\u044C 2023)
+                                </li>
+                                <li>
+                                    <a href="https://developer.nvidia.com/blog/accelerating-vector-search-nvidia-cuvs-ivf-pq-deep-dive-part-1/" class="text-blue-600 hover:text-blue-800">
+                                        NVIDIA Developer
+                                    </a> 
+                                    - cuVS \u043F\u043E\u0434\u0440\u043E\u0431\u043D\u043E\u0441\u0442\u0438 (2024)
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">\u{1F6E0} \u041F\u0440\u0430\u043A\u0442\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0440\u0435\u0441\u0443\u0440\u0441\u044B (\u043F\u043E\u0441\u0442\u043E\u044F\u043D\u043D\u043E \u043E\u0431\u043D\u043E\u0432\u043B\u044F\u0435\u043C\u044B\u0435):</h3>
+                            <ul class="space-y-2 mb-6">
+                                <li>
+                                    <a href="https://github.com/facebookresearch/faiss/wiki" class="text-blue-600 hover:text-blue-800">
+                                        FAISS GitHub Wiki
+                                    </a> 
+                                    - \u043E\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u0430\u044F \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430\u0446\u0438\u044F
+                                </li>
+                                <li>
+                                    <a href="https://ann-benchmarks.com/" class="text-blue-600 hover:text-blue-800">
+                                        ANN-Benchmarks
+                                    </a> 
+                                    - \u0430\u043A\u0442\u0443\u0430\u043B\u044C\u043D\u044B\u0435 \u0441\u0440\u0430\u0432\u043D\u0435\u043D\u0438\u044F (\u043E\u0431\u043D\u043E\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u0440\u0435\u0433\u0443\u043B\u044F\u0440\u043D\u043E)
+                                </li>
+                                <li>
+                                    <a href="https://github.com/nmslib/hnswlib" class="text-blue-600 hover:text-blue-800">
+                                        hnswlib README
+                                    </a> 
+                                    - \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430\u0446\u0438\u044F \u0438 \u043F\u0440\u0438\u043C\u0435\u0440\u044B
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">\u{1F4CA} \u0411\u0435\u043D\u0447\u043C\u0430\u0440\u043A-\u0440\u0435\u0441\u0443\u0440\u0441\u044B:</h3>
+                            <ul class="space-y-2">
+                                <li><strong>ANN-Benchmarks:</strong> \u0438\u043D\u0442\u0435\u0440\u0430\u043A\u0442\u0438\u0432\u043D\u044B\u0435 \u0433\u0440\u0430\u0444\u0438\u043A\u0438 \u0434\u043B\u044F \u0432\u0441\u0435\u0445 \u0434\u0430\u0442\u0430\u0441\u0435\u0442\u043E\u0432</li>
+                                <li><strong>\u041F\u043E\u0441\u043B\u0435\u0434\u043D\u0435\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435:</strong> \u0440\u0435\u0433\u0443\u043B\u044F\u0440\u043D\u043E, \u043F\u0440\u043E\u0432\u0435\u0440\u044F\u0439\u0442\u0435 \u043D\u0430 \u0441\u0430\u0439\u0442\u0435 \u0430\u043A\u0442\u0443\u0430\u043B\u044C\u043D\u044B\u0435 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B</li>
+                                <li><strong>\u0412\u043A\u043B\u044E\u0447\u0430\u044E\u0442:</strong> faiss-ivf, hnswlib, annoy, scann, pgvector \u0438 \u0434\u0440\u0443\u0433\u0438\u0435</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Practical Tips -->
+                <section id="practical-tips" class="bg-white rounded-xl p-8 card-shadow">
+                    <h2 class="text-3xl font-bold mb-6">
+                        <i class="fas fa-lightbulb mr-3 text-yellow-600"></i>
+                        \u{1F3AF} \u041F\u0440\u0430\u043A\u0442\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0441\u043E\u0432\u0435\u0442\u044B \u0434\u043B\u044F \u0432\u0430\u0448\u0438\u0445 \u043F\u0440\u043E\u0435\u043A\u0442\u043E\u0432
+                    </h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">\u{1F680} \u0411\u044B\u0441\u0442\u0440\u044B\u0439 \u0441\u0442\u0430\u0440\u0442 (\u0432\u044B\u0431\u043E\u0440 \u0437\u0430 30 \u0441\u0435\u043A\u0443\u043D\u0434):</h3>
+                            <div class="code-block mb-4">
+1. \u0423\u0447\u0435\u0431\u043D\u044B\u0439 \u043F\u0440\u043E\u0435\u043A\u0442 (&lt;100K \u0432\u0435\u043A\u0442\u043E\u0440\u043E\u0432): hnswlib
+2. \u041F\u0440\u043E\u0434\u0430\u043A\u0448\u043D \u043D\u0430 CPU (\u0432\u044B\u0441\u043E\u043A\u0430\u044F \u0442\u043E\u0447\u043D\u043E\u0441\u0442\u044C): hnswlib  
+3. \u041F\u0440\u043E\u0434\u0430\u043A\u0448\u043D \u0441 GPU (\u043C\u0430\u0441\u0448\u0442\u0430\u0431): FAISS IVFPQ
+4. \u041B\u0435\u0433\u0430\u0441\u0438 \u0441\u0438\u0441\u0442\u0435\u043C\u0430 (\u043F\u0440\u043E\u0441\u0442\u043E\u0442\u0430): \u043C\u043E\u0436\u043D\u043E Annoy, \u043D\u043E \u043B\u0443\u0447\u0448\u0435 hnswlib
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">\u26A0\uFE0F \u0422\u0438\u043F\u0438\u0447\u043D\u044B\u0435 \u043E\u0448\u0438\u0431\u043A\u0438 \u043D\u043E\u0432\u0438\u0447\u043A\u043E\u0432:</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li><strong>FAISS:</strong> \u0437\u0430\u0431\u044B\u0442\u044C train() \u0434\u043B\u044F IVF \u0438\u043D\u0434\u0435\u043A\u0441\u043E\u0432</li>
+                                <li><strong>HNSW:</strong> \u043D\u0435 \u043F\u043B\u0430\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C max_elements \u0437\u0430\u0440\u0430\u043D\u0435\u0435</li>
+                                <li><strong>Annoy:</strong> \u043E\u0436\u0438\u0434\u0430\u0442\u044C \u043E\u043D\u043B\u0430\u0439\u043D-\u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F \u043F\u043E\u0441\u043B\u0435 build()</li>
+                                <li><strong>\u041E\u0431\u0449\u0435\u0435:</strong> \u043D\u0435 \u043D\u043E\u0440\u043C\u0430\u043B\u0438\u0437\u043E\u0432\u0430\u0442\u044C \u0432\u0435\u043A\u0442\u043E\u0440\u044B \u0434\u043B\u044F cosine similarity</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-lg mb-2">\u{1F4C5} <strong>\u041C\u0430\u0442\u0435\u0440\u0438\u0430\u043B \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D:</strong> \u0434\u0435\u043A\u0430\u0431\u0440\u044C 2024</p>
+            <p class="text-sm text-gray-400">\u2705 \u0412\u0441\u0435 \u0444\u0430\u043A\u0442\u044B \u043F\u0440\u043E\u0432\u0435\u0440\u0435\u043D\u044B \u043F\u043E \u043F\u0435\u0440\u0432\u043E\u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0430\u043C</p>
+            <div class="mt-4">
+                <a href="/" class="text-blue-400 hover:text-blue-300 mr-4">
                     <i class="fas fa-home mr-2"></i>\u0413\u043B\u0430\u0432\u043D\u0430\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430
                 </a>
-                <a href="/vector_databases_guide.html" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors inline-block">
+                <a href="/vector_databases_guide.html" class="text-blue-400 hover:text-blue-300">
                     <i class="fas fa-book mr-2"></i>\u0411\u0430\u0437\u043E\u0432\u043E\u0435 \u0440\u0443\u043A\u043E\u0432\u043E\u0434\u0441\u0442\u0432\u043E
                 </a>
             </div>
         </div>
-    </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors opacity-0 invisible">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll to top button
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.remove('opacity-0', 'invisible');
+            } else {
+                scrollToTopBtn.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Highlight current section in navigation
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('nav a[href^="#"]');
+        
+        window.addEventListener('scroll', () => {
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 100 && rect.bottom >= 100) {
+                    currentSection = section.id;
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('font-bold', 'text-purple-600');
+                if (link.getAttribute('href') === \`#\${currentSection}\`) {
+                    link.classList.add('font-bold', 'text-purple-600');
+                }
+            });
+        });
+
+        console.log('\u{1F4DA} \u0423\u043B\u0443\u0447\u0448\u0435\u043D\u043D\u043E\u0435 \u0440\u0443\u043A\u043E\u0432\u043E\u0434\u0441\u0442\u0432\u043E \u043F\u043E \u0432\u0435\u043A\u0442\u043E\u0440\u043D\u044B\u043C \u0411\u0414 \u0437\u0430\u0433\u0440\u0443\u0436\u0435\u043D\u043E');
+    <\/script>
 </body>
 </html>`));
-var $e = new ht();
-var cs = Object.assign({ "/src/index.tsx": ce });
-var vt = false;
-for (const [, e] of Object.entries(cs)) e && ($e.all("*", (t) => {
+Z.get("/vector_databases_enhanced_guide.html", (e) => e.redirect("/vector_databases_enhanced_guide"));
+var He = new bt();
+var cs = Object.assign({ "/src/index.tsx": Z });
+var yt = false;
+for (const [, e] of Object.entries(cs)) e && (He.all("*", (t) => {
   let s;
   try {
     s = t.executionCtx;
   } catch {
   }
   return e.fetch(t.req.raw, t.env, s);
-}), $e.notFound((t) => {
+}), He.notFound((t) => {
   let s;
   try {
     s = t.executionCtx;
   } catch {
   }
   return e.fetch(t.req.raw, t.env, s);
-}), vt = true);
-if (!vt) throw new Error("Can't import modules from ['/src/index.ts','/src/index.tsx','/app/server.ts']");
+}), yt = true);
+if (!yt) throw new Error("Can't import modules from ['/src/index.ts','/src/index.tsx','/app/server.ts']");
 
 // ../node_modules/wrangler/templates/middleware/middleware-ensure-req-body-drained.ts
 var drainBody = /* @__PURE__ */ __name(async (request, env2, _ctx, middlewareCtx) => {
@@ -4746,12 +5338,12 @@ var jsonError = /* @__PURE__ */ __name(async (request, env2, _ctx, middlewareCtx
 }, "jsonError");
 var middleware_miniflare3_json_error_default = jsonError;
 
-// ../.wrangler/tmp/bundle-efVu30/middleware-insertion-facade.js
+// ../.wrangler/tmp/bundle-n4Pb3G/middleware-insertion-facade.js
 var __INTERNAL_WRANGLER_MIDDLEWARE__ = [
   middleware_ensure_req_body_drained_default,
   middleware_miniflare3_json_error_default
 ];
-var middleware_insertion_facade_default = $e;
+var middleware_insertion_facade_default = He;
 
 // ../node_modules/wrangler/templates/middleware/common.ts
 var __facade_middleware__ = [];
@@ -4778,7 +5370,7 @@ function __facade_invoke__(request, env2, ctx, dispatch, finalMiddleware) {
 }
 __name(__facade_invoke__, "__facade_invoke__");
 
-// ../.wrangler/tmp/bundle-efVu30/middleware-loader.entry.ts
+// ../.wrangler/tmp/bundle-n4Pb3G/middleware-loader.entry.ts
 var __Facade_ScheduledController__ = class ___Facade_ScheduledController__ {
   constructor(scheduledTime, cron, noRetry) {
     this.scheduledTime = scheduledTime;
@@ -4878,4 +5470,4 @@ export {
   __INTERNAL_WRANGLER_MIDDLEWARE__,
   middleware_loader_entry_default as default
 };
-//# sourceMappingURL=bundledWorker-0.5392857642760269.mjs.map
+//# sourceMappingURL=bundledWorker-0.046242164393147656.mjs.map
