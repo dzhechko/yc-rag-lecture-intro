@@ -3558,8 +3558,18 @@ if faiss.get_num_gpus() > 0:
 </html>`)
 })
 
-// Also handle .html extension for backward compatibility 
+// Handle backward compatibility routes
 app.get('/vector_databases_enhanced_guide.html', (c) => {
+  return c.redirect('/vector_databases_enhanced_guide')
+})
+
+// Redirect basic guide to enhanced guide
+app.get('/vector_databases_guide', (c) => {
+  return c.redirect('/vector_databases_enhanced_guide')
+})
+
+// Also handle .html extension for basic guide
+app.get('/vector_databases_guide.html', (c) => {
   return c.redirect('/vector_databases_enhanced_guide')
 })
 
